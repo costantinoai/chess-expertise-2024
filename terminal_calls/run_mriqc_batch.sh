@@ -13,7 +13,7 @@ echo "Waiting for $1 minute(s) before starting..."
 sleep $delay
 
 # Iterate over subject numbers
-for i in {37..40}; do
+for i in {0..40}; do
     # Skip subject 0, 5, 14, 31
     if [ $i -eq 0 ] || [ $i -eq 5 ] || [ $i -eq 14 ] || [ $i -eq 31 ]; then
         continue
@@ -25,7 +25,7 @@ for i in {37..40}; do
 
     # Docker command with dynamic subject ID using sudo
     docker run -it --rm \
-    -v /data/projects/chess/data/BIDS/derivatives/fmriprep:/data:ro \
+    -v /data/projects/chess/data/BIDS:/data:ro \
     -v /data/projects/chess/data/BIDS/derivatives/mriqc:/out \
     -v /home/eik-tb/Desktop/temp_mriqc:/scratch \
     nipreps/mriqc:latest /data /out participant \
@@ -41,7 +41,7 @@ done
 echo "Running group analysis"
 
 docker run -it --rm \
--v /data/projects/chess/data/BIDS/derivatives/fmriprep:/data:ro \
+-v /data/projects/chess/data/BIDS:/data:ro \
 -v /data/projects/chess/data/BIDS/derivatives/mriqc:/out \
 -v /home/eik-tb/Desktop/temp_mriqc:/scratch \
 nipreps/mriqc:latest /data /out group \
