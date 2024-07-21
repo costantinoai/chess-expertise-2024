@@ -61,11 +61,11 @@ niftiSpace = 'MNI'; % T1w, MNI
 fmriprepRoot = '/data/projects/chess/data/BIDS/derivatives/fmriprep';
 BIDSRoot = '/data/projects/chess/data/BIDS';
 outRoot = ['/data/projects/chess/data/BIDS/derivatives/fmriprep-SPM/',niftiSpace,'/fmriprep-SPM-', niftiSpace, '-checknocheck'];
-tempDir = '/media/costantino_ai/eiK-backup1/chess/temp/temp_spm';
+tempDir = '/media/costantino_ai/eiK-backup/chess/temp/temp_spm';
 % outRoot = '/home/eik-tb/Desktop/New Folder';
 
 % Files to select
-selectedSubjectsList = [37, 38, 39, 40];        % Must be list of integers or '*'
+selectedSubjectsList = [41,42,43,44];        % Must be list of integers or '*'
 % selectedSubjectsList = '*';     % Must be list of integers or '*'
 selectedRuns = '*';                         % Must be integer or '*'
 

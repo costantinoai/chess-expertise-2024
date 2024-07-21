@@ -6,10 +6,10 @@
 derivativesDir = '/data/projects/chess/data/BIDS/derivatives';
 spmRoot = fullfile(derivativesDir, 'fmriprep-SPM');
 roisRoot = fullfile(derivativesDir, 'rois-HCP');
-outRoot = fullfile(derivativesDir, 'mvpa', 'rsa_glm_hpc');
+outRoot = fullfile(derivativesDir, 'mvpa', 'svm_hpc');
 glmPath = fullfile(spmRoot, 'MNI', 'fmriprep-SPM-MNI-checknocheck', 'GLM');
 % selectedSubjectsList = '*'; % Can be modified to specify subjects
-selectedSubjectsList = [37, 38, 39, 40];        % Must be list of integers or '*'
+selectedSubjectsList = [41, 42, 43, 44];        % Must be list of integers or '*'
 
 % Find subject folders based on selected subjects list
 subDirs = findSubjectsFolders(glmPath, selectedSubjectsList);
@@ -30,6 +30,7 @@ for subDirIdx = 1:length(subDirs)
     roiPathStruct = prepareRoiFile(roiFilePattern);
     colorTablePath = fullfile(roisRoot, subName, 'label','lh_HCPMMP1_color_table.txt');
 
+
     if isempty(roiPathStruct)
         continue; % Skip if no ROI file is found
     end
@@ -40,15 +41,11 @@ for subDirIdx = 1:length(subDirs)
     ds = prepareDataset(spmSubjDir);
 
     % Get RDM to compare to brain RDM
-    [targets, null] = createTargetRDMs(ds);
-    ds.sa.targets = targets.stimuli;
-    ds=cosmo_fx(ds,@(x)mean(x,1),'targets');
-
-    [null, targetRDMs] = createTargetRDMs(ds);
-    confoundRDMs = {targetRDMs.checkmate, targetRDMs.visualStimuli, targetRDMs.categories};
+    [targets_, null] = createTargetRDMs(ds);
+    targets = {targets_.checkmate, targets_.visualStimuli, targets_.categories};
 
     % Perform RSA for each ROI in the atlas, now expecting two outputs
-    results = performAnalysisForSubject(ds, roiPath, confoundRDMs, outDir, colorTablePath);
+    results = performMVPACrossValidationForSubject(ds, targets, roiPath, outDir, colorTablePath);
     % cosmo_plot_slices(cosmo_slice(results,1));
     % cosmo_plot_slices(cosmo_slice(results,2));
     % cosmo_plot_slices(cosmo_slice(results,3));
@@ -58,122 +55,59 @@ end
 
 %% FUNCTIONS
 function ds = prepareDataset(spmSubjDir)
-    % Prepares the CoSMoMVPA dataset for RSA analysis.
-    %
-    % This function loads fMRI data, prepares it for RSA by removing
-    % useless data, and checks the dataset's integrity.
-    %
-    % Parameters:
-    %   spmSubjDir: Directory containing the subject's SPM.mat file.
-    %   roiPath: Path to the subject's multi-label ROI NIFTI file.
-    %
-    % Returns:
-    %   ds: A CoSMoMVPA dataset ready for RSA analysis.
+% Prepares the CoSMoMVPA dataset for RSA analysis.
+%
+% This function loads fMRI data, prepares it for RSA by removing
+% useless data, and checks the dataset's integrity.
+%
+% Parameters:
+%   spmSubjDir: Directory containing the subject's SPM.mat file.
+%   roiPath: Path to the subject's multi-label ROI NIFTI file.
+%
+% Returns:
+%   ds: A CoSMoMVPA dataset ready for RSA analysis.
 
-    % Load dataset with mask
-    ds = cosmo_fmri_dataset(fullfile(spmSubjDir, 'SPM.mat'));
-    
-    % Remove features with no variance and other useless data
-    % ds = cosmo_remove_useless_data(ds);
-    
-    % Check dataset integrity
-    cosmo_check_dataset(ds);
-    
-    % Warn if there are too few features for RSA
-    if size(ds.samples, 2) < 6
-        warning('Less than 6 features found for this dataset after cleaning and masking. Skipping..');
-    end
+% Load dataset with mask
+ds = cosmo_fmri_dataset(fullfile(spmSubjDir, 'SPM.mat'));
+
+% Remove features with no variance and other useless data
+% ds = cosmo_remove_useless_data(ds);
+
+% Check dataset integrity
+cosmo_check_dataset(ds);
+
+% Warn if there are too few features for RSA
+if size(ds.samples, 2) < 6
+    warning('Less than 6 features found for this dataset after cleaning and masking. Skipping..');
+end
 end
 
 function roiPathStruct = prepareRoiFile(roiFilePattern)
-    % Check and prepare ROI file, handling .nii and .nii.gz cases
+% Check and prepare ROI file, handling .nii and .nii.gz cases
+roiPathStruct = dir(roiFilePattern);
+
+% If multiple or no NIFTI files found, throw an error
+if size(roiPathStruct,1) > 1
+    error('Multiple ROI files found at %s.', roiFilePattern)
+
+    % If no .nii files found, check for .nii.gz files and decompress
+elseif isempty(roiPathStruct)
+    warning('No ROI file found at %s. Checking for nii.gz file... ', roiFilePattern)
+    roiFilePattern = fullfile(strcat(roiFilePattern, '.gz'));
     roiPathStruct = dir(roiFilePattern);
-    
-    % If multiple or no NIFTI files found, throw an error
-    if size(roiPathStruct,1) > 1
-        error('Multiple ROI files found at %s.', roiFilePattern)
-    
-        % If no .nii files found, check for .nii.gz files and decompress
-    elseif isempty(roiPathStruct)
-        warning('No ROI file found at %s. Checking for nii.gz file... ', roiFilePattern)
-        roiFilePattern = fullfile(strcat(roiFilePattern, '.gz'));
-        roiPathStruct = dir(roiFilePattern);
-        % If no .nii.gz files found
-        if isempty(roiPathStruct)
-            warning('No ROI file found at %s. SKIPPING!', roiFilePattern)
-            % If multiple files are found for this run
-        elseif size(roiPathStruct,1) > 1
-            error('Multiple NII.GZ files found.')
-            % If only one file is found for this run (expected)
-        else
-            roiFilePatternOld = fullfile(roiPathStruct.folder, roiPathStruct.name);
-            gunzippedNii = gunzipNiftiFile(roiFilePatternOld, roiPathStruct.folder);
-            roiPathStruct = dir(gunzippedNii{1});
-        end
+    % If no .nii.gz files found
+    if isempty(roiPathStruct)
+        warning('No ROI file found at %s. SKIPPING!', roiFilePattern)
+        % If multiple files are found for this run
+    elseif size(roiPathStruct,1) > 1
+        error('Multiple NII.GZ files found.')
+        % If only one file is found for this run (expected)
+    else
+        roiFilePatternOld = fullfile(roiPathStruct.folder, roiPathStruct.name);
+        gunzippedNii = gunzipNiftiFile(roiFilePatternOld, roiPathStruct.folder);
+        roiPathStruct = dir(gunzippedNii{1});
     end
 end
-
-function results_table = performAnalysisForSubject(ds, roiPath, confoundRDMs, outDir, colorTablePath)
-    % Performs RSA analysis for a single subject across different ROIs defined by a FreeSurfer color table.
-    %
-    % :param ds: Dataset structure loaded into CoSMoMVPA.
-    % :param roiPath: Path to the subject's multi-label ROI NIFTI file.
-    % :param confoundRDMs: A cell array of pre-computed RDMs to compare against the brain data RDMs.
-    % :param outDir: Output directory to save the results.
-    % :param colorTablePath: Path to the FreeSurfer color table file.
-    
-    % Load the ROI voxel data
-    roi_nii = cosmo_fmri_dataset(roiPath);
-    roi_data = roi_nii.samples;
-
-    % Load FreeSurfer color table and extract ROI names and indices
-    [ct_labels, ct_names] = loadColorTable(colorTablePath);
-
-    % Exclude ROIs not present in the color table
-    unique_labels = intersect(unique(roi_data), ct_labels);
-    
-    % Measure setup
-    measure = @cosmo_target_dsm_corr_measure;
-    measure_args = struct();
-    measure_args.center_data = true;
-    
-    % Initialize the results table with appropriate column names
-    roi_names = ct_names(ismember(ct_labels, unique_labels));
-    results_table = array2table(zeros(size(confoundRDMs, 2), numel(roi_names)), 'VariableNames', strrep(roi_names, ' ', '_'));
-    
-    % Analysis per label in the color table
-    for i = 1:numel(unique_labels)
-        label = unique_labels(i);
-
-        % Find voxels belonging to the current label
-        mask = roi_data == label;
-
-        % Update confound RDM for the measure
-        measure_args.glm_dsm = confoundRDMs;
-
-        ds_slice = cosmo_slice(ds, mask, 2);
-        % Remove features with no variance and other useless data
-        ds_slice = cosmo_remove_useless_data(ds_slice);
-        
-        % Check dataset integrity
-        cosmo_check_dataset(ds_slice);
-        
-        % Warn if there are too few features for RSA
-        if size(ds_slice.samples, 2) < 6
-            warning('Less than 6 features found for this dataset after cleaning and masking. Skipping..');
-            continue
-        end
-        
-        % Run the measure
-        result = measure(ds_slice, measure_args);
-        
-        % Directly store samples in the table, using ROI names as columns
-        column_name = strrep(ct_names{ct_labels == label}, ' ', '_');
-        results_table.(column_name) = result.samples;
-    end
-
-% Save the table to 'outdir' with the specified name
-writetable(results_table, fullfile(outDir, 'rsa_glm_check-vis-strategy.tsv'), 'FileType', 'text', 'Delimiter', '\t');
 end
 
 function [labels, names] = loadColorTable(colorTablePath)
@@ -204,6 +138,92 @@ function [labels, names] = loadColorTable(colorTablePath)
     names = [original_names; modified_names];
 end
 
+
+function results_table = performMVPACrossValidationForSubject(ds, targets, roiPath, outDir, colorTablePath)
+% Performs Multivariate Pattern Analysis (MVPA) using a Support Vector Machine (SVM) classifier
+% with cross-validation for a single subject across different ROIs defined by labels in a given ROI file.
+%
+% :param ds: Dataset structure loaded into CoSMoMVPA.
+% :param targets: A cell array of target labels for each classification task.
+% :param roiPath: Path to the subject's multi-label ROI NIFTI file.
+% :param outDir: Output directory to save the results.
+
+fprintf('Starting MVPA analysis...\n');
+
+% Load the ROI voxel data
+fprintf('Loading ROI data from: %s\n', roiPath);
+roi_nii = cosmo_fmri_dataset(roiPath);
+roi_data = roi_nii.samples;
+
+% Load FreeSurfer color table and extract ROI names and indices
+[ct_labels, ct_names] = loadColorTable(colorTablePath);
+
+% Exclude ROIs not present in the color table
+unique_labels = intersect(unique(roi_data), ct_labels);
+
+% Initialize the results table with appropriate column names
+roi_names = ct_names(ismember(ct_labels, unique_labels));
+results_table = array2table(zeros(size(targets, 2), numel(roi_names)), 'VariableNames', strrep(roi_names, ' ', '_'));
+
+% Analysis per label
+for label_idx = 1:numel(unique_labels)
+    label = unique_labels(label_idx);
+    fprintf('Analyzing ROI %d...\n', label);
+
+    % Find voxels belonging to the current label
+    mask = roi_data == label;
+
+    for targetIdx = 1:numel(targets)
+
+        fprintf('Processing target %d for ROI %d...\n', targetIdx, label);
+
+        % Apply mask and preprocess dataset for the current ROI
+        ds_masked = cosmo_slice(ds, mask, 2); % Slice dataset to include only voxels from current ROI
+        ds_masked = cosmo_remove_useless_data(ds_masked); % Remove features with no variance and other useless data
+        ds_masked.sa.targets = targets{targetIdx}; % Filter targets
+
+        % Ensure that there are enough samples for each class
+        if numel(unique(ds_masked.sa.targets)) < 2
+            warning('Not enough classes found for ROI %d and target %d. Skipping...', label, targets{targetIdx});
+            continue;
+        end
+
+        % Check dataset integrity
+        cosmo_check_dataset(ds_masked);
+
+        % Warn if there are too few features for MVPA
+        if size(ds_masked.samples, 2) < 6
+            warning('Less than 6 features found for this dataset after cleaning and masking. Skipping..');
+            continue;
+        end
+        
+        % Classifier setup
+        classifier = @cosmo_classify_svm;
+
+        % Setup for cross-validation
+        partitions = cosmo_nfold_partitioner(ds_masked);
+        partitions=cosmo_balance_partitions(partitions, ds_masked);
+        cosmo_check_partitions(partitions, ds_masked);
+
+        % Run the classifier with cross-validation
+        [pred, accuracy] = cosmo_crossvalidate(ds_masked, classifier, partitions);
+
+        % Store classification accuracy in the correct row (targetIdx) and column (label)
+        column_name = ct_names{ct_labels == label};
+        chance = 1/length(unique(targets{targetIdx}));
+        results_table{targetIdx, column_name} = accuracy;
+
+
+        fprintf('Accuracy - chance for target %d in ROI %d: %.2f%%\n', targetIdx, label, (accuracy - chance) * 100);
+
+    end
+end
+
+% Save the table to 'outdir' with a specified name
+outFilePath = fullfile(outDir, 'mvpa_crossval_accuracy_check-vis-strategy.tsv');
+fprintf('Saving results to %s\n', outFilePath);
+writetable(results_table, outFilePath, 'FileType', 'text', 'Delimiter', '\t');
+end
 
 function [targets, targetRDMs] = createTargetRDMs(ds)
 % Creates target Representational Dissimilarity Matrices (RDMs) based on different labelings.

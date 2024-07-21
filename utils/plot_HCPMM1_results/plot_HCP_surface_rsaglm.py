@@ -324,6 +324,7 @@ expertSubjects = (
     "33",
     "34",
     "36",
+    #"38"
 )
 nonExpertSubjects = (
     "01",
@@ -339,7 +340,15 @@ nonExpertSubjects = (
     "28",
     "32",
     "35",
+    "37",
+    "39",
+    "40",
+    "41",
+    "42",
+    "43",
+    "44"
 )
+
 
 # Define contrasts
 contrasts = ("checkmate", "visual", "strategy")

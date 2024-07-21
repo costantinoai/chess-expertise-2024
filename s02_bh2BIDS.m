@@ -22,11 +22,11 @@ clear all;
 clc;
 
 % Define range of subjects
-startSub = 37;
-endSub = 40;
+startSub = 41;
+endSub = 44;
 
 % Root directory for .mat files
-baseInputDir = "/media/costantino_ai/eiK-backup/chess/sourcedata";
+baseInputDir = "/data/projects/chess/data/sourcedata";
 % Root directory for output TSV files
 outRoot = "/data/projects/chess/data/BIDS";
 

@@ -21,7 +21,7 @@ clear all; % Clear all the variables from the workspace.
 clc; % Clear the command window.
 
 % Define the base directories
-baseInputDir = "/media/costantino_ai/eiK-backup/chess/sourcedata";
+baseInputDir = "/data/projects/chess/data/sourcedata";
 outdir = "/data/projects/chess/data/BIDS";
 jsonDir = "/home/eik-tb/OneDrive_andreaivan.costantino@kuleuven.be/GitHub/chess-expertise-2024/misc";
 dirs = {'anat', 'func'}; % Define the BIDS modality directories.
@@ -31,7 +31,7 @@ runNameToTaskName = containers.Map({'Functional', 'Localizer1', 'Localizer2'}, {
 
 % Define the start and end subjects
 startSub = 41;
-endSub = 41;
+endSub = 44;
 
 % Handle the case for a single subject or a range of subjects.
 if startSub == endSub

@@ -28,5 +28,5 @@ def run_python_scripts(directory):
             print(f"Error running {script_path}: {e}")
 
 # Specify the directory containing the Python scripts
-script_directory = '/home/eik-tb/OneDrive_andreaivan.costantino@kuleuven.be/GitHub/chess_expertise/fMRI_analysis/test'
+script_directory = './utils/plot_HCPMM1_results'
 run_python_scripts(script_directory)
