@@ -1,5 +1,0 @@
-- test scripts (we moved some scripts in other folders and changed names, so make sure the references are correct)
-- add complete instructions and docker calls for fmriprep and all the other tools (see STEPS) --> this could go in the lab wiki in long format and repo in short format
-- add a requirements file for the python env and also for the matlab dependencies
-- add a results folder where to store intermediate results (here, it could be the svm and rsa csv to produce the plots?)
-- Probably streamline the surface plot creations. a lot is redundandt and could be wrapped into functions managed by a single script
