@@ -94,131 +94,146 @@ def remove_useless_data(data: np.ndarray, dim: int = 2):
     return data_clean, keep_mask
 
 
-def compute_zmap_correlations(z_map, term_maps, ref_img, n_boot=10000, fdr_alpha=0.05):
+def compute_all_zmap_correlations(z_pos, z_neg, term_maps, ref_img,
+                                  n_boot=10000, fdr_alpha=0.05):
     """
-    Compute Pearson correlations (with bootstrap confidence intervals and FDR correction)
-    between a z-map and a set of term-maps.
+    Compute correlation statistics for positive and negative z-maps against term-maps,
+    along with their difference using Steiger's dependent correlation test.
+
+    Returns:
+    --------
+    df_pos : pd.DataFrame
+        Correlation stats for the positive z-map.
+    df_neg : pd.DataFrame
+        Correlation stats for the negative z-map.
+    df_diff : pd.DataFrame
+        Difference stats between positive and negative z-maps.
+    """
+    records_pos = []
+    records_neg = []
+    records_diff = []
+
+    flat_pos = z_pos.ravel()
+    flat_neg = z_neg.ravel()
+
+    for term, path in term_maps.items():
+        tpl = image.resample_to_img(image.load_img(path), ref_img,
+                                    force_resample=True, copy_header=True)
+        flat_t = tpl.get_fdata().ravel()
+
+        # Valid voxel mask
+        stacked = np.vstack([flat_pos, flat_neg, flat_t]).T
+        ok = np.all(np.isfinite(stacked), axis=1)
+        ok &= (stacked.max(axis=1) - stacked.min(axis=1)) > 0
+        x, y, t = stacked[ok, 0], stacked[ok, 1], stacked[ok, 2]
+
+        # --- POSITIVE MAP ---
+        res_pos = pg.corr(x=t, y=x, method='pearson',
+                          bootstraps=n_boot, confidence=0.95,
+                          method_ci='percentile', alternative='two-sided')
+        r_pos = res_pos['r'].iloc[0]
+        p_pos = res_pos['p-val'].iloc[0]
+        ci_lo_pos, ci_hi_pos = res_pos['CI95%'].iloc[0]
+        records_pos.append((term, r_pos, ci_lo_pos, ci_hi_pos, p_pos))
+
+        # --- NEGATIVE MAP ---
+        res_neg = pg.corr(x=t, y=y, method='pearson',
+                          bootstraps=n_boot, confidence=0.95,
+                          method_ci='percentile', alternative='two-sided')
+        r_neg = res_neg['r'].iloc[0]
+        p_neg = res_neg['p-val'].iloc[0]
+        ci_lo_neg, ci_hi_neg = res_neg['CI95%'].iloc[0]
+        records_neg.append((term, r_neg, ci_lo_neg, ci_hi_neg, p_neg))
+
+        # --- DIFFERENCE (Steiger's test) ---
+        # Fisher-z transform and Steiger’s dependent r test
+        r_xt = r_pos
+        r_yt = r_neg
+        r_xy = np.corrcoef(x, y)[0, 1]
+
+        z1 = np.arctanh(np.clip(r_xt, -0.999999, 0.999999))
+        z2 = np.arctanh(np.clip(r_yt, -0.999999, 0.999999))
+        dz = z1 - z2
+        n = len(x)
+        se = np.sqrt(2 * (1 - r_xy) / (n - 3))
+        Z = dz / se
+        p_diff = 2 * (1 - norm.cdf(abs(Z)))
+
+        crit = norm.ppf(1 - fdr_alpha / 2)
+        lo_r, hi_r = np.tanh([dz - crit * se, dz + crit * se])
+
+        records_diff.append((term, r_pos, r_neg, r_pos - r_neg, lo_r, hi_r, p_diff))
+
+    # Assemble DataFrames
+    df_pos = pd.DataFrame(records_pos, columns=['term', 'r', 'CI_low', 'CI_high', 'p_raw'])
+    df_neg = pd.DataFrame(records_neg, columns=['term', 'r', 'CI_low', 'CI_high', 'p_raw'])
+    df_diff = pd.DataFrame(records_diff,
+                           columns=['term', 'r_pos', 'r_neg', 'r_diff', 'CI_low', 'CI_high', 'p_raw'])
+
+    # FDR correction
+    for df in [df_pos, df_neg, df_diff]:
+        rej, p_fdr = fdrcorrection(df['p_raw'], alpha=fdr_alpha)
+        df['p_fdr'] = p_fdr
+        df['sig'] = rej
+
+    return df_pos, df_neg, df_diff
+
+import os
+def save_latex_correlation_tables(df_pos, df_neg, diff_df, run_id, out_dir):
+    """
+    Save and print LaTeX tables for positive/negative/difference z-map correlations.
 
     Parameters
     ----------
-    z_map : numpy.ndarray
-        3D array of z-values for each voxel.
-    term_maps : dict
-        Mapping term name -> filepath for its NIfTI image.
-    ref_img : nibabel image
-        Reference image for resampling term maps.
-    n_boot : int, optional
-        Number of bootstrap samples for CI estimation (default=10000).
-    fdr_alpha : float, optional
-        Alpha level for FDR correction (default=0.05).
-
-    Returns
-    -------
-    pandas.DataFrame
-        DataFrame with columns ['Term', 'r', 'CI_low', 'CI_high', 'p_raw', 'p_fdr', 'sig'],
-        indexed in the fixed TERM_ORDER.
+    df_pos : pd.DataFrame
+        Correlations and stats from positive z-map.
+    df_neg : pd.DataFrame
+        Correlations and stats from negative z-map.
+    diff_df : pd.DataFrame
+        Difference in correlations between positive and negative z-maps.
+    run_id : str
+        Identifier for the run (used in titles and filenames).
+    out_dir : str
+        Directory to save LaTeX tables.
     """
-    import pandas as pd
-    from nilearn import image
+    os.makedirs(out_dir, exist_ok=True)
 
-    records = []
-    # flatten the z_map once
-    flat_z = z_map.ravel()
-
-    for term, path in term_maps.items():
-        # resample term image to match reference
-        tpl_img = image.resample_to_img(image.load_img(path), ref_img,
-                                        force_resample=True, copy_header=True)
-        flat_t = tpl_img.get_fdata().ravel()
-
-        # stack and remove non-finite or constant voxels
-        stacked = np.vstack([flat_z, flat_t]).T
-        # mask out rows where either is nan/inf or where variance is zero
-        finite_mask = np.all(np.isfinite(stacked), axis=1)
-        nonconst_mask = (stacked.max(axis=1) - stacked.min(axis=1)) > 0
-        good_mask = finite_mask & nonconst_mask
-        x = stacked[good_mask, 0]
-        y = stacked[good_mask, 1]
-
-        # compute bootstrap Pearson correlation via pingouin
-        res = pg.corr(x=x, y=y, method='pearson', bootstraps=n_boot,
-                      confidence=0.95, method_ci='percentile')
-        r = res['r'].iloc[0]
-        p_raw = res['p-val'].iloc[0]
-        ci_low, ci_high = res['CI95%'].iloc[0]
-
-        records.append((term, r, ci_low, ci_high, p_raw))
-
-    # assemble DataFrame
-    df = pd.DataFrame(records, columns=['Term', 'r', 'CI_low', 'CI_high', 'p_raw'])
-    # enforce fixed order
-    df['Term'] = pd.Categorical(df['Term'], categories=TERM_ORDER, ordered=True)
-    df = df.sort_values('Term').reset_index(drop=True)
-
-    # FDR correction across terms
-    rej, p_fdr = fdrcorrection(df['p_raw'], alpha=fdr_alpha)
-    df['p_fdr'] = p_fdr
-    df['sig'] = rej
-
-    return df
-
-def compute_difference_stats(z_pos: np.ndarray,
-                             z_neg: np.ndarray,
-                             term_maps: dict,
-                             ref_img,
-                             n_boot: int = 10000,
-                             fdr_alpha: float = 0.05) -> pd.DataFrame:
-    """
-    Compute bootstrap-based statistical comparison of correlations between
-    z_pos vs term maps and z_neg vs term maps.
-
-    Returns a DataFrame with columns:
-      ['Term', 'r_pos', 'r_neg', 'r_diff', 'CI_low', 'CI_high', 'p_raw', 'p_fdr', 'sig']
-    """
-    records = []
-    flat_zpos = z_pos.ravel()
-    flat_zneg = z_neg.ravel()
-
-    for term, path in term_maps.items():
-        # load & resample
-        tpl = image.resample_to_img(
-            image.load_img(path), ref_img,
-            force_resample=True, copy_header=True
+    def format_and_save(df, columns, caption, label, fname):
+        latex_str = (
+            df[columns]
+            .round(3)
+            .sort_values(by=columns[1], ascending=False)
+            .to_latex(index=False, escape=True, caption=caption, label=label)
         )
-        flat_t = tpl.get_fdata().ravel()
+        out_path = os.path.join(out_dir, fname)
+        with open(out_path, "w") as f:
+            f.write(latex_str)
+        print(f"\n=== {caption} ===\n")
+        print(latex_str)
 
-        # mask
-        mask = np.isfinite(flat_zpos) & np.isfinite(flat_zneg) & np.isfinite(flat_t)
-        x = flat_zpos[mask]
-        y = flat_zneg[mask]
-        t = flat_t[mask]
-
-        # observed
-        r_pos = np.corrcoef(x, t)[0,1]
-        r_neg = np.corrcoef(y, t)[0,1]
-        diff_obs = r_pos - r_neg
-
-        # bootstrap diffs
-        diffs = np.empty(n_boot)
-        n = len(x)
-        for i in range(n_boot):
-            idx = np.random.randint(0, n, n)
-            diffs[i] = np.corrcoef(x[idx], t[idx])[0,1] - np.corrcoef(y[idx], t[idx])[0,1]
-
-        ci_low, ci_high = np.percentile(diffs, [2.5, 97.5])
-        p_raw = np.mean(np.abs(diffs) >= np.abs(diff_obs))
-
-        records.append((term, r_pos, r_neg, diff_obs, ci_low, ci_high, p_raw))
-
-    df = pd.DataFrame(
-        records,
-        columns=['Term','r_pos','r_neg','r_diff','CI_low','CI_high','p_raw']
+    # Table 1: Positive z-map correlations
+    format_and_save(
+        df_pos,
+        columns=['term', 'r', 'CI_low', 'CI_high', 'p_fdr'],
+        caption=f"{run_id} — Positive z-map: correlations with each term map.",
+        label=f"tab:{run_id}_pos",
+        fname=f"{run_id}_positive_zmap.tex"
     )
-    df['Term'] = pd.Categorical(df['Term'], categories=TERM_ORDER, ordered=True)
-    df = df.sort_values('Term').reset_index(drop=True)
 
-    rej, p_fdr = fdrcorrection(df['p_raw'], alpha=fdr_alpha)
-    df['p_fdr'] = p_fdr
-    df['sig'] = rej
+    # Table 2: Negative z-map correlations
+    format_and_save(
+        df_neg,
+        columns=['term', 'r', 'CI_low', 'CI_high', 'p_fdr'],
+        caption=f"{run_id} — Negative z-map: correlations with each term map.",
+        label=f"tab:{run_id}_neg",
+        fname=f"{run_id}_negative_zmap.tex"
+    )
 
-    return df
+    # Table 3: Differences
+    format_and_save(
+        diff_df,
+        columns=['term', 'r_diff', 'CI_low', 'CI_high', 'p_fdr'],
+        caption=f"{run_id} — Difference in correlations (positive - negative).",
+        label=f"tab:{run_id}_diff",
+        fname=f"{run_id}_difference_zmap.tex"
+    )

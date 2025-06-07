@@ -15,8 +15,8 @@ import logging
 logger = logging.getLogger(__name__)
 
 # Colors
-COL_POS = '#006400'
-COL_NEG = '#8B0000'
+COL_POS = '#216421'
+COL_NEG = '#8B2E2E'
 PALETTE = [COL_POS, COL_NEG]
 
 # Plot styles
@@ -36,7 +36,7 @@ BRAIN_CMAP = make_brain_cmap()
 # Title font settings
 TITLE_FONT = {
     'fontfamily': 'Ubuntu Condensed',
-    'fontsize': 18,
+    'fontsize': 22,
     'fontweight': 'bold',
     'color': 'black',
     'backgroundcolor': 'white'
@@ -44,8 +44,8 @@ TITLE_FONT = {
 
 # Fixed term order
 TERM_ORDER = [
-    'working memory', 'navigation', 'memory',
-    'language', 'object recognition', 'face recognition', 'early visual'
+    'working memory', 'navigation', 'memory retrieval',
+    'language network', 'object recognition', 'face recognition', 'early visual'
 ]
 
 # Mapping for run‐ID levels

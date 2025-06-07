@@ -1,0 +1,15 @@
+Term,Correlation,CI_low,CI_high,Group,p_fdr_indiv,p_fdr_diff
+Working Memory,0.2382642089397448,0.24,0.24,Positive z-map,0.0,0.0
+Navigation,0.2405838657458474,0.24,0.24,Positive z-map,0.0,0.0
+Memory Retrieval,0.0996501104175563,0.1,0.1,Positive z-map,0.0,0.0
+Language Network,0.035730222160445455,0.03,0.04,Positive z-map,8.984662631737478e-245,0.0
+Object Recognition,0.014092609994117938,0.01,0.02,Positive z-map,1.568723931423582e-39,0.0
+Face Recognition,-0.0022039379680529967,-0.0,-0.0,Positive z-map,0.03926879110810672,0.0
+Early Visual,0.011267359397098426,0.01,0.01,Positive z-map,6.678702311845229e-26,0.0
+Working Memory,0.00529140363635997,0.0,0.01,Negative z-map,7.455102396134245e-07,0.0
+Navigation,0.038077923307020534,0.04,0.04,Negative z-map,6.147815578583598e-278,0.0
+Memory Retrieval,0.062395443883809576,0.06,0.06,Negative z-map,0.0,0.0
+Language Network,0.08799546148092542,0.09,0.09,Negative z-map,0.0,0.0
+Object Recognition,0.06259280818224515,0.06,0.06,Negative z-map,0.0,0.0
+Face Recognition,0.09110257116282666,0.09,0.09,Negative z-map,0.0,0.0
+Early Visual,0.10728985437606291,0.11,0.11,Negative z-map,0.0,0.0
