@@ -151,4 +151,14 @@ cython_debug/
 #  option (not recommended) you can uncomment the following to ignore the entire idea folder.
 #.idea/
 
-local/
+**/local
+*.npy
+test
+misc
+chess-connectivity
+chess-manifold
+chess-behavioural/data/sub
+chess-dnn
+**/old
+chess-results-vis
+chess-rois

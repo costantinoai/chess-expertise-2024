@@ -1,0 +1,1521 @@
+sub_id,expert,sub_elo,check_board,stim_id,fen,board_name,sub_resp,sub_resp_long,recommended_moves_long,acc
+02,False,0,True,0.0,2r2r1k/1b5p/p2Q1q2/3p1P2/3Pp3/8/6RP/6RK w - - 0 1,c1_images_frombeautiful.png,,,['g2g8'],0
+02,False,0,True,1.0,r2q2kr/1p4p1/p1p2R1p/5p2/7P/P3Q3/1P4P1/7K w - - 0 1,c1_images_steinitznn.png,,,['e3e6'],0
+02,False,0,True,2.0,1k6/ppp3pp/3p1b2/1P1P1Q2/3qr3/2R5/P1R4P/1K6 w - - 0 1,c1_images_winterfriede(reversed).png,,,['f5c8'],0
+02,False,0,True,3.0,1k6/1b1q2p1/2R4p/2QB4/4Pp2/P4P2/6rP/KR6 w - - 0 1,c2_images_kekhayovpetrov(reversed).png,,,"['b1b7', 'c6e6', 'c5f8', 'c6a6']",0
+02,False,0,True,4.0,4rk2/1Q3p1r/1p2bB2/p5Rp/P5pP/6P1/1Pq5/3R2K1 w - - 0 1,c2_images_krausemeinhardt.png,,,"['b7e7', 'f6e7']",0
+02,False,0,True,5.0,k1n2br1/p1r5/QpP1pp2/3P4/3P3p/2P2PBq/3N1P1P/R3R1K1 w - - 0 1,c2_images_skujarozenbergs(reversed).png,,,['a6c8'],0
+02,False,0,True,6.0,6k1/1p1R1p1p/p5p1/P3n3/5N1P/2P2Q2/5PPK/4rq2 w - - 0 1,c2_images_replacement4.png,,,['d7d8'],0
+02,False,0,True,7.0,rk2q2r/p1p2p1p/B1p3p1/3N1b2/3Npp2/5P2/PPP3PP/1K1Rb2R w - - 0 1,c3_images_kazicvukovic(reversed).png,,,['d5e7'],0
+02,False,0,True,8.0,1k1r4/8/R1p1p2b/1NN1qp2/8/1P3B2/2PP1K2/8 w - - 0 1,c3_images_malininandreev(reversed).png,,,"['a6a8', 'a6b6']",0
+02,False,0,True,9.0,k2r3r/pbQ1n2p/7b/2pNN2q/5Bp1/8/PPP4P/1KR1R3 w - - 0 1,c3_images_podzerovkuntzevic(reversed).png,,,['c7b8'],0
+02,False,0,True,10.0,1kr1q3/pp6/1bp5/4N3/5Q1R/8/PP6/K7 w - - 0 1,c3_images_studybyercoledelrio(reversed).png,,,['e5d7'],0
+02,False,0,True,11.0,3r2k1/pb1q1pp1/1p2pb1p/8/3N4/P2QB3/1P3PPP/1Br1R1K1 w - - 0 1,c3_images_tylorwinter.png,,,['d3h7'],0
+02,False,0,True,12.0,1rr4k/3qN1b1/2p2n1p/3p1Q2/1P1P3N/2P3P1/5P1P/6K1 w - - 0 1,c3_images_replacement3.png,,,['e7g6'],0
+02,False,0,True,13.0,2r1rq2/4b2k/1p2BBbp/p3pQ2/4N3/1P2P3/5PPP/6K1 w - - 0 1,c3_images_replacement5.png,Lo1,,"['e4g5', 'e6g8']",0
+02,False,0,True,14.0,kr4r1/p1pqn1b1/2p1p2p/2Pp2p1/Q2P4/2RB2B1/PP3PPP/1K5R w - - 0 1,c4_images_brankawittwer(reversed).png,endedonnotimeleft,,['a4a7'],0
+02,False,0,True,15.0,1k6/pp6/q4p2/3p1B1p/5P1P/1PP1B1R1/r5bK/8 w - - 0 1,c4_images_ivanchuksavchenko(reversed).png,,,['g3g8'],0
+02,False,0,True,16.0,5k2/p4p1r/1n3b2/2p1Qp1p/1q2P3/1B4R1/Pr3PP1/2R2K2 w - - 0 1,c4_images_strekalovskyshaposhlikov.png,h4,,"['e5d6', 'g3g8']",0
+02,False,0,True,17.0,r1b2rk1/1pp2ppp/p1np1q2/8/1b2Q3/2PB1N2/PP1B1PPP/RN2K2R w - - 0 1,c5_images_easyposition2.png,53dr,,['e4h7'],0
+02,False,0,True,18.0,2kr1r2/3bb3/1pp5/4B1p1/2BP3p/8/5P1P/3RRK2 w - - 0 1,c5_images_easyposition5(reversed).png,,,['c4a6'],0
+02,False,0,True,19.0,1r4rk/6p1/1p5p/4N3/b7/3B4/PP6/K1R5 w - - 0 1,c5_images_easyposition6.png,,,['e5f7'],0
+02,False,0,False,20.0,2r2r1k/1b5p/p2Q1qp1/3p1P2/3Pp3/8/6RP/6RK w - - 0 1,nc1_images_frombeautiful(nomate).png,,,[],1
+02,False,0,False,21.0,3q2kr/1p3pp1/p1p2R1p/5p2/7P/P3Q3/1P4P1/7K w - - 0 1,nc1_images_steinitznn(nomate).png,,,[],1
+02,False,0,False,22.0,1k6/ppp3pp/3ppb2/1P1P1Q2/3qr3/2R5/P1R4P/1K6 w - - 0 1,nc1_images_winterfriede(nomate)(reversed).png,,,[],1
+02,False,0,False,23.0,1k6/1b1q2p1/2R4p/2QB4/1P2Pp2/P4P2/2r3rP/KR6 w - - 0 1,nc2_images_kekhayovpetrov(nomate)(reversed).png,,,[],1
+02,False,0,False,24.0,4rk2/1Qp2p1r/1p2bB2/p5Rp/P5pP/6P1/1Pq5/3R2K1 w - - 0 1,nc2_images_krausemeinhardt(nomate).png,,,[],1
+02,False,0,False,25.0,k1n2b2/p1r3r1/QpP1pp2/3P4/3P3p/2P2PBq/3N1P1P/R3R1K1 w - - 0 1,nc2_images_skujarozenbergs(nomate)(reversed).png,N239,,[],1
+02,False,0,False,26.0,6k1/1p1R1p2/p5pp/P3n3/5N1P/2P2Q2/5PPK/4rq2 w - - 0 1,nc2_images_replacement4(nomate).png,,,[],1
+02,False,0,False,27.0,rk2q2r/p1p2p1p/Bp4p1/3N1b2/3Npp2/5P2/PPP3PP/1K1Rb2R w - - 0 1,nc3_images_kazicvukovic(nomate)(reversed).png,,,[],1
+02,False,0,False,28.0,1k1r4/p7/R1p1p2b/1NN1qp2/8/1P3B2/2PP1K2/8 w - - 0 1,nc3_images_malininandreev(nomate)(reversed).png,,,[],1
+02,False,0,False,29.0,k2r3r/pbQ1n2p/3p3b/2pNN2q/5Bp1/8/PPP4P/1KR1R3 w - - 0 1,nc3_images_podzerovkuntzevic(nomate)(reversed).png,,,[],1
+02,False,0,False,30.0,1k2q3/ppr5/1bp5/4N3/5Q1R/8/PP6/K7 w - - 0 1,nc3_images_studybyercoledelrio(nomate)(reversed).png,,,[],1
+02,False,0,False,31.0,2r3k1/pb1q1p2/1p2pbpp/8/3N4/P2QB3/1P3PPP/1Br1R1K1 w - - 0 1,nc3_images_tylorwinter(nomate).png,Lo2,,[],1
+02,False,0,False,32.0,1rr4k/3qNpb1/2p2n1p/3p1Q2/1P1P3N/2P3P1/5P1P/6K1 w - - 0 1,nc3_images_replacement3(nomate).png,,,[],1
+02,False,0,False,33.0,2r1rq2/4b2k/1p2BBb1/p3pQ1p/4N3/1P2P3/5PPP/6K1 w - - 0 1,nc3_images_replacement5(nomate).png,,,[],1
+02,False,0,False,34.0,kr4r1/p1pqn1b1/2p1p2p/2Pp2p1/Q2P4/1PRB2B1/P4PPP/1K5R w - - 0 1,nc4_images_brankawittwer(nomate)(reversed).png,,,[],1
+02,False,0,False,35.0,1k6/pp4p1/q4p2/3p1B1p/5P1P/1PP1B1R1/r5bK/8 w - - 0 1,nc4_images_ivanchuksavchenko(nomate)(reversed).png,,,[],1
+02,False,0,False,36.0,5k2/p4p1r/1n3b2/2p1Qp1p/1q2P1p1/1B4R1/Pr3PP1/2R2K2 w - - 0 1,nc4_images_strekalovskyshaposhlikov(nomate).png,,,[],1
+02,False,0,False,37.0,r1b2rk1/1pp2p1p/p1np1qp1/8/1b2Q3/2PB1N2/PP1B1PPP/RN2K2R w - - 0 1,nc5_images_easyposition2(nomate).png,,,[],1
+02,False,0,False,38.0,2kr1r2/3bb3/2p5/1p2B1p1/2BP3p/8/5P1P/3RRK2 w - - 0 1,nc5_images_easyposition5(nomate)(reversed).png,,,[],1
+02,False,0,False,39.0,1r4rk/8/1p4pp/4N3/b7/3B4/PP6/K1R5 w - - 0 1,nc5_images_easyposition6(nomate).png,,,[],1
+03,True,2041,True,0.0,2r2r1k/1b5p/p2Q1q2/3p1P2/3Pp3/8/6RP/6RK w - - 0 1,c1_images_frombeautiful.png,Rg8,g2g8,['g2g8'],1
+03,True,2041,True,1.0,r2q2kr/1p4p1/p1p2R1p/5p2/7P/P3Q3/1P4P1/7K w - - 0 1,c1_images_steinitznn.png,Qe6,e3e6,['e3e6'],1
+03,True,2041,True,2.0,1k6/ppp3pp/3p1b2/1P1P1Q2/3qr3/2R5/P1R4P/1K6 w - - 0 1,c1_images_winterfriede(reversed).png,Qc8,f5c8,['f5c8'],1
+03,True,2041,True,3.0,1k6/1b1q2p1/2R4p/2QB4/4Pp2/P4P2/6rP/KR6 w - - 0 1,c2_images_kekhayovpetrov(reversed).png,Rb7,b1b7,"['b1b7', 'c6e6', 'c5f8', 'c6a6']",1
+03,True,2041,True,4.0,4rk2/1Q3p1r/1p2bB2/p5Rp/P5pP/6P1/1Pq5/3R2K1 w - - 0 1,c2_images_krausemeinhardt.png,Qe7,b7e7,"['b7e7', 'f6e7']",1
+03,True,2041,True,5.0,k1n2br1/p1r5/QpP1pp2/3P4/3P3p/2P2PBq/3N1P1P/R3R1K1 w - - 0 1,c2_images_skujarozenbergs(reversed).png,Qc8,a6c8,['a6c8'],1
+03,True,2041,True,6.0,6k1/1p1R1p1p/p5p1/P3n3/5N1P/2P2Q2/5PPK/4rq2 w - - 0 1,c2_images_replacement4.png,Rd8,d7d8,['d7d8'],1
+03,True,2041,True,7.0,rk2q2r/p1p2p1p/B1p3p1/3N1b2/3Npp2/5P2/PPP3PP/1K1Rb2R w - - 0 1,c3_images_kazicvukovic(reversed).png,Nf6,d5f6,['d5e7'],0
+03,True,2041,True,8.0,1k1r4/8/R1p1p2b/1NN1qp2/8/1P3B2/2PP1K2/8 w - - 0 1,c3_images_malininandreev(reversed).png,Ra8,a6a8,"['a6a8', 'a6b6']",1
+03,True,2041,True,9.0,k2r3r/pbQ1n2p/7b/2pNN2q/5Bp1/8/PPP4P/1KR1R3 w - - 0 1,c3_images_podzerovkuntzevic(reversed).png,Nb6,d5b6,['c7b8'],0
+03,True,2041,True,10.0,1kr1q3/pp6/1bp5/4N3/5Q1R/8/PP6/K7 w - - 0 1,c3_images_studybyercoledelrio(reversed).png,Nd7,e5d7,['e5d7'],1
+03,True,2041,True,11.0,3r2k1/pb1q1pp1/1p2pb1p/8/3N4/P2QB3/1P3PPP/1Br1R1K1 w - - 0 1,c3_images_tylorwinter.png,Qh7,d3h7,['d3h7'],1
+03,True,2041,True,12.0,1rr4k/3qN1b1/2p2n1p/3p1Q2/1P1P3N/2P3P1/5P1P/6K1 w - - 0 1,c3_images_replacement3.png,Ng6,e7g6,['e7g6'],1
+03,True,2041,True,13.0,2r1rq2/4b2k/1p2BBbp/p3pQ2/4N3/1P2P3/5PPP/6K1 w - - 0 1,c3_images_replacement5.png,Bg8,e6g8,"['e4g5', 'e6g8']",1
+03,True,2041,True,14.0,kr4r1/p1pqn1b1/2p1p2p/2Pp2p1/Q2P4/2RB2B1/PP3PPP/1K5R w - - 0 1,c4_images_brankawittwer(reversed).png,Qa7,a4a7,['a4a7'],1
+03,True,2041,True,15.0,1k6/pp6/q4p2/3p1B1p/5P1P/1PP1B1R1/r5bK/8 w - - 0 1,c4_images_ivanchuksavchenko(reversed).png,Rg8,g3g8,['g3g8'],1
+03,True,2041,True,16.0,5k2/p4p1r/1n3b2/2p1Qp1p/1q2P3/1B4R1/Pr3PP1/2R2K2 w - - 0 1,c4_images_strekalovskyshaposhlikov.png,Rg8,g3g8,"['e5d6', 'g3g8']",1
+03,True,2041,True,17.0,r1b2rk1/1pp2ppp/p1np1q2/8/1b2Q3/2PB1N2/PP1B1PPP/RN2K2R w - - 0 1,c5_images_easyposition2.png,Qh7,e4h7,['e4h7'],1
+03,True,2041,True,18.0,2kr1r2/3bb3/1pp5/4B1p1/2BP3p/8/5P1P/3RRK2 w - - 0 1,c5_images_easyposition5(reversed).png,Ba6,c4a6,['c4a6'],1
+03,True,2041,True,19.0,1r4rk/6p1/1p5p/4N3/b7/3B4/PP6/K1R5 w - - 0 1,c5_images_easyposition6.png,Nf7,e5f7,['e5f7'],1
+03,True,2041,False,20.0,2r2r1k/1b5p/p2Q1qp1/3p1P2/3Pp3/8/6RP/6RK w - - 0 1,nc1_images_frombeautiful(nomate).png,,,[],1
+03,True,2041,False,21.0,3q2kr/1p3pp1/p1p2R1p/5p2/7P/P3Q3/1P4P1/7K w - - 0 1,nc1_images_steinitznn(nomate).png,Rf5,f6f5,[],0
+03,True,2041,False,22.0,1k6/ppp3pp/3ppb2/1P1P1Q2/3qr3/2R5/P1R4P/1K6 w - - 0 1,nc1_images_winterfriede(nomate)(reversed).png,Qf1,f5f1,[],0
+03,True,2041,False,23.0,1k6/1b1q2p1/2R4p/2QB4/1P2Pp2/P4P2/2r3rP/KR6 w - - 0 1,nc2_images_kekhayovpetrov(nomate)(reversed).png,Qc2,c5c2,[],0
+03,True,2041,False,24.0,4rk2/1Qp2p1r/1p2bB2/p5Rp/P5pP/6P1/1Pq5/3R2K1 w - - 0 1,nc2_images_krausemeinhardt(nomate).png,,,[],1
+03,True,2041,False,25.0,k1n2b2/p1r3r1/QpP1pp2/3P4/3P3p/2P2PBq/3N1P1P/R3R1K1 w - - 0 1,nc2_images_skujarozenbergs(nomate)(reversed).png,,,[],1
+03,True,2041,False,26.0,6k1/1p1R1p2/p5pp/P3n3/5N1P/2P2Q2/5PPK/4rq2 w - - 0 1,nc2_images_replacement4(nomate).png,Rd8,d7d8,[],0
+03,True,2041,False,27.0,rk2q2r/p1p2p1p/Bp4p1/3N1b2/3Npp2/5P2/PPP3PP/1K1Rb2R w - - 0 1,nc3_images_kazicvukovic(nomate)(reversed).png,Re1,h1e1,[],0
+03,True,2041,False,28.0,1k1r4/p7/R1p1p2b/1NN1qp2/8/1P3B2/2PP1K2/8 w - - 0 1,nc3_images_malininandreev(nomate)(reversed).png,,,[],1
+03,True,2041,False,29.0,k2r3r/pbQ1n2p/3p3b/2pNN2q/5Bp1/8/PPP4P/1KR1R3 w - - 0 1,nc3_images_podzerovkuntzevic(nomate)(reversed).png,Nb6,d5b6,[],0
+03,True,2041,False,30.0,1k2q3/ppr5/1bp5/4N3/5Q1R/8/PP6/K7 w - - 0 1,nc3_images_studybyercoledelrio(nomate)(reversed).png,Pa3,a2a3,[],0
+03,True,2041,False,31.0,2r3k1/pb1q1p2/1p2pbpp/8/3N4/P2QB3/1P3PPP/1Br1R1K1 w - - 0 1,nc3_images_tylorwinter(nomate).png,Rc1,e1c1,[],0
+03,True,2041,False,32.0,1rr4k/3qNpb1/2p2n1p/3p1Q2/1P1P3N/2P3P1/5P1P/6K1 w - - 0 1,nc3_images_replacement3(nomate).png,,,[],1
+03,True,2041,False,33.0,2r1rq2/4b2k/1p2BBb1/p3pQ1p/4N3/1P2P3/5PPP/6K1 w - - 0 1,nc3_images_replacement5(nomate).png,,,[],1
+03,True,2041,False,34.0,kr4r1/p1pqn1b1/2p1p2p/2Pp2p1/Q2P4/1PRB2B1/P4PPP/1K5R w - - 0 1,nc4_images_brankawittwer(nomate)(reversed).png,Pb4,b3b4,[],0
+03,True,2041,False,35.0,1k6/pp4p1/q4p2/3p1B1p/5P1P/1PP1B1R1/r5bK/8 w - - 0 1,nc4_images_ivanchuksavchenko(nomate)(reversed).png,,,[],1
+03,True,2041,False,36.0,5k2/p4p1r/1n3b2/2p1Qp1p/1q2P1p1/1B4R1/Pr3PP1/2R2K2 w - - 0 1,nc4_images_strekalovskyshaposhlikov(nomate).png,Qf6,e5f6,[],0
+03,True,2041,False,37.0,r1b2rk1/1pp2p1p/p1np1qp1/8/1b2Q3/2PB1N2/PP1B1PPP/RN2K2R w - - 0 1,nc5_images_easyposition2(nomate).png,Pb4,c3b4,[],0
+03,True,2041,False,38.0,2kr1r2/3bb3/2p5/1p2B1p1/2BP3p/8/5P1P/3RRK2 w - - 0 1,nc5_images_easyposition5(nomate)(reversed).png,Ra1,d1a1,[],0
+03,True,2041,False,39.0,1r4rk/8/1p4pp/4N3/b7/3B4/PP6/K1R5 w - - 0 1,nc5_images_easyposition6(nomate).png,Bg6,d3g6,[],0
+04,True,1850,True,0.0,2r2r1k/1b5p/p2Q1q2/3p1P2/3Pp3/8/6RP/6RK w - - 0 1,c1_images_frombeautiful.png,Rg8,g2g8,['g2g8'],1
+04,True,1850,True,1.0,r2q2kr/1p4p1/p1p2R1p/5p2/7P/P3Q3/1P4P1/7K w - - 0 1,c1_images_steinitznn.png,,,['e3e6'],0
+04,True,1850,True,2.0,1k6/ppp3pp/3p1b2/1P1P1Q2/3qr3/2R5/P1R4P/1K6 w - - 0 1,c1_images_winterfriede(reversed).png,Qc8,f5c8,['f5c8'],1
+04,True,1850,True,3.0,1k6/1b1q2p1/2R4p/2QB4/4Pp2/P4P2/6rP/KR6 w - - 0 1,c2_images_kekhayovpetrov(reversed).png,Rb7,b1b7,"['b1b7', 'c6e6', 'c5f8', 'c6a6']",1
+04,True,1850,True,4.0,4rk2/1Q3p1r/1p2bB2/p5Rp/P5pP/6P1/1Pq5/3R2K1 w - - 0 1,c2_images_krausemeinhardt.png,,,"['b7e7', 'f6e7']",0
+04,True,1850,True,5.0,k1n2br1/p1r5/QpP1pp2/3P4/3P3p/2P2PBq/3N1P1P/R3R1K1 w - - 0 1,c2_images_skujarozenbergs(reversed).png,,,['a6c8'],0
+04,True,1850,True,6.0,6k1/1p1R1p1p/p5p1/P3n3/5N1P/2P2Q2/5PPK/4rq2 w - - 0 1,c2_images_replacement4.png,Rd8,d7d8,['d7d8'],1
+04,True,1850,True,7.0,rk2q2r/p1p2p1p/B1p3p1/3N1b2/3Npp2/5P2/PPP3PP/1K1Rb2R w - - 0 1,c3_images_kazicvukovic(reversed).png,Ne7,d5e7,['d5e7'],1
+04,True,1850,True,8.0,1k1r4/8/R1p1p2b/1NN1qp2/8/1P3B2/2PP1K2/8 w - - 0 1,c3_images_malininandreev(reversed).png,Ra8,a6a8,"['a6a8', 'a6b6']",1
+04,True,1850,True,9.0,k2r3r/pbQ1n2p/7b/2pNN2q/5Bp1/8/PPP4P/1KR1R3 w - - 0 1,c3_images_podzerovkuntzevic(reversed).png,,,['c7b8'],0
+04,True,1850,True,10.0,1kr1q3/pp6/1bp5/4N3/5Q1R/8/PP6/K7 w - - 0 1,c3_images_studybyercoledelrio(reversed).png,Nd7,e5d7,['e5d7'],1
+04,True,1850,True,11.0,3r2k1/pb1q1pp1/1p2pb1p/8/3N4/P2QB3/1P3PPP/1Br1R1K1 w - - 0 1,c3_images_tylorwinter.png,Qh7,d3h7,['d3h7'],1
+04,True,1850,True,12.0,1rr4k/3qN1b1/2p2n1p/3p1Q2/1P1P3N/2P3P1/5P1P/6K1 w - - 0 1,c3_images_replacement3.png,Ng6,e7g6,['e7g6'],1
+04,True,1850,True,13.0,2r1rq2/4b2k/1p2BBbp/p3pQ2/4N3/1P2P3/5PPP/6K1 w - - 0 1,c3_images_replacement5.png,,,"['e4g5', 'e6g8']",0
+04,True,1850,True,14.0,kr4r1/p1pqn1b1/2p1p2p/2Pp2p1/Q2P4/2RB2B1/PP3PPP/1K5R w - - 0 1,c4_images_brankawittwer(reversed).png,,,['a4a7'],0
+04,True,1850,True,15.0,1k6/pp6/q4p2/3p1B1p/5P1P/1PP1B1R1/r5bK/8 w - - 0 1,c4_images_ivanchuksavchenko(reversed).png,Rg8,g3g8,['g3g8'],1
+04,True,1850,True,16.0,5k2/p4p1r/1n3b2/2p1Qp1p/1q2P3/1B4R1/Pr3PP1/2R2K2 w - - 0 1,c4_images_strekalovskyshaposhlikov.png,Qf6,e5f6,"['e5d6', 'g3g8']",0
+04,True,1850,True,17.0,r1b2rk1/1pp2ppp/p1np1q2/8/1b2Q3/2PB1N2/PP1B1PPP/RN2K2R w - - 0 1,c5_images_easyposition2.png,Qh7,e4h7,['e4h7'],1
+04,True,1850,True,18.0,2kr1r2/3bb3/1pp5/4B1p1/2BP3p/8/5P1P/3RRK2 w - - 0 1,c5_images_easyposition5(reversed).png,Ba6,c4a6,['c4a6'],1
+04,True,1850,True,19.0,1r4rk/6p1/1p5p/4N3/b7/3B4/PP6/K1R5 w - - 0 1,c5_images_easyposition6.png,Nf7,e5f7,['e5f7'],1
+04,True,1850,False,20.0,2r2r1k/1b5p/p2Q1qp1/3p1P2/3Pp3/8/6RP/6RK w - - 0 1,nc1_images_frombeautiful(nomate).png,,,[],1
+04,True,1850,False,21.0,3q2kr/1p3pp1/p1p2R1p/5p2/7P/P3Q3/1P4P1/7K w - - 0 1,nc1_images_steinitznn(nomate).png,,,[],1
+04,True,1850,False,22.0,1k6/ppp3pp/3ppb2/1P1P1Q2/3qr3/2R5/P1R4P/1K6 w - - 0 1,nc1_images_winterfriede(nomate)(reversed).png,,,[],1
+04,True,1850,False,23.0,1k6/1b1q2p1/2R4p/2QB4/1P2Pp2/P4P2/2r3rP/KR6 w - - 0 1,nc2_images_kekhayovpetrov(nomate)(reversed).png,,,[],1
+04,True,1850,False,24.0,4rk2/1Qp2p1r/1p2bB2/p5Rp/P5pP/6P1/1Pq5/3R2K1 w - - 0 1,nc2_images_krausemeinhardt(nomate).png,,,[],1
+04,True,1850,False,25.0,k1n2b2/p1r3r1/QpP1pp2/3P4/3P3p/2P2PBq/3N1P1P/R3R1K1 w - - 0 1,nc2_images_skujarozenbergs(nomate)(reversed).png,,,[],1
+04,True,1850,False,26.0,6k1/1p1R1p2/p5pp/P3n3/5N1P/2P2Q2/5PPK/4rq2 w - - 0 1,nc2_images_replacement4(nomate).png,,,[],1
+04,True,1850,False,27.0,rk2q2r/p1p2p1p/Bp4p1/3N1b2/3Npp2/5P2/PPP3PP/1K1Rb2R w - - 0 1,nc3_images_kazicvukovic(nomate)(reversed).png,,,[],1
+04,True,1850,False,28.0,1k1r4/p7/R1p1p2b/1NN1qp2/8/1P3B2/2PP1K2/8 w - - 0 1,nc3_images_malininandreev(nomate)(reversed).png,,,[],1
+04,True,1850,False,29.0,k2r3r/pbQ1n2p/3p3b/2pNN2q/5Bp1/8/PPP4P/1KR1R3 w - - 0 1,nc3_images_podzerovkuntzevic(nomate)(reversed).png,,,[],1
+04,True,1850,False,30.0,1k2q3/ppr5/1bp5/4N3/5Q1R/8/PP6/K7 w - - 0 1,nc3_images_studybyercoledelrio(nomate)(reversed).png,,,[],1
+04,True,1850,False,31.0,2r3k1/pb1q1p2/1p2pbpp/8/3N4/P2QB3/1P3PPP/1Br1R1K1 w - - 0 1,nc3_images_tylorwinter(nomate).png,,,[],1
+04,True,1850,False,32.0,1rr4k/3qNpb1/2p2n1p/3p1Q2/1P1P3N/2P3P1/5P1P/6K1 w - - 0 1,nc3_images_replacement3(nomate).png,,,[],1
+04,True,1850,False,33.0,2r1rq2/4b2k/1p2BBb1/p3pQ1p/4N3/1P2P3/5PPP/6K1 w - - 0 1,nc3_images_replacement5(nomate).png,,,[],1
+04,True,1850,False,34.0,kr4r1/p1pqn1b1/2p1p2p/2Pp2p1/Q2P4/1PRB2B1/P4PPP/1K5R w - - 0 1,nc4_images_brankawittwer(nomate)(reversed).png,,,[],1
+04,True,1850,False,35.0,1k6/pp4p1/q4p2/3p1B1p/5P1P/1PP1B1R1/r5bK/8 w - - 0 1,nc4_images_ivanchuksavchenko(nomate)(reversed).png,,,[],1
+04,True,1850,False,36.0,5k2/p4p1r/1n3b2/2p1Qp1p/1q2P1p1/1B4R1/Pr3PP1/2R2K2 w - - 0 1,nc4_images_strekalovskyshaposhlikov(nomate).png,,,[],1
+04,True,1850,False,37.0,r1b2rk1/1pp2p1p/p1np1qp1/8/1b2Q3/2PB1N2/PP1B1PPP/RN2K2R w - - 0 1,nc5_images_easyposition2(nomate).png,,,[],1
+04,True,1850,False,38.0,2kr1r2/3bb3/2p5/1p2B1p1/2BP3p/8/5P1P/3RRK2 w - - 0 1,nc5_images_easyposition5(nomate)(reversed).png,,,[],1
+04,True,1850,False,39.0,1r4rk/8/1p4pp/4N3/b7/3B4/PP6/K1R5 w - - 0 1,nc5_images_easyposition6(nomate).png,Rc7,c1c7,[],0
+06,True,1751,True,0.0,2r2r1k/1b5p/p2Q1q2/3p1P2/3Pp3/8/6RP/6RK w - - 0 1,c1_images_frombeautiful.png,Rg8,g2g8,['g2g8'],1
+06,True,1751,True,1.0,r2q2kr/1p4p1/p1p2R1p/5p2/7P/P3Q3/1P4P1/7K w - - 0 1,c1_images_steinitznn.png,,,['e3e6'],0
+06,True,1751,True,2.0,1k6/ppp3pp/3p1b2/1P1P1Q2/3qr3/2R5/P1R4P/1K6 w - - 0 1,c1_images_winterfriede(reversed).png,Qc8,f5c8,['f5c8'],1
+06,True,1751,True,3.0,1k6/1b1q2p1/2R4p/2QB4/4Pp2/P4P2/6rP/KR6 w - - 0 1,c2_images_kekhayovpetrov(reversed).png,Rg2,,"['b1b7', 'c6e6', 'c5f8', 'c6a6']",0
+06,True,1751,True,4.0,4rk2/1Q3p1r/1p2bB2/p5Rp/P5pP/6P1/1Pq5/3R2K1 w - - 0 1,c2_images_krausemeinhardt.png,Qe7,b7e7,"['b7e7', 'f6e7']",1
+06,True,1751,True,5.0,k1n2br1/p1r5/QpP1pp2/3P4/3P3p/2P2PBq/3N1P1P/R3R1K1 w - - 0 1,c2_images_skujarozenbergs(reversed).png,,,['a6c8'],0
+06,True,1751,True,6.0,6k1/1p1R1p1p/p5p1/P3n3/5N1P/2P2Q2/5PPK/4rq2 w - - 0 1,c2_images_replacement4.png,,,['d7d8'],0
+06,True,1751,True,7.0,rk2q2r/p1p2p1p/B1p3p1/3N1b2/3Npp2/5P2/PPP3PP/1K1Rb2R w - - 0 1,c3_images_kazicvukovic(reversed).png,,,['d5e7'],0
+06,True,1751,True,8.0,1k1r4/8/R1p1p2b/1NN1qp2/8/1P3B2/2PP1K2/8 w - - 0 1,c3_images_malininandreev(reversed).png,Ra8,a6a8,"['a6a8', 'a6b6']",1
+06,True,1751,True,9.0,k2r3r/pbQ1n2p/7b/2pNN2q/5Bp1/8/PPP4P/1KR1R3 w - - 0 1,c3_images_podzerovkuntzevic(reversed).png,Qb8,c7b8,['c7b8'],1
+06,True,1751,True,10.0,1kr1q3/pp6/1bp5/4N3/5Q1R/8/PP6/K7 w - - 0 1,c3_images_studybyercoledelrio(reversed).png,Nd7,e5d7,['e5d7'],1
+06,True,1751,True,11.0,3r2k1/pb1q1pp1/1p2pb1p/8/3N4/P2QB3/1P3PPP/1Br1R1K1 w - - 0 1,c3_images_tylorwinter.png,,,['d3h7'],0
+06,True,1751,True,12.0,1rr4k/3qN1b1/2p2n1p/3p1Q2/1P1P3N/2P3P1/5P1P/6K1 w - - 0 1,c3_images_replacement3.png,Ng6,e7g6,['e7g6'],1
+06,True,1751,True,13.0,2r1rq2/4b2k/1p2BBbp/p3pQ2/4N3/1P2P3/5PPP/6K1 w - - 0 1,c3_images_replacement5.png,,,"['e4g5', 'e6g8']",0
+06,True,1751,True,14.0,kr4r1/p1pqn1b1/2p1p2p/2Pp2p1/Q2P4/2RB2B1/PP3PPP/1K5R w - - 0 1,c4_images_brankawittwer(reversed).png,Qa7,a4a7,['a4a7'],1
+06,True,1751,True,15.0,1k6/pp6/q4p2/3p1B1p/5P1P/1PP1B1R1/r5bK/8 w - - 0 1,c4_images_ivanchuksavchenko(reversed).png,Rg8,g3g8,['g3g8'],1
+06,True,1751,True,16.0,5k2/p4p1r/1n3b2/2p1Qp1p/1q2P3/1B4R1/Pr3PP1/2R2K2 w - - 0 1,c4_images_strekalovskyshaposhlikov.png,Qd6,e5d6,"['e5d6', 'g3g8']",1
+06,True,1751,True,17.0,r1b2rk1/1pp2ppp/p1np1q2/8/1b2Q3/2PB1N2/PP1B1PPP/RN2K2R w - - 0 1,c5_images_easyposition2.png,Qh7,e4h7,['e4h7'],1
+06,True,1751,True,18.0,2kr1r2/3bb3/1pp5/4B1p1/2BP3p/8/5P1P/3RRK2 w - - 0 1,c5_images_easyposition5(reversed).png,Ba6,c4a6,['c4a6'],1
+06,True,1751,True,19.0,1r4rk/6p1/1p5p/4N3/b7/3B4/PP6/K1R5 w - - 0 1,c5_images_easyposition6.png,Nf7,e5f7,['e5f7'],1
+06,True,1751,False,20.0,2r2r1k/1b5p/p2Q1qp1/3p1P2/3Pp3/8/6RP/6RK w - - 0 1,nc1_images_frombeautiful(nomate).png,,,[],1
+06,True,1751,False,21.0,3q2kr/1p3pp1/p1p2R1p/5p2/7P/P3Q3/1P4P1/7K w - - 0 1,nc1_images_steinitznn(nomate).png,,,[],1
+06,True,1751,False,22.0,1k6/ppp3pp/3ppb2/1P1P1Q2/3qr3/2R5/P1R4P/1K6 w - - 0 1,nc1_images_winterfriede(nomate)(reversed).png,,,[],1
+06,True,1751,False,23.0,1k6/1b1q2p1/2R4p/2QB4/1P2Pp2/P4P2/2r3rP/KR6 w - - 0 1,nc2_images_kekhayovpetrov(nomate)(reversed).png,,,[],1
+06,True,1751,False,24.0,4rk2/1Qp2p1r/1p2bB2/p5Rp/P5pP/6P1/1Pq5/3R2K1 w - - 0 1,nc2_images_krausemeinhardt(nomate).png,,,[],1
+06,True,1751,False,25.0,k1n2b2/p1r3r1/QpP1pp2/3P4/3P3p/2P2PBq/3N1P1P/R3R1K1 w - - 0 1,nc2_images_skujarozenbergs(nomate)(reversed).png,,,[],1
+06,True,1751,False,26.0,6k1/1p1R1p2/p5pp/P3n3/5N1P/2P2Q2/5PPK/4rq2 w - - 0 1,nc2_images_replacement4(nomate).png,Rd8,d7d8,[],0
+06,True,1751,False,27.0,rk2q2r/p1p2p1p/Bp4p1/3N1b2/3Npp2/5P2/PPP3PP/1K1Rb2R w - - 0 1,nc3_images_kazicvukovic(nomate)(reversed).png,,,[],1
+06,True,1751,False,28.0,1k1r4/p7/R1p1p2b/1NN1qp2/8/1P3B2/2PP1K2/8 w - - 0 1,nc3_images_malininandreev(nomate)(reversed).png,,,[],1
+06,True,1751,False,29.0,k2r3r/pbQ1n2p/3p3b/2pNN2q/5Bp1/8/PPP4P/1KR1R3 w - - 0 1,nc3_images_podzerovkuntzevic(nomate)(reversed).png,,,[],1
+06,True,1751,False,30.0,1k2q3/ppr5/1bp5/4N3/5Q1R/8/PP6/K7 w - - 0 1,nc3_images_studybyercoledelrio(nomate)(reversed).png,,,[],1
+06,True,1751,False,31.0,2r3k1/pb1q1p2/1p2pbpp/8/3N4/P2QB3/1P3PPP/1Br1R1K1 w - - 0 1,nc3_images_tylorwinter(nomate).png,,,[],1
+06,True,1751,False,32.0,1rr4k/3qNpb1/2p2n1p/3p1Q2/1P1P3N/2P3P1/5P1P/6K1 w - - 0 1,nc3_images_replacement3(nomate).png,,,[],1
+06,True,1751,False,33.0,2r1rq2/4b2k/1p2BBb1/p3pQ1p/4N3/1P2P3/5PPP/6K1 w - - 0 1,nc3_images_replacement5(nomate).png,,,[],1
+06,True,1751,False,34.0,kr4r1/p1pqn1b1/2p1p2p/2Pp2p1/Q2P4/1PRB2B1/P4PPP/1K5R w - - 0 1,nc4_images_brankawittwer(nomate)(reversed).png,,,[],1
+06,True,1751,False,35.0,1k6/pp4p1/q4p2/3p1B1p/5P1P/1PP1B1R1/r5bK/8 w - - 0 1,nc4_images_ivanchuksavchenko(nomate)(reversed).png,,,[],1
+06,True,1751,False,36.0,5k2/p4p1r/1n3b2/2p1Qp1p/1q2P1p1/1B4R1/Pr3PP1/2R2K2 w - - 0 1,nc4_images_strekalovskyshaposhlikov(nomate).png,,,[],1
+06,True,1751,False,37.0,r1b2rk1/1pp2p1p/p1np1qp1/8/1b2Q3/2PB1N2/PP1B1PPP/RN2K2R w - - 0 1,nc5_images_easyposition2(nomate).png,,,[],1
+06,True,1751,False,38.0,2kr1r2/3bb3/2p5/1p2B1p1/2BP3p/8/5P1P/3RRK2 w - - 0 1,nc5_images_easyposition5(nomate)(reversed).png,,,[],1
+06,True,1751,False,39.0,1r4rk/8/1p4pp/4N3/b7/3B4/PP6/K1R5 w - - 0 1,nc5_images_easyposition6(nomate).png,,,[],1
+08,True,1941,True,0.0,2r2r1k/1b5p/p2Q1q2/3p1P2/3Pp3/8/6RP/6RK w - - 0 1,c1_images_frombeautiful.png,Rg8,g2g8,['g2g8'],1
+08,True,1941,True,1.0,r2q2kr/1p4p1/p1p2R1p/5p2/7P/P3Q3/1P4P1/7K w - - 0 1,c1_images_steinitznn.png,Qe6,e3e6,['e3e6'],1
+08,True,1941,True,2.0,1k6/ppp3pp/3p1b2/1P1P1Q2/3qr3/2R5/P1R4P/1K6 w - - 0 1,c1_images_winterfriede(reversed).png,Qc8,f5c8,['f5c8'],1
+08,True,1941,True,3.0,1k6/1b1q2p1/2R4p/2QB4/4Pp2/P4P2/6rP/KR6 w - - 0 1,c2_images_kekhayovpetrov(reversed).png,Rb7,b1b7,"['b1b7', 'c6e6', 'c5f8', 'c6a6']",1
+08,True,1941,True,4.0,4rk2/1Q3p1r/1p2bB2/p5Rp/P5pP/6P1/1Pq5/3R2K1 w - - 0 1,c2_images_krausemeinhardt.png,Qe7,b7e7,"['b7e7', 'f6e7']",1
+08,True,1941,True,5.0,k1n2br1/p1r5/QpP1pp2/3P4/3P3p/2P2PBq/3N1P1P/R3R1K1 w - - 0 1,c2_images_skujarozenbergs(reversed).png,Qc8,a6c8,['a6c8'],1
+08,True,1941,True,6.0,6k1/1p1R1p1p/p5p1/P3n3/5N1P/2P2Q2/5PPK/4rq2 w - - 0 1,c2_images_replacement4.png,Ne6,f4e6,['d7d8'],0
+08,True,1941,True,7.0,rk2q2r/p1p2p1p/B1p3p1/3N1b2/3Npp2/5P2/PPP3PP/1K1Rb2R w - - 0 1,c3_images_kazicvukovic(reversed).png,,,['d5e7'],0
+08,True,1941,True,8.0,1k1r4/8/R1p1p2b/1NN1qp2/8/1P3B2/2PP1K2/8 w - - 0 1,c3_images_malininandreev(reversed).png,Ra8,a6a8,"['a6a8', 'a6b6']",1
+08,True,1941,True,9.0,k2r3r/pbQ1n2p/7b/2pNN2q/5Bp1/8/PPP4P/1KR1R3 w - - 0 1,c3_images_podzerovkuntzevic(reversed).png,Qb8,c7b8,['c7b8'],1
+08,True,1941,True,10.0,1kr1q3/pp6/1bp5/4N3/5Q1R/8/PP6/K7 w - - 0 1,c3_images_studybyercoledelrio(reversed).png,Nd7,e5d7,['e5d7'],1
+08,True,1941,True,11.0,3r2k1/pb1q1pp1/1p2pb1p/8/3N4/P2QB3/1P3PPP/1Br1R1K1 w - - 0 1,c3_images_tylorwinter.png,Qh7,d3h7,['d3h7'],1
+08,True,1941,True,12.0,1rr4k/3qN1b1/2p2n1p/3p1Q2/1P1P3N/2P3P1/5P1P/6K1 w - - 0 1,c3_images_replacement3.png,Ng6,e7g6,['e7g6'],1
+08,True,1941,True,13.0,2r1rq2/4b2k/1p2BBbp/p3pQ2/4N3/1P2P3/5PPP/6K1 w - - 0 1,c3_images_replacement5.png,Ng5,e4g5,"['e4g5', 'e6g8']",1
+08,True,1941,True,14.0,kr4r1/p1pqn1b1/2p1p2p/2Pp2p1/Q2P4/2RB2B1/PP3PPP/1K5R w - - 0 1,c4_images_brankawittwer(reversed).png,Qa7,a4a7,['a4a7'],1
+08,True,1941,True,15.0,1k6/pp6/q4p2/3p1B1p/5P1P/1PP1B1R1/r5bK/8 w - - 0 1,c4_images_ivanchuksavchenko(reversed).png,Rg8,g3g8,['g3g8'],1
+08,True,1941,True,16.0,5k2/p4p1r/1n3b2/2p1Qp1p/1q2P3/1B4R1/Pr3PP1/2R2K2 w - - 0 1,c4_images_strekalovskyshaposhlikov.png,Rg8,g3g8,"['e5d6', 'g3g8']",1
+08,True,1941,True,17.0,r1b2rk1/1pp2ppp/p1np1q2/8/1b2Q3/2PB1N2/PP1B1PPP/RN2K2R w - - 0 1,c5_images_easyposition2.png,Qh7,e4h7,['e4h7'],1
+08,True,1941,True,18.0,2kr1r2/3bb3/1pp5/4B1p1/2BP3p/8/5P1P/3RRK2 w - - 0 1,c5_images_easyposition5(reversed).png,Ba6,c4a6,['c4a6'],1
+08,True,1941,True,19.0,1r4rk/6p1/1p5p/4N3/b7/3B4/PP6/K1R5 w - - 0 1,c5_images_easyposition6.png,Nf7,e5f7,['e5f7'],1
+08,True,1941,False,20.0,2r2r1k/1b5p/p2Q1qp1/3p1P2/3Pp3/8/6RP/6RK w - - 0 1,nc1_images_frombeautiful(nomate).png,,,[],1
+08,True,1941,False,21.0,3q2kr/1p3pp1/p1p2R1p/5p2/7P/P3Q3/1P4P1/7K w - - 0 1,nc1_images_steinitznn(nomate).png,,,[],1
+08,True,1941,False,22.0,1k6/ppp3pp/3ppb2/1P1P1Q2/3qr3/2R5/P1R4P/1K6 w - - 0 1,nc1_images_winterfriede(nomate)(reversed).png,,,[],1
+08,True,1941,False,23.0,1k6/1b1q2p1/2R4p/2QB4/1P2Pp2/P4P2/2r3rP/KR6 w - - 0 1,nc2_images_kekhayovpetrov(nomate)(reversed).png,,,[],1
+08,True,1941,False,24.0,4rk2/1Qp2p1r/1p2bB2/p5Rp/P5pP/6P1/1Pq5/3R2K1 w - - 0 1,nc2_images_krausemeinhardt(nomate).png,,,[],1
+08,True,1941,False,25.0,k1n2b2/p1r3r1/QpP1pp2/3P4/3P3p/2P2PBq/3N1P1P/R3R1K1 w - - 0 1,nc2_images_skujarozenbergs(nomate)(reversed).png,,,[],1
+08,True,1941,False,26.0,6k1/1p1R1p2/p5pp/P3n3/5N1P/2P2Q2/5PPK/4rq2 w - - 0 1,nc2_images_replacement4(nomate).png,,,[],1
+08,True,1941,False,27.0,rk2q2r/p1p2p1p/Bp4p1/3N1b2/3Npp2/5P2/PPP3PP/1K1Rb2R w - - 0 1,nc3_images_kazicvukovic(nomate)(reversed).png,,,[],1
+08,True,1941,False,28.0,1k1r4/p7/R1p1p2b/1NN1qp2/8/1P3B2/2PP1K2/8 w - - 0 1,nc3_images_malininandreev(nomate)(reversed).png,,,[],1
+08,True,1941,False,29.0,k2r3r/pbQ1n2p/3p3b/2pNN2q/5Bp1/8/PPP4P/1KR1R3 w - - 0 1,nc3_images_podzerovkuntzevic(nomate)(reversed).png,,,[],1
+08,True,1941,False,30.0,1k2q3/ppr5/1bp5/4N3/5Q1R/8/PP6/K7 w - - 0 1,nc3_images_studybyercoledelrio(nomate)(reversed).png,,,[],1
+08,True,1941,False,31.0,2r3k1/pb1q1p2/1p2pbpp/8/3N4/P2QB3/1P3PPP/1Br1R1K1 w - - 0 1,nc3_images_tylorwinter(nomate).png,,,[],1
+08,True,1941,False,32.0,1rr4k/3qNpb1/2p2n1p/3p1Q2/1P1P3N/2P3P1/5P1P/6K1 w - - 0 1,nc3_images_replacement3(nomate).png,,,[],1
+08,True,1941,False,33.0,2r1rq2/4b2k/1p2BBb1/p3pQ1p/4N3/1P2P3/5PPP/6K1 w - - 0 1,nc3_images_replacement5(nomate).png,,,[],1
+08,True,1941,False,34.0,kr4r1/p1pqn1b1/2p1p2p/2Pp2p1/Q2P4/1PRB2B1/P4PPP/1K5R w - - 0 1,nc4_images_brankawittwer(nomate)(reversed).png,,,[],1
+08,True,1941,False,35.0,1k6/pp4p1/q4p2/3p1B1p/5P1P/1PP1B1R1/r5bK/8 w - - 0 1,nc4_images_ivanchuksavchenko(nomate)(reversed).png,,,[],1
+08,True,1941,False,36.0,5k2/p4p1r/1n3b2/2p1Qp1p/1q2P1p1/1B4R1/Pr3PP1/2R2K2 w - - 0 1,nc4_images_strekalovskyshaposhlikov(nomate).png,,,[],1
+08,True,1941,False,37.0,r1b2rk1/1pp2p1p/p1np1qp1/8/1b2Q3/2PB1N2/PP1B1PPP/RN2K2R w - - 0 1,nc5_images_easyposition2(nomate).png,,,[],1
+08,True,1941,False,38.0,2kr1r2/3bb3/2p5/1p2B1p1/2BP3p/8/5P1P/3RRK2 w - - 0 1,nc5_images_easyposition5(nomate)(reversed).png,,,[],1
+08,True,1941,False,39.0,1r4rk/8/1p4pp/4N3/b7/3B4/PP6/K1R5 w - - 0 1,nc5_images_easyposition6(nomate).png,,,[],1
+09,True,1969,True,0.0,2r2r1k/1b5p/p2Q1q2/3p1P2/3Pp3/8/6RP/6RK w - - 0 1,c1_images_frombeautiful.png,Rg8,g2g8,['g2g8'],1
+09,True,1969,True,1.0,r2q2kr/1p4p1/p1p2R1p/5p2/7P/P3Q3/1P4P1/7K w - - 0 1,c1_images_steinitznn.png,Qe6,e3e6,['e3e6'],1
+09,True,1969,True,2.0,1k6/ppp3pp/3p1b2/1P1P1Q2/3qr3/2R5/P1R4P/1K6 w - - 0 1,c1_images_winterfriede(reversed).png,Qc8,f5c8,['f5c8'],1
+09,True,1969,True,3.0,1k6/1b1q2p1/2R4p/2QB4/4Pp2/P4P2/6rP/KR6 w - - 0 1,c2_images_kekhayovpetrov(reversed).png,Rb6,c6b6,"['b1b7', 'c6e6', 'c5f8', 'c6a6']",0
+09,True,1969,True,4.0,4rk2/1Q3p1r/1p2bB2/p5Rp/P5pP/6P1/1Pq5/3R2K1 w - - 0 1,c2_images_krausemeinhardt.png,Qe7,b7e7,"['b7e7', 'f6e7']",1
+09,True,1969,True,5.0,k1n2br1/p1r5/QpP1pp2/3P4/3P3p/2P2PBq/3N1P1P/R3R1K1 w - - 0 1,c2_images_skujarozenbergs(reversed).png,Qc8,a6c8,['a6c8'],1
+09,True,1969,True,6.0,6k1/1p1R1p1p/p5p1/P3n3/5N1P/2P2Q2/5PPK/4rq2 w - - 0 1,c2_images_replacement4.png,Rd8,d7d8,['d7d8'],1
+09,True,1969,True,7.0,rk2q2r/p1p2p1p/B1p3p1/3N1b2/3Npp2/5P2/PPP3PP/1K1Rb2R w - - 0 1,c3_images_kazicvukovic(reversed).png,,,['d5e7'],0
+09,True,1969,True,8.0,1k1r4/8/R1p1p2b/1NN1qp2/8/1P3B2/2PP1K2/8 w - - 0 1,c3_images_malininandreev(reversed).png,Rb6,a6b6,"['a6a8', 'a6b6']",1
+09,True,1969,True,9.0,k2r3r/pbQ1n2p/7b/2pNN2q/5Bp1/8/PPP4P/1KR1R3 w - - 0 1,c3_images_podzerovkuntzevic(reversed).png,Qb8,c7b8,['c7b8'],1
+09,True,1969,True,10.0,1kr1q3/pp6/1bp5/4N3/5Q1R/8/PP6/K7 w - - 0 1,c3_images_studybyercoledelrio(reversed).png,,,['e5d7'],0
+09,True,1969,True,11.0,3r2k1/pb1q1pp1/1p2pb1p/8/3N4/P2QB3/1P3PPP/1Br1R1K1 w - - 0 1,c3_images_tylorwinter.png,,,['d3h7'],0
+09,True,1969,True,12.0,1rr4k/3qN1b1/2p2n1p/3p1Q2/1P1P3N/2P3P1/5P1P/6K1 w - - 0 1,c3_images_replacement3.png,Ng6,e7g6,['e7g6'],1
+09,True,1969,True,13.0,2r1rq2/4b2k/1p2BBbp/p3pQ2/4N3/1P2P3/5PPP/6K1 w - - 0 1,c3_images_replacement5.png,,,"['e4g5', 'e6g8']",0
+09,True,1969,True,14.0,kr4r1/p1pqn1b1/2p1p2p/2Pp2p1/Q2P4/2RB2B1/PP3PPP/1K5R w - - 0 1,c4_images_brankawittwer(reversed).png,Qa7,a4a7,['a4a7'],1
+09,True,1969,True,15.0,1k6/pp6/q4p2/3p1B1p/5P1P/1PP1B1R1/r5bK/8 w - - 0 1,c4_images_ivanchuksavchenko(reversed).png,,,['g3g8'],0
+09,True,1969,True,16.0,5k2/p4p1r/1n3b2/2p1Qp1p/1q2P3/1B4R1/Pr3PP1/2R2K2 w - - 0 1,c4_images_strekalovskyshaposhlikov.png,,,"['e5d6', 'g3g8']",0
+09,True,1969,True,17.0,r1b2rk1/1pp2ppp/p1np1q2/8/1b2Q3/2PB1N2/PP1B1PPP/RN2K2R w - - 0 1,c5_images_easyposition2.png,Qh7,e4h7,['e4h7'],1
+09,True,1969,True,18.0,2kr1r2/3bb3/1pp5/4B1p1/2BP3p/8/5P1P/3RRK2 w - - 0 1,c5_images_easyposition5(reversed).png,Ba6,c4a6,['c4a6'],1
+09,True,1969,True,19.0,1r4rk/6p1/1p5p/4N3/b7/3B4/PP6/K1R5 w - - 0 1,c5_images_easyposition6.png,Nf7,e5f7,['e5f7'],1
+09,True,1969,False,20.0,2r2r1k/1b5p/p2Q1qp1/3p1P2/3Pp3/8/6RP/6RK w - - 0 1,nc1_images_frombeautiful(nomate).png,,,[],1
+09,True,1969,False,21.0,3q2kr/1p3pp1/p1p2R1p/5p2/7P/P3Q3/1P4P1/7K w - - 0 1,nc1_images_steinitznn(nomate).png,,,[],1
+09,True,1969,False,22.0,1k6/ppp3pp/3ppb2/1P1P1Q2/3qr3/2R5/P1R4P/1K6 w - - 0 1,nc1_images_winterfriede(nomate)(reversed).png,,,[],1
+09,True,1969,False,23.0,1k6/1b1q2p1/2R4p/2QB4/1P2Pp2/P4P2/2r3rP/KR6 w - - 0 1,nc2_images_kekhayovpetrov(nomate)(reversed).png,,,[],1
+09,True,1969,False,24.0,4rk2/1Qp2p1r/1p2bB2/p5Rp/P5pP/6P1/1Pq5/3R2K1 w - - 0 1,nc2_images_krausemeinhardt(nomate).png,,,[],1
+09,True,1969,False,25.0,k1n2b2/p1r3r1/QpP1pp2/3P4/3P3p/2P2PBq/3N1P1P/R3R1K1 w - - 0 1,nc2_images_skujarozenbergs(nomate)(reversed).png,,,[],1
+09,True,1969,False,26.0,6k1/1p1R1p2/p5pp/P3n3/5N1P/2P2Q2/5PPK/4rq2 w - - 0 1,nc2_images_replacement4(nomate).png,,,[],1
+09,True,1969,False,27.0,rk2q2r/p1p2p1p/Bp4p1/3N1b2/3Npp2/5P2/PPP3PP/1K1Rb2R w - - 0 1,nc3_images_kazicvukovic(nomate)(reversed).png,,,[],1
+09,True,1969,False,28.0,1k1r4/p7/R1p1p2b/1NN1qp2/8/1P3B2/2PP1K2/8 w - - 0 1,nc3_images_malininandreev(nomate)(reversed).png,,,[],1
+09,True,1969,False,29.0,k2r3r/pbQ1n2p/3p3b/2pNN2q/5Bp1/8/PPP4P/1KR1R3 w - - 0 1,nc3_images_podzerovkuntzevic(nomate)(reversed).png,,,[],1
+09,True,1969,False,30.0,1k2q3/ppr5/1bp5/4N3/5Q1R/8/PP6/K7 w - - 0 1,nc3_images_studybyercoledelrio(nomate)(reversed).png,,,[],1
+09,True,1969,False,31.0,2r3k1/pb1q1p2/1p2pbpp/8/3N4/P2QB3/1P3PPP/1Br1R1K1 w - - 0 1,nc3_images_tylorwinter(nomate).png,,,[],1
+09,True,1969,False,32.0,1rr4k/3qNpb1/2p2n1p/3p1Q2/1P1P3N/2P3P1/5P1P/6K1 w - - 0 1,nc3_images_replacement3(nomate).png,,,[],1
+09,True,1969,False,33.0,2r1rq2/4b2k/1p2BBb1/p3pQ1p/4N3/1P2P3/5PPP/6K1 w - - 0 1,nc3_images_replacement5(nomate).png,,,[],1
+09,True,1969,False,34.0,kr4r1/p1pqn1b1/2p1p2p/2Pp2p1/Q2P4/1PRB2B1/P4PPP/1K5R w - - 0 1,nc4_images_brankawittwer(nomate)(reversed).png,,,[],1
+09,True,1969,False,35.0,1k6/pp4p1/q4p2/3p1B1p/5P1P/1PP1B1R1/r5bK/8 w - - 0 1,nc4_images_ivanchuksavchenko(nomate)(reversed).png,,,[],1
+09,True,1969,False,36.0,5k2/p4p1r/1n3b2/2p1Qp1p/1q2P1p1/1B4R1/Pr3PP1/2R2K2 w - - 0 1,nc4_images_strekalovskyshaposhlikov(nomate).png,,,[],1
+09,True,1969,False,37.0,r1b2rk1/1pp2p1p/p1np1qp1/8/1b2Q3/2PB1N2/PP1B1PPP/RN2K2R w - - 0 1,nc5_images_easyposition2(nomate).png,,,[],1
+09,True,1969,False,38.0,2kr1r2/3bb3/2p5/1p2B1p1/2BP3p/8/5P1P/3RRK2 w - - 0 1,nc5_images_easyposition5(nomate)(reversed).png,,,[],1
+09,True,1969,False,39.0,1r4rk/8/1p4pp/4N3/b7/3B4/PP6/K1R5 w - - 0 1,nc5_images_easyposition6(nomate).png,,,[],1
+10,True,2100,True,0.0,2r2r1k/1b5p/p2Q1q2/3p1P2/3Pp3/8/6RP/6RK w - - 0 1,c1_images_frombeautiful.png,Rg8,g2g8,['g2g8'],1
+10,True,2100,True,1.0,r2q2kr/1p4p1/p1p2R1p/5p2/7P/P3Q3/1P4P1/7K w - - 0 1,c1_images_steinitznn.png,Qe6,e3e6,['e3e6'],1
+10,True,2100,True,2.0,1k6/ppp3pp/3p1b2/1P1P1Q2/3qr3/2R5/P1R4P/1K6 w - - 0 1,c1_images_winterfriede(reversed).png,Qc8,f5c8,['f5c8'],1
+10,True,2100,True,3.0,1k6/1b1q2p1/2R4p/2QB4/4Pp2/P4P2/6rP/KR6 w - - 0 1,c2_images_kekhayovpetrov(reversed).png,Rc8,c6c8,"['b1b7', 'c6e6', 'c5f8', 'c6a6']",0
+10,True,2100,True,4.0,4rk2/1Q3p1r/1p2bB2/p5Rp/P5pP/6P1/1Pq5/3R2K1 w - - 0 1,c2_images_krausemeinhardt.png,Qe7,b7e7,"['b7e7', 'f6e7']",1
+10,True,2100,True,5.0,k1n2br1/p1r5/QpP1pp2/3P4/3P3p/2P2PBq/3N1P1P/R3R1K1 w - - 0 1,c2_images_skujarozenbergs(reversed).png,Qc8,a6c8,['a6c8'],1
+10,True,2100,True,6.0,6k1/1p1R1p1p/p5p1/P3n3/5N1P/2P2Q2/5PPK/4rq2 w - - 0 1,c2_images_replacement4.png,Rd8,d7d8,['d7d8'],1
+10,True,2100,True,7.0,rk2q2r/p1p2p1p/B1p3p1/3N1b2/3Npp2/5P2/PPP3PP/1K1Rb2R w - - 0 1,c3_images_kazicvukovic(reversed).png,Nb4,d5b4,['d5e7'],0
+10,True,2100,True,8.0,1k1r4/8/R1p1p2b/1NN1qp2/8/1P3B2/2PP1K2/8 w - - 0 1,c3_images_malininandreev(reversed).png,Rb6,a6b6,"['a6a8', 'a6b6']",1
+10,True,2100,True,9.0,k2r3r/pbQ1n2p/7b/2pNN2q/5Bp1/8/PPP4P/1KR1R3 w - - 0 1,c3_images_podzerovkuntzevic(reversed).png,,,['c7b8'],0
+10,True,2100,True,10.0,1kr1q3/pp6/1bp5/4N3/5Q1R/8/PP6/K7 w - - 0 1,c3_images_studybyercoledelrio(reversed).png,Nd7,e5d7,['e5d7'],1
+10,True,2100,True,11.0,3r2k1/pb1q1pp1/1p2pb1p/8/3N4/P2QB3/1P3PPP/1Br1R1K1 w - - 0 1,c3_images_tylorwinter.png,Qh7,d3h7,['d3h7'],1
+10,True,2100,True,12.0,1rr4k/3qN1b1/2p2n1p/3p1Q2/1P1P3N/2P3P1/5P1P/6K1 w - - 0 1,c3_images_replacement3.png,Ng6,e7g6,['e7g6'],1
+10,True,2100,True,13.0,2r1rq2/4b2k/1p2BBbp/p3pQ2/4N3/1P2P3/5PPP/6K1 w - - 0 1,c3_images_replacement5.png,Ng5,e4g5,"['e4g5', 'e6g8']",1
+10,True,2100,True,14.0,kr4r1/p1pqn1b1/2p1p2p/2Pp2p1/Q2P4/2RB2B1/PP3PPP/1K5R w - - 0 1,c4_images_brankawittwer(reversed).png,Qa7,a4a7,['a4a7'],1
+10,True,2100,True,15.0,1k6/pp6/q4p2/3p1B1p/5P1P/1PP1B1R1/r5bK/8 w - - 0 1,c4_images_ivanchuksavchenko(reversed).png,Rg8,g3g8,['g3g8'],1
+10,True,2100,True,16.0,5k2/p4p1r/1n3b2/2p1Qp1p/1q2P3/1B4R1/Pr3PP1/2R2K2 w - - 0 1,c4_images_strekalovskyshaposhlikov.png,Rg,,"['e5d6', 'g3g8']",0
+10,True,2100,True,17.0,r1b2rk1/1pp2ppp/p1np1q2/8/1b2Q3/2PB1N2/PP1B1PPP/RN2K2R w - - 0 1,c5_images_easyposition2.png,Qh7,e4h7,['e4h7'],1
+10,True,2100,True,18.0,2kr1r2/3bb3/1pp5/4B1p1/2BP3p/8/5P1P/3RRK2 w - - 0 1,c5_images_easyposition5(reversed).png,Ba6,c4a6,['c4a6'],1
+10,True,2100,True,19.0,1r4rk/6p1/1p5p/4N3/b7/3B4/PP6/K1R5 w - - 0 1,c5_images_easyposition6.png,Nf7,e5f7,['e5f7'],1
+10,True,2100,False,20.0,2r2r1k/1b5p/p2Q1qp1/3p1P2/3Pp3/8/6RP/6RK w - - 0 1,nc1_images_frombeautiful(nomate).png,,,[],1
+10,True,2100,False,21.0,3q2kr/1p3pp1/p1p2R1p/5p2/7P/P3Q3/1P4P1/7K w - - 0 1,nc1_images_steinitznn(nomate).png,,,[],1
+10,True,2100,False,22.0,1k6/ppp3pp/3ppb2/1P1P1Q2/3qr3/2R5/P1R4P/1K6 w - - 0 1,nc1_images_winterfriede(nomate)(reversed).png,,,[],1
+10,True,2100,False,23.0,1k6/1b1q2p1/2R4p/2QB4/1P2Pp2/P4P2/2r3rP/KR6 w - - 0 1,nc2_images_kekhayovpetrov(nomate)(reversed).png,,,[],1
+10,True,2100,False,24.0,4rk2/1Qp2p1r/1p2bB2/p5Rp/P5pP/6P1/1Pq5/3R2K1 w - - 0 1,nc2_images_krausemeinhardt(nomate).png,,,[],1
+10,True,2100,False,25.0,k1n2b2/p1r3r1/QpP1pp2/3P4/3P3p/2P2PBq/3N1P1P/R3R1K1 w - - 0 1,nc2_images_skujarozenbergs(nomate)(reversed).png,,,[],1
+10,True,2100,False,26.0,6k1/1p1R1p2/p5pp/P3n3/5N1P/2P2Q2/5PPK/4rq2 w - - 0 1,nc2_images_replacement4(nomate).png,,,[],1
+10,True,2100,False,27.0,rk2q2r/p1p2p1p/Bp4p1/3N1b2/3Npp2/5P2/PPP3PP/1K1Rb2R w - - 0 1,nc3_images_kazicvukovic(nomate)(reversed).png,,,[],1
+10,True,2100,False,28.0,1k1r4/p7/R1p1p2b/1NN1qp2/8/1P3B2/2PP1K2/8 w - - 0 1,nc3_images_malininandreev(nomate)(reversed).png,,,[],1
+10,True,2100,False,29.0,k2r3r/pbQ1n2p/3p3b/2pNN2q/5Bp1/8/PPP4P/1KR1R3 w - - 0 1,nc3_images_podzerovkuntzevic(nomate)(reversed).png,,,[],1
+10,True,2100,False,30.0,1k2q3/ppr5/1bp5/4N3/5Q1R/8/PP6/K7 w - - 0 1,nc3_images_studybyercoledelrio(nomate)(reversed).png,Nd7,e5d7,[],0
+10,True,2100,False,31.0,2r3k1/pb1q1p2/1p2pbpp/8/3N4/P2QB3/1P3PPP/1Br1R1K1 w - - 0 1,nc3_images_tylorwinter(nomate).png,,,[],1
+10,True,2100,False,32.0,1rr4k/3qNpb1/2p2n1p/3p1Q2/1P1P3N/2P3P1/5P1P/6K1 w - - 0 1,nc3_images_replacement3(nomate).png,,,[],1
+10,True,2100,False,33.0,2r1rq2/4b2k/1p2BBb1/p3pQ1p/4N3/1P2P3/5PPP/6K1 w - - 0 1,nc3_images_replacement5(nomate).png,Ng5,e4g5,[],0
+10,True,2100,False,34.0,kr4r1/p1pqn1b1/2p1p2p/2Pp2p1/Q2P4/1PRB2B1/P4PPP/1K5R w - - 0 1,nc4_images_brankawittwer(nomate)(reversed).png,,,[],1
+10,True,2100,False,35.0,1k6/pp4p1/q4p2/3p1B1p/5P1P/1PP1B1R1/r5bK/8 w - - 0 1,nc4_images_ivanchuksavchenko(nomate)(reversed).png,,,[],1
+10,True,2100,False,36.0,5k2/p4p1r/1n3b2/2p1Qp1p/1q2P1p1/1B4R1/Pr3PP1/2R2K2 w - - 0 1,nc4_images_strekalovskyshaposhlikov(nomate).png,,,[],1
+10,True,2100,False,37.0,r1b2rk1/1pp2p1p/p1np1qp1/8/1b2Q3/2PB1N2/PP1B1PPP/RN2K2R w - - 0 1,nc5_images_easyposition2(nomate).png,,,[],1
+10,True,2100,False,38.0,2kr1r2/3bb3/2p5/1p2B1p1/2BP3p/8/5P1P/3RRK2 w - - 0 1,nc5_images_easyposition5(nomate)(reversed).png,,,[],1
+10,True,2100,False,39.0,1r4rk/8/1p4pp/4N3/b7/3B4/PP6/K1R5 w - - 0 1,nc5_images_easyposition6(nomate).png,,,[],1
+11,True,2051,True,0.0,2r2r1k/1b5p/p2Q1q2/3p1P2/3Pp3/8/6RP/6RK w - - 0 1,c1_images_frombeautiful.png,Rg8,g2g8,['g2g8'],1
+11,True,2051,True,1.0,r2q2kr/1p4p1/p1p2R1p/5p2/7P/P3Q3/1P4P1/7K w - - 0 1,c1_images_steinitznn.png,Qe6,e3e6,['e3e6'],1
+11,True,2051,True,2.0,1k6/ppp3pp/3p1b2/1P1P1Q2/3qr3/2R5/P1R4P/1K6 w - - 0 1,c1_images_winterfriede(reversed).png,Qc8,f5c8,['f5c8'],1
+11,True,2051,True,3.0,1k6/1b1q2p1/2R4p/2QB4/4Pp2/P4P2/6rP/KR6 w - - 0 1,c2_images_kekhayovpetrov(reversed).png,Rb7,b1b7,"['b1b7', 'c6e6', 'c5f8', 'c6a6']",1
+11,True,2051,True,4.0,4rk2/1Q3p1r/1p2bB2/p5Rp/P5pP/6P1/1Pq5/3R2K1 w - - 0 1,c2_images_krausemeinhardt.png,Qe7,b7e7,"['b7e7', 'f6e7']",1
+11,True,2051,True,5.0,k1n2br1/p1r5/QpP1pp2/3P4/3P3p/2P2PBq/3N1P1P/R3R1K1 w - - 0 1,c2_images_skujarozenbergs(reversed).png,Qc8,a6c8,['a6c8'],1
+11,True,2051,True,6.0,6k1/1p1R1p1p/p5p1/P3n3/5N1P/2P2Q2/5PPK/4rq2 w - - 0 1,c2_images_replacement4.png,,,['d7d8'],0
+11,True,2051,True,7.0,rk2q2r/p1p2p1p/B1p3p1/3N1b2/3Npp2/5P2/PPP3PP/1K1Rb2R w - - 0 1,c3_images_kazicvukovic(reversed).png,,,['d5e7'],0
+11,True,2051,True,8.0,1k1r4/8/R1p1p2b/1NN1qp2/8/1P3B2/2PP1K2/8 w - - 0 1,c3_images_malininandreev(reversed).png,Ra8,a6a8,"['a6a8', 'a6b6']",1
+11,True,2051,True,9.0,k2r3r/pbQ1n2p/7b/2pNN2q/5Bp1/8/PPP4P/1KR1R3 w - - 0 1,c3_images_podzerovkuntzevic(reversed).png,Qb8,c7b8,['c7b8'],1
+11,True,2051,True,10.0,1kr1q3/pp6/1bp5/4N3/5Q1R/8/PP6/K7 w - - 0 1,c3_images_studybyercoledelrio(reversed).png,Nd7,e5d7,['e5d7'],1
+11,True,2051,True,11.0,3r2k1/pb1q1pp1/1p2pb1p/8/3N4/P2QB3/1P3PPP/1Br1R1K1 w - - 0 1,c3_images_tylorwinter.png,Qh7,d3h7,['d3h7'],1
+11,True,2051,True,12.0,1rr4k/3qN1b1/2p2n1p/3p1Q2/1P1P3N/2P3P1/5P1P/6K1 w - - 0 1,c3_images_replacement3.png,Ng6,e7g6,['e7g6'],1
+11,True,2051,True,13.0,2r1rq2/4b2k/1p2BBbp/p3pQ2/4N3/1P2P3/5PPP/6K1 w - - 0 1,c3_images_replacement5.png,Ng5,e4g5,"['e4g5', 'e6g8']",1
+11,True,2051,True,14.0,kr4r1/p1pqn1b1/2p1p2p/2Pp2p1/Q2P4/2RB2B1/PP3PPP/1K5R w - - 0 1,c4_images_brankawittwer(reversed).png,Qa7,a4a7,['a4a7'],1
+11,True,2051,True,15.0,1k6/pp6/q4p2/3p1B1p/5P1P/1PP1B1R1/r5bK/8 w - - 0 1,c4_images_ivanchuksavchenko(reversed).png,Rg8,g3g8,['g3g8'],1
+11,True,2051,True,16.0,5k2/p4p1r/1n3b2/2p1Qp1p/1q2P3/1B4R1/Pr3PP1/2R2K2 w - - 0 1,c4_images_strekalovskyshaposhlikov.png,Qb8,e5b8,"['e5d6', 'g3g8']",0
+11,True,2051,True,17.0,r1b2rk1/1pp2ppp/p1np1q2/8/1b2Q3/2PB1N2/PP1B1PPP/RN2K2R w - - 0 1,c5_images_easyposition2.png,Qh7,e4h7,['e4h7'],1
+11,True,2051,True,18.0,2kr1r2/3bb3/1pp5/4B1p1/2BP3p/8/5P1P/3RRK2 w - - 0 1,c5_images_easyposition5(reversed).png,Ba6,c4a6,['c4a6'],1
+11,True,2051,True,19.0,1r4rk/6p1/1p5p/4N3/b7/3B4/PP6/K1R5 w - - 0 1,c5_images_easyposition6.png,Nf7,e5f7,['e5f7'],1
+11,True,2051,False,20.0,2r2r1k/1b5p/p2Q1qp1/3p1P2/3Pp3/8/6RP/6RK w - - 0 1,nc1_images_frombeautiful(nomate).png,,,[],1
+11,True,2051,False,21.0,3q2kr/1p3pp1/p1p2R1p/5p2/7P/P3Q3/1P4P1/7K w - - 0 1,nc1_images_steinitznn(nomate).png,,,[],1
+11,True,2051,False,22.0,1k6/ppp3pp/3ppb2/1P1P1Q2/3qr3/2R5/P1R4P/1K6 w - - 0 1,nc1_images_winterfriede(nomate)(reversed).png,,,[],1
+11,True,2051,False,23.0,1k6/1b1q2p1/2R4p/2QB4/1P2Pp2/P4P2/2r3rP/KR6 w - - 0 1,nc2_images_kekhayovpetrov(nomate)(reversed).png,,,[],1
+11,True,2051,False,24.0,4rk2/1Qp2p1r/1p2bB2/p5Rp/P5pP/6P1/1Pq5/3R2K1 w - - 0 1,nc2_images_krausemeinhardt(nomate).png,,,[],1
+11,True,2051,False,25.0,k1n2b2/p1r3r1/QpP1pp2/3P4/3P3p/2P2PBq/3N1P1P/R3R1K1 w - - 0 1,nc2_images_skujarozenbergs(nomate)(reversed).png,,,[],1
+11,True,2051,False,26.0,6k1/1p1R1p2/p5pp/P3n3/5N1P/2P2Q2/5PPK/4rq2 w - - 0 1,nc2_images_replacement4(nomate).png,,,[],1
+11,True,2051,False,27.0,rk2q2r/p1p2p1p/Bp4p1/3N1b2/3Npp2/5P2/PPP3PP/1K1Rb2R w - - 0 1,nc3_images_kazicvukovic(nomate)(reversed).png,,,[],1
+11,True,2051,False,28.0,1k1r4/p7/R1p1p2b/1NN1qp2/8/1P3B2/2PP1K2/8 w - - 0 1,nc3_images_malininandreev(nomate)(reversed).png,,,[],1
+11,True,2051,False,29.0,k2r3r/pbQ1n2p/3p3b/2pNN2q/5Bp1/8/PPP4P/1KR1R3 w - - 0 1,nc3_images_podzerovkuntzevic(nomate)(reversed).png,,,[],1
+11,True,2051,False,30.0,1k2q3/ppr5/1bp5/4N3/5Q1R/8/PP6/K7 w - - 0 1,nc3_images_studybyercoledelrio(nomate)(reversed).png,,,[],1
+11,True,2051,False,31.0,2r3k1/pb1q1p2/1p2pbpp/8/3N4/P2QB3/1P3PPP/1Br1R1K1 w - - 0 1,nc3_images_tylorwinter(nomate).png,,,[],1
+11,True,2051,False,32.0,1rr4k/3qNpb1/2p2n1p/3p1Q2/1P1P3N/2P3P1/5P1P/6K1 w - - 0 1,nc3_images_replacement3(nomate).png,,,[],1
+11,True,2051,False,33.0,2r1rq2/4b2k/1p2BBb1/p3pQ1p/4N3/1P2P3/5PPP/6K1 w - - 0 1,nc3_images_replacement5(nomate).png,Ng5,e4g5,[],0
+11,True,2051,False,34.0,kr4r1/p1pqn1b1/2p1p2p/2Pp2p1/Q2P4/1PRB2B1/P4PPP/1K5R w - - 0 1,nc4_images_brankawittwer(nomate)(reversed).png,,,[],1
+11,True,2051,False,35.0,1k6/pp4p1/q4p2/3p1B1p/5P1P/1PP1B1R1/r5bK/8 w - - 0 1,nc4_images_ivanchuksavchenko(nomate)(reversed).png,,,[],1
+11,True,2051,False,36.0,5k2/p4p1r/1n3b2/2p1Qp1p/1q2P1p1/1B4R1/Pr3PP1/2R2K2 w - - 0 1,nc4_images_strekalovskyshaposhlikov(nomate).png,,,[],1
+11,True,2051,False,37.0,r1b2rk1/1pp2p1p/p1np1qp1/8/1b2Q3/2PB1N2/PP1B1PPP/RN2K2R w - - 0 1,nc5_images_easyposition2(nomate).png,,,[],1
+11,True,2051,False,38.0,2kr1r2/3bb3/2p5/1p2B1p1/2BP3p/8/5P1P/3RRK2 w - - 0 1,nc5_images_easyposition5(nomate)(reversed).png,,,[],1
+11,True,2051,False,39.0,1r4rk/8/1p4pp/4N3/b7/3B4/PP6/K1R5 w - - 0 1,nc5_images_easyposition6(nomate).png,,,[],1
+12,True,2150,True,0.0,2r2r1k/1b5p/p2Q1q2/3p1P2/3Pp3/8/6RP/6RK w - - 0 1,c1_images_frombeautiful.png,Rg8,g2g8,['g2g8'],1
+12,True,2150,True,1.0,r2q2kr/1p4p1/p1p2R1p/5p2/7P/P3Q3/1P4P1/7K w - - 0 1,c1_images_steinitznn.png,Qe6,e3e6,['e3e6'],1
+12,True,2150,True,2.0,1k6/ppp3pp/3p1b2/1P1P1Q2/3qr3/2R5/P1R4P/1K6 w - - 0 1,c1_images_winterfriede(reversed).png,Qc8,f5c8,['f5c8'],1
+12,True,2150,True,3.0,1k6/1b1q2p1/2R4p/2QB4/4Pp2/P4P2/6rP/KR6 w - - 0 1,c2_images_kekhayovpetrov(reversed).png,Rc7,c6c7,"['b1b7', 'c6e6', 'c5f8', 'c6a6']",0
+12,True,2150,True,4.0,4rk2/1Q3p1r/1p2bB2/p5Rp/P5pP/6P1/1Pq5/3R2K1 w - - 0 1,c2_images_krausemeinhardt.png,Qe7,b7e7,"['b7e7', 'f6e7']",1
+12,True,2150,True,5.0,k1n2br1/p1r5/QpP1pp2/3P4/3P3p/2P2PBq/3N1P1P/R3R1K1 w - - 0 1,c2_images_skujarozenbergs(reversed).png,Qc8,a6c8,['a6c8'],1
+12,True,2150,True,6.0,6k1/1p1R1p1p/p5p1/P3n3/5N1P/2P2Q2/5PPK/4rq2 w - - 0 1,c2_images_replacement4.png,Rd8,d7d8,['d7d8'],1
+12,True,2150,True,7.0,rk2q2r/p1p2p1p/B1p3p1/3N1b2/3Npp2/5P2/PPP3PP/1K1Rb2R w - - 0 1,c3_images_kazicvukovic(reversed).png,,,['d5e7'],0
+12,True,2150,True,8.0,1k1r4/8/R1p1p2b/1NN1qp2/8/1P3B2/2PP1K2/8 w - - 0 1,c3_images_malininandreev(reversed).png,Rb6,a6b6,"['a6a8', 'a6b6']",1
+12,True,2150,True,9.0,k2r3r/pbQ1n2p/7b/2pNN2q/5Bp1/8/PPP4P/1KR1R3 w - - 0 1,c3_images_podzerovkuntzevic(reversed).png,Qg8,,['c7b8'],0
+12,True,2150,True,10.0,1kr1q3/pp6/1bp5/4N3/5Q1R/8/PP6/K7 w - - 0 1,c3_images_studybyercoledelrio(reversed).png,Nd7,e5d7,['e5d7'],1
+12,True,2150,True,11.0,3r2k1/pb1q1pp1/1p2pb1p/8/3N4/P2QB3/1P3PPP/1Br1R1K1 w - - 0 1,c3_images_tylorwinter.png,Qh7,d3h7,['d3h7'],1
+12,True,2150,True,12.0,1rr4k/3qN1b1/2p2n1p/3p1Q2/1P1P3N/2P3P1/5P1P/6K1 w - - 0 1,c3_images_replacement3.png,Ng6,e7g6,['e7g6'],1
+12,True,2150,True,13.0,2r1rq2/4b2k/1p2BBbp/p3pQ2/4N3/1P2P3/5PPP/6K1 w - - 0 1,c3_images_replacement5.png,Bg8,e6g8,"['e4g5', 'e6g8']",1
+12,True,2150,True,14.0,kr4r1/p1pqn1b1/2p1p2p/2Pp2p1/Q2P4/2RB2B1/PP3PPP/1K5R w - - 0 1,c4_images_brankawittwer(reversed).png,Qa7,a4a7,['a4a7'],1
+12,True,2150,True,15.0,1k6/pp6/q4p2/3p1B1p/5P1P/1PP1B1R1/r5bK/8 w - - 0 1,c4_images_ivanchuksavchenko(reversed).png,Rg8,g3g8,['g3g8'],1
+12,True,2150,True,16.0,5k2/p4p1r/1n3b2/2p1Qp1p/1q2P3/1B4R1/Pr3PP1/2R2K2 w - - 0 1,c4_images_strekalovskyshaposhlikov.png,Qd6,e5d6,"['e5d6', 'g3g8']",1
+12,True,2150,True,17.0,r1b2rk1/1pp2ppp/p1np1q2/8/1b2Q3/2PB1N2/PP1B1PPP/RN2K2R w - - 0 1,c5_images_easyposition2.png,Qh7,e4h7,['e4h7'],1
+12,True,2150,True,18.0,2kr1r2/3bb3/1pp5/4B1p1/2BP3p/8/5P1P/3RRK2 w - - 0 1,c5_images_easyposition5(reversed).png,Ba6,c4a6,['c4a6'],1
+12,True,2150,True,19.0,1r4rk/6p1/1p5p/4N3/b7/3B4/PP6/K1R5 w - - 0 1,c5_images_easyposition6.png,Nf7,e5f7,['e5f7'],1
+12,True,2150,False,20.0,2r2r1k/1b5p/p2Q1qp1/3p1P2/3Pp3/8/6RP/6RK w - - 0 1,nc1_images_frombeautiful(nomate).png,,,[],1
+12,True,2150,False,21.0,3q2kr/1p3pp1/p1p2R1p/5p2/7P/P3Q3/1P4P1/7K w - - 0 1,nc1_images_steinitznn(nomate).png,,,[],1
+12,True,2150,False,22.0,1k6/ppp3pp/3ppb2/1P1P1Q2/3qr3/2R5/P1R4P/1K6 w - - 0 1,nc1_images_winterfriede(nomate)(reversed).png,Qh7,f5h7,[],0
+12,True,2150,False,23.0,1k6/1b1q2p1/2R4p/2QB4/1P2Pp2/P4P2/2r3rP/KR6 w - - 0 1,nc2_images_kekhayovpetrov(nomate)(reversed).png,,,[],1
+12,True,2150,False,24.0,4rk2/1Qp2p1r/1p2bB2/p5Rp/P5pP/6P1/1Pq5/3R2K1 w - - 0 1,nc2_images_krausemeinhardt(nomate).png,,,[],1
+12,True,2150,False,25.0,k1n2b2/p1r3r1/QpP1pp2/3P4/3P3p/2P2PBq/3N1P1P/R3R1K1 w - - 0 1,nc2_images_skujarozenbergs(nomate)(reversed).png,,,[],1
+12,True,2150,False,26.0,6k1/1p1R1p2/p5pp/P3n3/5N1P/2P2Q2/5PPK/4rq2 w - - 0 1,nc2_images_replacement4(nomate).png,,,[],1
+12,True,2150,False,27.0,rk2q2r/p1p2p1p/Bp4p1/3N1b2/3Npp2/5P2/PPP3PP/1K1Rb2R w - - 0 1,nc3_images_kazicvukovic(nomate)(reversed).png,,,[],1
+12,True,2150,False,28.0,1k1r4/p7/R1p1p2b/1NN1qp2/8/1P3B2/2PP1K2/8 w - - 0 1,nc3_images_malininandreev(nomate)(reversed).png,,,[],1
+12,True,2150,False,29.0,k2r3r/pbQ1n2p/3p3b/2pNN2q/5Bp1/8/PPP4P/1KR1R3 w - - 0 1,nc3_images_podzerovkuntzevic(nomate)(reversed).png,,,[],1
+12,True,2150,False,30.0,1k2q3/ppr5/1bp5/4N3/5Q1R/8/PP6/K7 w - - 0 1,nc3_images_studybyercoledelrio(nomate)(reversed).png,,,[],1
+12,True,2150,False,31.0,2r3k1/pb1q1p2/1p2pbpp/8/3N4/P2QB3/1P3PPP/1Br1R1K1 w - - 0 1,nc3_images_tylorwinter(nomate).png,,,[],1
+12,True,2150,False,32.0,1rr4k/3qNpb1/2p2n1p/3p1Q2/1P1P3N/2P3P1/5P1P/6K1 w - - 0 1,nc3_images_replacement3(nomate).png,,,[],1
+12,True,2150,False,33.0,2r1rq2/4b2k/1p2BBb1/p3pQ1p/4N3/1P2P3/5PPP/6K1 w - - 0 1,nc3_images_replacement5(nomate).png,,,[],1
+12,True,2150,False,34.0,kr4r1/p1pqn1b1/2p1p2p/2Pp2p1/Q2P4/1PRB2B1/P4PPP/1K5R w - - 0 1,nc4_images_brankawittwer(nomate)(reversed).png,,,[],1
+12,True,2150,False,35.0,1k6/pp4p1/q4p2/3p1B1p/5P1P/1PP1B1R1/r5bK/8 w - - 0 1,nc4_images_ivanchuksavchenko(nomate)(reversed).png,,,[],1
+12,True,2150,False,36.0,5k2/p4p1r/1n3b2/2p1Qp1p/1q2P1p1/1B4R1/Pr3PP1/2R2K2 w - - 0 1,nc4_images_strekalovskyshaposhlikov(nomate).png,,,[],1
+12,True,2150,False,37.0,r1b2rk1/1pp2p1p/p1np1qp1/8/1b2Q3/2PB1N2/PP1B1PPP/RN2K2R w - - 0 1,nc5_images_easyposition2(nomate).png,,,[],1
+12,True,2150,False,38.0,2kr1r2/3bb3/2p5/1p2B1p1/2BP3p/8/5P1P/3RRK2 w - - 0 1,nc5_images_easyposition5(nomate)(reversed).png,,,[],1
+12,True,2150,False,39.0,1r4rk/8/1p4pp/4N3/b7/3B4/PP6/K1R5 w - - 0 1,nc5_images_easyposition6(nomate).png,,,[],1
+13,True,1824,True,0.0,2r2r1k/1b5p/p2Q1q2/3p1P2/3Pp3/8/6RP/6RK w - - 0 1,c1_images_frombeautiful.png,Rg8,g2g8,['g2g8'],1
+13,True,1824,True,1.0,r2q2kr/1p4p1/p1p2R1p/5p2/7P/P3Q3/1P4P1/7K w - - 0 1,c1_images_steinitznn.png,Qe6,e3e6,['e3e6'],1
+13,True,1824,True,2.0,1k6/ppp3pp/3p1b2/1P1P1Q2/3qr3/2R5/P1R4P/1K6 w - - 0 1,c1_images_winterfriede(reversed).png,Qc8,f5c8,['f5c8'],1
+13,True,1824,True,3.0,1k6/1b1q2p1/2R4p/2QB4/4Pp2/P4P2/6rP/KR6 w - - 0 1,c2_images_kekhayovpetrov(reversed).png,Rc8,c6c8,"['b1b7', 'c6e6', 'c5f8', 'c6a6']",0
+13,True,1824,True,4.0,4rk2/1Q3p1r/1p2bB2/p5Rp/P5pP/6P1/1Pq5/3R2K1 w - - 0 1,c2_images_krausemeinhardt.png,Be7,f6e7,"['b7e7', 'f6e7']",1
+13,True,1824,True,5.0,k1n2br1/p1r5/QpP1pp2/3P4/3P3p/2P2PBq/3N1P1P/R3R1K1 w - - 0 1,c2_images_skujarozenbergs(reversed).png,,,['a6c8'],0
+13,True,1824,True,6.0,6k1/1p1R1p1p/p5p1/P3n3/5N1P/2P2Q2/5PPK/4rq2 w - - 0 1,c2_images_replacement4.png,,,['d7d8'],0
+13,True,1824,True,7.0,rk2q2r/p1p2p1p/B1p3p1/3N1b2/3Npp2/5P2/PPP3PP/1K1Rb2R w - - 0 1,c3_images_kazicvukovic(reversed).png,,,['d5e7'],0
+13,True,1824,True,8.0,1k1r4/8/R1p1p2b/1NN1qp2/8/1P3B2/2PP1K2/8 w - - 0 1,c3_images_malininandreev(reversed).png,Ra8,a6a8,"['a6a8', 'a6b6']",1
+13,True,1824,True,9.0,k2r3r/pbQ1n2p/7b/2pNN2q/5Bp1/8/PPP4P/1KR1R3 w - - 0 1,c3_images_podzerovkuntzevic(reversed).png,,,['c7b8'],0
+13,True,1824,True,10.0,1kr1q3/pp6/1bp5/4N3/5Q1R/8/PP6/K7 w - - 0 1,c3_images_studybyercoledelrio(reversed).png,Nd7,e5d7,['e5d7'],1
+13,True,1824,True,11.0,3r2k1/pb1q1pp1/1p2pb1p/8/3N4/P2QB3/1P3PPP/1Br1R1K1 w - - 0 1,c3_images_tylorwinter.png,Qh7,d3h7,['d3h7'],1
+13,True,1824,True,12.0,1rr4k/3qN1b1/2p2n1p/3p1Q2/1P1P3N/2P3P1/5P1P/6K1 w - - 0 1,c3_images_replacement3.png,Ng6,e7g6,['e7g6'],1
+13,True,1824,True,13.0,2r1rq2/4b2k/1p2BBbp/p3pQ2/4N3/1P2P3/5PPP/6K1 w - - 0 1,c3_images_replacement5.png,Ng5,e4g5,"['e4g5', 'e6g8']",1
+13,True,1824,True,14.0,kr4r1/p1pqn1b1/2p1p2p/2Pp2p1/Q2P4/2RB2B1/PP3PPP/1K5R w - - 0 1,c4_images_brankawittwer(reversed).png,,,['a4a7'],0
+13,True,1824,True,15.0,1k6/pp6/q4p2/3p1B1p/5P1P/1PP1B1R1/r5bK/8 w - - 0 1,c4_images_ivanchuksavchenko(reversed).png,,,['g3g8'],0
+13,True,1824,True,16.0,5k2/p4p1r/1n3b2/2p1Qp1p/1q2P3/1B4R1/Pr3PP1/2R2K2 w - - 0 1,c4_images_strekalovskyshaposhlikov.png,Qd6,e5d6,"['e5d6', 'g3g8']",1
+13,True,1824,True,17.0,r1b2rk1/1pp2ppp/p1np1q2/8/1b2Q3/2PB1N2/PP1B1PPP/RN2K2R w - - 0 1,c5_images_easyposition2.png,Qh7,e4h7,['e4h7'],1
+13,True,1824,True,18.0,2kr1r2/3bb3/1pp5/4B1p1/2BP3p/8/5P1P/3RRK2 w - - 0 1,c5_images_easyposition5(reversed).png,Ba6,c4a6,['c4a6'],1
+13,True,1824,True,19.0,1r4rk/6p1/1p5p/4N3/b7/3B4/PP6/K1R5 w - - 0 1,c5_images_easyposition6.png,Nf7,e5f7,['e5f7'],1
+13,True,1824,False,20.0,2r2r1k/1b5p/p2Q1qp1/3p1P2/3Pp3/8/6RP/6RK w - - 0 1,nc1_images_frombeautiful(nomate).png,,,[],1
+13,True,1824,False,21.0,3q2kr/1p3pp1/p1p2R1p/5p2/7P/P3Q3/1P4P1/7K w - - 0 1,nc1_images_steinitznn(nomate).png,,,[],1
+13,True,1824,False,22.0,1k6/ppp3pp/3ppb2/1P1P1Q2/3qr3/2R5/P1R4P/1K6 w - - 0 1,nc1_images_winterfriede(nomate)(reversed).png,,,[],1
+13,True,1824,False,23.0,1k6/1b1q2p1/2R4p/2QB4/1P2Pp2/P4P2/2r3rP/KR6 w - - 0 1,nc2_images_kekhayovpetrov(nomate)(reversed).png,,,[],1
+13,True,1824,False,24.0,4rk2/1Qp2p1r/1p2bB2/p5Rp/P5pP/6P1/1Pq5/3R2K1 w - - 0 1,nc2_images_krausemeinhardt(nomate).png,,,[],1
+13,True,1824,False,25.0,k1n2b2/p1r3r1/QpP1pp2/3P4/3P3p/2P2PBq/3N1P1P/R3R1K1 w - - 0 1,nc2_images_skujarozenbergs(nomate)(reversed).png,Qa7,a6a7,[],0
+13,True,1824,False,26.0,6k1/1p1R1p2/p5pp/P3n3/5N1P/2P2Q2/5PPK/4rq2 w - - 0 1,nc2_images_replacement4(nomate).png,,,[],1
+13,True,1824,False,27.0,rk2q2r/p1p2p1p/Bp4p1/3N1b2/3Npp2/5P2/PPP3PP/1K1Rb2R w - - 0 1,nc3_images_kazicvukovic(nomate)(reversed).png,Nf6,d5f6,[],0
+13,True,1824,False,28.0,1k1r4/p7/R1p1p2b/1NN1qp2/8/1P3B2/2PP1K2/8 w - - 0 1,nc3_images_malininandreev(nomate)(reversed).png,,,[],1
+13,True,1824,False,29.0,k2r3r/pbQ1n2p/3p3b/2pNN2q/5Bp1/8/PPP4P/1KR1R3 w - - 0 1,nc3_images_podzerovkuntzevic(nomate)(reversed).png,,,[],1
+13,True,1824,False,30.0,1k2q3/ppr5/1bp5/4N3/5Q1R/8/PP6/K7 w - - 0 1,nc3_images_studybyercoledelrio(nomate)(reversed).png,Nd7,e5d7,[],0
+13,True,1824,False,31.0,2r3k1/pb1q1p2/1p2pbpp/8/3N4/P2QB3/1P3PPP/1Br1R1K1 w - - 0 1,nc3_images_tylorwinter(nomate).png,,,[],1
+13,True,1824,False,32.0,1rr4k/3qNpb1/2p2n1p/3p1Q2/1P1P3N/2P3P1/5P1P/6K1 w - - 0 1,nc3_images_replacement3(nomate).png,,,[],1
+13,True,1824,False,33.0,2r1rq2/4b2k/1p2BBb1/p3pQ1p/4N3/1P2P3/5PPP/6K1 w - - 0 1,nc3_images_replacement5(nomate).png,,,[],1
+13,True,1824,False,34.0,kr4r1/p1pqn1b1/2p1p2p/2Pp2p1/Q2P4/1PRB2B1/P4PPP/1K5R w - - 0 1,nc4_images_brankawittwer(nomate)(reversed).png,,,[],1
+13,True,1824,False,35.0,1k6/pp4p1/q4p2/3p1B1p/5P1P/1PP1B1R1/r5bK/8 w - - 0 1,nc4_images_ivanchuksavchenko(nomate)(reversed).png,,,[],1
+13,True,1824,False,36.0,5k2/p4p1r/1n3b2/2p1Qp1p/1q2P1p1/1B4R1/Pr3PP1/2R2K2 w - - 0 1,nc4_images_strekalovskyshaposhlikov(nomate).png,,,[],1
+13,True,1824,False,37.0,r1b2rk1/1pp2p1p/p1np1qp1/8/1b2Q3/2PB1N2/PP1B1PPP/RN2K2R w - - 0 1,nc5_images_easyposition2(nomate).png,,,[],1
+13,True,1824,False,38.0,2kr1r2/3bb3/2p5/1p2B1p1/2BP3p/8/5P1P/3RRK2 w - - 0 1,nc5_images_easyposition5(nomate)(reversed).png,,,[],1
+13,True,1824,False,39.0,1r4rk/8/1p4pp/4N3/b7/3B4/PP6/K1R5 w - - 0 1,nc5_images_easyposition6(nomate).png,,,[],1
+15,False,0,True,0.0,2r2r1k/1b5p/p2Q1q2/3p1P2/3Pp3/8/6RP/6RK w - - 0 1,c1_images_frombeautiful.png,,,['g2g8'],0
+15,False,0,True,1.0,r2q2kr/1p4p1/p1p2R1p/5p2/7P/P3Q3/1P4P1/7K w - - 0 1,c1_images_steinitznn.png,,,['e3e6'],0
+15,False,0,True,2.0,1k6/ppp3pp/3p1b2/1P1P1Q2/3qr3/2R5/P1R4P/1K6 w - - 0 1,c1_images_winterfriede(reversed).png,,,['f5c8'],0
+15,False,0,True,3.0,1k6/1b1q2p1/2R4p/2QB4/4Pp2/P4P2/6rP/KR6 w - - 0 1,c2_images_kekhayovpetrov(reversed).png,,,"['b1b7', 'c6e6', 'c5f8', 'c6a6']",0
+15,False,0,True,4.0,4rk2/1Q3p1r/1p2bB2/p5Rp/P5pP/6P1/1Pq5/3R2K1 w - - 0 1,c2_images_krausemeinhardt.png,,,"['b7e7', 'f6e7']",0
+15,False,0,True,5.0,k1n2br1/p1r5/QpP1pp2/3P4/3P3p/2P2PBq/3N1P1P/R3R1K1 w - - 0 1,c2_images_skujarozenbergs(reversed).png,,,['a6c8'],0
+15,False,0,True,6.0,6k1/1p1R1p1p/p5p1/P3n3/5N1P/2P2Q2/5PPK/4rq2 w - - 0 1,c2_images_replacement4.png,,,['d7d8'],0
+15,False,0,True,7.0,rk2q2r/p1p2p1p/B1p3p1/3N1b2/3Npp2/5P2/PPP3PP/1K1Rb2R w - - 0 1,c3_images_kazicvukovic(reversed).png,,,['d5e7'],0
+15,False,0,True,8.0,1k1r4/8/R1p1p2b/1NN1qp2/8/1P3B2/2PP1K2/8 w - - 0 1,c3_images_malininandreev(reversed).png,,,"['a6a8', 'a6b6']",0
+15,False,0,True,9.0,k2r3r/pbQ1n2p/7b/2pNN2q/5Bp1/8/PPP4P/1KR1R3 w - - 0 1,c3_images_podzerovkuntzevic(reversed).png,,,['c7b8'],0
+15,False,0,True,10.0,1kr1q3/pp6/1bp5/4N3/5Q1R/8/PP6/K7 w - - 0 1,c3_images_studybyercoledelrio(reversed).png,Nc6,e5c6,['e5d7'],0
+15,False,0,True,11.0,3r2k1/pb1q1pp1/1p2pb1p/8/3N4/P2QB3/1P3PPP/1Br1R1K1 w - - 0 1,c3_images_tylorwinter.png,,,['d3h7'],0
+15,False,0,True,12.0,1rr4k/3qN1b1/2p2n1p/3p1Q2/1P1P3N/2P3P1/5P1P/6K1 w - - 0 1,c3_images_replacement3.png,,,['e7g6'],0
+15,False,0,True,13.0,2r1rq2/4b2k/1p2BBbp/p3pQ2/4N3/1P2P3/5PPP/6K1 w - - 0 1,c3_images_replacement5.png,,,"['e4g5', 'e6g8']",0
+15,False,0,True,14.0,kr4r1/p1pqn1b1/2p1p2p/2Pp2p1/Q2P4/2RB2B1/PP3PPP/1K5R w - - 0 1,c4_images_brankawittwer(reversed).png,,,['a4a7'],0
+15,False,0,True,15.0,1k6/pp6/q4p2/3p1B1p/5P1P/1PP1B1R1/r5bK/8 w - - 0 1,c4_images_ivanchuksavchenko(reversed).png,,,['g3g8'],0
+15,False,0,True,16.0,5k2/p4p1r/1n3b2/2p1Qp1p/1q2P3/1B4R1/Pr3PP1/2R2K2 w - - 0 1,c4_images_strekalovskyshaposhlikov.png,,,"['e5d6', 'g3g8']",0
+15,False,0,True,17.0,r1b2rk1/1pp2ppp/p1np1q2/8/1b2Q3/2PB1N2/PP1B1PPP/RN2K2R w - - 0 1,c5_images_easyposition2.png,Q,,['e4h7'],0
+15,False,0,True,18.0,2kr1r2/3bb3/1pp5/4B1p1/2BP3p/8/5P1P/3RRK2 w - - 0 1,c5_images_easyposition5(reversed).png,Ba6,c4a6,['c4a6'],1
+15,False,0,True,19.0,1r4rk/6p1/1p5p/4N3/b7/3B4/PP6/K1R5 w - - 0 1,c5_images_easyposition6.png,Nf7,e5f7,['e5f7'],1
+15,False,0,False,20.0,2r2r1k/1b5p/p2Q1qp1/3p1P2/3Pp3/8/6RP/6RK w - - 0 1,nc1_images_frombeautiful(nomate).png,,,[],1
+15,False,0,False,21.0,3q2kr/1p3pp1/p1p2R1p/5p2/7P/P3Q3/1P4P1/7K w - - 0 1,nc1_images_steinitznn(nomate).png,,,[],1
+15,False,0,False,22.0,1k6/ppp3pp/3ppb2/1P1P1Q2/3qr3/2R5/P1R4P/1K6 w - - 0 1,nc1_images_winterfriede(nomate)(reversed).png,,,[],1
+15,False,0,False,23.0,1k6/1b1q2p1/2R4p/2QB4/1P2Pp2/P4P2/2r3rP/KR6 w - - 0 1,nc2_images_kekhayovpetrov(nomate)(reversed).png,,,[],1
+15,False,0,False,24.0,4rk2/1Qp2p1r/1p2bB2/p5Rp/P5pP/6P1/1Pq5/3R2K1 w - - 0 1,nc2_images_krausemeinhardt(nomate).png,,,[],1
+15,False,0,False,25.0,k1n2b2/p1r3r1/QpP1pp2/3P4/3P3p/2P2PBq/3N1P1P/R3R1K1 w - - 0 1,nc2_images_skujarozenbergs(nomate)(reversed).png,,,[],1
+15,False,0,False,26.0,6k1/1p1R1p2/p5pp/P3n3/5N1P/2P2Q2/5PPK/4rq2 w - - 0 1,nc2_images_replacement4(nomate).png,,,[],1
+15,False,0,False,27.0,rk2q2r/p1p2p1p/Bp4p1/3N1b2/3Npp2/5P2/PPP3PP/1K1Rb2R w - - 0 1,nc3_images_kazicvukovic(nomate)(reversed).png,,,[],1
+15,False,0,False,28.0,1k1r4/p7/R1p1p2b/1NN1qp2/8/1P3B2/2PP1K2/8 w - - 0 1,nc3_images_malininandreev(nomate)(reversed).png,,,[],1
+15,False,0,False,29.0,k2r3r/pbQ1n2p/3p3b/2pNN2q/5Bp1/8/PPP4P/1KR1R3 w - - 0 1,nc3_images_podzerovkuntzevic(nomate)(reversed).png,,,[],1
+15,False,0,False,30.0,1k2q3/ppr5/1bp5/4N3/5Q1R/8/PP6/K7 w - - 0 1,nc3_images_studybyercoledelrio(nomate)(reversed).png,,,[],1
+15,False,0,False,31.0,2r3k1/pb1q1p2/1p2pbpp/8/3N4/P2QB3/1P3PPP/1Br1R1K1 w - - 0 1,nc3_images_tylorwinter(nomate).png,,,[],1
+15,False,0,False,32.0,1rr4k/3qNpb1/2p2n1p/3p1Q2/1P1P3N/2P3P1/5P1P/6K1 w - - 0 1,nc3_images_replacement3(nomate).png,,,[],1
+15,False,0,False,33.0,2r1rq2/4b2k/1p2BBb1/p3pQ1p/4N3/1P2P3/5PPP/6K1 w - - 0 1,nc3_images_replacement5(nomate).png,,,[],1
+15,False,0,False,34.0,kr4r1/p1pqn1b1/2p1p2p/2Pp2p1/Q2P4/1PRB2B1/P4PPP/1K5R w - - 0 1,nc4_images_brankawittwer(nomate)(reversed).png,,,[],1
+15,False,0,False,35.0,1k6/pp4p1/q4p2/3p1B1p/5P1P/1PP1B1R1/r5bK/8 w - - 0 1,nc4_images_ivanchuksavchenko(nomate)(reversed).png,,,[],1
+15,False,0,False,36.0,5k2/p4p1r/1n3b2/2p1Qp1p/1q2P1p1/1B4R1/Pr3PP1/2R2K2 w - - 0 1,nc4_images_strekalovskyshaposhlikov(nomate).png,,,[],1
+15,False,0,False,37.0,r1b2rk1/1pp2p1p/p1np1qp1/8/1b2Q3/2PB1N2/PP1B1PPP/RN2K2R w - - 0 1,nc5_images_easyposition2(nomate).png,,,[],1
+15,False,0,False,38.0,2kr1r2/3bb3/2p5/1p2B1p1/2BP3p/8/5P1P/3RRK2 w - - 0 1,nc5_images_easyposition5(nomate)(reversed).png,,,[],1
+15,False,0,False,39.0,1r4rk/8/1p4pp/4N3/b7/3B4/PP6/K1R5 w - - 0 1,nc5_images_easyposition6(nomate).png,,,[],1
+16,True,1881,True,0.0,2r2r1k/1b5p/p2Q1q2/3p1P2/3Pp3/8/6RP/6RK w - - 0 1,c1_images_frombeautiful.png,Rg8,g2g8,['g2g8'],1
+16,True,1881,True,1.0,r2q2kr/1p4p1/p1p2R1p/5p2/7P/P3Q3/1P4P1/7K w - - 0 1,c1_images_steinitznn.png,,,['e3e6'],0
+16,True,1881,True,2.0,1k6/ppp3pp/3p1b2/1P1P1Q2/3qr3/2R5/P1R4P/1K6 w - - 0 1,c1_images_winterfriede(reversed).png,Qc8,f5c8,['f5c8'],1
+16,True,1881,True,3.0,1k6/1b1q2p1/2R4p/2QB4/4Pp2/P4P2/6rP/KR6 w - - 0 1,c2_images_kekhayovpetrov(reversed).png,,,"['b1b7', 'c6e6', 'c5f8', 'c6a6']",0
+16,True,1881,True,4.0,4rk2/1Q3p1r/1p2bB2/p5Rp/P5pP/6P1/1Pq5/3R2K1 w - - 0 1,c2_images_krausemeinhardt.png,Qe7,b7e7,"['b7e7', 'f6e7']",1
+16,True,1881,True,5.0,k1n2br1/p1r5/QpP1pp2/3P4/3P3p/2P2PBq/3N1P1P/R3R1K1 w - - 0 1,c2_images_skujarozenbergs(reversed).png,Qc8,a6c8,['a6c8'],1
+16,True,1881,True,6.0,6k1/1p1R1p1p/p5p1/P3n3/5N1P/2P2Q2/5PPK/4rq2 w - - 0 1,c2_images_replacement4.png,,,['d7d8'],0
+16,True,1881,True,7.0,rk2q2r/p1p2p1p/B1p3p1/3N1b2/3Npp2/5P2/PPP3PP/1K1Rb2R w - - 0 1,c3_images_kazicvukovic(reversed).png,,,['d5e7'],0
+16,True,1881,True,8.0,1k1r4/8/R1p1p2b/1NN1qp2/8/1P3B2/2PP1K2/8 w - - 0 1,c3_images_malininandreev(reversed).png,,,"['a6a8', 'a6b6']",0
+16,True,1881,True,9.0,k2r3r/pbQ1n2p/7b/2pNN2q/5Bp1/8/PPP4P/1KR1R3 w - - 0 1,c3_images_podzerovkuntzevic(reversed).png,,,['c7b8'],0
+16,True,1881,True,10.0,1kr1q3/pp6/1bp5/4N3/5Q1R/8/PP6/K7 w - - 0 1,c3_images_studybyercoledelrio(reversed).png,Nd7,e5d7,['e5d7'],1
+16,True,1881,True,11.0,3r2k1/pb1q1pp1/1p2pb1p/8/3N4/P2QB3/1P3PPP/1Br1R1K1 w - - 0 1,c3_images_tylorwinter.png,,,['d3h7'],0
+16,True,1881,True,12.0,1rr4k/3qN1b1/2p2n1p/3p1Q2/1P1P3N/2P3P1/5P1P/6K1 w - - 0 1,c3_images_replacement3.png,Ng6,e7g6,['e7g6'],1
+16,True,1881,True,13.0,2r1rq2/4b2k/1p2BBbp/p3pQ2/4N3/1P2P3/5PPP/6K1 w - - 0 1,c3_images_replacement5.png,Ng5,e4g5,"['e4g5', 'e6g8']",1
+16,True,1881,True,14.0,kr4r1/p1pqn1b1/2p1p2p/2Pp2p1/Q2P4/2RB2B1/PP3PPP/1K5R w - - 0 1,c4_images_brankawittwer(reversed).png,Qa7,a4a7,['a4a7'],1
+16,True,1881,True,15.0,1k6/pp6/q4p2/3p1B1p/5P1P/1PP1B1R1/r5bK/8 w - - 0 1,c4_images_ivanchuksavchenko(reversed).png,Rg8,g3g8,['g3g8'],1
+16,True,1881,True,16.0,5k2/p4p1r/1n3b2/2p1Qp1p/1q2P3/1B4R1/Pr3PP1/2R2K2 w - - 0 1,c4_images_strekalovskyshaposhlikov.png,Rg8,g3g8,"['e5d6', 'g3g8']",1
+16,True,1881,True,17.0,r1b2rk1/1pp2ppp/p1np1q2/8/1b2Q3/2PB1N2/PP1B1PPP/RN2K2R w - - 0 1,c5_images_easyposition2.png,Qh7,e4h7,['e4h7'],1
+16,True,1881,True,18.0,2kr1r2/3bb3/1pp5/4B1p1/2BP3p/8/5P1P/3RRK2 w - - 0 1,c5_images_easyposition5(reversed).png,Ba6,c4a6,['c4a6'],1
+16,True,1881,True,19.0,1r4rk/6p1/1p5p/4N3/b7/3B4/PP6/K1R5 w - - 0 1,c5_images_easyposition6.png,Nf7,e5f7,['e5f7'],1
+16,True,1881,False,20.0,2r2r1k/1b5p/p2Q1qp1/3p1P2/3Pp3/8/6RP/6RK w - - 0 1,nc1_images_frombeautiful(nomate).png,,,[],1
+16,True,1881,False,21.0,3q2kr/1p3pp1/p1p2R1p/5p2/7P/P3Q3/1P4P1/7K w - - 0 1,nc1_images_steinitznn(nomate).png,,,[],1
+16,True,1881,False,22.0,1k6/ppp3pp/3ppb2/1P1P1Q2/3qr3/2R5/P1R4P/1K6 w - - 0 1,nc1_images_winterfriede(nomate)(reversed).png,,,[],1
+16,True,1881,False,23.0,1k6/1b1q2p1/2R4p/2QB4/1P2Pp2/P4P2/2r3rP/KR6 w - - 0 1,nc2_images_kekhayovpetrov(nomate)(reversed).png,,,[],1
+16,True,1881,False,24.0,4rk2/1Qp2p1r/1p2bB2/p5Rp/P5pP/6P1/1Pq5/3R2K1 w - - 0 1,nc2_images_krausemeinhardt(nomate).png,,,[],1
+16,True,1881,False,25.0,k1n2b2/p1r3r1/QpP1pp2/3P4/3P3p/2P2PBq/3N1P1P/R3R1K1 w - - 0 1,nc2_images_skujarozenbergs(nomate)(reversed).png,,,[],1
+16,True,1881,False,26.0,6k1/1p1R1p2/p5pp/P3n3/5N1P/2P2Q2/5PPK/4rq2 w - - 0 1,nc2_images_replacement4(nomate).png,,,[],1
+16,True,1881,False,27.0,rk2q2r/p1p2p1p/Bp4p1/3N1b2/3Npp2/5P2/PPP3PP/1K1Rb2R w - - 0 1,nc3_images_kazicvukovic(nomate)(reversed).png,,,[],1
+16,True,1881,False,28.0,1k1r4/p7/R1p1p2b/1NN1qp2/8/1P3B2/2PP1K2/8 w - - 0 1,nc3_images_malininandreev(nomate)(reversed).png,,,[],1
+16,True,1881,False,29.0,k2r3r/pbQ1n2p/3p3b/2pNN2q/5Bp1/8/PPP4P/1KR1R3 w - - 0 1,nc3_images_podzerovkuntzevic(nomate)(reversed).png,,,[],1
+16,True,1881,False,30.0,1k2q3/ppr5/1bp5/4N3/5Q1R/8/PP6/K7 w - - 0 1,nc3_images_studybyercoledelrio(nomate)(reversed).png,,,[],1
+16,True,1881,False,31.0,2r3k1/pb1q1p2/1p2pbpp/8/3N4/P2QB3/1P3PPP/1Br1R1K1 w - - 0 1,nc3_images_tylorwinter(nomate).png,,,[],1
+16,True,1881,False,32.0,1rr4k/3qNpb1/2p2n1p/3p1Q2/1P1P3N/2P3P1/5P1P/6K1 w - - 0 1,nc3_images_replacement3(nomate).png,,,[],1
+16,True,1881,False,33.0,2r1rq2/4b2k/1p2BBb1/p3pQ1p/4N3/1P2P3/5PPP/6K1 w - - 0 1,nc3_images_replacement5(nomate).png,,,[],1
+16,True,1881,False,34.0,kr4r1/p1pqn1b1/2p1p2p/2Pp2p1/Q2P4/1PRB2B1/P4PPP/1K5R w - - 0 1,nc4_images_brankawittwer(nomate)(reversed).png,,,[],1
+16,True,1881,False,35.0,1k6/pp4p1/q4p2/3p1B1p/5P1P/1PP1B1R1/r5bK/8 w - - 0 1,nc4_images_ivanchuksavchenko(nomate)(reversed).png,,,[],1
+16,True,1881,False,36.0,5k2/p4p1r/1n3b2/2p1Qp1p/1q2P1p1/1B4R1/Pr3PP1/2R2K2 w - - 0 1,nc4_images_strekalovskyshaposhlikov(nomate).png,,,[],1
+16,True,1881,False,37.0,r1b2rk1/1pp2p1p/p1np1qp1/8/1b2Q3/2PB1N2/PP1B1PPP/RN2K2R w - - 0 1,nc5_images_easyposition2(nomate).png,,,[],1
+16,True,1881,False,38.0,2kr1r2/3bb3/2p5/1p2B1p1/2BP3p/8/5P1P/3RRK2 w - - 0 1,nc5_images_easyposition5(nomate)(reversed).png,,,[],1
+16,True,1881,False,39.0,1r4rk/8/1p4pp/4N3/b7/3B4/PP6/K1R5 w - - 0 1,nc5_images_easyposition6(nomate).png,,,[],1
+17,False,0,True,0.0,2r2r1k/1b5p/p2Q1q2/3p1P2/3Pp3/8/6RP/6RK w - - 0 1,c1_images_frombeautiful.png,Rg8,g2g8,['g2g8'],1
+17,False,0,True,1.0,r2q2kr/1p4p1/p1p2R1p/5p2/7P/P3Q3/1P4P1/7K w - - 0 1,c1_images_steinitznn.png,Qe6,e3e6,['e3e6'],1
+17,False,0,True,2.0,1k6/ppp3pp/3p1b2/1P1P1Q2/3qr3/2R5/P1R4P/1K6 w - - 0 1,c1_images_winterfriede(reversed).png,Qd7,f5d7,['f5c8'],0
+17,False,0,True,3.0,1k6/1b1q2p1/2R4p/2QB4/4Pp2/P4P2/6rP/KR6 w - - 0 1,c2_images_kekhayovpetrov(reversed).png,,,"['b1b7', 'c6e6', 'c5f8', 'c6a6']",0
+17,False,0,True,4.0,4rk2/1Q3p1r/1p2bB2/p5Rp/P5pP/6P1/1Pq5/3R2K1 w - - 0 1,c2_images_krausemeinhardt.png,,,"['b7e7', 'f6e7']",0
+17,False,0,True,5.0,k1n2br1/p1r5/QpP1pp2/3P4/3P3p/2P2PBq/3N1P1P/R3R1K1 w - - 0 1,c2_images_skujarozenbergs(reversed).png,Qb6,a6b6,['a6c8'],0
+17,False,0,True,6.0,6k1/1p1R1p1p/p5p1/P3n3/5N1P/2P2Q2/5PPK/4rq2 w - - 0 1,c2_images_replacement4.png,,,['d7d8'],0
+17,False,0,True,7.0,rk2q2r/p1p2p1p/B1p3p1/3N1b2/3Npp2/5P2/PPP3PP/1K1Rb2R w - - 0 1,c3_images_kazicvukovic(reversed).png,,,['d5e7'],0
+17,False,0,True,8.0,1k1r4/8/R1p1p2b/1NN1qp2/8/1P3B2/2PP1K2/8 w - - 0 1,c3_images_malininandreev(reversed).png,,,"['a6a8', 'a6b6']",0
+17,False,0,True,9.0,k2r3r/pbQ1n2p/7b/2pNN2q/5Bp1/8/PPP4P/1KR1R3 w - - 0 1,c3_images_podzerovkuntzevic(reversed).png,,,['c7b8'],0
+17,False,0,True,10.0,1kr1q3/pp6/1bp5/4N3/5Q1R/8/PP6/K7 w - - 0 1,c3_images_studybyercoledelrio(reversed).png,Nc6,e5c6,['e5d7'],0
+17,False,0,True,11.0,3r2k1/pb1q1pp1/1p2pb1p/8/3N4/P2QB3/1P3PPP/1Br1R1K1 w - - 0 1,c3_images_tylorwinter.png,Qh7,d3h7,['d3h7'],1
+17,False,0,True,12.0,1rr4k/3qN1b1/2p2n1p/3p1Q2/1P1P3N/2P3P1/5P1P/6K1 w - - 0 1,c3_images_replacement3.png,Ng6,e7g6,['e7g6'],1
+17,False,0,True,13.0,2r1rq2/4b2k/1p2BBbp/p3pQ2/4N3/1P2P3/5PPP/6K1 w - - 0 1,c3_images_replacement5.png,,,"['e4g5', 'e6g8']",0
+17,False,0,True,14.0,kr4r1/p1pqn1b1/2p1p2p/2Pp2p1/Q2P4/2RB2B1/PP3PPP/1K5R w - - 0 1,c4_images_brankawittwer(reversed).png,Ra3,c3a3,['a4a7'],0
+17,False,0,True,15.0,1k6/pp6/q4p2/3p1B1p/5P1P/1PP1B1R1/r5bK/8 w - - 0 1,c4_images_ivanchuksavchenko(reversed).png,Rg8,g3g8,['g3g8'],1
+17,False,0,True,16.0,5k2/p4p1r/1n3b2/2p1Qp1p/1q2P3/1B4R1/Pr3PP1/2R2K2 w - - 0 1,c4_images_strekalovskyshaposhlikov.png,Qb8,e5b8,"['e5d6', 'g3g8']",0
+17,False,0,True,17.0,r1b2rk1/1pp2ppp/p1np1q2/8/1b2Q3/2PB1N2/PP1B1PPP/RN2K2R w - - 0 1,c5_images_easyposition2.png,Qh7,e4h7,['e4h7'],1
+17,False,0,True,18.0,2kr1r2/3bb3/1pp5/4B1p1/2BP3p/8/5P1P/3RRK2 w - - 0 1,c5_images_easyposition5(reversed).png,Ba6,c4a6,['c4a6'],1
+17,False,0,True,19.0,1r4rk/6p1/1p5p/4N3/b7/3B4/PP6/K1R5 w - - 0 1,c5_images_easyposition6.png,Nf7,e5f7,['e5f7'],1
+17,False,0,False,20.0,2r2r1k/1b5p/p2Q1qp1/3p1P2/3Pp3/8/6RP/6RK w - - 0 1,nc1_images_frombeautiful(nomate).png,,,[],1
+17,False,0,False,21.0,3q2kr/1p3pp1/p1p2R1p/5p2/7P/P3Q3/1P4P1/7K w - - 0 1,nc1_images_steinitznn(nomate).png,Re6,f6e6,[],0
+17,False,0,False,22.0,1k6/ppp3pp/3ppb2/1P1P1Q2/3qr3/2R5/P1R4P/1K6 w - - 0 1,nc1_images_winterfriede(nomate)(reversed).png,Qh7,f5h7,[],0
+17,False,0,False,23.0,1k6/1b1q2p1/2R4p/2QB4/1P2Pp2/P4P2/2r3rP/KR6 w - - 0 1,nc2_images_kekhayovpetrov(nomate)(reversed).png,,,[],1
+17,False,0,False,24.0,4rk2/1Qp2p1r/1p2bB2/p5Rp/P5pP/6P1/1Pq5/3R2K1 w - - 0 1,nc2_images_krausemeinhardt(nomate).png,,,[],1
+17,False,0,False,25.0,k1n2b2/p1r3r1/QpP1pp2/3P4/3P3p/2P2PBq/3N1P1P/R3R1K1 w - - 0 1,nc2_images_skujarozenbergs(nomate)(reversed).png,,,[],1
+17,False,0,False,26.0,6k1/1p1R1p2/p5pp/P3n3/5N1P/2P2Q2/5PPK/4rq2 w - - 0 1,nc2_images_replacement4(nomate).png,Rd8,d7d8,[],0
+17,False,0,False,27.0,rk2q2r/p1p2p1p/Bp4p1/3N1b2/3Npp2/5P2/PPP3PP/1K1Rb2R w - - 0 1,nc3_images_kazicvukovic(nomate)(reversed).png,Nc7,d5c7,[],0
+17,False,0,False,28.0,1k1r4/p7/R1p1p2b/1NN1qp2/8/1P3B2/2PP1K2/8 w - - 0 1,nc3_images_malininandreev(nomate)(reversed).png,,,[],1
+17,False,0,False,29.0,k2r3r/pbQ1n2p/3p3b/2pNN2q/5Bp1/8/PPP4P/1KR1R3 w - - 0 1,nc3_images_podzerovkuntzevic(nomate)(reversed).png,Nb6,d5b6,[],0
+17,False,0,False,30.0,1k2q3/ppr5/1bp5/4N3/5Q1R/8/PP6/K7 w - - 0 1,nc3_images_studybyercoledelrio(nomate)(reversed).png,,,[],1
+17,False,0,False,31.0,2r3k1/pb1q1p2/1p2pbpp/8/3N4/P2QB3/1P3PPP/1Br1R1K1 w - - 0 1,nc3_images_tylorwinter(nomate).png,,,[],1
+17,False,0,False,32.0,1rr4k/3qNpb1/2p2n1p/3p1Q2/1P1P3N/2P3P1/5P1P/6K1 w - - 0 1,nc3_images_replacement3(nomate).png,,,[],1
+17,False,0,False,33.0,2r1rq2/4b2k/1p2BBb1/p3pQ1p/4N3/1P2P3/5PPP/6K1 w - - 0 1,nc3_images_replacement5(nomate).png,,,[],1
+17,False,0,False,34.0,kr4r1/p1pqn1b1/2p1p2p/2Pp2p1/Q2P4/1PRB2B1/P4PPP/1K5R w - - 0 1,nc4_images_brankawittwer(nomate)(reversed).png,,,[],1
+17,False,0,False,35.0,1k6/pp4p1/q4p2/3p1B1p/5P1P/1PP1B1R1/r5bK/8 w - - 0 1,nc4_images_ivanchuksavchenko(nomate)(reversed).png,,,[],1
+17,False,0,False,36.0,5k2/p4p1r/1n3b2/2p1Qp1p/1q2P1p1/1B4R1/Pr3PP1/2R2K2 w - - 0 1,nc4_images_strekalovskyshaposhlikov(nomate).png,Qf6,e5f6,[],0
+17,False,0,False,37.0,r1b2rk1/1pp2p1p/p1np1qp1/8/1b2Q3/2PB1N2/PP1B1PPP/RN2K2R w - - 0 1,nc5_images_easyposition2(nomate).png,,,[],1
+17,False,0,False,38.0,2kr1r2/3bb3/2p5/1p2B1p1/2BP3p/8/5P1P/3RRK2 w - - 0 1,nc5_images_easyposition5(nomate)(reversed).png,,,[],1
+17,False,0,False,39.0,1r4rk/8/1p4pp/4N3/b7/3B4/PP6/K1R5 w - - 0 1,nc5_images_easyposition6(nomate).png,,,[],1
+18,False,0,True,0.0,2r2r1k/1b5p/p2Q1q2/3p1P2/3Pp3/8/6RP/6RK w - - 0 1,c1_images_frombeautiful.png,,,['g2g8'],0
+18,False,0,True,1.0,r2q2kr/1p4p1/p1p2R1p/5p2/7P/P3Q3/1P4P1/7K w - - 0 1,c1_images_steinitznn.png,,,['e3e6'],0
+18,False,0,True,2.0,1k6/ppp3pp/3p1b2/1P1P1Q2/3qr3/2R5/P1R4P/1K6 w - - 0 1,c1_images_winterfriede(reversed).png,,,['f5c8'],0
+18,False,0,True,3.0,1k6/1b1q2p1/2R4p/2QB4/4Pp2/P4P2/6rP/KR6 w - - 0 1,c2_images_kekhayovpetrov(reversed).png,,,"['b1b7', 'c6e6', 'c5f8', 'c6a6']",0
+18,False,0,True,4.0,4rk2/1Q3p1r/1p2bB2/p5Rp/P5pP/6P1/1Pq5/3R2K1 w - - 0 1,c2_images_krausemeinhardt.png,,,"['b7e7', 'f6e7']",0
+18,False,0,True,5.0,k1n2br1/p1r5/QpP1pp2/3P4/3P3p/2P2PBq/3N1P1P/R3R1K1 w - - 0 1,c2_images_skujarozenbergs(reversed).png,Bc7,,['a6c8'],0
+18,False,0,True,6.0,6k1/1p1R1p1p/p5p1/P3n3/5N1P/2P2Q2/5PPK/4rq2 w - - 0 1,c2_images_replacement4.png,,,['d7d8'],0
+18,False,0,True,7.0,rk2q2r/p1p2p1p/B1p3p1/3N1b2/3Npp2/5P2/PPP3PP/1K1Rb2R w - - 0 1,c3_images_kazicvukovic(reversed).png,,,['d5e7'],0
+18,False,0,True,8.0,1k1r4/8/R1p1p2b/1NN1qp2/8/1P3B2/2PP1K2/8 w - - 0 1,c3_images_malininandreev(reversed).png,,,"['a6a8', 'a6b6']",0
+18,False,0,True,9.0,k2r3r/pbQ1n2p/7b/2pNN2q/5Bp1/8/PPP4P/1KR1R3 w - - 0 1,c3_images_podzerovkuntzevic(reversed).png,,,['c7b8'],0
+18,False,0,True,10.0,1kr1q3/pp6/1bp5/4N3/5Q1R/8/PP6/K7 w - - 0 1,c3_images_studybyercoledelrio(reversed).png,,,['e5d7'],0
+18,False,0,True,11.0,3r2k1/pb1q1pp1/1p2pb1p/8/3N4/P2QB3/1P3PPP/1Br1R1K1 w - - 0 1,c3_images_tylorwinter.png,,,['d3h7'],0
+18,False,0,True,12.0,1rr4k/3qN1b1/2p2n1p/3p1Q2/1P1P3N/2P3P1/5P1P/6K1 w - - 0 1,c3_images_replacement3.png,,,['e7g6'],0
+18,False,0,True,13.0,2r1rq2/4b2k/1p2BBbp/p3pQ2/4N3/1P2P3/5PPP/6K1 w - - 0 1,c3_images_replacement5.png,,,"['e4g5', 'e6g8']",0
+18,False,0,True,14.0,kr4r1/p1pqn1b1/2p1p2p/2Pp2p1/Q2P4/2RB2B1/PP3PPP/1K5R w - - 0 1,c4_images_brankawittwer(reversed).png,,,['a4a7'],0
+18,False,0,True,15.0,1k6/pp6/q4p2/3p1B1p/5P1P/1PP1B1R1/r5bK/8 w - - 0 1,c4_images_ivanchuksavchenko(reversed).png,,,['g3g8'],0
+18,False,0,True,16.0,5k2/p4p1r/1n3b2/2p1Qp1p/1q2P3/1B4R1/Pr3PP1/2R2K2 w - - 0 1,c4_images_strekalovskyshaposhlikov.png,,,"['e5d6', 'g3g8']",0
+18,False,0,True,17.0,r1b2rk1/1pp2ppp/p1np1q2/8/1b2Q3/2PB1N2/PP1B1PPP/RN2K2R w - - 0 1,c5_images_easyposition2.png,,,['e4h7'],0
+18,False,0,True,18.0,2kr1r2/3bb3/1pp5/4B1p1/2BP3p/8/5P1P/3RRK2 w - - 0 1,c5_images_easyposition5(reversed).png,,,['c4a6'],0
+18,False,0,True,19.0,1r4rk/6p1/1p5p/4N3/b7/3B4/PP6/K1R5 w - - 0 1,c5_images_easyposition6.png,Nf7,e5f7,['e5f7'],1
+18,False,0,False,20.0,2r2r1k/1b5p/p2Q1qp1/3p1P2/3Pp3/8/6RP/6RK w - - 0 1,nc1_images_frombeautiful(nomate).png,,,[],1
+18,False,0,False,21.0,3q2kr/1p3pp1/p1p2R1p/5p2/7P/P3Q3/1P4P1/7K w - - 0 1,nc1_images_steinitznn(nomate).png,,,[],1
+18,False,0,False,22.0,1k6/ppp3pp/3ppb2/1P1P1Q2/3qr3/2R5/P1R4P/1K6 w - - 0 1,nc1_images_winterfriede(nomate)(reversed).png,,,[],1
+18,False,0,False,23.0,1k6/1b1q2p1/2R4p/2QB4/1P2Pp2/P4P2/2r3rP/KR6 w - - 0 1,nc2_images_kekhayovpetrov(nomate)(reversed).png,,,[],1
+18,False,0,False,24.0,4rk2/1Qp2p1r/1p2bB2/p5Rp/P5pP/6P1/1Pq5/3R2K1 w - - 0 1,nc2_images_krausemeinhardt(nomate).png,,,[],1
+18,False,0,False,25.0,k1n2b2/p1r3r1/QpP1pp2/3P4/3P3p/2P2PBq/3N1P1P/R3R1K1 w - - 0 1,nc2_images_skujarozenbergs(nomate)(reversed).png,,,[],1
+18,False,0,False,26.0,6k1/1p1R1p2/p5pp/P3n3/5N1P/2P2Q2/5PPK/4rq2 w - - 0 1,nc2_images_replacement4(nomate).png,,,[],1
+18,False,0,False,27.0,rk2q2r/p1p2p1p/Bp4p1/3N1b2/3Npp2/5P2/PPP3PP/1K1Rb2R w - - 0 1,nc3_images_kazicvukovic(nomate)(reversed).png,,,[],1
+18,False,0,False,28.0,1k1r4/p7/R1p1p2b/1NN1qp2/8/1P3B2/2PP1K2/8 w - - 0 1,nc3_images_malininandreev(nomate)(reversed).png,,,[],1
+18,False,0,False,29.0,k2r3r/pbQ1n2p/3p3b/2pNN2q/5Bp1/8/PPP4P/1KR1R3 w - - 0 1,nc3_images_podzerovkuntzevic(nomate)(reversed).png,,,[],1
+18,False,0,False,30.0,1k2q3/ppr5/1bp5/4N3/5Q1R/8/PP6/K7 w - - 0 1,nc3_images_studybyercoledelrio(nomate)(reversed).png,,,[],1
+18,False,0,False,31.0,2r3k1/pb1q1p2/1p2pbpp/8/3N4/P2QB3/1P3PPP/1Br1R1K1 w - - 0 1,nc3_images_tylorwinter(nomate).png,,,[],1
+18,False,0,False,32.0,1rr4k/3qNpb1/2p2n1p/3p1Q2/1P1P3N/2P3P1/5P1P/6K1 w - - 0 1,nc3_images_replacement3(nomate).png,,,[],1
+18,False,0,False,33.0,2r1rq2/4b2k/1p2BBb1/p3pQ1p/4N3/1P2P3/5PPP/6K1 w - - 0 1,nc3_images_replacement5(nomate).png,,,[],1
+18,False,0,False,34.0,kr4r1/p1pqn1b1/2p1p2p/2Pp2p1/Q2P4/1PRB2B1/P4PPP/1K5R w - - 0 1,nc4_images_brankawittwer(nomate)(reversed).png,,,[],1
+18,False,0,False,35.0,1k6/pp4p1/q4p2/3p1B1p/5P1P/1PP1B1R1/r5bK/8 w - - 0 1,nc4_images_ivanchuksavchenko(nomate)(reversed).png,,,[],1
+18,False,0,False,36.0,5k2/p4p1r/1n3b2/2p1Qp1p/1q2P1p1/1B4R1/Pr3PP1/2R2K2 w - - 0 1,nc4_images_strekalovskyshaposhlikov(nomate).png,,,[],1
+18,False,0,False,37.0,r1b2rk1/1pp2p1p/p1np1qp1/8/1b2Q3/2PB1N2/PP1B1PPP/RN2K2R w - - 0 1,nc5_images_easyposition2(nomate).png,,,[],1
+18,False,0,False,38.0,2kr1r2/3bb3/2p5/1p2B1p1/2BP3p/8/5P1P/3RRK2 w - - 0 1,nc5_images_easyposition5(nomate)(reversed).png,,,[],1
+18,False,0,False,39.0,1r4rk/8/1p4pp/4N3/b7/3B4/PP6/K1R5 w - - 0 1,nc5_images_easyposition6(nomate).png,,,[],1
+19,False,0,True,0.0,2r2r1k/1b5p/p2Q1q2/3p1P2/3Pp3/8/6RP/6RK w - - 0 1,c1_images_frombeautiful.png,,,['g2g8'],0
+19,False,0,True,1.0,r2q2kr/1p4p1/p1p2R1p/5p2/7P/P3Q3/1P4P1/7K w - - 0 1,c1_images_steinitznn.png,Qh6,e3h6,['e3e6'],0
+19,False,0,True,2.0,1k6/ppp3pp/3p1b2/1P1P1Q2/3qr3/2R5/P1R4P/1K6 w - - 0 1,c1_images_winterfriede(reversed).png,Qd7,f5d7,['f5c8'],0
+19,False,0,True,3.0,1k6/1b1q2p1/2R4p/2QB4/4Pp2/P4P2/6rP/KR6 w - - 0 1,c2_images_kekhayovpetrov(reversed).png,,,"['b1b7', 'c6e6', 'c5f8', 'c6a6']",0
+19,False,0,True,4.0,4rk2/1Q3p1r/1p2bB2/p5Rp/P5pP/6P1/1Pq5/3R2K1 w - - 0 1,c2_images_krausemeinhardt.png,Qe7,b7e7,"['b7e7', 'f6e7']",1
+19,False,0,True,5.0,k1n2br1/p1r5/QpP1pp2/3P4/3P3p/2P2PBq/3N1P1P/R3R1K1 w - - 0 1,c2_images_skujarozenbergs(reversed).png,,,['a6c8'],0
+19,False,0,True,6.0,6k1/1p1R1p1p/p5p1/P3n3/5N1P/2P2Q2/5PPK/4rq2 w - - 0 1,c2_images_replacement4.png,Rd8,d7d8,['d7d8'],1
+19,False,0,True,7.0,rk2q2r/p1p2p1p/B1p3p1/3N1b2/3Npp2/5P2/PPP3PP/1K1Rb2R w - - 0 1,c3_images_kazicvukovic(reversed).png,Nc6,d4c6,['d5e7'],0
+19,False,0,True,8.0,1k1r4/8/R1p1p2b/1NN1qp2/8/1P3B2/2PP1K2/8 w - - 0 1,c3_images_malininandreev(reversed).png,,,"['a6a8', 'a6b6']",0
+19,False,0,True,9.0,k2r3r/pbQ1n2p/7b/2pNN2q/5Bp1/8/PPP4P/1KR1R3 w - - 0 1,c3_images_podzerovkuntzevic(reversed).png,,,['c7b8'],0
+19,False,0,True,10.0,1kr1q3/pp6/1bp5/4N3/5Q1R/8/PP6/K7 w - - 0 1,c3_images_studybyercoledelrio(reversed).png,,,['e5d7'],0
+19,False,0,True,11.0,3r2k1/pb1q1pp1/1p2pb1p/8/3N4/P2QB3/1P3PPP/1Br1R1K1 w - - 0 1,c3_images_tylorwinter.png,Qh7,d3h7,['d3h7'],1
+19,False,0,True,12.0,1rr4k/3qN1b1/2p2n1p/3p1Q2/1P1P3N/2P3P1/5P1P/6K1 w - - 0 1,c3_images_replacement3.png,Ng6,e7g6,['e7g6'],1
+19,False,0,True,13.0,2r1rq2/4b2k/1p2BBbp/p3pQ2/4N3/1P2P3/5PPP/6K1 w - - 0 1,c3_images_replacement5.png,Ng5,e4g5,"['e4g5', 'e6g8']",1
+19,False,0,True,14.0,kr4r1/p1pqn1b1/2p1p2p/2Pp2p1/Q2P4/2RB2B1/PP3PPP/1K5R w - - 0 1,c4_images_brankawittwer(reversed).png,,,['a4a7'],0
+19,False,0,True,15.0,1k6/pp6/q4p2/3p1B1p/5P1P/1PP1B1R1/r5bK/8 w - - 0 1,c4_images_ivanchuksavchenko(reversed).png,,,['g3g8'],0
+19,False,0,True,16.0,5k2/p4p1r/1n3b2/2p1Qp1p/1q2P3/1B4R1/Pr3PP1/2R2K2 w - - 0 1,c4_images_strekalovskyshaposhlikov.png,,,"['e5d6', 'g3g8']",0
+19,False,0,True,17.0,r1b2rk1/1pp2ppp/p1np1q2/8/1b2Q3/2PB1N2/PP1B1PPP/RN2K2R w - - 0 1,c5_images_easyposition2.png,Qh7,e4h7,['e4h7'],1
+19,False,0,True,18.0,2kr1r2/3bb3/1pp5/4B1p1/2BP3p/8/5P1P/3RRK2 w - - 0 1,c5_images_easyposition5(reversed).png,Ba6,c4a6,['c4a6'],1
+19,False,0,True,19.0,1r4rk/6p1/1p5p/4N3/b7/3B4/PP6/K1R5 w - - 0 1,c5_images_easyposition6.png,Nf7,e5f7,['e5f7'],1
+19,False,0,False,20.0,2r2r1k/1b5p/p2Q1qp1/3p1P2/3Pp3/8/6RP/6RK w - - 0 1,nc1_images_frombeautiful(nomate).png,Rg8,,[],1
+19,False,0,False,21.0,3q2kr/1p3pp1/p1p2R1p/5p2/7P/P3Q3/1P4P1/7K w - - 0 1,nc1_images_steinitznn(nomate).png,,,[],1
+19,False,0,False,22.0,1k6/ppp3pp/3ppb2/1P1P1Q2/3qr3/2R5/P1R4P/1K6 w - - 0 1,nc1_images_winterfriede(nomate)(reversed).png,,,[],1
+19,False,0,False,23.0,1k6/1b1q2p1/2R4p/2QB4/1P2Pp2/P4P2/2r3rP/KR6 w - - 0 1,nc2_images_kekhayovpetrov(nomate)(reversed).png,,,[],1
+19,False,0,False,24.0,4rk2/1Qp2p1r/1p2bB2/p5Rp/P5pP/6P1/1Pq5/3R2K1 w - - 0 1,nc2_images_krausemeinhardt(nomate).png,,,[],1
+19,False,0,False,25.0,k1n2b2/p1r3r1/QpP1pp2/3P4/3P3p/2P2PBq/3N1P1P/R3R1K1 w - - 0 1,nc2_images_skujarozenbergs(nomate)(reversed).png,Qb7,a6b7,[],0
+19,False,0,False,26.0,6k1/1p1R1p2/p5pp/P3n3/5N1P/2P2Q2/5PPK/4rq2 w - - 0 1,nc2_images_replacement4(nomate).png,H,,[],1
+19,False,0,False,27.0,rk2q2r/p1p2p1p/Bp4p1/3N1b2/3Npp2/5P2/PPP3PP/1K1Rb2R w - - 0 1,nc3_images_kazicvukovic(nomate)(reversed).png,Nf6,d5f6,[],0
+19,False,0,False,28.0,1k1r4/p7/R1p1p2b/1NN1qp2/8/1P3B2/2PP1K2/8 w - - 0 1,nc3_images_malininandreev(nomate)(reversed).png,,,[],1
+19,False,0,False,29.0,k2r3r/pbQ1n2p/3p3b/2pNN2q/5Bp1/8/PPP4P/1KR1R3 w - - 0 1,nc3_images_podzerovkuntzevic(nomate)(reversed).png,Nb6,d5b6,[],0
+19,False,0,False,30.0,1k2q3/ppr5/1bp5/4N3/5Q1R/8/PP6/K7 w - - 0 1,nc3_images_studybyercoledelrio(nomate)(reversed).png,,,[],1
+19,False,0,False,31.0,2r3k1/pb1q1p2/1p2pbpp/8/3N4/P2QB3/1P3PPP/1Br1R1K1 w - - 0 1,nc3_images_tylorwinter(nomate).png,,,[],1
+19,False,0,False,32.0,1rr4k/3qNpb1/2p2n1p/3p1Q2/1P1P3N/2P3P1/5P1P/6K1 w - - 0 1,nc3_images_replacement3(nomate).png,Ng6,e7g6,[],0
+19,False,0,False,33.0,2r1rq2/4b2k/1p2BBb1/p3pQ1p/4N3/1P2P3/5PPP/6K1 w - - 0 1,nc3_images_replacement5(nomate).png,,,[],1
+19,False,0,False,34.0,kr4r1/p1pqn1b1/2p1p2p/2Pp2p1/Q2P4/1PRB2B1/P4PPP/1K5R w - - 0 1,nc4_images_brankawittwer(nomate)(reversed).png,,,[],1
+19,False,0,False,35.0,1k6/pp4p1/q4p2/3p1B1p/5P1P/1PP1B1R1/r5bK/8 w - - 0 1,nc4_images_ivanchuksavchenko(nomate)(reversed).png,Rg7,g3g7,[],0
+19,False,0,False,36.0,5k2/p4p1r/1n3b2/2p1Qp1p/1q2P1p1/1B4R1/Pr3PP1/2R2K2 w - - 0 1,nc4_images_strekalovskyshaposhlikov(nomate).png,,,[],1
+19,False,0,False,37.0,r1b2rk1/1pp2p1p/p1np1qp1/8/1b2Q3/2PB1N2/PP1B1PPP/RN2K2R w - - 0 1,nc5_images_easyposition2(nomate).png,,,[],1
+19,False,0,False,38.0,2kr1r2/3bb3/2p5/1p2B1p1/2BP3p/8/5P1P/3RRK2 w - - 0 1,nc5_images_easyposition5(nomate)(reversed).png,,,[],1
+19,False,0,False,39.0,1r4rk/8/1p4pp/4N3/b7/3B4/PP6/K1R5 w - - 0 1,nc5_images_easyposition6(nomate).png,,,[],1
+20,True,2269,True,0.0,2r2r1k/1b5p/p2Q1q2/3p1P2/3Pp3/8/6RP/6RK w - - 0 1,c1_images_frombeautiful.png,Rg8,g2g8,['g2g8'],1
+20,True,2269,True,1.0,r2q2kr/1p4p1/p1p2R1p/5p2/7P/P3Q3/1P4P1/7K w - - 0 1,c1_images_steinitznn.png,Qe6,e3e6,['e3e6'],1
+20,True,2269,True,2.0,1k6/ppp3pp/3p1b2/1P1P1Q2/3qr3/2R5/P1R4P/1K6 w - - 0 1,c1_images_winterfriede(reversed).png,Qc8,f5c8,['f5c8'],1
+20,True,2269,True,3.0,1k6/1b1q2p1/2R4p/2QB4/4Pp2/P4P2/6rP/KR6 w - - 0 1,c2_images_kekhayovpetrov(reversed).png,Rb7,b1b7,"['b1b7', 'c6e6', 'c5f8', 'c6a6']",1
+20,True,2269,True,4.0,4rk2/1Q3p1r/1p2bB2/p5Rp/P5pP/6P1/1Pq5/3R2K1 w - - 0 1,c2_images_krausemeinhardt.png,Qe7,b7e7,"['b7e7', 'f6e7']",1
+20,True,2269,True,5.0,k1n2br1/p1r5/QpP1pp2/3P4/3P3p/2P2PBq/3N1P1P/R3R1K1 w - - 0 1,c2_images_skujarozenbergs(reversed).png,Qc8,a6c8,['a6c8'],1
+20,True,2269,True,6.0,6k1/1p1R1p1p/p5p1/P3n3/5N1P/2P2Q2/5PPK/4rq2 w - - 0 1,c2_images_replacement4.png,Rd8,d7d8,['d7d8'],1
+20,True,2269,True,7.0,rk2q2r/p1p2p1p/B1p3p1/3N1b2/3Npp2/5P2/PPP3PP/1K1Rb2R w - - 0 1,c3_images_kazicvukovic(reversed).png,Ne7,d5e7,['d5e7'],1
+20,True,2269,True,8.0,1k1r4/8/R1p1p2b/1NN1qp2/8/1P3B2/2PP1K2/8 w - - 0 1,c3_images_malininandreev(reversed).png,Ra8,a6a8,"['a6a8', 'a6b6']",1
+20,True,2269,True,9.0,k2r3r/pbQ1n2p/7b/2pNN2q/5Bp1/8/PPP4P/1KR1R3 w - - 0 1,c3_images_podzerovkuntzevic(reversed).png,Qb8,c7b8,['c7b8'],1
+20,True,2269,True,10.0,1kr1q3/pp6/1bp5/4N3/5Q1R/8/PP6/K7 w - - 0 1,c3_images_studybyercoledelrio(reversed).png,,,['e5d7'],0
+20,True,2269,True,11.0,3r2k1/pb1q1pp1/1p2pb1p/8/3N4/P2QB3/1P3PPP/1Br1R1K1 w - - 0 1,c3_images_tylorwinter.png,Qh7,d3h7,['d3h7'],1
+20,True,2269,True,12.0,1rr4k/3qN1b1/2p2n1p/3p1Q2/1P1P3N/2P3P1/5P1P/6K1 w - - 0 1,c3_images_replacement3.png,Ng6,e7g6,['e7g6'],1
+20,True,2269,True,13.0,2r1rq2/4b2k/1p2BBbp/p3pQ2/4N3/1P2P3/5PPP/6K1 w - - 0 1,c3_images_replacement5.png,,,"['e4g5', 'e6g8']",0
+20,True,2269,True,14.0,kr4r1/p1pqn1b1/2p1p2p/2Pp2p1/Q2P4/2RB2B1/PP3PPP/1K5R w - - 0 1,c4_images_brankawittwer(reversed).png,Qa7,a4a7,['a4a7'],1
+20,True,2269,True,15.0,1k6/pp6/q4p2/3p1B1p/5P1P/1PP1B1R1/r5bK/8 w - - 0 1,c4_images_ivanchuksavchenko(reversed).png,Rg8,g3g8,['g3g8'],1
+20,True,2269,True,16.0,5k2/p4p1r/1n3b2/2p1Qp1p/1q2P3/1B4R1/Pr3PP1/2R2K2 w - - 0 1,c4_images_strekalovskyshaposhlikov.png,Rg8,g3g8,"['e5d6', 'g3g8']",1
+20,True,2269,True,17.0,r1b2rk1/1pp2ppp/p1np1q2/8/1b2Q3/2PB1N2/PP1B1PPP/RN2K2R w - - 0 1,c5_images_easyposition2.png,Qh7,e4h7,['e4h7'],1
+20,True,2269,True,18.0,2kr1r2/3bb3/1pp5/4B1p1/2BP3p/8/5P1P/3RRK2 w - - 0 1,c5_images_easyposition5(reversed).png,Ba6,c4a6,['c4a6'],1
+20,True,2269,True,19.0,1r4rk/6p1/1p5p/4N3/b7/3B4/PP6/K1R5 w - - 0 1,c5_images_easyposition6.png,Nf7,e5f7,['e5f7'],1
+20,True,2269,False,20.0,2r2r1k/1b5p/p2Q1qp1/3p1P2/3Pp3/8/6RP/6RK w - - 0 1,nc1_images_frombeautiful(nomate).png,,,[],1
+20,True,2269,False,21.0,3q2kr/1p3pp1/p1p2R1p/5p2/7P/P3Q3/1P4P1/7K w - - 0 1,nc1_images_steinitznn(nomate).png,,,[],1
+20,True,2269,False,22.0,1k6/ppp3pp/3ppb2/1P1P1Q2/3qr3/2R5/P1R4P/1K6 w - - 0 1,nc1_images_winterfriede(nomate)(reversed).png,,,[],1
+20,True,2269,False,23.0,1k6/1b1q2p1/2R4p/2QB4/1P2Pp2/P4P2/2r3rP/KR6 w - - 0 1,nc2_images_kekhayovpetrov(nomate)(reversed).png,,,[],1
+20,True,2269,False,24.0,4rk2/1Qp2p1r/1p2bB2/p5Rp/P5pP/6P1/1Pq5/3R2K1 w - - 0 1,nc2_images_krausemeinhardt(nomate).png,,,[],1
+20,True,2269,False,25.0,k1n2b2/p1r3r1/QpP1pp2/3P4/3P3p/2P2PBq/3N1P1P/R3R1K1 w - - 0 1,nc2_images_skujarozenbergs(nomate)(reversed).png,,,[],1
+20,True,2269,False,26.0,6k1/1p1R1p2/p5pp/P3n3/5N1P/2P2Q2/5PPK/4rq2 w - - 0 1,nc2_images_replacement4(nomate).png,,,[],1
+20,True,2269,False,27.0,rk2q2r/p1p2p1p/Bp4p1/3N1b2/3Npp2/5P2/PPP3PP/1K1Rb2R w - - 0 1,nc3_images_kazicvukovic(nomate)(reversed).png,,,[],1
+20,True,2269,False,28.0,1k1r4/p7/R1p1p2b/1NN1qp2/8/1P3B2/2PP1K2/8 w - - 0 1,nc3_images_malininandreev(nomate)(reversed).png,,,[],1
+20,True,2269,False,29.0,k2r3r/pbQ1n2p/3p3b/2pNN2q/5Bp1/8/PPP4P/1KR1R3 w - - 0 1,nc3_images_podzerovkuntzevic(nomate)(reversed).png,,,[],1
+20,True,2269,False,30.0,1k2q3/ppr5/1bp5/4N3/5Q1R/8/PP6/K7 w - - 0 1,nc3_images_studybyercoledelrio(nomate)(reversed).png,,,[],1
+20,True,2269,False,31.0,2r3k1/pb1q1p2/1p2pbpp/8/3N4/P2QB3/1P3PPP/1Br1R1K1 w - - 0 1,nc3_images_tylorwinter(nomate).png,,,[],1
+20,True,2269,False,32.0,1rr4k/3qNpb1/2p2n1p/3p1Q2/1P1P3N/2P3P1/5P1P/6K1 w - - 0 1,nc3_images_replacement3(nomate).png,,,[],1
+20,True,2269,False,33.0,2r1rq2/4b2k/1p2BBb1/p3pQ1p/4N3/1P2P3/5PPP/6K1 w - - 0 1,nc3_images_replacement5(nomate).png,,,[],1
+20,True,2269,False,34.0,kr4r1/p1pqn1b1/2p1p2p/2Pp2p1/Q2P4/1PRB2B1/P4PPP/1K5R w - - 0 1,nc4_images_brankawittwer(nomate)(reversed).png,,,[],1
+20,True,2269,False,35.0,1k6/pp4p1/q4p2/3p1B1p/5P1P/1PP1B1R1/r5bK/8 w - - 0 1,nc4_images_ivanchuksavchenko(nomate)(reversed).png,,,[],1
+20,True,2269,False,36.0,5k2/p4p1r/1n3b2/2p1Qp1p/1q2P1p1/1B4R1/Pr3PP1/2R2K2 w - - 0 1,nc4_images_strekalovskyshaposhlikov(nomate).png,,,[],1
+20,True,2269,False,37.0,r1b2rk1/1pp2p1p/p1np1qp1/8/1b2Q3/2PB1N2/PP1B1PPP/RN2K2R w - - 0 1,nc5_images_easyposition2(nomate).png,,,[],1
+20,True,2269,False,38.0,2kr1r2/3bb3/2p5/1p2B1p1/2BP3p/8/5P1P/3RRK2 w - - 0 1,nc5_images_easyposition5(nomate)(reversed).png,,,[],1
+20,True,2269,False,39.0,1r4rk/8/1p4pp/4N3/b7/3B4/PP6/K1R5 w - - 0 1,nc5_images_easyposition6(nomate).png,,,[],1
+21,False,0,True,0.0,2r2r1k/1b5p/p2Q1q2/3p1P2/3Pp3/8/6RP/6RK w - - 0 1,c1_images_frombeautiful.png,,,['g2g8'],0
+21,False,0,True,1.0,r2q2kr/1p4p1/p1p2R1p/5p2/7P/P3Q3/1P4P1/7K w - - 0 1,c1_images_steinitznn.png,,,['e3e6'],0
+21,False,0,True,2.0,1k6/ppp3pp/3p1b2/1P1P1Q2/3qr3/2R5/P1R4P/1K6 w - - 0 1,c1_images_winterfriede(reversed).png,Rc7,c3c7,['f5c8'],0
+21,False,0,True,3.0,1k6/1b1q2p1/2R4p/2QB4/4Pp2/P4P2/6rP/KR6 w - - 0 1,c2_images_kekhayovpetrov(reversed).png,,,"['b1b7', 'c6e6', 'c5f8', 'c6a6']",0
+21,False,0,True,4.0,4rk2/1Q3p1r/1p2bB2/p5Rp/P5pP/6P1/1Pq5/3R2K1 w - - 0 1,c2_images_krausemeinhardt.png,,,"['b7e7', 'f6e7']",0
+21,False,0,True,5.0,k1n2br1/p1r5/QpP1pp2/3P4/3P3p/2P2PBq/3N1P1P/R3R1K1 w - - 0 1,c2_images_skujarozenbergs(reversed).png,,,['a6c8'],0
+21,False,0,True,6.0,6k1/1p1R1p1p/p5p1/P3n3/5N1P/2P2Q2/5PPK/4rq2 w - - 0 1,c2_images_replacement4.png,,,['d7d8'],0
+21,False,0,True,7.0,rk2q2r/p1p2p1p/B1p3p1/3N1b2/3Npp2/5P2/PPP3PP/1K1Rb2R w - - 0 1,c3_images_kazicvukovic(reversed).png,,,['d5e7'],0
+21,False,0,True,8.0,1k1r4/8/R1p1p2b/1NN1qp2/8/1P3B2/2PP1K2/8 w - - 0 1,c3_images_malininandreev(reversed).png,,,"['a6a8', 'a6b6']",0
+21,False,0,True,9.0,k2r3r/pbQ1n2p/7b/2pNN2q/5Bp1/8/PPP4P/1KR1R3 w - - 0 1,c3_images_podzerovkuntzevic(reversed).png,,,['c7b8'],0
+21,False,0,True,10.0,1kr1q3/pp6/1bp5/4N3/5Q1R/8/PP6/K7 w - - 0 1,c3_images_studybyercoledelrio(reversed).png,Nc6,e5c6,['e5d7'],0
+21,False,0,True,11.0,3r2k1/pb1q1pp1/1p2pb1p/8/3N4/P2QB3/1P3PPP/1Br1R1K1 w - - 0 1,c3_images_tylorwinter.png,,,['d3h7'],0
+21,False,0,True,12.0,1rr4k/3qN1b1/2p2n1p/3p1Q2/1P1P3N/2P3P1/5P1P/6K1 w - - 0 1,c3_images_replacement3.png,,,['e7g6'],0
+21,False,0,True,13.0,2r1rq2/4b2k/1p2BBbp/p3pQ2/4N3/1P2P3/5PPP/6K1 w - - 0 1,c3_images_replacement5.png,,,"['e4g5', 'e6g8']",0
+21,False,0,True,14.0,kr4r1/p1pqn1b1/2p1p2p/2Pp2p1/Q2P4/2RB2B1/PP3PPP/1K5R w - - 0 1,c4_images_brankawittwer(reversed).png,,,['a4a7'],0
+21,False,0,True,15.0,1k6/pp6/q4p2/3p1B1p/5P1P/1PP1B1R1/r5bK/8 w - - 0 1,c4_images_ivanchuksavchenko(reversed).png,,,['g3g8'],0
+21,False,0,True,16.0,5k2/p4p1r/1n3b2/2p1Qp1p/1q2P3/1B4R1/Pr3PP1/2R2K2 w - - 0 1,c4_images_strekalovskyshaposhlikov.png,,,"['e5d6', 'g3g8']",0
+21,False,0,True,17.0,r1b2rk1/1pp2ppp/p1np1q2/8/1b2Q3/2PB1N2/PP1B1PPP/RN2K2R w - - 0 1,c5_images_easyposition2.png,Qh6,,['e4h7'],0
+21,False,0,True,18.0,2kr1r2/3bb3/1pp5/4B1p1/2BP3p/8/5P1P/3RRK2 w - - 0 1,c5_images_easyposition5(reversed).png,Ba6,c4a6,['c4a6'],1
+21,False,0,True,19.0,1r4rk/6p1/1p5p/4N3/b7/3B4/PP6/K1R5 w - - 0 1,c5_images_easyposition6.png,Ng6,e5g6,['e5f7'],0
+21,False,0,False,20.0,2r2r1k/1b5p/p2Q1qp1/3p1P2/3Pp3/8/6RP/6RK w - - 0 1,nc1_images_frombeautiful(nomate).png,,,[],1
+21,False,0,False,21.0,3q2kr/1p3pp1/p1p2R1p/5p2/7P/P3Q3/1P4P1/7K w - - 0 1,nc1_images_steinitznn(nomate).png,,,[],1
+21,False,0,False,22.0,1k6/ppp3pp/3ppb2/1P1P1Q2/3qr3/2R5/P1R4P/1K6 w - - 0 1,nc1_images_winterfriede(nomate)(reversed).png,,,[],1
+21,False,0,False,23.0,1k6/1b1q2p1/2R4p/2QB4/1P2Pp2/P4P2/2r3rP/KR6 w - - 0 1,nc2_images_kekhayovpetrov(nomate)(reversed).png,,,[],1
+21,False,0,False,24.0,4rk2/1Qp2p1r/1p2bB2/p5Rp/P5pP/6P1/1Pq5/3R2K1 w - - 0 1,nc2_images_krausemeinhardt(nomate).png,,,[],1
+21,False,0,False,25.0,k1n2b2/p1r3r1/QpP1pp2/3P4/3P3p/2P2PBq/3N1P1P/R3R1K1 w - - 0 1,nc2_images_skujarozenbergs(nomate)(reversed).png,,,[],1
+21,False,0,False,26.0,6k1/1p1R1p2/p5pp/P3n3/5N1P/2P2Q2/5PPK/4rq2 w - - 0 1,nc2_images_replacement4(nomate).png,,,[],1
+21,False,0,False,27.0,rk2q2r/p1p2p1p/Bp4p1/3N1b2/3Npp2/5P2/PPP3PP/1K1Rb2R w - - 0 1,nc3_images_kazicvukovic(nomate)(reversed).png,,,[],1
+21,False,0,False,28.0,1k1r4/p7/R1p1p2b/1NN1qp2/8/1P3B2/2PP1K2/8 w - - 0 1,nc3_images_malininandreev(nomate)(reversed).png,,,[],1
+21,False,0,False,29.0,k2r3r/pbQ1n2p/3p3b/2pNN2q/5Bp1/8/PPP4P/1KR1R3 w - - 0 1,nc3_images_podzerovkuntzevic(nomate)(reversed).png,,,[],1
+21,False,0,False,30.0,1k2q3/ppr5/1bp5/4N3/5Q1R/8/PP6/K7 w - - 0 1,nc3_images_studybyercoledelrio(nomate)(reversed).png,,,[],1
+21,False,0,False,31.0,2r3k1/pb1q1p2/1p2pbpp/8/3N4/P2QB3/1P3PPP/1Br1R1K1 w - - 0 1,nc3_images_tylorwinter(nomate).png,,,[],1
+21,False,0,False,32.0,1rr4k/3qNpb1/2p2n1p/3p1Q2/1P1P3N/2P3P1/5P1P/6K1 w - - 0 1,nc3_images_replacement3(nomate).png,,,[],1
+21,False,0,False,33.0,2r1rq2/4b2k/1p2BBb1/p3pQ1p/4N3/1P2P3/5PPP/6K1 w - - 0 1,nc3_images_replacement5(nomate).png,,,[],1
+21,False,0,False,34.0,kr4r1/p1pqn1b1/2p1p2p/2Pp2p1/Q2P4/1PRB2B1/P4PPP/1K5R w - - 0 1,nc4_images_brankawittwer(nomate)(reversed).png,,,[],1
+21,False,0,False,35.0,1k6/pp4p1/q4p2/3p1B1p/5P1P/1PP1B1R1/r5bK/8 w - - 0 1,nc4_images_ivanchuksavchenko(nomate)(reversed).png,,,[],1
+21,False,0,False,36.0,5k2/p4p1r/1n3b2/2p1Qp1p/1q2P1p1/1B4R1/Pr3PP1/2R2K2 w - - 0 1,nc4_images_strekalovskyshaposhlikov(nomate).png,,,[],1
+21,False,0,False,37.0,r1b2rk1/1pp2p1p/p1np1qp1/8/1b2Q3/2PB1N2/PP1B1PPP/RN2K2R w - - 0 1,nc5_images_easyposition2(nomate).png,,,[],1
+21,False,0,False,38.0,2kr1r2/3bb3/2p5/1p2B1p1/2BP3p/8/5P1P/3RRK2 w - - 0 1,nc5_images_easyposition5(nomate)(reversed).png,,,[],1
+21,False,0,False,39.0,1r4rk/8/1p4pp/4N3/b7/3B4/PP6/K1R5 w - - 0 1,nc5_images_easyposition6(nomate).png,,,[],1
+22,True,2010,True,0.0,2r2r1k/1b5p/p2Q1q2/3p1P2/3Pp3/8/6RP/6RK w - - 0 1,c1_images_frombeautiful.png,Rg8,g2g8,['g2g8'],1
+22,True,2010,True,1.0,r2q2kr/1p4p1/p1p2R1p/5p2/7P/P3Q3/1P4P1/7K w - - 0 1,c1_images_steinitznn.png,Qe6,e3e6,['e3e6'],1
+22,True,2010,True,2.0,1k6/ppp3pp/3p1b2/1P1P1Q2/3qr3/2R5/P1R4P/1K6 w - - 0 1,c1_images_winterfriede(reversed).png,Qc8,f5c8,['f5c8'],1
+22,True,2010,True,3.0,1k6/1b1q2p1/2R4p/2QB4/4Pp2/P4P2/6rP/KR6 w - - 0 1,c2_images_kekhayovpetrov(reversed).png,Rc8,c6c8,"['b1b7', 'c6e6', 'c5f8', 'c6a6']",0
+22,True,2010,True,4.0,4rk2/1Q3p1r/1p2bB2/p5Rp/P5pP/6P1/1Pq5/3R2K1 w - - 0 1,c2_images_krausemeinhardt.png,Qe7,b7e7,"['b7e7', 'f6e7']",1
+22,True,2010,True,5.0,k1n2br1/p1r5/QpP1pp2/3P4/3P3p/2P2PBq/3N1P1P/R3R1K1 w - - 0 1,c2_images_skujarozenbergs(reversed).png,Qc8,a6c8,['a6c8'],1
+22,True,2010,True,6.0,6k1/1p1R1p1p/p5p1/P3n3/5N1P/2P2Q2/5PPK/4rq2 w - - 0 1,c2_images_replacement4.png,Rd8,d7d8,['d7d8'],1
+22,True,2010,True,7.0,rk2q2r/p1p2p1p/B1p3p1/3N1b2/3Npp2/5P2/PPP3PP/1K1Rb2R w - - 0 1,c3_images_kazicvukovic(reversed).png,,,['d5e7'],0
+22,True,2010,True,8.0,1k1r4/8/R1p1p2b/1NN1qp2/8/1P3B2/2PP1K2/8 w - - 0 1,c3_images_malininandreev(reversed).png,Rb6,a6b6,"['a6a8', 'a6b6']",1
+22,True,2010,True,9.0,k2r3r/pbQ1n2p/7b/2pNN2q/5Bp1/8/PPP4P/1KR1R3 w - - 0 1,c3_images_podzerovkuntzevic(reversed).png,Qb8,c7b8,['c7b8'],1
+22,True,2010,True,10.0,1kr1q3/pp6/1bp5/4N3/5Q1R/8/PP6/K7 w - - 0 1,c3_images_studybyercoledelrio(reversed).png,Rh8,h4h8,['e5d7'],0
+22,True,2010,True,11.0,3r2k1/pb1q1pp1/1p2pb1p/8/3N4/P2QB3/1P3PPP/1Br1R1K1 w - - 0 1,c3_images_tylorwinter.png,Qh7,d3h7,['d3h7'],1
+22,True,2010,True,12.0,1rr4k/3qN1b1/2p2n1p/3p1Q2/1P1P3N/2P3P1/5P1P/6K1 w - - 0 1,c3_images_replacement3.png,Ng6,e7g6,['e7g6'],1
+22,True,2010,True,13.0,2r1rq2/4b2k/1p2BBbp/p3pQ2/4N3/1P2P3/5PPP/6K1 w - - 0 1,c3_images_replacement5.png,Ng5,e4g5,"['e4g5', 'e6g8']",1
+22,True,2010,True,14.0,kr4r1/p1pqn1b1/2p1p2p/2Pp2p1/Q2P4/2RB2B1/PP3PPP/1K5R w - - 0 1,c4_images_brankawittwer(reversed).png,Qa7,a4a7,['a4a7'],1
+22,True,2010,True,15.0,1k6/pp6/q4p2/3p1B1p/5P1P/1PP1B1R1/r5bK/8 w - - 0 1,c4_images_ivanchuksavchenko(reversed).png,Rg8,g3g8,['g3g8'],1
+22,True,2010,True,16.0,5k2/p4p1r/1n3b2/2p1Qp1p/1q2P3/1B4R1/Pr3PP1/2R2K2 w - - 0 1,c4_images_strekalovskyshaposhlikov.png,Qd6,e5d6,"['e5d6', 'g3g8']",1
+22,True,2010,True,17.0,r1b2rk1/1pp2ppp/p1np1q2/8/1b2Q3/2PB1N2/PP1B1PPP/RN2K2R w - - 0 1,c5_images_easyposition2.png,Qh7,e4h7,['e4h7'],1
+22,True,2010,True,18.0,2kr1r2/3bb3/1pp5/4B1p1/2BP3p/8/5P1P/3RRK2 w - - 0 1,c5_images_easyposition5(reversed).png,Ba6,c4a6,['c4a6'],1
+22,True,2010,True,19.0,1r4rk/6p1/1p5p/4N3/b7/3B4/PP6/K1R5 w - - 0 1,c5_images_easyposition6.png,Nf7,e5f7,['e5f7'],1
+22,True,2010,False,20.0,2r2r1k/1b5p/p2Q1qp1/3p1P2/3Pp3/8/6RP/6RK w - - 0 1,nc1_images_frombeautiful(nomate).png,,,[],1
+22,True,2010,False,21.0,3q2kr/1p3pp1/p1p2R1p/5p2/7P/P3Q3/1P4P1/7K w - - 0 1,nc1_images_steinitznn(nomate).png,,,[],1
+22,True,2010,False,22.0,1k6/ppp3pp/3ppb2/1P1P1Q2/3qr3/2R5/P1R4P/1K6 w - - 0 1,nc1_images_winterfriede(nomate)(reversed).png,,,[],1
+22,True,2010,False,23.0,1k6/1b1q2p1/2R4p/2QB4/1P2Pp2/P4P2/2r3rP/KR6 w - - 0 1,nc2_images_kekhayovpetrov(nomate)(reversed).png,,,[],1
+22,True,2010,False,24.0,4rk2/1Qp2p1r/1p2bB2/p5Rp/P5pP/6P1/1Pq5/3R2K1 w - - 0 1,nc2_images_krausemeinhardt(nomate).png,,,[],1
+22,True,2010,False,25.0,k1n2b2/p1r3r1/QpP1pp2/3P4/3P3p/2P2PBq/3N1P1P/R3R1K1 w - - 0 1,nc2_images_skujarozenbergs(nomate)(reversed).png,,,[],1
+22,True,2010,False,26.0,6k1/1p1R1p2/p5pp/P3n3/5N1P/2P2Q2/5PPK/4rq2 w - - 0 1,nc2_images_replacement4(nomate).png,Rd8,d7d8,[],0
+22,True,2010,False,27.0,rk2q2r/p1p2p1p/Bp4p1/3N1b2/3Npp2/5P2/PPP3PP/1K1Rb2R w - - 0 1,nc3_images_kazicvukovic(nomate)(reversed).png,,,[],1
+22,True,2010,False,28.0,1k1r4/p7/R1p1p2b/1NN1qp2/8/1P3B2/2PP1K2/8 w - - 0 1,nc3_images_malininandreev(nomate)(reversed).png,,,[],1
+22,True,2010,False,29.0,k2r3r/pbQ1n2p/3p3b/2pNN2q/5Bp1/8/PPP4P/1KR1R3 w - - 0 1,nc3_images_podzerovkuntzevic(nomate)(reversed).png,,,[],1
+22,True,2010,False,30.0,1k2q3/ppr5/1bp5/4N3/5Q1R/8/PP6/K7 w - - 0 1,nc3_images_studybyercoledelrio(nomate)(reversed).png,,,[],1
+22,True,2010,False,31.0,2r3k1/pb1q1p2/1p2pbpp/8/3N4/P2QB3/1P3PPP/1Br1R1K1 w - - 0 1,nc3_images_tylorwinter(nomate).png,Bc1,e3c1,[],0
+22,True,2010,False,32.0,1rr4k/3qNpb1/2p2n1p/3p1Q2/1P1P3N/2P3P1/5P1P/6K1 w - - 0 1,nc3_images_replacement3(nomate).png,,,[],1
+22,True,2010,False,33.0,2r1rq2/4b2k/1p2BBb1/p3pQ1p/4N3/1P2P3/5PPP/6K1 w - - 0 1,nc3_images_replacement5(nomate).png,,,[],1
+22,True,2010,False,34.0,kr4r1/p1pqn1b1/2p1p2p/2Pp2p1/Q2P4/1PRB2B1/P4PPP/1K5R w - - 0 1,nc4_images_brankawittwer(nomate)(reversed).png,,,[],1
+22,True,2010,False,35.0,1k6/pp4p1/q4p2/3p1B1p/5P1P/1PP1B1R1/r5bK/8 w - - 0 1,nc4_images_ivanchuksavchenko(nomate)(reversed).png,,,[],1
+22,True,2010,False,36.0,5k2/p4p1r/1n3b2/2p1Qp1p/1q2P1p1/1B4R1/Pr3PP1/2R2K2 w - - 0 1,nc4_images_strekalovskyshaposhlikov(nomate).png,,,[],1
+22,True,2010,False,37.0,r1b2rk1/1pp2p1p/p1np1qp1/8/1b2Q3/2PB1N2/PP1B1PPP/RN2K2R w - - 0 1,nc5_images_easyposition2(nomate).png,,,[],1
+22,True,2010,False,38.0,2kr1r2/3bb3/2p5/1p2B1p1/2BP3p/8/5P1P/3RRK2 w - - 0 1,nc5_images_easyposition5(nomate)(reversed).png,,,[],1
+22,True,2010,False,39.0,1r4rk/8/1p4pp/4N3/b7/3B4/PP6/K1R5 w - - 0 1,nc5_images_easyposition6(nomate).png,,,[],1
+23,True,2100,True,0.0,2r2r1k/1b5p/p2Q1q2/3p1P2/3Pp3/8/6RP/6RK w - - 0 1,c1_images_frombeautiful.png,Rg8,g2g8,['g2g8'],1
+23,True,2100,True,1.0,r2q2kr/1p4p1/p1p2R1p/5p2/7P/P3Q3/1P4P1/7K w - - 0 1,c1_images_steinitznn.png,Qe6,e3e6,['e3e6'],1
+23,True,2100,True,2.0,1k6/ppp3pp/3p1b2/1P1P1Q2/3qr3/2R5/P1R4P/1K6 w - - 0 1,c1_images_winterfriede(reversed).png,Qc8,f5c8,['f5c8'],1
+23,True,2100,True,3.0,1k6/1b1q2p1/2R4p/2QB4/4Pp2/P4P2/6rP/KR6 w - - 0 1,c2_images_kekhayovpetrov(reversed).png,Rb7,b1b7,"['b1b7', 'c6e6', 'c5f8', 'c6a6']",1
+23,True,2100,True,4.0,4rk2/1Q3p1r/1p2bB2/p5Rp/P5pP/6P1/1Pq5/3R2K1 w - - 0 1,c2_images_krausemeinhardt.png,Qe7,b7e7,"['b7e7', 'f6e7']",1
+23,True,2100,True,5.0,k1n2br1/p1r5/QpP1pp2/3P4/3P3p/2P2PBq/3N1P1P/R3R1K1 w - - 0 1,c2_images_skujarozenbergs(reversed).png,Qc8,a6c8,['a6c8'],1
+23,True,2100,True,6.0,6k1/1p1R1p1p/p5p1/P3n3/5N1P/2P2Q2/5PPK/4rq2 w - - 0 1,c2_images_replacement4.png,Rd8,d7d8,['d7d8'],1
+23,True,2100,True,7.0,rk2q2r/p1p2p1p/B1p3p1/3N1b2/3Npp2/5P2/PPP3PP/1K1Rb2R w - - 0 1,c3_images_kazicvukovic(reversed).png,Ne7,d5e7,['d5e7'],1
+23,True,2100,True,8.0,1k1r4/8/R1p1p2b/1NN1qp2/8/1P3B2/2PP1K2/8 w - - 0 1,c3_images_malininandreev(reversed).png,Ra8,a6a8,"['a6a8', 'a6b6']",1
+23,True,2100,True,9.0,k2r3r/pbQ1n2p/7b/2pNN2q/5Bp1/8/PPP4P/1KR1R3 w - - 0 1,c3_images_podzerovkuntzevic(reversed).png,Qb8,c7b8,['c7b8'],1
+23,True,2100,True,10.0,1kr1q3/pp6/1bp5/4N3/5Q1R/8/PP6/K7 w - - 0 1,c3_images_studybyercoledelrio(reversed).png,Nd7,e5d7,['e5d7'],1
+23,True,2100,True,11.0,3r2k1/pb1q1pp1/1p2pb1p/8/3N4/P2QB3/1P3PPP/1Br1R1K1 w - - 0 1,c3_images_tylorwinter.png,Qh7,d3h7,['d3h7'],1
+23,True,2100,True,12.0,1rr4k/3qN1b1/2p2n1p/3p1Q2/1P1P3N/2P3P1/5P1P/6K1 w - - 0 1,c3_images_replacement3.png,Ng6,e7g6,['e7g6'],1
+23,True,2100,True,13.0,2r1rq2/4b2k/1p2BBbp/p3pQ2/4N3/1P2P3/5PPP/6K1 w - - 0 1,c3_images_replacement5.png,,,"['e4g5', 'e6g8']",0
+23,True,2100,True,14.0,kr4r1/p1pqn1b1/2p1p2p/2Pp2p1/Q2P4/2RB2B1/PP3PPP/1K5R w - - 0 1,c4_images_brankawittwer(reversed).png,Qa7,a4a7,['a4a7'],1
+23,True,2100,True,15.0,1k6/pp6/q4p2/3p1B1p/5P1P/1PP1B1R1/r5bK/8 w - - 0 1,c4_images_ivanchuksavchenko(reversed).png,Rg8,g3g8,['g3g8'],1
+23,True,2100,True,16.0,5k2/p4p1r/1n3b2/2p1Qp1p/1q2P3/1B4R1/Pr3PP1/2R2K2 w - - 0 1,c4_images_strekalovskyshaposhlikov.png,,,"['e5d6', 'g3g8']",0
+23,True,2100,True,17.0,r1b2rk1/1pp2ppp/p1np1q2/8/1b2Q3/2PB1N2/PP1B1PPP/RN2K2R w - - 0 1,c5_images_easyposition2.png,Qh7,e4h7,['e4h7'],1
+23,True,2100,True,18.0,2kr1r2/3bb3/1pp5/4B1p1/2BP3p/8/5P1P/3RRK2 w - - 0 1,c5_images_easyposition5(reversed).png,Ba6,c4a6,['c4a6'],1
+23,True,2100,True,19.0,1r4rk/6p1/1p5p/4N3/b7/3B4/PP6/K1R5 w - - 0 1,c5_images_easyposition6.png,Nf7,e5f7,['e5f7'],1
+23,True,2100,False,20.0,2r2r1k/1b5p/p2Q1qp1/3p1P2/3Pp3/8/6RP/6RK w - - 0 1,nc1_images_frombeautiful(nomate).png,,,[],1
+23,True,2100,False,21.0,3q2kr/1p3pp1/p1p2R1p/5p2/7P/P3Q3/1P4P1/7K w - - 0 1,nc1_images_steinitznn(nomate).png,,,[],1
+23,True,2100,False,22.0,1k6/ppp3pp/3ppb2/1P1P1Q2/3qr3/2R5/P1R4P/1K6 w - - 0 1,nc1_images_winterfriede(nomate)(reversed).png,,,[],1
+23,True,2100,False,23.0,1k6/1b1q2p1/2R4p/2QB4/1P2Pp2/P4P2/2r3rP/KR6 w - - 0 1,nc2_images_kekhayovpetrov(nomate)(reversed).png,,,[],1
+23,True,2100,False,24.0,4rk2/1Qp2p1r/1p2bB2/p5Rp/P5pP/6P1/1Pq5/3R2K1 w - - 0 1,nc2_images_krausemeinhardt(nomate).png,,,[],1
+23,True,2100,False,25.0,k1n2b2/p1r3r1/QpP1pp2/3P4/3P3p/2P2PBq/3N1P1P/R3R1K1 w - - 0 1,nc2_images_skujarozenbergs(nomate)(reversed).png,,,[],1
+23,True,2100,False,26.0,6k1/1p1R1p2/p5pp/P3n3/5N1P/2P2Q2/5PPK/4rq2 w - - 0 1,nc2_images_replacement4(nomate).png,,,[],1
+23,True,2100,False,27.0,rk2q2r/p1p2p1p/Bp4p1/3N1b2/3Npp2/5P2/PPP3PP/1K1Rb2R w - - 0 1,nc3_images_kazicvukovic(nomate)(reversed).png,,,[],1
+23,True,2100,False,28.0,1k1r4/p7/R1p1p2b/1NN1qp2/8/1P3B2/2PP1K2/8 w - - 0 1,nc3_images_malininandreev(nomate)(reversed).png,,,[],1
+23,True,2100,False,29.0,k2r3r/pbQ1n2p/3p3b/2pNN2q/5Bp1/8/PPP4P/1KR1R3 w - - 0 1,nc3_images_podzerovkuntzevic(nomate)(reversed).png,,,[],1
+23,True,2100,False,30.0,1k2q3/ppr5/1bp5/4N3/5Q1R/8/PP6/K7 w - - 0 1,nc3_images_studybyercoledelrio(nomate)(reversed).png,,,[],1
+23,True,2100,False,31.0,2r3k1/pb1q1p2/1p2pbpp/8/3N4/P2QB3/1P3PPP/1Br1R1K1 w - - 0 1,nc3_images_tylorwinter(nomate).png,,,[],1
+23,True,2100,False,32.0,1rr4k/3qNpb1/2p2n1p/3p1Q2/1P1P3N/2P3P1/5P1P/6K1 w - - 0 1,nc3_images_replacement3(nomate).png,,,[],1
+23,True,2100,False,33.0,2r1rq2/4b2k/1p2BBb1/p3pQ1p/4N3/1P2P3/5PPP/6K1 w - - 0 1,nc3_images_replacement5(nomate).png,Ng5,e4g5,[],0
+23,True,2100,False,34.0,kr4r1/p1pqn1b1/2p1p2p/2Pp2p1/Q2P4/1PRB2B1/P4PPP/1K5R w - - 0 1,nc4_images_brankawittwer(nomate)(reversed).png,,,[],1
+23,True,2100,False,35.0,1k6/pp4p1/q4p2/3p1B1p/5P1P/1PP1B1R1/r5bK/8 w - - 0 1,nc4_images_ivanchuksavchenko(nomate)(reversed).png,,,[],1
+23,True,2100,False,36.0,5k2/p4p1r/1n3b2/2p1Qp1p/1q2P1p1/1B4R1/Pr3PP1/2R2K2 w - - 0 1,nc4_images_strekalovskyshaposhlikov(nomate).png,,,[],1
+23,True,2100,False,37.0,r1b2rk1/1pp2p1p/p1np1qp1/8/1b2Q3/2PB1N2/PP1B1PPP/RN2K2R w - - 0 1,nc5_images_easyposition2(nomate).png,,,[],1
+23,True,2100,False,38.0,2kr1r2/3bb3/2p5/1p2B1p1/2BP3p/8/5P1P/3RRK2 w - - 0 1,nc5_images_easyposition5(nomate)(reversed).png,,,[],1
+23,True,2100,False,39.0,1r4rk/8/1p4pp/4N3/b7/3B4/PP6/K1R5 w - - 0 1,nc5_images_easyposition6(nomate).png,,,[],1
+24,True,2094,True,0.0,2r2r1k/1b5p/p2Q1q2/3p1P2/3Pp3/8/6RP/6RK w - - 0 1,c1_images_frombeautiful.png,Rg8,g2g8,['g2g8'],1
+24,True,2094,True,1.0,r2q2kr/1p4p1/p1p2R1p/5p2/7P/P3Q3/1P4P1/7K w - - 0 1,c1_images_steinitznn.png,,,['e3e6'],0
+24,True,2094,True,2.0,1k6/ppp3pp/3p1b2/1P1P1Q2/3qr3/2R5/P1R4P/1K6 w - - 0 1,c1_images_winterfriede(reversed).png,Qc8,f5c8,['f5c8'],1
+24,True,2094,True,3.0,1k6/1b1q2p1/2R4p/2QB4/4Pp2/P4P2/6rP/KR6 w - - 0 1,c2_images_kekhayovpetrov(reversed).png,Qf8,c5f8,"['b1b7', 'c6e6', 'c5f8', 'c6a6']",1
+24,True,2094,True,4.0,4rk2/1Q3p1r/1p2bB2/p5Rp/P5pP/6P1/1Pq5/3R2K1 w - - 0 1,c2_images_krausemeinhardt.png,,,"['b7e7', 'f6e7']",0
+24,True,2094,True,5.0,k1n2br1/p1r5/QpP1pp2/3P4/3P3p/2P2PBq/3N1P1P/R3R1K1 w - - 0 1,c2_images_skujarozenbergs(reversed).png,Qc8,a6c8,['a6c8'],1
+24,True,2094,True,6.0,6k1/1p1R1p1p/p5p1/P3n3/5N1P/2P2Q2/5PPK/4rq2 w - - 0 1,c2_images_replacement4.png,Rd8,d7d8,['d7d8'],1
+24,True,2094,True,7.0,rk2q2r/p1p2p1p/B1p3p1/3N1b2/3Npp2/5P2/PPP3PP/1K1Rb2R w - - 0 1,c3_images_kazicvukovic(reversed).png,Ne7,d5e7,['d5e7'],1
+24,True,2094,True,8.0,1k1r4/8/R1p1p2b/1NN1qp2/8/1P3B2/2PP1K2/8 w - - 0 1,c3_images_malininandreev(reversed).png,Ra8,a6a8,"['a6a8', 'a6b6']",1
+24,True,2094,True,9.0,k2r3r/pbQ1n2p/7b/2pNN2q/5Bp1/8/PPP4P/1KR1R3 w - - 0 1,c3_images_podzerovkuntzevic(reversed).png,Qb8,c7b8,['c7b8'],1
+24,True,2094,True,10.0,1kr1q3/pp6/1bp5/4N3/5Q1R/8/PP6/K7 w - - 0 1,c3_images_studybyercoledelrio(reversed).png,Nd7,e5d7,['e5d7'],1
+24,True,2094,True,11.0,3r2k1/pb1q1pp1/1p2pb1p/8/3N4/P2QB3/1P3PPP/1Br1R1K1 w - - 0 1,c3_images_tylorwinter.png,Qh7,d3h7,['d3h7'],1
+24,True,2094,True,12.0,1rr4k/3qN1b1/2p2n1p/3p1Q2/1P1P3N/2P3P1/5P1P/6K1 w - - 0 1,c3_images_replacement3.png,Ng6,e7g6,['e7g6'],1
+24,True,2094,True,13.0,2r1rq2/4b2k/1p2BBbp/p3pQ2/4N3/1P2P3/5PPP/6K1 w - - 0 1,c3_images_replacement5.png,,,"['e4g5', 'e6g8']",0
+24,True,2094,True,14.0,kr4r1/p1pqn1b1/2p1p2p/2Pp2p1/Q2P4/2RB2B1/PP3PPP/1K5R w - - 0 1,c4_images_brankawittwer(reversed).png,Qa7,a4a7,['a4a7'],1
+24,True,2094,True,15.0,1k6/pp6/q4p2/3p1B1p/5P1P/1PP1B1R1/r5bK/8 w - - 0 1,c4_images_ivanchuksavchenko(reversed).png,,,['g3g8'],0
+24,True,2094,True,16.0,5k2/p4p1r/1n3b2/2p1Qp1p/1q2P3/1B4R1/Pr3PP1/2R2K2 w - - 0 1,c4_images_strekalovskyshaposhlikov.png,,,"['e5d6', 'g3g8']",0
+24,True,2094,True,17.0,r1b2rk1/1pp2ppp/p1np1q2/8/1b2Q3/2PB1N2/PP1B1PPP/RN2K2R w - - 0 1,c5_images_easyposition2.png,Qh7,e4h7,['e4h7'],1
+24,True,2094,True,18.0,2kr1r2/3bb3/1pp5/4B1p1/2BP3p/8/5P1P/3RRK2 w - - 0 1,c5_images_easyposition5(reversed).png,Ba6,c4a6,['c4a6'],1
+24,True,2094,True,19.0,1r4rk/6p1/1p5p/4N3/b7/3B4/PP6/K1R5 w - - 0 1,c5_images_easyposition6.png,Nf7,e5f7,['e5f7'],1
+24,True,2094,False,20.0,2r2r1k/1b5p/p2Q1qp1/3p1P2/3Pp3/8/6RP/6RK w - - 0 1,nc1_images_frombeautiful(nomate).png,,,[],1
+24,True,2094,False,21.0,3q2kr/1p3pp1/p1p2R1p/5p2/7P/P3Q3/1P4P1/7K w - - 0 1,nc1_images_steinitznn(nomate).png,,,[],1
+24,True,2094,False,22.0,1k6/ppp3pp/3ppb2/1P1P1Q2/3qr3/2R5/P1R4P/1K6 w - - 0 1,nc1_images_winterfriede(nomate)(reversed).png,,,[],1
+24,True,2094,False,23.0,1k6/1b1q2p1/2R4p/2QB4/1P2Pp2/P4P2/2r3rP/KR6 w - - 0 1,nc2_images_kekhayovpetrov(nomate)(reversed).png,,,[],1
+24,True,2094,False,24.0,4rk2/1Qp2p1r/1p2bB2/p5Rp/P5pP/6P1/1Pq5/3R2K1 w - - 0 1,nc2_images_krausemeinhardt(nomate).png,,,[],1
+24,True,2094,False,25.0,k1n2b2/p1r3r1/QpP1pp2/3P4/3P3p/2P2PBq/3N1P1P/R3R1K1 w - - 0 1,nc2_images_skujarozenbergs(nomate)(reversed).png,,,[],1
+24,True,2094,False,26.0,6k1/1p1R1p2/p5pp/P3n3/5N1P/2P2Q2/5PPK/4rq2 w - - 0 1,nc2_images_replacement4(nomate).png,,,[],1
+24,True,2094,False,27.0,rk2q2r/p1p2p1p/Bp4p1/3N1b2/3Npp2/5P2/PPP3PP/1K1Rb2R w - - 0 1,nc3_images_kazicvukovic(nomate)(reversed).png,,,[],1
+24,True,2094,False,28.0,1k1r4/p7/R1p1p2b/1NN1qp2/8/1P3B2/2PP1K2/8 w - - 0 1,nc3_images_malininandreev(nomate)(reversed).png,,,[],1
+24,True,2094,False,29.0,k2r3r/pbQ1n2p/3p3b/2pNN2q/5Bp1/8/PPP4P/1KR1R3 w - - 0 1,nc3_images_podzerovkuntzevic(nomate)(reversed).png,,,[],1
+24,True,2094,False,30.0,1k2q3/ppr5/1bp5/4N3/5Q1R/8/PP6/K7 w - - 0 1,nc3_images_studybyercoledelrio(nomate)(reversed).png,,,[],1
+24,True,2094,False,31.0,2r3k1/pb1q1p2/1p2pbpp/8/3N4/P2QB3/1P3PPP/1Br1R1K1 w - - 0 1,nc3_images_tylorwinter(nomate).png,,,[],1
+24,True,2094,False,32.0,1rr4k/3qNpb1/2p2n1p/3p1Q2/1P1P3N/2P3P1/5P1P/6K1 w - - 0 1,nc3_images_replacement3(nomate).png,,,[],1
+24,True,2094,False,33.0,2r1rq2/4b2k/1p2BBb1/p3pQ1p/4N3/1P2P3/5PPP/6K1 w - - 0 1,nc3_images_replacement5(nomate).png,,,[],1
+24,True,2094,False,34.0,kr4r1/p1pqn1b1/2p1p2p/2Pp2p1/Q2P4/1PRB2B1/P4PPP/1K5R w - - 0 1,nc4_images_brankawittwer(nomate)(reversed).png,,,[],1
+24,True,2094,False,35.0,1k6/pp4p1/q4p2/3p1B1p/5P1P/1PP1B1R1/r5bK/8 w - - 0 1,nc4_images_ivanchuksavchenko(nomate)(reversed).png,,,[],1
+24,True,2094,False,36.0,5k2/p4p1r/1n3b2/2p1Qp1p/1q2P1p1/1B4R1/Pr3PP1/2R2K2 w - - 0 1,nc4_images_strekalovskyshaposhlikov(nomate).png,,,[],1
+24,True,2094,False,37.0,r1b2rk1/1pp2p1p/p1np1qp1/8/1b2Q3/2PB1N2/PP1B1PPP/RN2K2R w - - 0 1,nc5_images_easyposition2(nomate).png,,,[],1
+24,True,2094,False,38.0,2kr1r2/3bb3/2p5/1p2B1p1/2BP3p/8/5P1P/3RRK2 w - - 0 1,nc5_images_easyposition5(nomate)(reversed).png,,,[],1
+24,True,2094,False,39.0,1r4rk/8/1p4pp/4N3/b7/3B4/PP6/K1R5 w - - 0 1,nc5_images_easyposition6(nomate).png,,,[],1
+25,False,0,True,0.0,2r2r1k/1b5p/p2Q1q2/3p1P2/3Pp3/8/6RP/6RK w - - 0 1,c1_images_frombeautiful.png,Rg8,g2g8,['g2g8'],1
+25,False,0,True,1.0,r2q2kr/1p4p1/p1p2R1p/5p2/7P/P3Q3/1P4P1/7K w - - 0 1,c1_images_steinitznn.png,,,['e3e6'],0
+25,False,0,True,2.0,1k6/ppp3pp/3p1b2/1P1P1Q2/3qr3/2R5/P1R4P/1K6 w - - 0 1,c1_images_winterfriede(reversed).png,,,['f5c8'],0
+25,False,0,True,3.0,1k6/1b1q2p1/2R4p/2QB4/4Pp2/P4P2/6rP/KR6 w - - 0 1,c2_images_kekhayovpetrov(reversed).png,Rc8,c6c8,"['b1b7', 'c6e6', 'c5f8', 'c6a6']",0
+25,False,0,True,4.0,4rk2/1Q3p1r/1p2bB2/p5Rp/P5pP/6P1/1Pq5/3R2K1 w - - 0 1,c2_images_krausemeinhardt.png,,,"['b7e7', 'f6e7']",0
+25,False,0,True,5.0,k1n2br1/p1r5/QpP1pp2/3P4/3P3p/2P2PBq/3N1P1P/R3R1K1 w - - 0 1,c2_images_skujarozenbergs(reversed).png,Bc7,,['a6c8'],0
+25,False,0,True,6.0,6k1/1p1R1p1p/p5p1/P3n3/5N1P/2P2Q2/5PPK/4rq2 w - - 0 1,c2_images_replacement4.png,,,['d7d8'],0
+25,False,0,True,7.0,rk2q2r/p1p2p1p/B1p3p1/3N1b2/3Npp2/5P2/PPP3PP/1K1Rb2R w - - 0 1,c3_images_kazicvukovic(reversed).png,,,['d5e7'],0
+25,False,0,True,8.0,1k1r4/8/R1p1p2b/1NN1qp2/8/1P3B2/2PP1K2/8 w - - 0 1,c3_images_malininandreev(reversed).png,,,"['a6a8', 'a6b6']",0
+25,False,0,True,9.0,k2r3r/pbQ1n2p/7b/2pNN2q/5Bp1/8/PPP4P/1KR1R3 w - - 0 1,c3_images_podzerovkuntzevic(reversed).png,,,['c7b8'],0
+25,False,0,True,10.0,1kr1q3/pp6/1bp5/4N3/5Q1R/8/PP6/K7 w - - 0 1,c3_images_studybyercoledelrio(reversed).png,,,['e5d7'],0
+25,False,0,True,11.0,3r2k1/pb1q1pp1/1p2pb1p/8/3N4/P2QB3/1P3PPP/1Br1R1K1 w - - 0 1,c3_images_tylorwinter.png,,,['d3h7'],0
+25,False,0,True,12.0,1rr4k/3qN1b1/2p2n1p/3p1Q2/1P1P3N/2P3P1/5P1P/6K1 w - - 0 1,c3_images_replacement3.png,Ng8,e7g8,['e7g6'],0
+25,False,0,True,13.0,2r1rq2/4b2k/1p2BBbp/p3pQ2/4N3/1P2P3/5PPP/6K1 w - - 0 1,c3_images_replacement5.png,,,"['e4g5', 'e6g8']",0
+25,False,0,True,14.0,kr4r1/p1pqn1b1/2p1p2p/2Pp2p1/Q2P4/2RB2B1/PP3PPP/1K5R w - - 0 1,c4_images_brankawittwer(reversed).png,Rb3,c3b3,['a4a7'],0
+25,False,0,True,15.0,1k6/pp6/q4p2/3p1B1p/5P1P/1PP1B1R1/r5bK/8 w - - 0 1,c4_images_ivanchuksavchenko(reversed).png,Rg8,g3g8,['g3g8'],1
+25,False,0,True,16.0,5k2/p4p1r/1n3b2/2p1Qp1p/1q2P3/1B4R1/Pr3PP1/2R2K2 w - - 0 1,c4_images_strekalovskyshaposhlikov.png,Qb8,e5b8,"['e5d6', 'g3g8']",0
+25,False,0,True,17.0,r1b2rk1/1pp2ppp/p1np1q2/8/1b2Q3/2PB1N2/PP1B1PPP/RN2K2R w - - 0 1,c5_images_easyposition2.png,,,['e4h7'],0
+25,False,0,True,18.0,2kr1r2/3bb3/1pp5/4B1p1/2BP3p/8/5P1P/3RRK2 w - - 0 1,c5_images_easyposition5(reversed).png,Ba6,c4a6,['c4a6'],1
+25,False,0,True,19.0,1r4rk/6p1/1p5p/4N3/b7/3B4/PP6/K1R5 w - - 0 1,c5_images_easyposition6.png,Nf7,e5f7,['e5f7'],1
+25,False,0,False,20.0,2r2r1k/1b5p/p2Q1qp1/3p1P2/3Pp3/8/6RP/6RK w - - 0 1,nc1_images_frombeautiful(nomate).png,,,[],1
+25,False,0,False,21.0,3q2kr/1p3pp1/p1p2R1p/5p2/7P/P3Q3/1P4P1/7K w - - 0 1,nc1_images_steinitznn(nomate).png,,,[],1
+25,False,0,False,22.0,1k6/ppp3pp/3ppb2/1P1P1Q2/3qr3/2R5/P1R4P/1K6 w - - 0 1,nc1_images_winterfriede(nomate)(reversed).png,,,[],1
+25,False,0,False,23.0,1k6/1b1q2p1/2R4p/2QB4/1P2Pp2/P4P2/2r3rP/KR6 w - - 0 1,nc2_images_kekhayovpetrov(nomate)(reversed).png,Rc8,c6c8,[],0
+25,False,0,False,24.0,4rk2/1Qp2p1r/1p2bB2/p5Rp/P5pP/6P1/1Pq5/3R2K1 w - - 0 1,nc2_images_krausemeinhardt(nomate).png,Be7,f6e7,[],0
+25,False,0,False,25.0,k1n2b2/p1r3r1/QpP1pp2/3P4/3P3p/2P2PBq/3N1P1P/R3R1K1 w - - 0 1,nc2_images_skujarozenbergs(nomate)(reversed).png,,,[],1
+25,False,0,False,26.0,6k1/1p1R1p2/p5pp/P3n3/5N1P/2P2Q2/5PPK/4rq2 w - - 0 1,nc2_images_replacement4(nomate).png,,,[],1
+25,False,0,False,27.0,rk2q2r/p1p2p1p/Bp4p1/3N1b2/3Npp2/5P2/PPP3PP/1K1Rb2R w - - 0 1,nc3_images_kazicvukovic(nomate)(reversed).png,,,[],1
+25,False,0,False,28.0,1k1r4/p7/R1p1p2b/1NN1qp2/8/1P3B2/2PP1K2/8 w - - 0 1,nc3_images_malininandreev(nomate)(reversed).png,Rb6,a6b6,[],0
+25,False,0,False,29.0,k2r3r/pbQ1n2p/3p3b/2pNN2q/5Bp1/8/PPP4P/1KR1R3 w - - 0 1,nc3_images_podzerovkuntzevic(nomate)(reversed).png,Qb7,c7b7,[],0
+25,False,0,False,30.0,1k2q3/ppr5/1bp5/4N3/5Q1R/8/PP6/K7 w - - 0 1,nc3_images_studybyercoledelrio(nomate)(reversed).png,,,[],1
+25,False,0,False,31.0,2r3k1/pb1q1p2/1p2pbpp/8/3N4/P2QB3/1P3PPP/1Br1R1K1 w - - 0 1,nc3_images_tylorwinter(nomate).png,,,[],1
+25,False,0,False,32.0,1rr4k/3qNpb1/2p2n1p/3p1Q2/1P1P3N/2P3P1/5P1P/6K1 w - - 0 1,nc3_images_replacement3(nomate).png,Ng8,e7g8,[],0
+25,False,0,False,33.0,2r1rq2/4b2k/1p2BBb1/p3pQ1p/4N3/1P2P3/5PPP/6K1 w - - 0 1,nc3_images_replacement5(nomate).png,,,[],1
+25,False,0,False,34.0,kr4r1/p1pqn1b1/2p1p2p/2Pp2p1/Q2P4/1PRB2B1/P4PPP/1K5R w - - 0 1,nc4_images_brankawittwer(nomate)(reversed).png,,,[],1
+25,False,0,False,35.0,1k6/pp4p1/q4p2/3p1B1p/5P1P/1PP1B1R1/r5bK/8 w - - 0 1,nc4_images_ivanchuksavchenko(nomate)(reversed).png,,,[],1
+25,False,0,False,36.0,5k2/p4p1r/1n3b2/2p1Qp1p/1q2P1p1/1B4R1/Pr3PP1/2R2K2 w - - 0 1,nc4_images_strekalovskyshaposhlikov(nomate).png,,,[],1
+25,False,0,False,37.0,r1b2rk1/1pp2p1p/p1np1qp1/8/1b2Q3/2PB1N2/PP1B1PPP/RN2K2R w - - 0 1,nc5_images_easyposition2(nomate).png,Bh6,d2h6,[],0
+25,False,0,False,38.0,2kr1r2/3bb3/2p5/1p2B1p1/2BP3p/8/5P1P/3RRK2 w - - 0 1,nc5_images_easyposition5(nomate)(reversed).png,,,[],1
+25,False,0,False,39.0,1r4rk/8/1p4pp/4N3/b7/3B4/PP6/K1R5 w - - 0 1,nc5_images_easyposition6(nomate).png,Nf7,e5f7,[],0
+26,False,0,True,0.0,2r2r1k/1b5p/p2Q1q2/3p1P2/3Pp3/8/6RP/6RK w - - 0 1,c1_images_frombeautiful.png,,,['g2g8'],0
+26,False,0,True,1.0,r2q2kr/1p4p1/p1p2R1p/5p2/7P/P3Q3/1P4P1/7K w - - 0 1,c1_images_steinitznn.png,,,['e3e6'],0
+26,False,0,True,2.0,1k6/ppp3pp/3p1b2/1P1P1Q2/3qr3/2R5/P1R4P/1K6 w - - 0 1,c1_images_winterfriede(reversed).png,Qc8,f5c8,['f5c8'],1
+26,False,0,True,3.0,1k6/1b1q2p1/2R4p/2QB4/4Pp2/P4P2/6rP/KR6 w - - 0 1,c2_images_kekhayovpetrov(reversed).png,Qa7,c5a7,"['b1b7', 'c6e6', 'c5f8', 'c6a6']",0
+26,False,0,True,4.0,4rk2/1Q3p1r/1p2bB2/p5Rp/P5pP/6P1/1Pq5/3R2K1 w - - 0 1,c2_images_krausemeinhardt.png,Rg8,g5g8,"['b7e7', 'f6e7']",0
+26,False,0,True,5.0,k1n2br1/p1r5/QpP1pp2/3P4/3P3p/2P2PBq/3N1P1P/R3R1K1 w - - 0 1,c2_images_skujarozenbergs(reversed).png,Qb8,,['a6c8'],0
+26,False,0,True,6.0,6k1/1p1R1p1p/p5p1/P3n3/5N1P/2P2Q2/5PPK/4rq2 w - - 0 1,c2_images_replacement4.png,,,['d7d8'],0
+26,False,0,True,7.0,rk2q2r/p1p2p1p/B1p3p1/3N1b2/3Npp2/5P2/PPP3PP/1K1Rb2R w - - 0 1,c3_images_kazicvukovic(reversed).png,,,['d5e7'],0
+26,False,0,True,8.0,1k1r4/8/R1p1p2b/1NN1qp2/8/1P3B2/2PP1K2/8 w - - 0 1,c3_images_malininandreev(reversed).png,Ra8,a6a8,"['a6a8', 'a6b6']",1
+26,False,0,True,9.0,k2r3r/pbQ1n2p/7b/2pNN2q/5Bp1/8/PPP4P/1KR1R3 w - - 0 1,c3_images_podzerovkuntzevic(reversed).png,Qc8,c7c8,['c7b8'],0
+26,False,0,True,10.0,1kr1q3/pp6/1bp5/4N3/5Q1R/8/PP6/K7 w - - 0 1,c3_images_studybyercoledelrio(reversed).png,,,['e5d7'],0
+26,False,0,True,11.0,3r2k1/pb1q1pp1/1p2pb1p/8/3N4/P2QB3/1P3PPP/1Br1R1K1 w - - 0 1,c3_images_tylorwinter.png,,,['d3h7'],0
+26,False,0,True,12.0,1rr4k/3qN1b1/2p2n1p/3p1Q2/1P1P3N/2P3P1/5P1P/6K1 w - - 0 1,c3_images_replacement3.png,,,['e7g6'],0
+26,False,0,True,13.0,2r1rq2/4b2k/1p2BBbp/p3pQ2/4N3/1P2P3/5PPP/6K1 w - - 0 1,c3_images_replacement5.png,,,"['e4g5', 'e6g8']",0
+26,False,0,True,14.0,kr4r1/p1pqn1b1/2p1p2p/2Pp2p1/Q2P4/2RB2B1/PP3PPP/1K5R w - - 0 1,c4_images_brankawittwer(reversed).png,,,['a4a7'],0
+26,False,0,True,15.0,1k6/pp6/q4p2/3p1B1p/5P1P/1PP1B1R1/r5bK/8 w - - 0 1,c4_images_ivanchuksavchenko(reversed).png,,,['g3g8'],0
+26,False,0,True,16.0,5k2/p4p1r/1n3b2/2p1Qp1p/1q2P3/1B4R1/Pr3PP1/2R2K2 w - - 0 1,c4_images_strekalovskyshaposhlikov.png,Qe8,e5e8,"['e5d6', 'g3g8']",0
+26,False,0,True,17.0,r1b2rk1/1pp2ppp/p1np1q2/8/1b2Q3/2PB1N2/PP1B1PPP/RN2K2R w - - 0 1,c5_images_easyposition2.png,,,['e4h7'],0
+26,False,0,True,18.0,2kr1r2/3bb3/1pp5/4B1p1/2BP3p/8/5P1P/3RRK2 w - - 0 1,c5_images_easyposition5(reversed).png,,,['c4a6'],0
+26,False,0,True,19.0,1r4rk/6p1/1p5p/4N3/b7/3B4/PP6/K1R5 w - - 0 1,c5_images_easyposition6.png,Bh7,d3h7,['e5f7'],0
+26,False,0,False,20.0,2r2r1k/1b5p/p2Q1qp1/3p1P2/3Pp3/8/6RP/6RK w - - 0 1,nc1_images_frombeautiful(nomate).png,,,[],1
+26,False,0,False,21.0,3q2kr/1p3pp1/p1p2R1p/5p2/7P/P3Q3/1P4P1/7K w - - 0 1,nc1_images_steinitznn(nomate).png,,,[],1
+26,False,0,False,22.0,1k6/ppp3pp/3ppb2/1P1P1Q2/3qr3/2R5/P1R4P/1K6 w - - 0 1,nc1_images_winterfriede(nomate)(reversed).png,,,[],1
+26,False,0,False,23.0,1k6/1b1q2p1/2R4p/2QB4/1P2Pp2/P4P2/2r3rP/KR6 w - - 0 1,nc2_images_kekhayovpetrov(nomate)(reversed).png,Rc8,c6c8,[],0
+26,False,0,False,24.0,4rk2/1Qp2p1r/1p2bB2/p5Rp/P5pP/6P1/1Pq5/3R2K1 w - - 0 1,nc2_images_krausemeinhardt(nomate).png,,,[],1
+26,False,0,False,25.0,k1n2b2/p1r3r1/QpP1pp2/3P4/3P3p/2P2PBq/3N1P1P/R3R1K1 w - - 0 1,nc2_images_skujarozenbergs(nomate)(reversed).png,,,[],1
+26,False,0,False,26.0,6k1/1p1R1p2/p5pp/P3n3/5N1P/2P2Q2/5PPK/4rq2 w - - 0 1,nc2_images_replacement4(nomate).png,,,[],1
+26,False,0,False,27.0,rk2q2r/p1p2p1p/Bp4p1/3N1b2/3Npp2/5P2/PPP3PP/1K1Rb2R w - - 0 1,nc3_images_kazicvukovic(nomate)(reversed).png,,,[],1
+26,False,0,False,28.0,1k1r4/p7/R1p1p2b/1NN1qp2/8/1P3B2/2PP1K2/8 w - - 0 1,nc3_images_malininandreev(nomate)(reversed).png,,,[],1
+26,False,0,False,29.0,k2r3r/pbQ1n2p/3p3b/2pNN2q/5Bp1/8/PPP4P/1KR1R3 w - - 0 1,nc3_images_podzerovkuntzevic(nomate)(reversed).png,Qc8,c7c8,[],0
+26,False,0,False,30.0,1k2q3/ppr5/1bp5/4N3/5Q1R/8/PP6/K7 w - - 0 1,nc3_images_studybyercoledelrio(nomate)(reversed).png,,,[],1
+26,False,0,False,31.0,2r3k1/pb1q1p2/1p2pbpp/8/3N4/P2QB3/1P3PPP/1Br1R1K1 w - - 0 1,nc3_images_tylorwinter(nomate).png,,,[],1
+26,False,0,False,32.0,1rr4k/3qNpb1/2p2n1p/3p1Q2/1P1P3N/2P3P1/5P1P/6K1 w - - 0 1,nc3_images_replacement3(nomate).png,,,[],1
+26,False,0,False,33.0,2r1rq2/4b2k/1p2BBb1/p3pQ1p/4N3/1P2P3/5PPP/6K1 w - - 0 1,nc3_images_replacement5(nomate).png,Qg5,f5g5,[],0
+26,False,0,False,34.0,kr4r1/p1pqn1b1/2p1p2p/2Pp2p1/Q2P4/1PRB2B1/P4PPP/1K5R w - - 0 1,nc4_images_brankawittwer(nomate)(reversed).png,,,[],1
+26,False,0,False,35.0,1k6/pp4p1/q4p2/3p1B1p/5P1P/1PP1B1R1/r5bK/8 w - - 0 1,nc4_images_ivanchuksavchenko(nomate)(reversed).png,,,[],1
+26,False,0,False,36.0,5k2/p4p1r/1n3b2/2p1Qp1p/1q2P1p1/1B4R1/Pr3PP1/2R2K2 w - - 0 1,nc4_images_strekalovskyshaposhlikov(nomate).png,,,[],1
+26,False,0,False,37.0,r1b2rk1/1pp2p1p/p1np1qp1/8/1b2Q3/2PB1N2/PP1B1PPP/RN2K2R w - - 0 1,nc5_images_easyposition2(nomate).png,,,[],1
+26,False,0,False,38.0,2kr1r2/3bb3/2p5/1p2B1p1/2BP3p/8/5P1P/3RRK2 w - - 0 1,nc5_images_easyposition5(nomate)(reversed).png,,,[],1
+26,False,0,False,39.0,1r4rk/8/1p4pp/4N3/b7/3B4/PP6/K1R5 w - - 0 1,nc5_images_easyposition6(nomate).png,,,[],1
+27,False,0,True,0.0,2r2r1k/1b5p/p2Q1q2/3p1P2/3Pp3/8/6RP/6RK w - - 0 1,c1_images_frombeautiful.png,,,['g2g8'],0
+27,False,0,True,1.0,r2q2kr/1p4p1/p1p2R1p/5p2/7P/P3Q3/1P4P1/7K w - - 0 1,c1_images_steinitznn.png,,,['e3e6'],0
+27,False,0,True,2.0,1k6/ppp3pp/3p1b2/1P1P1Q2/3qr3/2R5/P1R4P/1K6 w - - 0 1,c1_images_winterfriede(reversed).png,,,['f5c8'],0
+27,False,0,True,3.0,1k6/1b1q2p1/2R4p/2QB4/4Pp2/P4P2/6rP/KR6 w - - 0 1,c2_images_kekhayovpetrov(reversed).png,Rb2,b1b2,"['b1b7', 'c6e6', 'c5f8', 'c6a6']",0
+27,False,0,True,4.0,4rk2/1Q3p1r/1p2bB2/p5Rp/P5pP/6P1/1Pq5/3R2K1 w - - 0 1,c2_images_krausemeinhardt.png,,,"['b7e7', 'f6e7']",0
+27,False,0,True,5.0,k1n2br1/p1r5/QpP1pp2/3P4/3P3p/2P2PBq/3N1P1P/R3R1K1 w - - 0 1,c2_images_skujarozenbergs(reversed).png,Bc7,,['a6c8'],0
+27,False,0,True,6.0,6k1/1p1R1p1p/p5p1/P3n3/5N1P/2P2Q2/5PPK/4rq2 w - - 0 1,c2_images_replacement4.png,,,['d7d8'],0
+27,False,0,True,7.0,rk2q2r/p1p2p1p/B1p3p1/3N1b2/3Npp2/5P2/PPP3PP/1K1Rb2R w - - 0 1,c3_images_kazicvukovic(reversed).png,Nc6,d4c6,['d5e7'],0
+27,False,0,True,8.0,1k1r4/8/R1p1p2b/1NN1qp2/8/1P3B2/2PP1K2/8 w - - 0 1,c3_images_malininandreev(reversed).png,,,"['a6a8', 'a6b6']",0
+27,False,0,True,9.0,k2r3r/pbQ1n2p/7b/2pNN2q/5Bp1/8/PPP4P/1KR1R3 w - - 0 1,c3_images_podzerovkuntzevic(reversed).png,,,['c7b8'],0
+27,False,0,True,10.0,1kr1q3/pp6/1bp5/4N3/5Q1R/8/PP6/K7 w - - 0 1,c3_images_studybyercoledelrio(reversed).png,,,['e5d7'],0
+27,False,0,True,11.0,3r2k1/pb1q1pp1/1p2pb1p/8/3N4/P2QB3/1P3PPP/1Br1R1K1 w - - 0 1,c3_images_tylorwinter.png,,,['d3h7'],0
+27,False,0,True,12.0,1rr4k/3qN1b1/2p2n1p/3p1Q2/1P1P3N/2P3P1/5P1P/6K1 w - - 0 1,c3_images_replacement3.png,,,['e7g6'],0
+27,False,0,True,13.0,2r1rq2/4b2k/1p2BBbp/p3pQ2/4N3/1P2P3/5PPP/6K1 w - - 0 1,c3_images_replacement5.png,,,"['e4g5', 'e6g8']",0
+27,False,0,True,14.0,kr4r1/p1pqn1b1/2p1p2p/2Pp2p1/Q2P4/2RB2B1/PP3PPP/1K5R w - - 0 1,c4_images_brankawittwer(reversed).png,,,['a4a7'],0
+27,False,0,True,15.0,1k6/pp6/q4p2/3p1B1p/5P1P/1PP1B1R1/r5bK/8 w - - 0 1,c4_images_ivanchuksavchenko(reversed).png,Rg7,g3g7,['g3g8'],0
+27,False,0,True,16.0,5k2/p4p1r/1n3b2/2p1Qp1p/1q2P3/1B4R1/Pr3PP1/2R2K2 w - - 0 1,c4_images_strekalovskyshaposhlikov.png,,,"['e5d6', 'g3g8']",0
+27,False,0,True,17.0,r1b2rk1/1pp2ppp/p1np1q2/8/1b2Q3/2PB1N2/PP1B1PPP/RN2K2R w - - 0 1,c5_images_easyposition2.png,,,['e4h7'],0
+27,False,0,True,18.0,2kr1r2/3bb3/1pp5/4B1p1/2BP3p/8/5P1P/3RRK2 w - - 0 1,c5_images_easyposition5(reversed).png,Ba6,c4a6,['c4a6'],1
+27,False,0,True,19.0,1r4rk/6p1/1p5p/4N3/b7/3B4/PP6/K1R5 w - - 0 1,c5_images_easyposition6.png,Bg6,d3g6,['e5f7'],0
+27,False,0,False,20.0,2r2r1k/1b5p/p2Q1qp1/3p1P2/3Pp3/8/6RP/6RK w - - 0 1,nc1_images_frombeautiful(nomate).png,,,[],1
+27,False,0,False,21.0,3q2kr/1p3pp1/p1p2R1p/5p2/7P/P3Q3/1P4P1/7K w - - 0 1,nc1_images_steinitznn(nomate).png,,,[],1
+27,False,0,False,22.0,1k6/ppp3pp/3ppb2/1P1P1Q2/3qr3/2R5/P1R4P/1K6 w - - 0 1,nc1_images_winterfriede(nomate)(reversed).png,Pe6,d5e6,[],0
+27,False,0,False,23.0,1k6/1b1q2p1/2R4p/2QB4/1P2Pp2/P4P2/2r3rP/KR6 w - - 0 1,nc2_images_kekhayovpetrov(nomate)(reversed).png,,,[],1
+27,False,0,False,24.0,4rk2/1Qp2p1r/1p2bB2/p5Rp/P5pP/6P1/1Pq5/3R2K1 w - - 0 1,nc2_images_krausemeinhardt(nomate).png,,,[],1
+27,False,0,False,25.0,k1n2b2/p1r3r1/QpP1pp2/3P4/3P3p/2P2PBq/3N1P1P/R3R1K1 w - - 0 1,nc2_images_skujarozenbergs(nomate)(reversed).png,,,[],1
+27,False,0,False,26.0,6k1/1p1R1p2/p5pp/P3n3/5N1P/2P2Q2/5PPK/4rq2 w - - 0 1,nc2_images_replacement4(nomate).png,,,[],1
+27,False,0,False,27.0,rk2q2r/p1p2p1p/Bp4p1/3N1b2/3Npp2/5P2/PPP3PP/1K1Rb2R w - - 0 1,nc3_images_kazicvukovic(nomate)(reversed).png,,,[],1
+27,False,0,False,28.0,1k1r4/p7/R1p1p2b/1NN1qp2/8/1P3B2/2PP1K2/8 w - - 0 1,nc3_images_malininandreev(nomate)(reversed).png,,,[],1
+27,False,0,False,29.0,k2r3r/pbQ1n2p/3p3b/2pNN2q/5Bp1/8/PPP4P/1KR1R3 w - - 0 1,nc3_images_podzerovkuntzevic(nomate)(reversed).png,,,[],1
+27,False,0,False,30.0,1k2q3/ppr5/1bp5/4N3/5Q1R/8/PP6/K7 w - - 0 1,nc3_images_studybyercoledelrio(nomate)(reversed).png,,,[],1
+27,False,0,False,31.0,2r3k1/pb1q1p2/1p2pbpp/8/3N4/P2QB3/1P3PPP/1Br1R1K1 w - - 0 1,nc3_images_tylorwinter(nomate).png,,,[],1
+27,False,0,False,32.0,1rr4k/3qNpb1/2p2n1p/3p1Q2/1P1P3N/2P3P1/5P1P/6K1 w - - 0 1,nc3_images_replacement3(nomate).png,Ng6,e7g6,[],0
+27,False,0,False,33.0,2r1rq2/4b2k/1p2BBb1/p3pQ1p/4N3/1P2P3/5PPP/6K1 w - - 0 1,nc3_images_replacement5(nomate).png,,,[],1
+27,False,0,False,34.0,kr4r1/p1pqn1b1/2p1p2p/2Pp2p1/Q2P4/1PRB2B1/P4PPP/1K5R w - - 0 1,nc4_images_brankawittwer(nomate)(reversed).png,,,[],1
+27,False,0,False,35.0,1k6/pp4p1/q4p2/3p1B1p/5P1P/1PP1B1R1/r5bK/8 w - - 0 1,nc4_images_ivanchuksavchenko(nomate)(reversed).png,,,[],1
+27,False,0,False,36.0,5k2/p4p1r/1n3b2/2p1Qp1p/1q2P1p1/1B4R1/Pr3PP1/2R2K2 w - - 0 1,nc4_images_strekalovskyshaposhlikov(nomate).png,,,[],1
+27,False,0,False,37.0,r1b2rk1/1pp2p1p/p1np1qp1/8/1b2Q3/2PB1N2/PP1B1PPP/RN2K2R w - - 0 1,nc5_images_easyposition2(nomate).png,,,[],1
+27,False,0,False,38.0,2kr1r2/3bb3/2p5/1p2B1p1/2BP3p/8/5P1P/3RRK2 w - - 0 1,nc5_images_easyposition5(nomate)(reversed).png,,,[],1
+27,False,0,False,39.0,1r4rk/8/1p4pp/4N3/b7/3B4/PP6/K1R5 w - - 0 1,nc5_images_easyposition6(nomate).png,,,[],1
+28,False,0,True,0.0,2r2r1k/1b5p/p2Q1q2/3p1P2/3Pp3/8/6RP/6RK w - - 0 1,c1_images_frombeautiful.png,Rg8,g2g8,['g2g8'],1
+28,False,0,True,1.0,r2q2kr/1p4p1/p1p2R1p/5p2/7P/P3Q3/1P4P1/7K w - - 0 1,c1_images_steinitznn.png,Qb3,e3b3,['e3e6'],0
+28,False,0,True,2.0,1k6/ppp3pp/3p1b2/1P1P1Q2/3qr3/2R5/P1R4P/1K6 w - - 0 1,c1_images_winterfriede(reversed).png,,,['f5c8'],0
+28,False,0,True,3.0,1k6/1b1q2p1/2R4p/2QB4/4Pp2/P4P2/6rP/KR6 w - - 0 1,c2_images_kekhayovpetrov(reversed).png,Qf8,c5f8,"['b1b7', 'c6e6', 'c5f8', 'c6a6']",1
+28,False,0,True,4.0,4rk2/1Q3p1r/1p2bB2/p5Rp/P5pP/6P1/1Pq5/3R2K1 w - - 0 1,c2_images_krausemeinhardt.png,Bg7,f6g7,"['b7e7', 'f6e7']",0
+28,False,0,True,5.0,k1n2br1/p1r5/QpP1pp2/3P4/3P3p/2P2PBq/3N1P1P/R3R1K1 w - - 0 1,c2_images_skujarozenbergs(reversed).png,,,['a6c8'],0
+28,False,0,True,6.0,6k1/1p1R1p1p/p5p1/P3n3/5N1P/2P2Q2/5PPK/4rq2 w - - 0 1,c2_images_replacement4.png,Rd8,d7d8,['d7d8'],1
+28,False,0,True,7.0,rk2q2r/p1p2p1p/B1p3p1/3N1b2/3Npp2/5P2/PPP3PP/1K1Rb2R w - - 0 1,c3_images_kazicvukovic(reversed).png,,,['d5e7'],0
+28,False,0,True,8.0,1k1r4/8/R1p1p2b/1NN1qp2/8/1P3B2/2PP1K2/8 w - - 0 1,c3_images_malininandreev(reversed).png,Nd7,c5d7,"['a6a8', 'a6b6']",0
+28,False,0,True,9.0,k2r3r/pbQ1n2p/7b/2pNN2q/5Bp1/8/PPP4P/1KR1R3 w - - 0 1,c3_images_podzerovkuntzevic(reversed).png,,,['c7b8'],0
+28,False,0,True,10.0,1kr1q3/pp6/1bp5/4N3/5Q1R/8/PP6/K7 w - - 0 1,c3_images_studybyercoledelrio(reversed).png,,,['e5d7'],0
+28,False,0,True,11.0,3r2k1/pb1q1pp1/1p2pb1p/8/3N4/P2QB3/1P3PPP/1Br1R1K1 w - - 0 1,c3_images_tylorwinter.png,Qh7,d3h7,['d3h7'],1
+28,False,0,True,12.0,1rr4k/3qN1b1/2p2n1p/3p1Q2/1P1P3N/2P3P1/5P1P/6K1 w - - 0 1,c3_images_replacement3.png,Ng6,e7g6,['e7g6'],1
+28,False,0,True,13.0,2r1rq2/4b2k/1p2BBbp/p3pQ2/4N3/1P2P3/5PPP/6K1 w - - 0 1,c3_images_replacement5.png,Ng5,e4g5,"['e4g5', 'e6g8']",1
+28,False,0,True,14.0,kr4r1/p1pqn1b1/2p1p2p/2Pp2p1/Q2P4/2RB2B1/PP3PPP/1K5R w - - 0 1,c4_images_brankawittwer(reversed).png,Qa7,a4a7,['a4a7'],1
+28,False,0,True,15.0,1k6/pp6/q4p2/3p1B1p/5P1P/1PP1B1R1/r5bK/8 w - - 0 1,c4_images_ivanchuksavchenko(reversed).png,,,['g3g8'],0
+28,False,0,True,16.0,5k2/p4p1r/1n3b2/2p1Qp1p/1q2P3/1B4R1/Pr3PP1/2R2K2 w - - 0 1,c4_images_strekalovskyshaposhlikov.png,Qd6,e5d6,"['e5d6', 'g3g8']",1
+28,False,0,True,17.0,r1b2rk1/1pp2ppp/p1np1q2/8/1b2Q3/2PB1N2/PP1B1PPP/RN2K2R w - - 0 1,c5_images_easyposition2.png,Qh7,e4h7,['e4h7'],1
+28,False,0,True,18.0,2kr1r2/3bb3/1pp5/4B1p1/2BP3p/8/5P1P/3RRK2 w - - 0 1,c5_images_easyposition5(reversed).png,Ba6,c4a6,['c4a6'],1
+28,False,0,True,19.0,1r4rk/6p1/1p5p/4N3/b7/3B4/PP6/K1R5 w - - 0 1,c5_images_easyposition6.png,Nf7,e5f7,['e5f7'],1
+28,False,0,False,20.0,2r2r1k/1b5p/p2Q1qp1/3p1P2/3Pp3/8/6RP/6RK w - - 0 1,nc1_images_frombeautiful(nomate).png,,,[],1
+28,False,0,False,21.0,3q2kr/1p3pp1/p1p2R1p/5p2/7P/P3Q3/1P4P1/7K w - - 0 1,nc1_images_steinitznn(nomate).png,,,[],1
+28,False,0,False,22.0,1k6/ppp3pp/3ppb2/1P1P1Q2/3qr3/2R5/P1R4P/1K6 w - - 0 1,nc1_images_winterfriede(nomate)(reversed).png,,,[],1
+28,False,0,False,23.0,1k6/1b1q2p1/2R4p/2QB4/1P2Pp2/P4P2/2r3rP/KR6 w - - 0 1,nc2_images_kekhayovpetrov(nomate)(reversed).png,,,[],1
+28,False,0,False,24.0,4rk2/1Qp2p1r/1p2bB2/p5Rp/P5pP/6P1/1Pq5/3R2K1 w - - 0 1,nc2_images_krausemeinhardt(nomate).png,Be7,f6e7,[],0
+28,False,0,False,25.0,k1n2b2/p1r3r1/QpP1pp2/3P4/3P3p/2P2PBq/3N1P1P/R3R1K1 w - - 0 1,nc2_images_skujarozenbergs(nomate)(reversed).png,,,[],1
+28,False,0,False,26.0,6k1/1p1R1p2/p5pp/P3n3/5N1P/2P2Q2/5PPK/4rq2 w - - 0 1,nc2_images_replacement4(nomate).png,Rd8,d7d8,[],0
+28,False,0,False,27.0,rk2q2r/p1p2p1p/Bp4p1/3N1b2/3Npp2/5P2/PPP3PP/1K1Rb2R w - - 0 1,nc3_images_kazicvukovic(nomate)(reversed).png,Nc6,d4c6,[],0
+28,False,0,False,28.0,1k1r4/p7/R1p1p2b/1NN1qp2/8/1P3B2/2PP1K2/8 w - - 0 1,nc3_images_malininandreev(nomate)(reversed).png,,,[],1
+28,False,0,False,29.0,k2r3r/pbQ1n2p/3p3b/2pNN2q/5Bp1/8/PPP4P/1KR1R3 w - - 0 1,nc3_images_podzerovkuntzevic(nomate)(reversed).png,,,[],1
+28,False,0,False,30.0,1k2q3/ppr5/1bp5/4N3/5Q1R/8/PP6/K7 w - - 0 1,nc3_images_studybyercoledelrio(nomate)(reversed).png,Nd7,e5d7,[],0
+28,False,0,False,31.0,2r3k1/pb1q1p2/1p2pbpp/8/3N4/P2QB3/1P3PPP/1Br1R1K1 w - - 0 1,nc3_images_tylorwinter(nomate).png,,,[],1
+28,False,0,False,32.0,1rr4k/3qNpb1/2p2n1p/3p1Q2/1P1P3N/2P3P1/5P1P/6K1 w - - 0 1,nc3_images_replacement3(nomate).png,,,[],1
+28,False,0,False,33.0,2r1rq2/4b2k/1p2BBb1/p3pQ1p/4N3/1P2P3/5PPP/6K1 w - - 0 1,nc3_images_replacement5(nomate).png,Ng5,e4g5,[],0
+28,False,0,False,34.0,kr4r1/p1pqn1b1/2p1p2p/2Pp2p1/Q2P4/1PRB2B1/P4PPP/1K5R w - - 0 1,nc4_images_brankawittwer(nomate)(reversed).png,,,[],1
+28,False,0,False,35.0,1k6/pp4p1/q4p2/3p1B1p/5P1P/1PP1B1R1/r5bK/8 w - - 0 1,nc4_images_ivanchuksavchenko(nomate)(reversed).png,,,[],1
+28,False,0,False,36.0,5k2/p4p1r/1n3b2/2p1Qp1p/1q2P1p1/1B4R1/Pr3PP1/2R2K2 w - - 0 1,nc4_images_strekalovskyshaposhlikov(nomate).png,Qb8,e5b8,[],0
+28,False,0,False,37.0,r1b2rk1/1pp2p1p/p1np1qp1/8/1b2Q3/2PB1N2/PP1B1PPP/RN2K2R w - - 0 1,nc5_images_easyposition2(nomate).png,,,[],1
+28,False,0,False,38.0,2kr1r2/3bb3/2p5/1p2B1p1/2BP3p/8/5P1P/3RRK2 w - - 0 1,nc5_images_easyposition5(nomate)(reversed).png,,,[],1
+28,False,0,False,39.0,1r4rk/8/1p4pp/4N3/b7/3B4/PP6/K1R5 w - - 0 1,nc5_images_easyposition6(nomate).png,,,[],1
+29,True,1879,True,0.0,2r2r1k/1b5p/p2Q1q2/3p1P2/3Pp3/8/6RP/6RK w - - 0 1,c1_images_frombeautiful.png,Rg8,g2g8,['g2g8'],1
+29,True,1879,True,1.0,r2q2kr/1p4p1/p1p2R1p/5p2/7P/P3Q3/1P4P1/7K w - - 0 1,c1_images_steinitznn.png,Qe6,e3e6,['e3e6'],1
+29,True,1879,True,2.0,1k6/ppp3pp/3p1b2/1P1P1Q2/3qr3/2R5/P1R4P/1K6 w - - 0 1,c1_images_winterfriede(reversed).png,Qc8,f5c8,['f5c8'],1
+29,True,1879,True,3.0,1k6/1b1q2p1/2R4p/2QB4/4Pp2/P4P2/6rP/KR6 w - - 0 1,c2_images_kekhayovpetrov(reversed).png,Qf8,c5f8,"['b1b7', 'c6e6', 'c5f8', 'c6a6']",1
+29,True,1879,True,4.0,4rk2/1Q3p1r/1p2bB2/p5Rp/P5pP/6P1/1Pq5/3R2K1 w - - 0 1,c2_images_krausemeinhardt.png,,,"['b7e7', 'f6e7']",0
+29,True,1879,True,5.0,k1n2br1/p1r5/QpP1pp2/3P4/3P3p/2P2PBq/3N1P1P/R3R1K1 w - - 0 1,c2_images_skujarozenbergs(reversed).png,Qc8,a6c8,['a6c8'],1
+29,True,1879,True,6.0,6k1/1p1R1p1p/p5p1/P3n3/5N1P/2P2Q2/5PPK/4rq2 w - - 0 1,c2_images_replacement4.png,Rd8,d7d8,['d7d8'],1
+29,True,1879,True,7.0,rk2q2r/p1p2p1p/B1p3p1/3N1b2/3Npp2/5P2/PPP3PP/1K1Rb2R w - - 0 1,c3_images_kazicvukovic(reversed).png,,,['d5e7'],0
+29,True,1879,True,8.0,1k1r4/8/R1p1p2b/1NN1qp2/8/1P3B2/2PP1K2/8 w - - 0 1,c3_images_malininandreev(reversed).png,,,"['a6a8', 'a6b6']",0
+29,True,1879,True,9.0,k2r3r/pbQ1n2p/7b/2pNN2q/5Bp1/8/PPP4P/1KR1R3 w - - 0 1,c3_images_podzerovkuntzevic(reversed).png,Nb6,d5b6,['c7b8'],0
+29,True,1879,True,10.0,1kr1q3/pp6/1bp5/4N3/5Q1R/8/PP6/K7 w - - 0 1,c3_images_studybyercoledelrio(reversed).png,Nd7,e5d7,['e5d7'],1
+29,True,1879,True,11.0,3r2k1/pb1q1pp1/1p2pb1p/8/3N4/P2QB3/1P3PPP/1Br1R1K1 w - - 0 1,c3_images_tylorwinter.png,Qh7,d3h7,['d3h7'],1
+29,True,1879,True,12.0,1rr4k/3qN1b1/2p2n1p/3p1Q2/1P1P3N/2P3P1/5P1P/6K1 w - - 0 1,c3_images_replacement3.png,Ng6,e7g6,['e7g6'],1
+29,True,1879,True,13.0,2r1rq2/4b2k/1p2BBbp/p3pQ2/4N3/1P2P3/5PPP/6K1 w - - 0 1,c3_images_replacement5.png,Ng5,e4g5,"['e4g5', 'e6g8']",1
+29,True,1879,True,14.0,kr4r1/p1pqn1b1/2p1p2p/2Pp2p1/Q2P4/2RB2B1/PP3PPP/1K5R w - - 0 1,c4_images_brankawittwer(reversed).png,Qa7,a4a7,['a4a7'],1
+29,True,1879,True,15.0,1k6/pp6/q4p2/3p1B1p/5P1P/1PP1B1R1/r5bK/8 w - - 0 1,c4_images_ivanchuksavchenko(reversed).png,Rg8,g3g8,['g3g8'],1
+29,True,1879,True,16.0,5k2/p4p1r/1n3b2/2p1Qp1p/1q2P3/1B4R1/Pr3PP1/2R2K2 w - - 0 1,c4_images_strekalovskyshaposhlikov.png,Rg8,g3g8,"['e5d6', 'g3g8']",1
+29,True,1879,True,17.0,r1b2rk1/1pp2ppp/p1np1q2/8/1b2Q3/2PB1N2/PP1B1PPP/RN2K2R w - - 0 1,c5_images_easyposition2.png,Qh7,e4h7,['e4h7'],1
+29,True,1879,True,18.0,2kr1r2/3bb3/1pp5/4B1p1/2BP3p/8/5P1P/3RRK2 w - - 0 1,c5_images_easyposition5(reversed).png,Ba6,c4a6,['c4a6'],1
+29,True,1879,True,19.0,1r4rk/6p1/1p5p/4N3/b7/3B4/PP6/K1R5 w - - 0 1,c5_images_easyposition6.png,Nf7,e5f7,['e5f7'],1
+29,True,1879,False,20.0,2r2r1k/1b5p/p2Q1qp1/3p1P2/3Pp3/8/6RP/6RK w - - 0 1,nc1_images_frombeautiful(nomate).png,,,[],1
+29,True,1879,False,21.0,3q2kr/1p3pp1/p1p2R1p/5p2/7P/P3Q3/1P4P1/7K w - - 0 1,nc1_images_steinitznn(nomate).png,,,[],1
+29,True,1879,False,22.0,1k6/ppp3pp/3ppb2/1P1P1Q2/3qr3/2R5/P1R4P/1K6 w - - 0 1,nc1_images_winterfriede(nomate)(reversed).png,,,[],1
+29,True,1879,False,23.0,1k6/1b1q2p1/2R4p/2QB4/1P2Pp2/P4P2/2r3rP/KR6 w - - 0 1,nc2_images_kekhayovpetrov(nomate)(reversed).png,,,[],1
+29,True,1879,False,24.0,4rk2/1Qp2p1r/1p2bB2/p5Rp/P5pP/6P1/1Pq5/3R2K1 w - - 0 1,nc2_images_krausemeinhardt(nomate).png,,,[],1
+29,True,1879,False,25.0,k1n2b2/p1r3r1/QpP1pp2/3P4/3P3p/2P2PBq/3N1P1P/R3R1K1 w - - 0 1,nc2_images_skujarozenbergs(nomate)(reversed).png,Nc4,d2c4,[],0
+29,True,1879,False,26.0,6k1/1p1R1p2/p5pp/P3n3/5N1P/2P2Q2/5PPK/4rq2 w - - 0 1,nc2_images_replacement4(nomate).png,,,[],1
+29,True,1879,False,27.0,rk2q2r/p1p2p1p/Bp4p1/3N1b2/3Npp2/5P2/PPP3PP/1K1Rb2R w - - 0 1,nc3_images_kazicvukovic(nomate)(reversed).png,Nf6,d5f6,[],0
+29,True,1879,False,28.0,1k1r4/p7/R1p1p2b/1NN1qp2/8/1P3B2/2PP1K2/8 w - - 0 1,nc3_images_malininandreev(nomate)(reversed).png,,,[],1
+29,True,1879,False,29.0,k2r3r/pbQ1n2p/3p3b/2pNN2q/5Bp1/8/PPP4P/1KR1R3 w - - 0 1,nc3_images_podzerovkuntzevic(nomate)(reversed).png,Nb6,d5b6,[],0
+29,True,1879,False,30.0,1k2q3/ppr5/1bp5/4N3/5Q1R/8/PP6/K7 w - - 0 1,nc3_images_studybyercoledelrio(nomate)(reversed).png,,,[],1
+29,True,1879,False,31.0,2r3k1/pb1q1p2/1p2pbpp/8/3N4/P2QB3/1P3PPP/1Br1R1K1 w - - 0 1,nc3_images_tylorwinter(nomate).png,,,[],1
+29,True,1879,False,32.0,1rr4k/3qNpb1/2p2n1p/3p1Q2/1P1P3N/2P3P1/5P1P/6K1 w - - 0 1,nc3_images_replacement3(nomate).png,,,[],1
+29,True,1879,False,33.0,2r1rq2/4b2k/1p2BBb1/p3pQ1p/4N3/1P2P3/5PPP/6K1 w - - 0 1,nc3_images_replacement5(nomate).png,,,[],1
+29,True,1879,False,34.0,kr4r1/p1pqn1b1/2p1p2p/2Pp2p1/Q2P4/1PRB2B1/P4PPP/1K5R w - - 0 1,nc4_images_brankawittwer(nomate)(reversed).png,,,[],1
+29,True,1879,False,35.0,1k6/pp4p1/q4p2/3p1B1p/5P1P/1PP1B1R1/r5bK/8 w - - 0 1,nc4_images_ivanchuksavchenko(nomate)(reversed).png,,,[],1
+29,True,1879,False,36.0,5k2/p4p1r/1n3b2/2p1Qp1p/1q2P1p1/1B4R1/Pr3PP1/2R2K2 w - - 0 1,nc4_images_strekalovskyshaposhlikov(nomate).png,,,[],1
+29,True,1879,False,37.0,r1b2rk1/1pp2p1p/p1np1qp1/8/1b2Q3/2PB1N2/PP1B1PPP/RN2K2R w - - 0 1,nc5_images_easyposition2(nomate).png,,,[],1
+29,True,1879,False,38.0,2kr1r2/3bb3/2p5/1p2B1p1/2BP3p/8/5P1P/3RRK2 w - - 0 1,nc5_images_easyposition5(nomate)(reversed).png,,,[],1
+29,True,1879,False,39.0,1r4rk/8/1p4pp/4N3/b7/3B4/PP6/K1R5 w - - 0 1,nc5_images_easyposition6(nomate).png,,,[],1
+30,True,2232,True,0.0,2r2r1k/1b5p/p2Q1q2/3p1P2/3Pp3/8/6RP/6RK w - - 0 1,c1_images_frombeautiful.png,Rg8,g2g8,['g2g8'],1
+30,True,2232,True,1.0,r2q2kr/1p4p1/p1p2R1p/5p2/7P/P3Q3/1P4P1/7K w - - 0 1,c1_images_steinitznn.png,Qe6,e3e6,['e3e6'],1
+30,True,2232,True,2.0,1k6/ppp3pp/3p1b2/1P1P1Q2/3qr3/2R5/P1R4P/1K6 w - - 0 1,c1_images_winterfriede(reversed).png,Qc8,f5c8,['f5c8'],1
+30,True,2232,True,3.0,1k6/1b1q2p1/2R4p/2QB4/4Pp2/P4P2/6rP/KR6 w - - 0 1,c2_images_kekhayovpetrov(reversed).png,Rb7,b1b7,"['b1b7', 'c6e6', 'c5f8', 'c6a6']",1
+30,True,2232,True,4.0,4rk2/1Q3p1r/1p2bB2/p5Rp/P5pP/6P1/1Pq5/3R2K1 w - - 0 1,c2_images_krausemeinhardt.png,Qe7,b7e7,"['b7e7', 'f6e7']",1
+30,True,2232,True,5.0,k1n2br1/p1r5/QpP1pp2/3P4/3P3p/2P2PBq/3N1P1P/R3R1K1 w - - 0 1,c2_images_skujarozenbergs(reversed).png,Qc8,a6c8,['a6c8'],1
+30,True,2232,True,6.0,6k1/1p1R1p1p/p5p1/P3n3/5N1P/2P2Q2/5PPK/4rq2 w - - 0 1,c2_images_replacement4.png,Rd8,d7d8,['d7d8'],1
+30,True,2232,True,7.0,rk2q2r/p1p2p1p/B1p3p1/3N1b2/3Npp2/5P2/PPP3PP/1K1Rb2R w - - 0 1,c3_images_kazicvukovic(reversed).png,,,['d5e7'],0
+30,True,2232,True,8.0,1k1r4/8/R1p1p2b/1NN1qp2/8/1P3B2/2PP1K2/8 w - - 0 1,c3_images_malininandreev(reversed).png,Ra8,a6a8,"['a6a8', 'a6b6']",1
+30,True,2232,True,9.0,k2r3r/pbQ1n2p/7b/2pNN2q/5Bp1/8/PPP4P/1KR1R3 w - - 0 1,c3_images_podzerovkuntzevic(reversed).png,Nb6,d5b6,['c7b8'],0
+30,True,2232,True,10.0,1kr1q3/pp6/1bp5/4N3/5Q1R/8/PP6/K7 w - - 0 1,c3_images_studybyercoledelrio(reversed).png,Nd7,e5d7,['e5d7'],1
+30,True,2232,True,11.0,3r2k1/pb1q1pp1/1p2pb1p/8/3N4/P2QB3/1P3PPP/1Br1R1K1 w - - 0 1,c3_images_tylorwinter.png,Qh7,d3h7,['d3h7'],1
+30,True,2232,True,12.0,1rr4k/3qN1b1/2p2n1p/3p1Q2/1P1P3N/2P3P1/5P1P/6K1 w - - 0 1,c3_images_replacement3.png,Ng6,e7g6,['e7g6'],1
+30,True,2232,True,13.0,2r1rq2/4b2k/1p2BBbp/p3pQ2/4N3/1P2P3/5PPP/6K1 w - - 0 1,c3_images_replacement5.png,Ng5,e4g5,"['e4g5', 'e6g8']",1
+30,True,2232,True,14.0,kr4r1/p1pqn1b1/2p1p2p/2Pp2p1/Q2P4/2RB2B1/PP3PPP/1K5R w - - 0 1,c4_images_brankawittwer(reversed).png,Qa7,a4a7,['a4a7'],1
+30,True,2232,True,15.0,1k6/pp6/q4p2/3p1B1p/5P1P/1PP1B1R1/r5bK/8 w - - 0 1,c4_images_ivanchuksavchenko(reversed).png,Rg8,g3g8,['g3g8'],1
+30,True,2232,True,16.0,5k2/p4p1r/1n3b2/2p1Qp1p/1q2P3/1B4R1/Pr3PP1/2R2K2 w - - 0 1,c4_images_strekalovskyshaposhlikov.png,Rg8,g3g8,"['e5d6', 'g3g8']",1
+30,True,2232,True,17.0,r1b2rk1/1pp2ppp/p1np1q2/8/1b2Q3/2PB1N2/PP1B1PPP/RN2K2R w - - 0 1,c5_images_easyposition2.png,Qh7,e4h7,['e4h7'],1
+30,True,2232,True,18.0,2kr1r2/3bb3/1pp5/4B1p1/2BP3p/8/5P1P/3RRK2 w - - 0 1,c5_images_easyposition5(reversed).png,Ba6,c4a6,['c4a6'],1
+30,True,2232,True,19.0,1r4rk/6p1/1p5p/4N3/b7/3B4/PP6/K1R5 w - - 0 1,c5_images_easyposition6.png,Nf7,e5f7,['e5f7'],1
+30,True,2232,False,20.0,2r2r1k/1b5p/p2Q1qp1/3p1P2/3Pp3/8/6RP/6RK w - - 0 1,nc1_images_frombeautiful(nomate).png,,,[],1
+30,True,2232,False,21.0,3q2kr/1p3pp1/p1p2R1p/5p2/7P/P3Q3/1P4P1/7K w - - 0 1,nc1_images_steinitznn(nomate).png,,,[],1
+30,True,2232,False,22.0,1k6/ppp3pp/3ppb2/1P1P1Q2/3qr3/2R5/P1R4P/1K6 w - - 0 1,nc1_images_winterfriede(nomate)(reversed).png,,,[],1
+30,True,2232,False,23.0,1k6/1b1q2p1/2R4p/2QB4/1P2Pp2/P4P2/2r3rP/KR6 w - - 0 1,nc2_images_kekhayovpetrov(nomate)(reversed).png,,,[],1
+30,True,2232,False,24.0,4rk2/1Qp2p1r/1p2bB2/p5Rp/P5pP/6P1/1Pq5/3R2K1 w - - 0 1,nc2_images_krausemeinhardt(nomate).png,,,[],1
+30,True,2232,False,25.0,k1n2b2/p1r3r1/QpP1pp2/3P4/3P3p/2P2PBq/3N1P1P/R3R1K1 w - - 0 1,nc2_images_skujarozenbergs(nomate)(reversed).png,,,[],1
+30,True,2232,False,26.0,6k1/1p1R1p2/p5pp/P3n3/5N1P/2P2Q2/5PPK/4rq2 w - - 0 1,nc2_images_replacement4(nomate).png,,,[],1
+30,True,2232,False,27.0,rk2q2r/p1p2p1p/Bp4p1/3N1b2/3Npp2/5P2/PPP3PP/1K1Rb2R w - - 0 1,nc3_images_kazicvukovic(nomate)(reversed).png,,,[],1
+30,True,2232,False,28.0,1k1r4/p7/R1p1p2b/1NN1qp2/8/1P3B2/2PP1K2/8 w - - 0 1,nc3_images_malininandreev(nomate)(reversed).png,,,[],1
+30,True,2232,False,29.0,k2r3r/pbQ1n2p/3p3b/2pNN2q/5Bp1/8/PPP4P/1KR1R3 w - - 0 1,nc3_images_podzerovkuntzevic(nomate)(reversed).png,,,[],1
+30,True,2232,False,30.0,1k2q3/ppr5/1bp5/4N3/5Q1R/8/PP6/K7 w - - 0 1,nc3_images_studybyercoledelrio(nomate)(reversed).png,,,[],1
+30,True,2232,False,31.0,2r3k1/pb1q1p2/1p2pbpp/8/3N4/P2QB3/1P3PPP/1Br1R1K1 w - - 0 1,nc3_images_tylorwinter(nomate).png,,,[],1
+30,True,2232,False,32.0,1rr4k/3qNpb1/2p2n1p/3p1Q2/1P1P3N/2P3P1/5P1P/6K1 w - - 0 1,nc3_images_replacement3(nomate).png,,,[],1
+30,True,2232,False,33.0,2r1rq2/4b2k/1p2BBb1/p3pQ1p/4N3/1P2P3/5PPP/6K1 w - - 0 1,nc3_images_replacement5(nomate).png,,,[],1
+30,True,2232,False,34.0,kr4r1/p1pqn1b1/2p1p2p/2Pp2p1/Q2P4/1PRB2B1/P4PPP/1K5R w - - 0 1,nc4_images_brankawittwer(nomate)(reversed).png,,,[],1
+30,True,2232,False,35.0,1k6/pp4p1/q4p2/3p1B1p/5P1P/1PP1B1R1/r5bK/8 w - - 0 1,nc4_images_ivanchuksavchenko(nomate)(reversed).png,,,[],1
+30,True,2232,False,36.0,5k2/p4p1r/1n3b2/2p1Qp1p/1q2P1p1/1B4R1/Pr3PP1/2R2K2 w - - 0 1,nc4_images_strekalovskyshaposhlikov(nomate).png,,,[],1
+30,True,2232,False,37.0,r1b2rk1/1pp2p1p/p1np1qp1/8/1b2Q3/2PB1N2/PP1B1PPP/RN2K2R w - - 0 1,nc5_images_easyposition2(nomate).png,,,[],1
+30,True,2232,False,38.0,2kr1r2/3bb3/2p5/1p2B1p1/2BP3p/8/5P1P/3RRK2 w - - 0 1,nc5_images_easyposition5(nomate)(reversed).png,,,[],1
+30,True,2232,False,39.0,1r4rk/8/1p4pp/4N3/b7/3B4/PP6/K1R5 w - - 0 1,nc5_images_easyposition6(nomate).png,,,[],1
+32,False,0,True,0.0,2r2r1k/1b5p/p2Q1q2/3p1P2/3Pp3/8/6RP/6RK w - - 0 1,c1_images_frombeautiful.png,Qf6,d6f6,['g2g8'],0
+32,False,0,True,1.0,r2q2kr/1p4p1/p1p2R1p/5p2/7P/P3Q3/1P4P1/7K w - - 0 1,c1_images_steinitznn.png,Qb3,e3b3,['e3e6'],0
+32,False,0,True,2.0,1k6/ppp3pp/3p1b2/1P1P1Q2/3qr3/2R5/P1R4P/1K6 w - - 0 1,c1_images_winterfriede(reversed).png,Rc7,c3c7,['f5c8'],0
+32,False,0,True,3.0,1k6/1b1q2p1/2R4p/2QB4/4Pp2/P4P2/6rP/KR6 w - - 0 1,c2_images_kekhayovpetrov(reversed).png,,,"['b1b7', 'c6e6', 'c5f8', 'c6a6']",0
+32,False,0,True,4.0,4rk2/1Q3p1r/1p2bB2/p5Rp/P5pP/6P1/1Pq5/3R2K1 w - - 0 1,c2_images_krausemeinhardt.png,,,"['b7e7', 'f6e7']",0
+32,False,0,True,5.0,k1n2br1/p1r5/QpP1pp2/3P4/3P3p/2P2PBq/3N1P1P/R3R1K1 w - - 0 1,c2_images_skujarozenbergs(reversed).png,Bc7,,['a6c8'],0
+32,False,0,True,6.0,6k1/1p1R1p1p/p5p1/P3n3/5N1P/2P2Q2/5PPK/4rq2 w - - 0 1,c2_images_replacement4.png,Ng6,f4g6,['d7d8'],0
+32,False,0,True,7.0,rk2q2r/p1p2p1p/B1p3p1/3N1b2/3Npp2/5P2/PPP3PP/1K1Rb2R w - - 0 1,c3_images_kazicvukovic(reversed).png,,,['d5e7'],0
+32,False,0,True,8.0,1k1r4/8/R1p1p2b/1NN1qp2/8/1P3B2/2PP1K2/8 w - - 0 1,c3_images_malininandreev(reversed).png,N,,"['a6a8', 'a6b6']",0
+32,False,0,True,9.0,k2r3r/pbQ1n2p/7b/2pNN2q/5Bp1/8/PPP4P/1KR1R3 w - - 0 1,c3_images_podzerovkuntzevic(reversed).png,,,['c7b8'],0
+32,False,0,True,10.0,1kr1q3/pp6/1bp5/4N3/5Q1R/8/PP6/K7 w - - 0 1,c3_images_studybyercoledelrio(reversed).png,Nc6,e5c6,['e5d7'],0
+32,False,0,True,11.0,3r2k1/pb1q1pp1/1p2pb1p/8/3N4/P2QB3/1P3PPP/1Br1R1K1 w - - 0 1,c3_images_tylorwinter.png,,,['d3h7'],0
+32,False,0,True,12.0,1rr4k/3qN1b1/2p2n1p/3p1Q2/1P1P3N/2P3P1/5P1P/6K1 w - - 0 1,c3_images_replacement3.png,Ng6,e7g6,['e7g6'],1
+32,False,0,True,13.0,2r1rq2/4b2k/1p2BBbp/p3pQ2/4N3/1P2P3/5PPP/6K1 w - - 0 1,c3_images_replacement5.png,Ng5,e4g5,"['e4g5', 'e6g8']",1
+32,False,0,True,14.0,kr4r1/p1pqn1b1/2p1p2p/2Pp2p1/Q2P4/2RB2B1/PP3PPP/1K5R w - - 0 1,c4_images_brankawittwer(reversed).png,Ra3,c3a3,['a4a7'],0
+32,False,0,True,15.0,1k6/pp6/q4p2/3p1B1p/5P1P/1PP1B1R1/r5bK/8 w - - 0 1,c4_images_ivanchuksavchenko(reversed).png,,,['g3g8'],0
+32,False,0,True,16.0,5k2/p4p1r/1n3b2/2p1Qp1p/1q2P3/1B4R1/Pr3PP1/2R2K2 w - - 0 1,c4_images_strekalovskyshaposhlikov.png,Qd6,e5d6,"['e5d6', 'g3g8']",1
+32,False,0,True,17.0,r1b2rk1/1pp2ppp/p1np1q2/8/1b2Q3/2PB1N2/PP1B1PPP/RN2K2R w - - 0 1,c5_images_easyposition2.png,Qh7,e4h7,['e4h7'],1
+32,False,0,True,18.0,2kr1r2/3bb3/1pp5/4B1p1/2BP3p/8/5P1P/3RRK2 w - - 0 1,c5_images_easyposition5(reversed).png,Ba6,c4a6,['c4a6'],1
+32,False,0,True,19.0,1r4rk/6p1/1p5p/4N3/b7/3B4/PP6/K1R5 w - - 0 1,c5_images_easyposition6.png,Nf7,e5f7,['e5f7'],1
+32,False,0,False,20.0,2r2r1k/1b5p/p2Q1qp1/3p1P2/3Pp3/8/6RP/6RK w - - 0 1,nc1_images_frombeautiful(nomate).png,,,[],1
+32,False,0,False,21.0,3q2kr/1p3pp1/p1p2R1p/5p2/7P/P3Q3/1P4P1/7K w - - 0 1,nc1_images_steinitznn(nomate).png,,,[],1
+32,False,0,False,22.0,1k6/ppp3pp/3ppb2/1P1P1Q2/3qr3/2R5/P1R4P/1K6 w - - 0 1,nc1_images_winterfriede(nomate)(reversed).png,Rc7,c3c7,[],0
+32,False,0,False,23.0,1k6/1b1q2p1/2R4p/2QB4/1P2Pp2/P4P2/2r3rP/KR6 w - - 0 1,nc2_images_kekhayovpetrov(nomate)(reversed).png,,,[],1
+32,False,0,False,24.0,4rk2/1Qp2p1r/1p2bB2/p5Rp/P5pP/6P1/1Pq5/3R2K1 w - - 0 1,nc2_images_krausemeinhardt(nomate).png,,,[],1
+32,False,0,False,25.0,k1n2b2/p1r3r1/QpP1pp2/3P4/3P3p/2P2PBq/3N1P1P/R3R1K1 w - - 0 1,nc2_images_skujarozenbergs(nomate)(reversed).png,Qc6,,[],1
+32,False,0,False,26.0,6k1/1p1R1p2/p5pp/P3n3/5N1P/2P2Q2/5PPK/4rq2 w - - 0 1,nc2_images_replacement4(nomate).png,Rd8,d7d8,[],0
+32,False,0,False,27.0,rk2q2r/p1p2p1p/Bp4p1/3N1b2/3Npp2/5P2/PPP3PP/1K1Rb2R w - - 0 1,nc3_images_kazicvukovic(nomate)(reversed).png,,,[],1
+32,False,0,False,28.0,1k1r4/p7/R1p1p2b/1NN1qp2/8/1P3B2/2PP1K2/8 w - - 0 1,nc3_images_malininandreev(nomate)(reversed).png,Rc6,a6c6,[],0
+32,False,0,False,29.0,k2r3r/pbQ1n2p/3p3b/2pNN2q/5Bp1/8/PPP4P/1KR1R3 w - - 0 1,nc3_images_podzerovkuntzevic(nomate)(reversed).png,Nb,,[],1
+32,False,0,False,30.0,1k2q3/ppr5/1bp5/4N3/5Q1R/8/PP6/K7 w - - 0 1,nc3_images_studybyercoledelrio(nomate)(reversed).png,Nd7,e5d7,[],0
+32,False,0,False,31.0,2r3k1/pb1q1p2/1p2pbpp/8/3N4/P2QB3/1P3PPP/1Br1R1K1 w - - 0 1,nc3_images_tylorwinter(nomate).png,,,[],1
+32,False,0,False,32.0,1rr4k/3qNpb1/2p2n1p/3p1Q2/1P1P3N/2P3P1/5P1P/6K1 w - - 0 1,nc3_images_replacement3(nomate).png,Ng6,e7g6,[],0
+32,False,0,False,33.0,2r1rq2/4b2k/1p2BBb1/p3pQ1p/4N3/1P2P3/5PPP/6K1 w - - 0 1,nc3_images_replacement5(nomate).png,Ng5,e4g5,[],0
+32,False,0,False,34.0,kr4r1/p1pqn1b1/2p1p2p/2Pp2p1/Q2P4/1PRB2B1/P4PPP/1K5R w - - 0 1,nc4_images_brankawittwer(nomate)(reversed).png,,,[],1
+32,False,0,False,35.0,1k6/pp4p1/q4p2/3p1B1p/5P1P/1PP1B1R1/r5bK/8 w - - 0 1,nc4_images_ivanchuksavchenko(nomate)(reversed).png,Rg7,g3g7,[],0
+32,False,0,False,36.0,5k2/p4p1r/1n3b2/2p1Qp1p/1q2P1p1/1B4R1/Pr3PP1/2R2K2 w - - 0 1,nc4_images_strekalovskyshaposhlikov(nomate).png,,,[],1
+32,False,0,False,37.0,r1b2rk1/1pp2p1p/p1np1qp1/8/1b2Q3/2PB1N2/PP1B1PPP/RN2K2R w - - 0 1,nc5_images_easyposition2(nomate).png,,,[],1
+32,False,0,False,38.0,2kr1r2/3bb3/2p5/1p2B1p1/2BP3p/8/5P1P/3RRK2 w - - 0 1,nc5_images_easyposition5(nomate)(reversed).png,Rd1,,[],1
+32,False,0,False,39.0,1r4rk/8/1p4pp/4N3/b7/3B4/PP6/K1R5 w - - 0 1,nc5_images_easyposition6(nomate).png,Nf7,e5f7,[],0
+33,True,2073,True,0.0,2r2r1k/1b5p/p2Q1q2/3p1P2/3Pp3/8/6RP/6RK w - - 0 1,c1_images_frombeautiful.png,Rg8+,g2g8,['g2g8'],1
+33,True,2073,True,1.0,r2q2kr/1p4p1/p1p2R1p/5p2/7P/P3Q3/1P4P1/7K w - - 0 1,c1_images_steinitznn.png,Qe6+,e3e6,['e3e6'],1
+33,True,2073,True,2.0,1k6/ppp3pp/3p1b2/1P1P1Q2/3qr3/2R5/P1R4P/1K6 w - - 0 1,c1_images_winterfriede(reversed).png,Qc8+,f5c8,['f5c8'],1
+33,True,2073,True,3.0,1k6/1b1q2p1/2R4p/2QB4/4Pp2/P4P2/6rP/KR6 w - - 0 1,c2_images_kekhayovpetrov(reversed).png,Qf8+,c5f8,"['b1b7', 'c6e6', 'c5f8', 'c6a6']",1
+33,True,2073,True,4.0,4rk2/1Q3p1r/1p2bB2/p5Rp/P5pP/6P1/1Pq5/3R2K1 w - - 0 1,c2_images_krausemeinhardt.png,Qe7+,b7e7,"['b7e7', 'f6e7']",1
+33,True,2073,True,5.0,k1n2br1/p1r5/QpP1pp2/3P4/3P3p/2P2PBq/3N1P1P/R3R1K1 w - - 0 1,c2_images_skujarozenbergs(reversed).png,Qxc8+,a6c8,['a6c8'],1
+33,True,2073,True,6.0,6k1/1p1R1p1p/p5p1/P3n3/5N1P/2P2Q2/5PPK/4rq2 w - - 0 1,c2_images_replacement4.png,Re8+,,['d7d8'],0
+33,True,2073,True,7.0,rk2q2r/p1p2p1p/B1p3p1/3N1b2/3Npp2/5P2/PPP3PP/1K1Rb2R w - - 0 1,c3_images_kazicvukovic(reversed).png,Ne7,d5e7,['d5e7'],1
+33,True,2073,True,8.0,1k1r4/8/R1p1p2b/1NN1qp2/8/1P3B2/2PP1K2/8 w - - 0 1,c3_images_malininandreev(reversed).png,Rb6+,a6b6,"['a6a8', 'a6b6']",1
+33,True,2073,True,9.0,k2r3r/pbQ1n2p/7b/2pNN2q/5Bp1/8/PPP4P/1KR1R3 w - - 0 1,c3_images_podzerovkuntzevic(reversed).png,,,['c7b8'],0
+33,True,2073,True,10.0,1kr1q3/pp6/1bp5/4N3/5Q1R/8/PP6/K7 w - - 0 1,c3_images_studybyercoledelrio(reversed).png,Nd7+,e5d7,['e5d7'],1
+33,True,2073,True,11.0,3r2k1/pb1q1pp1/1p2pb1p/8/3N4/P2QB3/1P3PPP/1Br1R1K1 w - - 0 1,c3_images_tylorwinter.png,Qh7+,d3h7,['d3h7'],1
+33,True,2073,True,12.0,1rr4k/3qN1b1/2p2n1p/3p1Q2/1P1P3N/2P3P1/5P1P/6K1 w - - 0 1,c3_images_replacement3.png,Nhg6+,,['e7g6'],0
+33,True,2073,True,13.0,2r1rq2/4b2k/1p2BBbp/p3pQ2/4N3/1P2P3/5PPP/6K1 w - - 0 1,c3_images_replacement5.png,Ng5+,e4g5,"['e4g5', 'e6g8']",1
+33,True,2073,True,14.0,kr4r1/p1pqn1b1/2p1p2p/2Pp2p1/Q2P4/2RB2B1/PP3PPP/1K5R w - - 0 1,c4_images_brankawittwer(reversed).png,Qxh7+,,['a4a7'],0
+33,True,2073,True,15.0,1k6/pp6/q4p2/3p1B1p/5P1P/1PP1B1R1/r5bK/8 w - - 0 1,c4_images_ivanchuksavchenko(reversed).png,Rg8+,g3g8,['g3g8'],1
+33,True,2073,True,16.0,5k2/p4p1r/1n3b2/2p1Qp1p/1q2P3/1B4R1/Pr3PP1/2R2K2 w - - 0 1,c4_images_strekalovskyshaposhlikov.png,Qd6+,e5d6,"['e5d6', 'g3g8']",1
+33,True,2073,True,17.0,r1b2rk1/1pp2ppp/p1np1q2/8/1b2Q3/2PB1N2/PP1B1PPP/RN2K2R w - - 0 1,c5_images_easyposition2.png,Qxh7#,e4h7,['e4h7'],1
+33,True,2073,True,18.0,2kr1r2/3bb3/1pp5/4B1p1/2BP3p/8/5P1P/3RRK2 w - - 0 1,c5_images_easyposition5(reversed).png,Ba6#,c4a6,['c4a6'],1
+33,True,2073,True,19.0,1r4rk/6p1/1p5p/4N3/b7/3B4/PP6/K1R5 w - - 0 1,c5_images_easyposition6.png,Nf7#,e5f7,['e5f7'],1
+33,True,2073,False,20.0,2r2r1k/1b5p/p2Q1qp1/3p1P2/3Pp3/8/6RP/6RK w - - 0 1,nc1_images_frombeautiful(nomate).png,,,[],1
+33,True,2073,False,21.0,3q2kr/1p3pp1/p1p2R1p/5p2/7P/P3Q3/1P4P1/7K w - - 0 1,nc1_images_steinitznn(nomate).png,,,[],1
+33,True,2073,False,22.0,1k6/ppp3pp/3ppb2/1P1P1Q2/3qr3/2R5/P1R4P/1K6 w - - 0 1,nc1_images_winterfriede(nomate)(reversed).png,,,[],1
+33,True,2073,False,23.0,1k6/1b1q2p1/2R4p/2QB4/1P2Pp2/P4P2/2r3rP/KR6 w - - 0 1,nc2_images_kekhayovpetrov(nomate)(reversed).png,,,[],1
+33,True,2073,False,24.0,4rk2/1Qp2p1r/1p2bB2/p5Rp/P5pP/6P1/1Pq5/3R2K1 w - - 0 1,nc2_images_krausemeinhardt(nomate).png,,,[],1
+33,True,2073,False,25.0,k1n2b2/p1r3r1/QpP1pp2/3P4/3P3p/2P2PBq/3N1P1P/R3R1K1 w - - 0 1,nc2_images_skujarozenbergs(nomate)(reversed).png,,,[],1
+33,True,2073,False,26.0,6k1/1p1R1p2/p5pp/P3n3/5N1P/2P2Q2/5PPK/4rq2 w - - 0 1,nc2_images_replacement4(nomate).png,,,[],1
+33,True,2073,False,27.0,rk2q2r/p1p2p1p/Bp4p1/3N1b2/3Npp2/5P2/PPP3PP/1K1Rb2R w - - 0 1,nc3_images_kazicvukovic(nomate)(reversed).png,,,[],1
+33,True,2073,False,28.0,1k1r4/p7/R1p1p2b/1NN1qp2/8/1P3B2/2PP1K2/8 w - - 0 1,nc3_images_malininandreev(nomate)(reversed).png,,,[],1
+33,True,2073,False,29.0,k2r3r/pbQ1n2p/3p3b/2pNN2q/5Bp1/8/PPP4P/1KR1R3 w - - 0 1,nc3_images_podzerovkuntzevic(nomate)(reversed).png,,,[],1
+33,True,2073,False,30.0,1k2q3/ppr5/1bp5/4N3/5Q1R/8/PP6/K7 w - - 0 1,nc3_images_studybyercoledelrio(nomate)(reversed).png,,,[],1
+33,True,2073,False,31.0,2r3k1/pb1q1p2/1p2pbpp/8/3N4/P2QB3/1P3PPP/1Br1R1K1 w - - 0 1,nc3_images_tylorwinter(nomate).png,,,[],1
+33,True,2073,False,32.0,1rr4k/3qNpb1/2p2n1p/3p1Q2/1P1P3N/2P3P1/5P1P/6K1 w - - 0 1,nc3_images_replacement3(nomate).png,,,[],1
+33,True,2073,False,33.0,2r1rq2/4b2k/1p2BBb1/p3pQ1p/4N3/1P2P3/5PPP/6K1 w - - 0 1,nc3_images_replacement5(nomate).png,,,[],1
+33,True,2073,False,34.0,kr4r1/p1pqn1b1/2p1p2p/2Pp2p1/Q2P4/1PRB2B1/P4PPP/1K5R w - - 0 1,nc4_images_brankawittwer(nomate)(reversed).png,,,[],1
+33,True,2073,False,35.0,1k6/pp4p1/q4p2/3p1B1p/5P1P/1PP1B1R1/r5bK/8 w - - 0 1,nc4_images_ivanchuksavchenko(nomate)(reversed).png,,,[],1
+33,True,2073,False,36.0,5k2/p4p1r/1n3b2/2p1Qp1p/1q2P1p1/1B4R1/Pr3PP1/2R2K2 w - - 0 1,nc4_images_strekalovskyshaposhlikov(nomate).png,,,[],1
+33,True,2073,False,37.0,r1b2rk1/1pp2p1p/p1np1qp1/8/1b2Q3/2PB1N2/PP1B1PPP/RN2K2R w - - 0 1,nc5_images_easyposition2(nomate).png,,,[],1
+33,True,2073,False,38.0,2kr1r2/3bb3/2p5/1p2B1p1/2BP3p/8/5P1P/3RRK2 w - - 0 1,nc5_images_easyposition5(nomate)(reversed).png,,,[],1
+33,True,2073,False,39.0,1r4rk/8/1p4pp/4N3/b7/3B4/PP6/K1R5 w - - 0 1,nc5_images_easyposition6(nomate).png,,,[],1
+34,True,2083,True,0.0,2r2r1k/1b5p/p2Q1q2/3p1P2/3Pp3/8/6RP/6RK w - - 0 1,c1_images_frombeautiful.png,Rg8,g2g8,['g2g8'],1
+34,True,2083,True,1.0,r2q2kr/1p4p1/p1p2R1p/5p2/7P/P3Q3/1P4P1/7K w - - 0 1,c1_images_steinitznn.png,Qe6,e3e6,['e3e6'],1
+34,True,2083,True,2.0,1k6/ppp3pp/3p1b2/1P1P1Q2/3qr3/2R5/P1R4P/1K6 w - - 0 1,c1_images_winterfriede(reversed).png,,,['f5c8'],0
+34,True,2083,True,3.0,1k6/1b1q2p1/2R4p/2QB4/4Pp2/P4P2/6rP/KR6 w - - 0 1,c2_images_kekhayovpetrov(reversed).png,Rc8,c6c8,"['b1b7', 'c6e6', 'c5f8', 'c6a6']",0
+34,True,2083,True,4.0,4rk2/1Q3p1r/1p2bB2/p5Rp/P5pP/6P1/1Pq5/3R2K1 w - - 0 1,c2_images_krausemeinhardt.png,Be7,f6e7,"['b7e7', 'f6e7']",1
+34,True,2083,True,5.0,k1n2br1/p1r5/QpP1pp2/3P4/3P3p/2P2PBq/3N1P1P/R3R1K1 w - - 0 1,c2_images_skujarozenbergs(reversed).png,Qxc8,a6c8,['a6c8'],1
+34,True,2083,True,6.0,6k1/1p1R1p1p/p5p1/P3n3/5N1P/2P2Q2/5PPK/4rq2 w - - 0 1,c2_images_replacement4.png,Rd8,d7d8,['d7d8'],1
+34,True,2083,True,7.0,rk2q2r/p1p2p1p/B1p3p1/3N1b2/3Npp2/5P2/PPP3PP/1K1Rb2R w - - 0 1,c3_images_kazicvukovic(reversed).png,,,['d5e7'],0
+34,True,2083,True,8.0,1k1r4/8/R1p1p2b/1NN1qp2/8/1P3B2/2PP1K2/8 w - - 0 1,c3_images_malininandreev(reversed).png,Ra8,a6a8,"['a6a8', 'a6b6']",1
+34,True,2083,True,9.0,k2r3r/pbQ1n2p/7b/2pNN2q/5Bp1/8/PPP4P/1KR1R3 w - - 0 1,c3_images_podzerovkuntzevic(reversed).png,Nb6,d5b6,['c7b8'],0
+34,True,2083,True,10.0,1kr1q3/pp6/1bp5/4N3/5Q1R/8/PP6/K7 w - - 0 1,c3_images_studybyercoledelrio(reversed).png,Nd7,e5d7,['e5d7'],1
+34,True,2083,True,11.0,3r2k1/pb1q1pp1/1p2pb1p/8/3N4/P2QB3/1P3PPP/1Br1R1K1 w - - 0 1,c3_images_tylorwinter.png,Qh7,d3h7,['d3h7'],1
+34,True,2083,True,12.0,1rr4k/3qN1b1/2p2n1p/3p1Q2/1P1P3N/2P3P1/5P1P/6K1 w - - 0 1,c3_images_replacement3.png,Nhg6,,['e7g6'],0
+34,True,2083,True,13.0,2r1rq2/4b2k/1p2BBbp/p3pQ2/4N3/1P2P3/5PPP/6K1 w - - 0 1,c3_images_replacement5.png,,,"['e4g5', 'e6g8']",0
+34,True,2083,True,14.0,kr4r1/p1pqn1b1/2p1p2p/2Pp2p1/Q2P4/2RB2B1/PP3PPP/1K5R w - - 0 1,c4_images_brankawittwer(reversed).png,Qxh7,,['a4a7'],0
+34,True,2083,True,15.0,1k6/pp6/q4p2/3p1B1p/5P1P/1PP1B1R1/r5bK/8 w - - 0 1,c4_images_ivanchuksavchenko(reversed).png,Rg8,g3g8,['g3g8'],1
+34,True,2083,True,16.0,5k2/p4p1r/1n3b2/2p1Qp1p/1q2P3/1B4R1/Pr3PP1/2R2K2 w - - 0 1,c4_images_strekalovskyshaposhlikov.png,Qd6,e5d6,"['e5d6', 'g3g8']",1
+34,True,2083,True,17.0,r1b2rk1/1pp2ppp/p1np1q2/8/1b2Q3/2PB1N2/PP1B1PPP/RN2K2R w - - 0 1,c5_images_easyposition2.png,Qxh7,e4h7,['e4h7'],1
+34,True,2083,True,18.0,2kr1r2/3bb3/1pp5/4B1p1/2BP3p/8/5P1P/3RRK2 w - - 0 1,c5_images_easyposition5(reversed).png,Ba6,c4a6,['c4a6'],1
+34,True,2083,True,19.0,1r4rk/6p1/1p5p/4N3/b7/3B4/PP6/K1R5 w - - 0 1,c5_images_easyposition6.png,Nf7,e5f7,['e5f7'],1
+34,True,2083,False,20.0,2r2r1k/1b5p/p2Q1qp1/3p1P2/3Pp3/8/6RP/6RK w - - 0 1,nc1_images_frombeautiful(nomate).png,,,[],1
+34,True,2083,False,21.0,3q2kr/1p3pp1/p1p2R1p/5p2/7P/P3Q3/1P4P1/7K w - - 0 1,nc1_images_steinitznn(nomate).png,,,[],1
+34,True,2083,False,22.0,1k6/ppp3pp/3ppb2/1P1P1Q2/3qr3/2R5/P1R4P/1K6 w - - 0 1,nc1_images_winterfriede(nomate)(reversed).png,,,[],1
+34,True,2083,False,23.0,1k6/1b1q2p1/2R4p/2QB4/1P2Pp2/P4P2/2r3rP/KR6 w - - 0 1,nc2_images_kekhayovpetrov(nomate)(reversed).png,,,[],1
+34,True,2083,False,24.0,4rk2/1Qp2p1r/1p2bB2/p5Rp/P5pP/6P1/1Pq5/3R2K1 w - - 0 1,nc2_images_krausemeinhardt(nomate).png,,,[],1
+34,True,2083,False,25.0,k1n2b2/p1r3r1/QpP1pp2/3P4/3P3p/2P2PBq/3N1P1P/R3R1K1 w - - 0 1,nc2_images_skujarozenbergs(nomate)(reversed).png,,,[],1
+34,True,2083,False,26.0,6k1/1p1R1p2/p5pp/P3n3/5N1P/2P2Q2/5PPK/4rq2 w - - 0 1,nc2_images_replacement4(nomate).png,,,[],1
+34,True,2083,False,27.0,rk2q2r/p1p2p1p/Bp4p1/3N1b2/3Npp2/5P2/PPP3PP/1K1Rb2R w - - 0 1,nc3_images_kazicvukovic(nomate)(reversed).png,,,[],1
+34,True,2083,False,28.0,1k1r4/p7/R1p1p2b/1NN1qp2/8/1P3B2/2PP1K2/8 w - - 0 1,nc3_images_malininandreev(nomate)(reversed).png,Rb6,a6b6,[],0
+34,True,2083,False,29.0,k2r3r/pbQ1n2p/3p3b/2pNN2q/5Bp1/8/PPP4P/1KR1R3 w - - 0 1,nc3_images_podzerovkuntzevic(nomate)(reversed).png,Nb6,d5b6,[],0
+34,True,2083,False,30.0,1k2q3/ppr5/1bp5/4N3/5Q1R/8/PP6/K7 w - - 0 1,nc3_images_studybyercoledelrio(nomate)(reversed).png,,,[],1
+34,True,2083,False,31.0,2r3k1/pb1q1p2/1p2pbpp/8/3N4/P2QB3/1P3PPP/1Br1R1K1 w - - 0 1,nc3_images_tylorwinter(nomate).png,,,[],1
+34,True,2083,False,32.0,1rr4k/3qNpb1/2p2n1p/3p1Q2/1P1P3N/2P3P1/5P1P/6K1 w - - 0 1,nc3_images_replacement3(nomate).png,,,[],1
+34,True,2083,False,33.0,2r1rq2/4b2k/1p2BBb1/p3pQ1p/4N3/1P2P3/5PPP/6K1 w - - 0 1,nc3_images_replacement5(nomate).png,Ng5,e4g5,[],0
+34,True,2083,False,34.0,kr4r1/p1pqn1b1/2p1p2p/2Pp2p1/Q2P4/1PRB2B1/P4PPP/1K5R w - - 0 1,nc4_images_brankawittwer(nomate)(reversed).png,,,[],1
+34,True,2083,False,35.0,1k6/pp4p1/q4p2/3p1B1p/5P1P/1PP1B1R1/r5bK/8 w - - 0 1,nc4_images_ivanchuksavchenko(nomate)(reversed).png,,,[],1
+34,True,2083,False,36.0,5k2/p4p1r/1n3b2/2p1Qp1p/1q2P1p1/1B4R1/Pr3PP1/2R2K2 w - - 0 1,nc4_images_strekalovskyshaposhlikov(nomate).png,,,[],1
+34,True,2083,False,37.0,r1b2rk1/1pp2p1p/p1np1qp1/8/1b2Q3/2PB1N2/PP1B1PPP/RN2K2R w - - 0 1,nc5_images_easyposition2(nomate).png,,,[],1
+34,True,2083,False,38.0,2kr1r2/3bb3/2p5/1p2B1p1/2BP3p/8/5P1P/3RRK2 w - - 0 1,nc5_images_easyposition5(nomate)(reversed).png,,,[],1
+34,True,2083,False,39.0,1r4rk/8/1p4pp/4N3/b7/3B4/PP6/K1R5 w - - 0 1,nc5_images_easyposition6(nomate).png,,,[],1
+35,False,0,True,0.0,2r2r1k/1b5p/p2Q1q2/3p1P2/3Pp3/8/6RP/6RK w - - 0 1,c1_images_frombeautiful.png,,,['g2g8'],0
+35,False,0,True,1.0,r2q2kr/1p4p1/p1p2R1p/5p2/7P/P3Q3/1P4P1/7K w - - 0 1,c1_images_steinitznn.png,,,['e3e6'],0
+35,False,0,True,2.0,1k6/ppp3pp/3p1b2/1P1P1Q2/3qr3/2R5/P1R4P/1K6 w - - 0 1,c1_images_winterfriede(reversed).png,,,['f5c8'],0
+35,False,0,True,3.0,1k6/1b1q2p1/2R4p/2QB4/4Pp2/P4P2/6rP/KR6 w - - 0 1,c2_images_kekhayovpetrov(reversed).png,,,"['b1b7', 'c6e6', 'c5f8', 'c6a6']",0
+35,False,0,True,4.0,4rk2/1Q3p1r/1p2bB2/p5Rp/P5pP/6P1/1Pq5/3R2K1 w - - 0 1,c2_images_krausemeinhardt.png,RG,,"['b7e7', 'f6e7']",0
+35,False,0,True,5.0,k1n2br1/p1r5/QpP1pp2/3P4/3P3p/2P2PBq/3N1P1P/R3R1K1 w - - 0 1,c2_images_skujarozenbergs(reversed).png,Qb7,a6b7,['a6c8'],0
+35,False,0,True,6.0,6k1/1p1R1p1p/p5p1/P3n3/5N1P/2P2Q2/5PPK/4rq2 w - - 0 1,c2_images_replacement4.png,,,['d7d8'],0
+35,False,0,True,7.0,rk2q2r/p1p2p1p/B1p3p1/3N1b2/3Npp2/5P2/PPP3PP/1K1Rb2R w - - 0 1,c3_images_kazicvukovic(reversed).png,,,['d5e7'],0
+35,False,0,True,8.0,1k1r4/8/R1p1p2b/1NN1qp2/8/1P3B2/2PP1K2/8 w - - 0 1,c3_images_malininandreev(reversed).png,,,"['a6a8', 'a6b6']",0
+35,False,0,True,9.0,k2r3r/pbQ1n2p/7b/2pNN2q/5Bp1/8/PPP4P/1KR1R3 w - - 0 1,c3_images_podzerovkuntzevic(reversed).png,,,['c7b8'],0
+35,False,0,True,10.0,1kr1q3/pp6/1bp5/4N3/5Q1R/8/PP6/K7 w - - 0 1,c3_images_studybyercoledelrio(reversed).png,,,['e5d7'],0
+35,False,0,True,11.0,3r2k1/pb1q1pp1/1p2pb1p/8/3N4/P2QB3/1P3PPP/1Br1R1K1 w - - 0 1,c3_images_tylorwinter.png,,,['d3h7'],0
+35,False,0,True,12.0,1rr4k/3qN1b1/2p2n1p/3p1Q2/1P1P3N/2P3P1/5P1P/6K1 w - - 0 1,c3_images_replacement3.png,,,['e7g6'],0
+35,False,0,True,13.0,2r1rq2/4b2k/1p2BBbp/p3pQ2/4N3/1P2P3/5PPP/6K1 w - - 0 1,c3_images_replacement5.png,,,"['e4g5', 'e6g8']",0
+35,False,0,True,14.0,kr4r1/p1pqn1b1/2p1p2p/2Pp2p1/Q2P4/2RB2B1/PP3PPP/1K5R w - - 0 1,c4_images_brankawittwer(reversed).png,,,['a4a7'],0
+35,False,0,True,15.0,1k6/pp6/q4p2/3p1B1p/5P1P/1PP1B1R1/r5bK/8 w - - 0 1,c4_images_ivanchuksavchenko(reversed).png,,,['g3g8'],0
+35,False,0,True,16.0,5k2/p4p1r/1n3b2/2p1Qp1p/1q2P3/1B4R1/Pr3PP1/2R2K2 w - - 0 1,c4_images_strekalovskyshaposhlikov.png,,,"['e5d6', 'g3g8']",0
+35,False,0,True,17.0,r1b2rk1/1pp2ppp/p1np1q2/8/1b2Q3/2PB1N2/PP1B1PPP/RN2K2R w - - 0 1,c5_images_easyposition2.png,,,['e4h7'],0
+35,False,0,True,18.0,2kr1r2/3bb3/1pp5/4B1p1/2BP3p/8/5P1P/3RRK2 w - - 0 1,c5_images_easyposition5(reversed).png,Ba6,c4a6,['c4a6'],1
+35,False,0,True,19.0,1r4rk/6p1/1p5p/4N3/b7/3B4/PP6/K1R5 w - - 0 1,c5_images_easyposition6.png,Nf7,e5f7,['e5f7'],1
+35,False,0,False,20.0,2r2r1k/1b5p/p2Q1qp1/3p1P2/3Pp3/8/6RP/6RK w - - 0 1,nc1_images_frombeautiful(nomate).png,,,[],1
+35,False,0,False,21.0,3q2kr/1p3pp1/p1p2R1p/5p2/7P/P3Q3/1P4P1/7K w - - 0 1,nc1_images_steinitznn(nomate).png,,,[],1
+35,False,0,False,22.0,1k6/ppp3pp/3ppb2/1P1P1Q2/3qr3/2R5/P1R4P/1K6 w - - 0 1,nc1_images_winterfriede(nomate)(reversed).png,,,[],1
+35,False,0,False,23.0,1k6/1b1q2p1/2R4p/2QB4/1P2Pp2/P4P2/2r3rP/KR6 w - - 0 1,nc2_images_kekhayovpetrov(nomate)(reversed).png,,,[],1
+35,False,0,False,24.0,4rk2/1Qp2p1r/1p2bB2/p5Rp/P5pP/6P1/1Pq5/3R2K1 w - - 0 1,nc2_images_krausemeinhardt(nomate).png,,,[],1
+35,False,0,False,25.0,k1n2b2/p1r3r1/QpP1pp2/3P4/3P3p/2P2PBq/3N1P1P/R3R1K1 w - - 0 1,nc2_images_skujarozenbergs(nomate)(reversed).png,,,[],1
+35,False,0,False,26.0,6k1/1p1R1p2/p5pp/P3n3/5N1P/2P2Q2/5PPK/4rq2 w - - 0 1,nc2_images_replacement4(nomate).png,,,[],1
+35,False,0,False,27.0,rk2q2r/p1p2p1p/Bp4p1/3N1b2/3Npp2/5P2/PPP3PP/1K1Rb2R w - - 0 1,nc3_images_kazicvukovic(nomate)(reversed).png,,,[],1
+35,False,0,False,28.0,1k1r4/p7/R1p1p2b/1NN1qp2/8/1P3B2/2PP1K2/8 w - - 0 1,nc3_images_malininandreev(nomate)(reversed).png,,,[],1
+35,False,0,False,29.0,k2r3r/pbQ1n2p/3p3b/2pNN2q/5Bp1/8/PPP4P/1KR1R3 w - - 0 1,nc3_images_podzerovkuntzevic(nomate)(reversed).png,,,[],1
+35,False,0,False,30.0,1k2q3/ppr5/1bp5/4N3/5Q1R/8/PP6/K7 w - - 0 1,nc3_images_studybyercoledelrio(nomate)(reversed).png,,,[],1
+35,False,0,False,31.0,2r3k1/pb1q1p2/1p2pbpp/8/3N4/P2QB3/1P3PPP/1Br1R1K1 w - - 0 1,nc3_images_tylorwinter(nomate).png,,,[],1
+35,False,0,False,32.0,1rr4k/3qNpb1/2p2n1p/3p1Q2/1P1P3N/2P3P1/5P1P/6K1 w - - 0 1,nc3_images_replacement3(nomate).png,,,[],1
+35,False,0,False,33.0,2r1rq2/4b2k/1p2BBb1/p3pQ1p/4N3/1P2P3/5PPP/6K1 w - - 0 1,nc3_images_replacement5(nomate).png,,,[],1
+35,False,0,False,34.0,kr4r1/p1pqn1b1/2p1p2p/2Pp2p1/Q2P4/1PRB2B1/P4PPP/1K5R w - - 0 1,nc4_images_brankawittwer(nomate)(reversed).png,,,[],1
+35,False,0,False,35.0,1k6/pp4p1/q4p2/3p1B1p/5P1P/1PP1B1R1/r5bK/8 w - - 0 1,nc4_images_ivanchuksavchenko(nomate)(reversed).png,,,[],1
+35,False,0,False,36.0,5k2/p4p1r/1n3b2/2p1Qp1p/1q2P1p1/1B4R1/Pr3PP1/2R2K2 w - - 0 1,nc4_images_strekalovskyshaposhlikov(nomate).png,,,[],1
+35,False,0,False,37.0,r1b2rk1/1pp2p1p/p1np1qp1/8/1b2Q3/2PB1N2/PP1B1PPP/RN2K2R w - - 0 1,nc5_images_easyposition2(nomate).png,,,[],1
+35,False,0,False,38.0,2kr1r2/3bb3/2p5/1p2B1p1/2BP3p/8/5P1P/3RRK2 w - - 0 1,nc5_images_easyposition5(nomate)(reversed).png,,,[],1
+35,False,0,False,39.0,1r4rk/8/1p4pp/4N3/b7/3B4/PP6/K1R5 w - - 0 1,nc5_images_easyposition6(nomate).png,,,[],1
+36,True,2189,True,0.0,2r2r1k/1b5p/p2Q1q2/3p1P2/3Pp3/8/6RP/6RK w - - 0 1,c1_images_frombeautiful.png,Rg8,g2g8,['g2g8'],1
+36,True,2189,True,1.0,r2q2kr/1p4p1/p1p2R1p/5p2/7P/P3Q3/1P4P1/7K w - - 0 1,c1_images_steinitznn.png,Qe6,e3e6,['e3e6'],1
+36,True,2189,True,2.0,1k6/ppp3pp/3p1b2/1P1P1Q2/3qr3/2R5/P1R4P/1K6 w - - 0 1,c1_images_winterfriede(reversed).png,Qc8,f5c8,['f5c8'],1
+36,True,2189,True,3.0,1k6/1b1q2p1/2R4p/2QB4/4Pp2/P4P2/6rP/KR6 w - - 0 1,c2_images_kekhayovpetrov(reversed).png,,,"['b1b7', 'c6e6', 'c5f8', 'c6a6']",0
+36,True,2189,True,4.0,4rk2/1Q3p1r/1p2bB2/p5Rp/P5pP/6P1/1Pq5/3R2K1 w - - 0 1,c2_images_krausemeinhardt.png,Qe7,b7e7,"['b7e7', 'f6e7']",1
+36,True,2189,True,5.0,k1n2br1/p1r5/QpP1pp2/3P4/3P3p/2P2PBq/3N1P1P/R3R1K1 w - - 0 1,c2_images_skujarozenbergs(reversed).png,Qc8,a6c8,['a6c8'],1
+36,True,2189,True,6.0,6k1/1p1R1p1p/p5p1/P3n3/5N1P/2P2Q2/5PPK/4rq2 w - - 0 1,c2_images_replacement4.png,Rd8,d7d8,['d7d8'],1
+36,True,2189,True,7.0,rk2q2r/p1p2p1p/B1p3p1/3N1b2/3Npp2/5P2/PPP3PP/1K1Rb2R w - - 0 1,c3_images_kazicvukovic(reversed).png,Ne7,d5e7,['d5e7'],1
+36,True,2189,True,8.0,1k1r4/8/R1p1p2b/1NN1qp2/8/1P3B2/2PP1K2/8 w - - 0 1,c3_images_malininandreev(reversed).png,Ra8,a6a8,"['a6a8', 'a6b6']",1
+36,True,2189,True,9.0,k2r3r/pbQ1n2p/7b/2pNN2q/5Bp1/8/PPP4P/1KR1R3 w - - 0 1,c3_images_podzerovkuntzevic(reversed).png,Qb8,c7b8,['c7b8'],1
+36,True,2189,True,10.0,1kr1q3/pp6/1bp5/4N3/5Q1R/8/PP6/K7 w - - 0 1,c3_images_studybyercoledelrio(reversed).png,Nd7,e5d7,['e5d7'],1
+36,True,2189,True,11.0,3r2k1/pb1q1pp1/1p2pb1p/8/3N4/P2QB3/1P3PPP/1Br1R1K1 w - - 0 1,c3_images_tylorwinter.png,Qh7,d3h7,['d3h7'],1
+36,True,2189,True,12.0,1rr4k/3qN1b1/2p2n1p/3p1Q2/1P1P3N/2P3P1/5P1P/6K1 w - - 0 1,c3_images_replacement3.png,Nhg6,,['e7g6'],0
+36,True,2189,True,13.0,2r1rq2/4b2k/1p2BBbp/p3pQ2/4N3/1P2P3/5PPP/6K1 w - - 0 1,c3_images_replacement5.png,,,"['e4g5', 'e6g8']",0
+36,True,2189,True,14.0,kr4r1/p1pqn1b1/2p1p2p/2Pp2p1/Q2P4/2RB2B1/PP3PPP/1K5R w - - 0 1,c4_images_brankawittwer(reversed).png,Qa7,a4a7,['a4a7'],1
+36,True,2189,True,15.0,1k6/pp6/q4p2/3p1B1p/5P1P/1PP1B1R1/r5bK/8 w - - 0 1,c4_images_ivanchuksavchenko(reversed).png,Rg8,g3g8,['g3g8'],1
+36,True,2189,True,16.0,5k2/p4p1r/1n3b2/2p1Qp1p/1q2P3/1B4R1/Pr3PP1/2R2K2 w - - 0 1,c4_images_strekalovskyshaposhlikov.png,Rg8,g3g8,"['e5d6', 'g3g8']",1
+36,True,2189,True,17.0,r1b2rk1/1pp2ppp/p1np1q2/8/1b2Q3/2PB1N2/PP1B1PPP/RN2K2R w - - 0 1,c5_images_easyposition2.png,Qh7,e4h7,['e4h7'],1
+36,True,2189,True,18.0,2kr1r2/3bb3/1pp5/4B1p1/2BP3p/8/5P1P/3RRK2 w - - 0 1,c5_images_easyposition5(reversed).png,Ba6,c4a6,['c4a6'],1
+36,True,2189,True,19.0,1r4rk/6p1/1p5p/4N3/b7/3B4/PP6/K1R5 w - - 0 1,c5_images_easyposition6.png,Nf7,e5f7,['e5f7'],1
+36,True,2189,False,20.0,2r2r1k/1b5p/p2Q1qp1/3p1P2/3Pp3/8/6RP/6RK w - - 0 1,nc1_images_frombeautiful(nomate).png,,,[],1
+36,True,2189,False,21.0,3q2kr/1p3pp1/p1p2R1p/5p2/7P/P3Q3/1P4P1/7K w - - 0 1,nc1_images_steinitznn(nomate).png,,,[],1
+36,True,2189,False,22.0,1k6/ppp3pp/3ppb2/1P1P1Q2/3qr3/2R5/P1R4P/1K6 w - - 0 1,nc1_images_winterfriede(nomate)(reversed).png,,,[],1
+36,True,2189,False,23.0,1k6/1b1q2p1/2R4p/2QB4/1P2Pp2/P4P2/2r3rP/KR6 w - - 0 1,nc2_images_kekhayovpetrov(nomate)(reversed).png,,,[],1
+36,True,2189,False,24.0,4rk2/1Qp2p1r/1p2bB2/p5Rp/P5pP/6P1/1Pq5/3R2K1 w - - 0 1,nc2_images_krausemeinhardt(nomate).png,,,[],1
+36,True,2189,False,25.0,k1n2b2/p1r3r1/QpP1pp2/3P4/3P3p/2P2PBq/3N1P1P/R3R1K1 w - - 0 1,nc2_images_skujarozenbergs(nomate)(reversed).png,,,[],1
+36,True,2189,False,26.0,6k1/1p1R1p2/p5pp/P3n3/5N1P/2P2Q2/5PPK/4rq2 w - - 0 1,nc2_images_replacement4(nomate).png,,,[],1
+36,True,2189,False,27.0,rk2q2r/p1p2p1p/Bp4p1/3N1b2/3Npp2/5P2/PPP3PP/1K1Rb2R w - - 0 1,nc3_images_kazicvukovic(nomate)(reversed).png,,,[],1
+36,True,2189,False,28.0,1k1r4/p7/R1p1p2b/1NN1qp2/8/1P3B2/2PP1K2/8 w - - 0 1,nc3_images_malininandreev(nomate)(reversed).png,,,[],1
+36,True,2189,False,29.0,k2r3r/pbQ1n2p/3p3b/2pNN2q/5Bp1/8/PPP4P/1KR1R3 w - - 0 1,nc3_images_podzerovkuntzevic(nomate)(reversed).png,,,[],1
+36,True,2189,False,30.0,1k2q3/ppr5/1bp5/4N3/5Q1R/8/PP6/K7 w - - 0 1,nc3_images_studybyercoledelrio(nomate)(reversed).png,,,[],1
+36,True,2189,False,31.0,2r3k1/pb1q1p2/1p2pbpp/8/3N4/P2QB3/1P3PPP/1Br1R1K1 w - - 0 1,nc3_images_tylorwinter(nomate).png,,,[],1
+36,True,2189,False,32.0,1rr4k/3qNpb1/2p2n1p/3p1Q2/1P1P3N/2P3P1/5P1P/6K1 w - - 0 1,nc3_images_replacement3(nomate).png,,,[],1
+36,True,2189,False,33.0,2r1rq2/4b2k/1p2BBb1/p3pQ1p/4N3/1P2P3/5PPP/6K1 w - - 0 1,nc3_images_replacement5(nomate).png,,,[],1
+36,True,2189,False,34.0,kr4r1/p1pqn1b1/2p1p2p/2Pp2p1/Q2P4/1PRB2B1/P4PPP/1K5R w - - 0 1,nc4_images_brankawittwer(nomate)(reversed).png,,,[],1
+36,True,2189,False,35.0,1k6/pp4p1/q4p2/3p1B1p/5P1P/1PP1B1R1/r5bK/8 w - - 0 1,nc4_images_ivanchuksavchenko(nomate)(reversed).png,,,[],1
+36,True,2189,False,36.0,5k2/p4p1r/1n3b2/2p1Qp1p/1q2P1p1/1B4R1/Pr3PP1/2R2K2 w - - 0 1,nc4_images_strekalovskyshaposhlikov(nomate).png,,,[],1
+36,True,2189,False,37.0,r1b2rk1/1pp2p1p/p1np1qp1/8/1b2Q3/2PB1N2/PP1B1PPP/RN2K2R w - - 0 1,nc5_images_easyposition2(nomate).png,,,[],1
+36,True,2189,False,38.0,2kr1r2/3bb3/2p5/1p2B1p1/2BP3p/8/5P1P/3RRK2 w - - 0 1,nc5_images_easyposition5(nomate)(reversed).png,,,[],1
+36,True,2189,False,39.0,1r4rk/8/1p4pp/4N3/b7/3B4/PP6/K1R5 w - - 0 1,nc5_images_easyposition6(nomate).png,,,[],1
+37,False,0,True,0.0,2r2r1k/1b5p/p2Q1q2/3p1P2/3Pp3/8/6RP/6RK w - - 0 1,c1_images_frombeautiful.png,,,['g2g8'],0
+37,False,0,True,1.0,r2q2kr/1p4p1/p1p2R1p/5p2/7P/P3Q3/1P4P1/7K w - - 0 1,c1_images_steinitznn.png,,,['e3e6'],0
+37,False,0,True,2.0,1k6/ppp3pp/3p1b2/1P1P1Q2/3qr3/2R5/P1R4P/1K6 w - - 0 1,c1_images_winterfriede(reversed).png,Qd7,f5d7,['f5c8'],0
+37,False,0,True,3.0,1k6/1b1q2p1/2R4p/2QB4/4Pp2/P4P2/6rP/KR6 w - - 0 1,c2_images_kekhayovpetrov(reversed).png,,,"['b1b7', 'c6e6', 'c5f8', 'c6a6']",0
+37,False,0,True,4.0,4rk2/1Q3p1r/1p2bB2/p5Rp/P5pP/6P1/1Pq5/3R2K1 w - - 0 1,c2_images_krausemeinhardt.png,,,"['b7e7', 'f6e7']",0
+37,False,0,True,5.0,k1n2br1/p1r5/QpP1pp2/3P4/3P3p/2P2PBq/3N1P1P/R3R1K1 w - - 0 1,c2_images_skujarozenbergs(reversed).png,Qc7,,['a6c8'],0
+37,False,0,True,6.0,6k1/1p1R1p1p/p5p1/P3n3/5N1P/2P2Q2/5PPK/4rq2 w - - 0 1,c2_images_replacement4.png,,,['d7d8'],0
+37,False,0,True,7.0,rk2q2r/p1p2p1p/B1p3p1/3N1b2/3Npp2/5P2/PPP3PP/1K1Rb2R w - - 0 1,c3_images_kazicvukovic(reversed).png,,,['d5e7'],0
+37,False,0,True,8.0,1k1r4/8/R1p1p2b/1NN1qp2/8/1P3B2/2PP1K2/8 w - - 0 1,c3_images_malininandreev(reversed).png,,,"['a6a8', 'a6b6']",0
+37,False,0,True,9.0,k2r3r/pbQ1n2p/7b/2pNN2q/5Bp1/8/PPP4P/1KR1R3 w - - 0 1,c3_images_podzerovkuntzevic(reversed).png,,,['c7b8'],0
+37,False,0,True,10.0,1kr1q3/pp6/1bp5/4N3/5Q1R/8/PP6/K7 w - - 0 1,c3_images_studybyercoledelrio(reversed).png,,,['e5d7'],0
+37,False,0,True,11.0,3r2k1/pb1q1pp1/1p2pb1p/8/3N4/P2QB3/1P3PPP/1Br1R1K1 w - - 0 1,c3_images_tylorwinter.png,,,['d3h7'],0
+37,False,0,True,12.0,1rr4k/3qN1b1/2p2n1p/3p1Q2/1P1P3N/2P3P1/5P1P/6K1 w - - 0 1,c3_images_replacement3.png,Qg6,f5g6,['e7g6'],0
+37,False,0,True,13.0,2r1rq2/4b2k/1p2BBbp/p3pQ2/4N3/1P2P3/5PPP/6K1 w - - 0 1,c3_images_replacement5.png,,,"['e4g5', 'e6g8']",0
+37,False,0,True,14.0,kr4r1/p1pqn1b1/2p1p2p/2Pp2p1/Q2P4/2RB2B1/PP3PPP/1K5R w - - 0 1,c4_images_brankawittwer(reversed).png,,,['a4a7'],0
+37,False,0,True,15.0,1k6/pp6/q4p2/3p1B1p/5P1P/1PP1B1R1/r5bK/8 w - - 0 1,c4_images_ivanchuksavchenko(reversed).png,,,['g3g8'],0
+37,False,0,True,16.0,5k2/p4p1r/1n3b2/2p1Qp1p/1q2P3/1B4R1/Pr3PP1/2R2K2 w - - 0 1,c4_images_strekalovskyshaposhlikov.png,Qg6,,"['e5d6', 'g3g8']",0
+37,False,0,True,17.0,r1b2rk1/1pp2ppp/p1np1q2/8/1b2Q3/2PB1N2/PP1B1PPP/RN2K2R w - - 0 1,c5_images_easyposition2.png,,,['e4h7'],0
+37,False,0,True,18.0,2kr1r2/3bb3/1pp5/4B1p1/2BP3p/8/5P1P/3RRK2 w - - 0 1,c5_images_easyposition5(reversed).png,,,['c4a6'],0
+37,False,0,True,19.0,1r4rk/6p1/1p5p/4N3/b7/3B4/PP6/K1R5 w - - 0 1,c5_images_easyposition6.png,,,['e5f7'],0
+37,False,0,False,20.0,2r2r1k/1b5p/p2Q1qp1/3p1P2/3Pp3/8/6RP/6RK w - - 0 1,nc1_images_frombeautiful(nomate).png,,,[],1
+37,False,0,False,21.0,3q2kr/1p3pp1/p1p2R1p/5p2/7P/P3Q3/1P4P1/7K w - - 0 1,nc1_images_steinitznn(nomate).png,,,[],1
+37,False,0,False,22.0,1k6/ppp3pp/3ppb2/1P1P1Q2/3qr3/2R5/P1R4P/1K6 w - - 0 1,nc1_images_winterfriede(nomate)(reversed).png,,,[],1
+37,False,0,False,23.0,1k6/1b1q2p1/2R4p/2QB4/1P2Pp2/P4P2/2r3rP/KR6 w - - 0 1,nc2_images_kekhayovpetrov(nomate)(reversed).png,,,[],1
+37,False,0,False,24.0,4rk2/1Qp2p1r/1p2bB2/p5Rp/P5pP/6P1/1Pq5/3R2K1 w - - 0 1,nc2_images_krausemeinhardt(nomate).png,,,[],1
+37,False,0,False,25.0,k1n2b2/p1r3r1/QpP1pp2/3P4/3P3p/2P2PBq/3N1P1P/R3R1K1 w - - 0 1,nc2_images_skujarozenbergs(nomate)(reversed).png,,,[],1
+37,False,0,False,26.0,6k1/1p1R1p2/p5pp/P3n3/5N1P/2P2Q2/5PPK/4rq2 w - - 0 1,nc2_images_replacement4(nomate).png,,,[],1
+37,False,0,False,27.0,rk2q2r/p1p2p1p/Bp4p1/3N1b2/3Npp2/5P2/PPP3PP/1K1Rb2R w - - 0 1,nc3_images_kazicvukovic(nomate)(reversed).png,,,[],1
+37,False,0,False,28.0,1k1r4/p7/R1p1p2b/1NN1qp2/8/1P3B2/2PP1K2/8 w - - 0 1,nc3_images_malininandreev(nomate)(reversed).png,,,[],1
+37,False,0,False,29.0,k2r3r/pbQ1n2p/3p3b/2pNN2q/5Bp1/8/PPP4P/1KR1R3 w - - 0 1,nc3_images_podzerovkuntzevic(nomate)(reversed).png,,,[],1
+37,False,0,False,30.0,1k2q3/ppr5/1bp5/4N3/5Q1R/8/PP6/K7 w - - 0 1,nc3_images_studybyercoledelrio(nomate)(reversed).png,,,[],1
+37,False,0,False,31.0,2r3k1/pb1q1p2/1p2pbpp/8/3N4/P2QB3/1P3PPP/1Br1R1K1 w - - 0 1,nc3_images_tylorwinter(nomate).png,Qg6,d3g6,[],0
+37,False,0,False,32.0,1rr4k/3qNpb1/2p2n1p/3p1Q2/1P1P3N/2P3P1/5P1P/6K1 w - - 0 1,nc3_images_replacement3(nomate).png,Qg6,f5g6,[],0
+37,False,0,False,33.0,2r1rq2/4b2k/1p2BBb1/p3pQ1p/4N3/1P2P3/5PPP/6K1 w - - 0 1,nc3_images_replacement5(nomate).png,,,[],1
+37,False,0,False,34.0,kr4r1/p1pqn1b1/2p1p2p/2Pp2p1/Q2P4/1PRB2B1/P4PPP/1K5R w - - 0 1,nc4_images_brankawittwer(nomate)(reversed).png,,,[],1
+37,False,0,False,35.0,1k6/pp4p1/q4p2/3p1B1p/5P1P/1PP1B1R1/r5bK/8 w - - 0 1,nc4_images_ivanchuksavchenko(nomate)(reversed).png,,,[],1
+37,False,0,False,36.0,5k2/p4p1r/1n3b2/2p1Qp1p/1q2P1p1/1B4R1/Pr3PP1/2R2K2 w - - 0 1,nc4_images_strekalovskyshaposhlikov(nomate).png,Qd7,,[],1
+37,False,0,False,37.0,r1b2rk1/1pp2p1p/p1np1qp1/8/1b2Q3/2PB1N2/PP1B1PPP/RN2K2R w - - 0 1,nc5_images_easyposition2(nomate).png,Qf6,,[],1
+37,False,0,False,38.0,2kr1r2/3bb3/2p5/1p2B1p1/2BP3p/8/5P1P/3RRK2 w - - 0 1,nc5_images_easyposition5(nomate)(reversed).png,,,[],1
+37,False,0,False,39.0,1r4rk/8/1p4pp/4N3/b7/3B4/PP6/K1R5 w - - 0 1,nc5_images_easyposition6(nomate).png,,,[],1
+38,True,2120,True,0.0,2r2r1k/1b5p/p2Q1q2/3p1P2/3Pp3/8/6RP/6RK w - - 0 1,c1_images_frombeautiful.png,Rg8,g2g8,['g2g8'],1
+38,True,2120,True,1.0,r2q2kr/1p4p1/p1p2R1p/5p2/7P/P3Q3/1P4P1/7K w - - 0 1,c1_images_steinitznn.png,Qe6,e3e6,['e3e6'],1
+38,True,2120,True,2.0,1k6/ppp3pp/3p1b2/1P1P1Q2/3qr3/2R5/P1R4P/1K6 w - - 0 1,c1_images_winterfriede(reversed).png,Qc8,f5c8,['f5c8'],1
+38,True,2120,True,3.0,1k6/1b1q2p1/2R4p/2QB4/4Pp2/P4P2/6rP/KR6 w - - 0 1,c2_images_kekhayovpetrov(reversed).png,Rxb7,b1b7,"['b1b7', 'c6e6', 'c5f8', 'c6a6']",1
+38,True,2120,True,4.0,4rk2/1Q3p1r/1p2bB2/p5Rp/P5pP/6P1/1Pq5/3R2K1 w - - 0 1,c2_images_krausemeinhardt.png,Qe7,b7e7,"['b7e7', 'f6e7']",1
+38,True,2120,True,5.0,k1n2br1/p1r5/QpP1pp2/3P4/3P3p/2P2PBq/3N1P1P/R3R1K1 w - - 0 1,c2_images_skujarozenbergs(reversed).png,Qxc8,a6c8,['a6c8'],1
+38,True,2120,True,6.0,6k1/1p1R1p1p/p5p1/P3n3/5N1P/2P2Q2/5PPK/4rq2 w - - 0 1,c2_images_replacement4.png,Rd8,d7d8,['d7d8'],1
+38,True,2120,True,7.0,rk2q2r/p1p2p1p/B1p3p1/3N1b2/3Npp2/5P2/PPP3PP/1K1Rb2R w - - 0 1,c3_images_kazicvukovic(reversed).png,Ne7,d5e7,['d5e7'],1
+38,True,2120,True,8.0,1k1r4/8/R1p1p2b/1NN1qp2/8/1P3B2/2PP1K2/8 w - - 0 1,c3_images_malininandreev(reversed).png,,,"['a6a8', 'a6b6']",0
+38,True,2120,True,9.0,k2r3r/pbQ1n2p/7b/2pNN2q/5Bp1/8/PPP4P/1KR1R3 w - - 0 1,c3_images_podzerovkuntzevic(reversed).png,Qb8,c7b8,['c7b8'],1
+38,True,2120,True,10.0,1kr1q3/pp6/1bp5/4N3/5Q1R/8/PP6/K7 w - - 0 1,c3_images_studybyercoledelrio(reversed).png,Nd7,e5d7,['e5d7'],1
+38,True,2120,True,11.0,3r2k1/pb1q1pp1/1p2pb1p/8/3N4/P2QB3/1P3PPP/1Br1R1K1 w - - 0 1,c3_images_tylorwinter.png,Qh7,d3h7,['d3h7'],1
+38,True,2120,True,12.0,1rr4k/3qN1b1/2p2n1p/3p1Q2/1P1P3N/2P3P1/5P1P/6K1 w - - 0 1,c3_images_replacement3.png,Ng6,e7g6,['e7g6'],1
+38,True,2120,True,13.0,2r1rq2/4b2k/1p2BBbp/p3pQ2/4N3/1P2P3/5PPP/6K1 w - - 0 1,c3_images_replacement5.png,Ng5,e4g5,"['e4g5', 'e6g8']",1
+38,True,2120,True,14.0,kr4r1/p1pqn1b1/2p1p2p/2Pp2p1/Q2P4/2RB2B1/PP3PPP/1K5R w - - 0 1,c4_images_brankawittwer(reversed).png,Qxa7,a4a7,['a4a7'],1
+38,True,2120,True,15.0,1k6/pp6/q4p2/3p1B1p/5P1P/1PP1B1R1/r5bK/8 w - - 0 1,c4_images_ivanchuksavchenko(reversed).png,Rg8,g3g8,['g3g8'],1
+38,True,2120,True,16.0,5k2/p4p1r/1n3b2/2p1Qp1p/1q2P3/1B4R1/Pr3PP1/2R2K2 w - - 0 1,c4_images_strekalovskyshaposhlikov.png,Rg8,g3g8,"['e5d6', 'g3g8']",1
+38,True,2120,True,17.0,r1b2rk1/1pp2ppp/p1np1q2/8/1b2Q3/2PB1N2/PP1B1PPP/RN2K2R w - - 0 1,c5_images_easyposition2.png,Qxh7,e4h7,['e4h7'],1
+38,True,2120,True,18.0,2kr1r2/3bb3/1pp5/4B1p1/2BP3p/8/5P1P/3RRK2 w - - 0 1,c5_images_easyposition5(reversed).png,Ba6,c4a6,['c4a6'],1
+38,True,2120,True,19.0,1r4rk/6p1/1p5p/4N3/b7/3B4/PP6/K1R5 w - - 0 1,c5_images_easyposition6.png,Nf7,e5f7,['e5f7'],1
+38,True,2120,False,20.0,2r2r1k/1b5p/p2Q1qp1/3p1P2/3Pp3/8/6RP/6RK w - - 0 1,nc1_images_frombeautiful(nomate).png,,,[],1
+38,True,2120,False,21.0,3q2kr/1p3pp1/p1p2R1p/5p2/7P/P3Q3/1P4P1/7K w - - 0 1,nc1_images_steinitznn(nomate).png,,,[],1
+38,True,2120,False,22.0,1k6/ppp3pp/3ppb2/1P1P1Q2/3qr3/2R5/P1R4P/1K6 w - - 0 1,nc1_images_winterfriede(nomate)(reversed).png,,,[],1
+38,True,2120,False,23.0,1k6/1b1q2p1/2R4p/2QB4/1P2Pp2/P4P2/2r3rP/KR6 w - - 0 1,nc2_images_kekhayovpetrov(nomate)(reversed).png,,,[],1
+38,True,2120,False,24.0,4rk2/1Qp2p1r/1p2bB2/p5Rp/P5pP/6P1/1Pq5/3R2K1 w - - 0 1,nc2_images_krausemeinhardt(nomate).png,,,[],1
+38,True,2120,False,25.0,k1n2b2/p1r3r1/QpP1pp2/3P4/3P3p/2P2PBq/3N1P1P/R3R1K1 w - - 0 1,nc2_images_skujarozenbergs(nomate)(reversed).png,,,[],1
+38,True,2120,False,26.0,6k1/1p1R1p2/p5pp/P3n3/5N1P/2P2Q2/5PPK/4rq2 w - - 0 1,nc2_images_replacement4(nomate).png,,,[],1
+38,True,2120,False,27.0,rk2q2r/p1p2p1p/Bp4p1/3N1b2/3Npp2/5P2/PPP3PP/1K1Rb2R w - - 0 1,nc3_images_kazicvukovic(nomate)(reversed).png,,,[],1
+38,True,2120,False,28.0,1k1r4/p7/R1p1p2b/1NN1qp2/8/1P3B2/2PP1K2/8 w - - 0 1,nc3_images_malininandreev(nomate)(reversed).png,,,[],1
+38,True,2120,False,29.0,k2r3r/pbQ1n2p/3p3b/2pNN2q/5Bp1/8/PPP4P/1KR1R3 w - - 0 1,nc3_images_podzerovkuntzevic(nomate)(reversed).png,,,[],1
+38,True,2120,False,30.0,1k2q3/ppr5/1bp5/4N3/5Q1R/8/PP6/K7 w - - 0 1,nc3_images_studybyercoledelrio(nomate)(reversed).png,,,[],1
+38,True,2120,False,31.0,2r3k1/pb1q1p2/1p2pbpp/8/3N4/P2QB3/1P3PPP/1Br1R1K1 w - - 0 1,nc3_images_tylorwinter(nomate).png,,,[],1
+38,True,2120,False,32.0,1rr4k/3qNpb1/2p2n1p/3p1Q2/1P1P3N/2P3P1/5P1P/6K1 w - - 0 1,nc3_images_replacement3(nomate).png,,,[],1
+38,True,2120,False,33.0,2r1rq2/4b2k/1p2BBb1/p3pQ1p/4N3/1P2P3/5PPP/6K1 w - - 0 1,nc3_images_replacement5(nomate).png,,,[],1
+38,True,2120,False,34.0,kr4r1/p1pqn1b1/2p1p2p/2Pp2p1/Q2P4/1PRB2B1/P4PPP/1K5R w - - 0 1,nc4_images_brankawittwer(nomate)(reversed).png,,,[],1
+38,True,2120,False,35.0,1k6/pp4p1/q4p2/3p1B1p/5P1P/1PP1B1R1/r5bK/8 w - - 0 1,nc4_images_ivanchuksavchenko(nomate)(reversed).png,,,[],1
+38,True,2120,False,36.0,5k2/p4p1r/1n3b2/2p1Qp1p/1q2P1p1/1B4R1/Pr3PP1/2R2K2 w - - 0 1,nc4_images_strekalovskyshaposhlikov(nomate).png,,,[],1
+38,True,2120,False,37.0,r1b2rk1/1pp2p1p/p1np1qp1/8/1b2Q3/2PB1N2/PP1B1PPP/RN2K2R w - - 0 1,nc5_images_easyposition2(nomate).png,,,[],1
+38,True,2120,False,38.0,2kr1r2/3bb3/2p5/1p2B1p1/2BP3p/8/5P1P/3RRK2 w - - 0 1,nc5_images_easyposition5(nomate)(reversed).png,,,[],1
+38,True,2120,False,39.0,1r4rk/8/1p4pp/4N3/b7/3B4/PP6/K1R5 w - - 0 1,nc5_images_easyposition6(nomate).png,,,[],1
+40,False,0,True,0.0,2r2r1k/1b5p/p2Q1q2/3p1P2/3Pp3/8/6RP/6RK w - - 0 1,c1_images_frombeautiful.png,,,['g2g8'],0
+40,False,0,True,1.0,r2q2kr/1p4p1/p1p2R1p/5p2/7P/P3Q3/1P4P1/7K w - - 0 1,c1_images_steinitznn.png,qe6,e3e6,['e3e6'],1
+40,False,0,True,2.0,1k6/ppp3pp/3p1b2/1P1P1Q2/3qr3/2R5/P1R4P/1K6 w - - 0 1,c1_images_winterfriede(reversed).png,Rc7,c3c7,['f5c8'],0
+40,False,0,True,3.0,1k6/1b1q2p1/2R4p/2QB4/4Pp2/P4P2/6rP/KR6 w - - 0 1,c2_images_kekhayovpetrov(reversed).png,,,"['b1b7', 'c6e6', 'c5f8', 'c6a6']",0
+40,False,0,True,4.0,4rk2/1Q3p1r/1p2bB2/p5Rp/P5pP/6P1/1Pq5/3R2K1 w - - 0 1,c2_images_krausemeinhardt.png,,,"['b7e7', 'f6e7']",0
+40,False,0,True,5.0,k1n2br1/p1r5/QpP1pp2/3P4/3P3p/2P2PBq/3N1P1P/R3R1K1 w - - 0 1,c2_images_skujarozenbergs(reversed).png,,,['a6c8'],0
+40,False,0,True,6.0,6k1/1p1R1p1p/p5p1/P3n3/5N1P/2P2Q2/5PPK/4rq2 w - - 0 1,c2_images_replacement4.png,,,['d7d8'],0
+40,False,0,True,7.0,rk2q2r/p1p2p1p/B1p3p1/3N1b2/3Npp2/5P2/PPP3PP/1K1Rb2R w - - 0 1,c3_images_kazicvukovic(reversed).png,,,['d5e7'],0
+40,False,0,True,8.0,1k1r4/8/R1p1p2b/1NN1qp2/8/1P3B2/2PP1K2/8 w - - 0 1,c3_images_malininandreev(reversed).png,,,"['a6a8', 'a6b6']",0
+40,False,0,True,9.0,k2r3r/pbQ1n2p/7b/2pNN2q/5Bp1/8/PPP4P/1KR1R3 w - - 0 1,c3_images_podzerovkuntzevic(reversed).png,nb6,d5b6,['c7b8'],0
+40,False,0,True,10.0,1kr1q3/pp6/1bp5/4N3/5Q1R/8/PP6/K7 w - - 0 1,c3_images_studybyercoledelrio(reversed).png,,,['e5d7'],0
+40,False,0,True,11.0,3r2k1/pb1q1pp1/1p2pb1p/8/3N4/P2QB3/1P3PPP/1Br1R1K1 w - - 0 1,c3_images_tylorwinter.png,,,['d3h7'],0
+40,False,0,True,12.0,1rr4k/3qN1b1/2p2n1p/3p1Q2/1P1P3N/2P3P1/5P1P/6K1 w - - 0 1,c3_images_replacement3.png,ng6,e7g6,['e7g6'],1
+40,False,0,True,13.0,2r1rq2/4b2k/1p2BBbp/p3pQ2/4N3/1P2P3/5PPP/6K1 w - - 0 1,c3_images_replacement5.png,,,"['e4g5', 'e6g8']",0
+40,False,0,True,14.0,kr4r1/p1pqn1b1/2p1p2p/2Pp2p1/Q2P4/2RB2B1/PP3PPP/1K5R w - - 0 1,c4_images_brankawittwer(reversed).png,,,['a4a7'],0
+40,False,0,True,15.0,1k6/pp6/q4p2/3p1B1p/5P1P/1PP1B1R1/r5bK/8 w - - 0 1,c4_images_ivanchuksavchenko(reversed).png,,,['g3g8'],0
+40,False,0,True,16.0,5k2/p4p1r/1n3b2/2p1Qp1p/1q2P3/1B4R1/Pr3PP1/2R2K2 w - - 0 1,c4_images_strekalovskyshaposhlikov.png,,,"['e5d6', 'g3g8']",0
+40,False,0,True,17.0,r1b2rk1/1pp2ppp/p1np1q2/8/1b2Q3/2PB1N2/PP1B1PPP/RN2K2R w - - 0 1,c5_images_easyposition2.png,,,['e4h7'],0
+40,False,0,True,18.0,2kr1r2/3bb3/1pp5/4B1p1/2BP3p/8/5P1P/3RRK2 w - - 0 1,c5_images_easyposition5(reversed).png,ba6,c4a6,['c4a6'],1
+40,False,0,True,19.0,1r4rk/6p1/1p5p/4N3/b7/3B4/PP6/K1R5 w - - 0 1,c5_images_easyposition6.png,nf7,e5f7,['e5f7'],1
+40,False,0,False,20.0,2r2r1k/1b5p/p2Q1qp1/3p1P2/3Pp3/8/6RP/6RK w - - 0 1,nc1_images_frombeautiful(nomate).png,,,[],1
+40,False,0,False,21.0,3q2kr/1p3pp1/p1p2R1p/5p2/7P/P3Q3/1P4P1/7K w - - 0 1,nc1_images_steinitznn(nomate).png,,,[],1
+40,False,0,False,22.0,1k6/ppp3pp/3ppb2/1P1P1Q2/3qr3/2R5/P1R4P/1K6 w - - 0 1,nc1_images_winterfriede(nomate)(reversed).png,rc7,c3c7,[],0
+40,False,0,False,23.0,1k6/1b1q2p1/2R4p/2QB4/1P2Pp2/P4P2/2r3rP/KR6 w - - 0 1,nc2_images_kekhayovpetrov(nomate)(reversed).png,qf8,c5f8,[],0
+40,False,0,False,24.0,4rk2/1Qp2p1r/1p2bB2/p5Rp/P5pP/6P1/1Pq5/3R2K1 w - - 0 1,nc2_images_krausemeinhardt(nomate).png,,,[],1
+40,False,0,False,25.0,k1n2b2/p1r3r1/QpP1pp2/3P4/3P3p/2P2PBq/3N1P1P/R3R1K1 w - - 0 1,nc2_images_skujarozenbergs(nomate)(reversed).png,,,[],1
+40,False,0,False,26.0,6k1/1p1R1p2/p5pp/P3n3/5N1P/2P2Q2/5PPK/4rq2 w - - 0 1,nc2_images_replacement4(nomate).png,rd8,d7d8,[],0
+40,False,0,False,27.0,rk2q2r/p1p2p1p/Bp4p1/3N1b2/3Npp2/5P2/PPP3PP/1K1Rb2R w - - 0 1,nc3_images_kazicvukovic(nomate)(reversed).png,,,[],1
+40,False,0,False,28.0,1k1r4/p7/R1p1p2b/1NN1qp2/8/1P3B2/2PP1K2/8 w - - 0 1,nc3_images_malininandreev(nomate)(reversed).png,,,[],1
+40,False,0,False,29.0,k2r3r/pbQ1n2p/3p3b/2pNN2q/5Bp1/8/PPP4P/1KR1R3 w - - 0 1,nc3_images_podzerovkuntzevic(nomate)(reversed).png,,,[],1
+40,False,0,False,30.0,1k2q3/ppr5/1bp5/4N3/5Q1R/8/PP6/K7 w - - 0 1,nc3_images_studybyercoledelrio(nomate)(reversed).png,,,[],1
+40,False,0,False,31.0,2r3k1/pb1q1p2/1p2pbpp/8/3N4/P2QB3/1P3PPP/1Br1R1K1 w - - 0 1,nc3_images_tylorwinter(nomate).png,,,[],1
+40,False,0,False,32.0,1rr4k/3qNpb1/2p2n1p/3p1Q2/1P1P3N/2P3P1/5P1P/6K1 w - - 0 1,nc3_images_replacement3(nomate).png,,,[],1
+40,False,0,False,33.0,2r1rq2/4b2k/1p2BBb1/p3pQ1p/4N3/1P2P3/5PPP/6K1 w - - 0 1,nc3_images_replacement5(nomate).png,,,[],1
+40,False,0,False,34.0,kr4r1/p1pqn1b1/2p1p2p/2Pp2p1/Q2P4/1PRB2B1/P4PPP/1K5R w - - 0 1,nc4_images_brankawittwer(nomate)(reversed).png,,,[],1
+40,False,0,False,35.0,1k6/pp4p1/q4p2/3p1B1p/5P1P/1PP1B1R1/r5bK/8 w - - 0 1,nc4_images_ivanchuksavchenko(nomate)(reversed).png,,,[],1
+40,False,0,False,36.0,5k2/p4p1r/1n3b2/2p1Qp1p/1q2P1p1/1B4R1/Pr3PP1/2R2K2 w - - 0 1,nc4_images_strekalovskyshaposhlikov(nomate).png,qd6,e5d6,[],0
+40,False,0,False,37.0,r1b2rk1/1pp2p1p/p1np1qp1/8/1b2Q3/2PB1N2/PP1B1PPP/RN2K2R w - - 0 1,nc5_images_easyposition2(nomate).png,,,[],1
+40,False,0,False,38.0,2kr1r2/3bb3/2p5/1p2B1p1/2BP3p/8/5P1P/3RRK2 w - - 0 1,nc5_images_easyposition5(nomate)(reversed).png,ra1,d1a1,[],0
+40,False,0,False,39.0,1r4rk/8/1p4pp/4N3/b7/3B4/PP6/K1R5 w - - 0 1,nc5_images_easyposition6(nomate).png,,,[],1
+41,False,0,True,0.0,2r2r1k/1b5p/p2Q1q2/3p1P2/3Pp3/8/6RP/6RK w - - 0 1,c1_images_frombeautiful.png,,,['g2g8'],0
+41,False,0,True,1.0,r2q2kr/1p4p1/p1p2R1p/5p2/7P/P3Q3/1P4P1/7K w - - 0 1,c1_images_steinitznn.png,qe6,e3e6,['e3e6'],1
+41,False,0,True,2.0,1k6/ppp3pp/3p1b2/1P1P1Q2/3qr3/2R5/P1R4P/1K6 w - - 0 1,c1_images_winterfriede(reversed).png,qd7,f5d7,['f5c8'],0
+41,False,0,True,3.0,1k6/1b1q2p1/2R4p/2QB4/4Pp2/P4P2/6rP/KR6 w - - 0 1,c2_images_kekhayovpetrov(reversed).png,,,"['b1b7', 'c6e6', 'c5f8', 'c6a6']",0
+41,False,0,True,4.0,4rk2/1Q3p1r/1p2bB2/p5Rp/P5pP/6P1/1Pq5/3R2K1 w - - 0 1,c2_images_krausemeinhardt.png,,,"['b7e7', 'f6e7']",0
+41,False,0,True,5.0,k1n2br1/p1r5/QpP1pp2/3P4/3P3p/2P2PBq/3N1P1P/R3R1K1 w - - 0 1,c2_images_skujarozenbergs(reversed).png,,,['a6c8'],0
+41,False,0,True,6.0,6k1/1p1R1p1p/p5p1/P3n3/5N1P/2P2Q2/5PPK/4rq2 w - - 0 1,c2_images_replacement4.png,,,['d7d8'],0
+41,False,0,True,7.0,rk2q2r/p1p2p1p/B1p3p1/3N1b2/3Npp2/5P2/PPP3PP/1K1Rb2R w - - 0 1,c3_images_kazicvukovic(reversed).png,,,['d5e7'],0
+41,False,0,True,8.0,1k1r4/8/R1p1p2b/1NN1qp2/8/1P3B2/2PP1K2/8 w - - 0 1,c3_images_malininandreev(reversed).png,,,"['a6a8', 'a6b6']",0
+41,False,0,True,9.0,k2r3r/pbQ1n2p/7b/2pNN2q/5Bp1/8/PPP4P/1KR1R3 w - - 0 1,c3_images_podzerovkuntzevic(reversed).png,,,['c7b8'],0
+41,False,0,True,10.0,1kr1q3/pp6/1bp5/4N3/5Q1R/8/PP6/K7 w - - 0 1,c3_images_studybyercoledelrio(reversed).png,,,['e5d7'],0
+41,False,0,True,11.0,3r2k1/pb1q1pp1/1p2pb1p/8/3N4/P2QB3/1P3PPP/1Br1R1K1 w - - 0 1,c3_images_tylorwinter.png,,,['d3h7'],0
+41,False,0,True,12.0,1rr4k/3qN1b1/2p2n1p/3p1Q2/1P1P3N/2P3P1/5P1P/6K1 w - - 0 1,c3_images_replacement3.png,,,['e7g6'],0
+41,False,0,True,13.0,2r1rq2/4b2k/1p2BBbp/p3pQ2/4N3/1P2P3/5PPP/6K1 w - - 0 1,c3_images_replacement5.png,,,"['e4g5', 'e6g8']",0
+41,False,0,True,14.0,kr4r1/p1pqn1b1/2p1p2p/2Pp2p1/Q2P4/2RB2B1/PP3PPP/1K5R w - - 0 1,c4_images_brankawittwer(reversed).png,,,['a4a7'],0
+41,False,0,True,15.0,1k6/pp6/q4p2/3p1B1p/5P1P/1PP1B1R1/r5bK/8 w - - 0 1,c4_images_ivanchuksavchenko(reversed).png,rg8,g3g8,['g3g8'],1
+41,False,0,True,16.0,5k2/p4p1r/1n3b2/2p1Qp1p/1q2P3/1B4R1/Pr3PP1/2R2K2 w - - 0 1,c4_images_strekalovskyshaposhlikov.png,,,"['e5d6', 'g3g8']",0
+41,False,0,True,17.0,r1b2rk1/1pp2ppp/p1np1q2/8/1b2Q3/2PB1N2/PP1B1PPP/RN2K2R w - - 0 1,c5_images_easyposition2.png,qh7,e4h7,['e4h7'],1
+41,False,0,True,18.0,2kr1r2/3bb3/1pp5/4B1p1/2BP3p/8/5P1P/3RRK2 w - - 0 1,c5_images_easyposition5(reversed).png,,,['c4a6'],0
+41,False,0,True,19.0,1r4rk/6p1/1p5p/4N3/b7/3B4/PP6/K1R5 w - - 0 1,c5_images_easyposition6.png,nf7,e5f7,['e5f7'],1
+41,False,0,False,20.0,2r2r1k/1b5p/p2Q1qp1/3p1P2/3Pp3/8/6RP/6RK w - - 0 1,nc1_images_frombeautiful(nomate).png,,,[],1
+41,False,0,False,21.0,3q2kr/1p3pp1/p1p2R1p/5p2/7P/P3Q3/1P4P1/7K w - - 0 1,nc1_images_steinitznn(nomate).png,qb3,e3b3,[],0
+41,False,0,False,22.0,1k6/ppp3pp/3ppb2/1P1P1Q2/3qr3/2R5/P1R4P/1K6 w - - 0 1,nc1_images_winterfriede(nomate)(reversed).png,qh7,f5h7,[],0
+41,False,0,False,23.0,1k6/1b1q2p1/2R4p/2QB4/1P2Pp2/P4P2/2r3rP/KR6 w - - 0 1,nc2_images_kekhayovpetrov(nomate)(reversed).png,,,[],1
+41,False,0,False,24.0,4rk2/1Qp2p1r/1p2bB2/p5Rp/P5pP/6P1/1Pq5/3R2K1 w - - 0 1,nc2_images_krausemeinhardt(nomate).png,,,[],1
+41,False,0,False,25.0,k1n2b2/p1r3r1/QpP1pp2/3P4/3P3p/2P2PBq/3N1P1P/R3R1K1 w - - 0 1,nc2_images_skujarozenbergs(nomate)(reversed).png,,,[],1
+41,False,0,False,26.0,6k1/1p1R1p2/p5pp/P3n3/5N1P/2P2Q2/5PPK/4rq2 w - - 0 1,nc2_images_replacement4(nomate).png,,,[],1
+41,False,0,False,27.0,rk2q2r/p1p2p1p/Bp4p1/3N1b2/3Npp2/5P2/PPP3PP/1K1Rb2R w - - 0 1,nc3_images_kazicvukovic(nomate)(reversed).png,,,[],1
+41,False,0,False,28.0,1k1r4/p7/R1p1p2b/1NN1qp2/8/1P3B2/2PP1K2/8 w - - 0 1,nc3_images_malininandreev(nomate)(reversed).png,ra7,a6a7,[],0
+41,False,0,False,29.0,k2r3r/pbQ1n2p/3p3b/2pNN2q/5Bp1/8/PPP4P/1KR1R3 w - - 0 1,nc3_images_podzerovkuntzevic(nomate)(reversed).png,,,[],1
+41,False,0,False,30.0,1k2q3/ppr5/1bp5/4N3/5Q1R/8/PP6/K7 w - - 0 1,nc3_images_studybyercoledelrio(nomate)(reversed).png,,,[],1
+41,False,0,False,31.0,2r3k1/pb1q1p2/1p2pbpp/8/3N4/P2QB3/1P3PPP/1Br1R1K1 w - - 0 1,nc3_images_tylorwinter(nomate).png,,,[],1
+41,False,0,False,32.0,1rr4k/3qNpb1/2p2n1p/3p1Q2/1P1P3N/2P3P1/5P1P/6K1 w - - 0 1,nc3_images_replacement3(nomate).png,,,[],1
+41,False,0,False,33.0,2r1rq2/4b2k/1p2BBb1/p3pQ1p/4N3/1P2P3/5PPP/6K1 w - - 0 1,nc3_images_replacement5(nomate).png,ng5,e4g5,[],0
+41,False,0,False,34.0,kr4r1/p1pqn1b1/2p1p2p/2Pp2p1/Q2P4/1PRB2B1/P4PPP/1K5R w - - 0 1,nc4_images_brankawittwer(nomate)(reversed).png,,,[],1
+41,False,0,False,35.0,1k6/pp4p1/q4p2/3p1B1p/5P1P/1PP1B1R1/r5bK/8 w - - 0 1,nc4_images_ivanchuksavchenko(nomate)(reversed).png,rg7,g3g7,[],0
+41,False,0,False,36.0,5k2/p4p1r/1n3b2/2p1Qp1p/1q2P1p1/1B4R1/Pr3PP1/2R2K2 w - - 0 1,nc4_images_strekalovskyshaposhlikov(nomate).png,,,[],1
+41,False,0,False,37.0,r1b2rk1/1pp2p1p/p1np1qp1/8/1b2Q3/2PB1N2/PP1B1PPP/RN2K2R w - - 0 1,nc5_images_easyposition2(nomate).png,,,[],1
+41,False,0,False,38.0,2kr1r2/3bb3/2p5/1p2B1p1/2BP3p/8/5P1P/3RRK2 w - - 0 1,nc5_images_easyposition5(nomate)(reversed).png,,,[],1
+41,False,0,False,39.0,1r4rk/8/1p4pp/4N3/b7/3B4/PP6/K1R5 w - - 0 1,nc5_images_easyposition6(nomate).png,,,[],1
+42,False,0,True,0.0,2r2r1k/1b5p/p2Q1q2/3p1P2/3Pp3/8/6RP/6RK w - - 0 1,c1_images_frombeautiful.png,,,['g2g8'],0
+42,False,0,True,1.0,r2q2kr/1p4p1/p1p2R1p/5p2/7P/P3Q3/1P4P1/7K w - - 0 1,c1_images_steinitznn.png,,,['e3e6'],0
+42,False,0,True,2.0,1k6/ppp3pp/3p1b2/1P1P1Q2/3qr3/2R5/P1R4P/1K6 w - - 0 1,c1_images_winterfriede(reversed).png,,,['f5c8'],0
+42,False,0,True,3.0,1k6/1b1q2p1/2R4p/2QB4/4Pp2/P4P2/6rP/KR6 w - - 0 1,c2_images_kekhayovpetrov(reversed).png,,,"['b1b7', 'c6e6', 'c5f8', 'c6a6']",0
+42,False,0,True,4.0,4rk2/1Q3p1r/1p2bB2/p5Rp/P5pP/6P1/1Pq5/3R2K1 w - - 0 1,c2_images_krausemeinhardt.png,,,"['b7e7', 'f6e7']",0
+42,False,0,True,5.0,k1n2br1/p1r5/QpP1pp2/3P4/3P3p/2P2PBq/3N1P1P/R3R1K1 w - - 0 1,c2_images_skujarozenbergs(reversed).png,,,['a6c8'],0
+42,False,0,True,6.0,6k1/1p1R1p1p/p5p1/P3n3/5N1P/2P2Q2/5PPK/4rq2 w - - 0 1,c2_images_replacement4.png,,,['d7d8'],0
+42,False,0,True,7.0,rk2q2r/p1p2p1p/B1p3p1/3N1b2/3Npp2/5P2/PPP3PP/1K1Rb2R w - - 0 1,c3_images_kazicvukovic(reversed).png,,,['d5e7'],0
+42,False,0,True,8.0,1k1r4/8/R1p1p2b/1NN1qp2/8/1P3B2/2PP1K2/8 w - - 0 1,c3_images_malininandreev(reversed).png,,,"['a6a8', 'a6b6']",0
+42,False,0,True,9.0,k2r3r/pbQ1n2p/7b/2pNN2q/5Bp1/8/PPP4P/1KR1R3 w - - 0 1,c3_images_podzerovkuntzevic(reversed).png,,,['c7b8'],0
+42,False,0,True,10.0,1kr1q3/pp6/1bp5/4N3/5Q1R/8/PP6/K7 w - - 0 1,c3_images_studybyercoledelrio(reversed).png,,,['e5d7'],0
+42,False,0,True,11.0,3r2k1/pb1q1pp1/1p2pb1p/8/3N4/P2QB3/1P3PPP/1Br1R1K1 w - - 0 1,c3_images_tylorwinter.png,,,['d3h7'],0
+42,False,0,True,12.0,1rr4k/3qN1b1/2p2n1p/3p1Q2/1P1P3N/2P3P1/5P1P/6K1 w - - 0 1,c3_images_replacement3.png,,,['e7g6'],0
+42,False,0,True,13.0,2r1rq2/4b2k/1p2BBbp/p3pQ2/4N3/1P2P3/5PPP/6K1 w - - 0 1,c3_images_replacement5.png,,,"['e4g5', 'e6g8']",0
+42,False,0,True,14.0,kr4r1/p1pqn1b1/2p1p2p/2Pp2p1/Q2P4/2RB2B1/PP3PPP/1K5R w - - 0 1,c4_images_brankawittwer(reversed).png,,,['a4a7'],0
+42,False,0,True,15.0,1k6/pp6/q4p2/3p1B1p/5P1P/1PP1B1R1/r5bK/8 w - - 0 1,c4_images_ivanchuksavchenko(reversed).png,,,['g3g8'],0
+42,False,0,True,16.0,5k2/p4p1r/1n3b2/2p1Qp1p/1q2P3/1B4R1/Pr3PP1/2R2K2 w - - 0 1,c4_images_strekalovskyshaposhlikov.png,,,"['e5d6', 'g3g8']",0
+42,False,0,True,17.0,r1b2rk1/1pp2ppp/p1np1q2/8/1b2Q3/2PB1N2/PP1B1PPP/RN2K2R w - - 0 1,c5_images_easyposition2.png,,,['e4h7'],0
+42,False,0,True,18.0,2kr1r2/3bb3/1pp5/4B1p1/2BP3p/8/5P1P/3RRK2 w - - 0 1,c5_images_easyposition5(reversed).png,ba6,c4a6,['c4a6'],1
+42,False,0,True,19.0,1r4rk/6p1/1p5p/4N3/b7/3B4/PP6/K1R5 w - - 0 1,c5_images_easyposition6.png,Nf7,e5f7,['e5f7'],1
+42,False,0,False,20.0,2r2r1k/1b5p/p2Q1qp1/3p1P2/3Pp3/8/6RP/6RK w - - 0 1,nc1_images_frombeautiful(nomate).png,,,[],1
+42,False,0,False,21.0,3q2kr/1p3pp1/p1p2R1p/5p2/7P/P3Q3/1P4P1/7K w - - 0 1,nc1_images_steinitznn(nomate).png,,,[],1
+42,False,0,False,22.0,1k6/ppp3pp/3ppb2/1P1P1Q2/3qr3/2R5/P1R4P/1K6 w - - 0 1,nc1_images_winterfriede(nomate)(reversed).png,,,[],1
+42,False,0,False,23.0,1k6/1b1q2p1/2R4p/2QB4/1P2Pp2/P4P2/2r3rP/KR6 w - - 0 1,nc2_images_kekhayovpetrov(nomate)(reversed).png,,,[],1
+42,False,0,False,24.0,4rk2/1Qp2p1r/1p2bB2/p5Rp/P5pP/6P1/1Pq5/3R2K1 w - - 0 1,nc2_images_krausemeinhardt(nomate).png,,,[],1
+42,False,0,False,25.0,k1n2b2/p1r3r1/QpP1pp2/3P4/3P3p/2P2PBq/3N1P1P/R3R1K1 w - - 0 1,nc2_images_skujarozenbergs(nomate)(reversed).png,,,[],1
+42,False,0,False,26.0,6k1/1p1R1p2/p5pp/P3n3/5N1P/2P2Q2/5PPK/4rq2 w - - 0 1,nc2_images_replacement4(nomate).png,,,[],1
+42,False,0,False,27.0,rk2q2r/p1p2p1p/Bp4p1/3N1b2/3Npp2/5P2/PPP3PP/1K1Rb2R w - - 0 1,nc3_images_kazicvukovic(nomate)(reversed).png,,,[],1
+42,False,0,False,28.0,1k1r4/p7/R1p1p2b/1NN1qp2/8/1P3B2/2PP1K2/8 w - - 0 1,nc3_images_malininandreev(nomate)(reversed).png,,,[],1
+42,False,0,False,29.0,k2r3r/pbQ1n2p/3p3b/2pNN2q/5Bp1/8/PPP4P/1KR1R3 w - - 0 1,nc3_images_podzerovkuntzevic(nomate)(reversed).png,,,[],1
+42,False,0,False,30.0,1k2q3/ppr5/1bp5/4N3/5Q1R/8/PP6/K7 w - - 0 1,nc3_images_studybyercoledelrio(nomate)(reversed).png,,,[],1
+42,False,0,False,31.0,2r3k1/pb1q1p2/1p2pbpp/8/3N4/P2QB3/1P3PPP/1Br1R1K1 w - - 0 1,nc3_images_tylorwinter(nomate).png,,,[],1
+42,False,0,False,32.0,1rr4k/3qNpb1/2p2n1p/3p1Q2/1P1P3N/2P3P1/5P1P/6K1 w - - 0 1,nc3_images_replacement3(nomate).png,,,[],1
+42,False,0,False,33.0,2r1rq2/4b2k/1p2BBb1/p3pQ1p/4N3/1P2P3/5PPP/6K1 w - - 0 1,nc3_images_replacement5(nomate).png,,,[],1
+42,False,0,False,34.0,kr4r1/p1pqn1b1/2p1p2p/2Pp2p1/Q2P4/1PRB2B1/P4PPP/1K5R w - - 0 1,nc4_images_brankawittwer(nomate)(reversed).png,,,[],1
+42,False,0,False,35.0,1k6/pp4p1/q4p2/3p1B1p/5P1P/1PP1B1R1/r5bK/8 w - - 0 1,nc4_images_ivanchuksavchenko(nomate)(reversed).png,,,[],1
+42,False,0,False,36.0,5k2/p4p1r/1n3b2/2p1Qp1p/1q2P1p1/1B4R1/Pr3PP1/2R2K2 w - - 0 1,nc4_images_strekalovskyshaposhlikov(nomate).png,,,[],1
+42,False,0,False,37.0,r1b2rk1/1pp2p1p/p1np1qp1/8/1b2Q3/2PB1N2/PP1B1PPP/RN2K2R w - - 0 1,nc5_images_easyposition2(nomate).png,,,[],1
+42,False,0,False,38.0,2kr1r2/3bb3/2p5/1p2B1p1/2BP3p/8/5P1P/3RRK2 w - - 0 1,nc5_images_easyposition5(nomate)(reversed).png,,,[],1
+42,False,0,False,39.0,1r4rk/8/1p4pp/4N3/b7/3B4/PP6/K1R5 w - - 0 1,nc5_images_easyposition6(nomate).png,,,[],1
+43,False,0,True,0.0,2r2r1k/1b5p/p2Q1q2/3p1P2/3Pp3/8/6RP/6RK w - - 0 1,c1_images_frombeautiful.png,,,['g2g8'],0
+43,False,0,True,1.0,r2q2kr/1p4p1/p1p2R1p/5p2/7P/P3Q3/1P4P1/7K w - - 0 1,c1_images_steinitznn.png,,,['e3e6'],0
+43,False,0,True,2.0,1k6/ppp3pp/3p1b2/1P1P1Q2/3qr3/2R5/P1R4P/1K6 w - - 0 1,c1_images_winterfriede(reversed).png,rc7,c3c7,['f5c8'],0
+43,False,0,True,3.0,1k6/1b1q2p1/2R4p/2QB4/4Pp2/P4P2/6rP/KR6 w - - 0 1,c2_images_kekhayovpetrov(reversed).png,rc1,b1c1,"['b1b7', 'c6e6', 'c5f8', 'c6a6']",0
+43,False,0,True,4.0,4rk2/1Q3p1r/1p2bB2/p5Rp/P5pP/6P1/1Pq5/3R2K1 w - - 0 1,c2_images_krausemeinhardt.png,,,"['b7e7', 'f6e7']",0
+43,False,0,True,5.0,k1n2br1/p1r5/QpP1pp2/3P4/3P3p/2P2PBq/3N1P1P/R3R1K1 w - - 0 1,c2_images_skujarozenbergs(reversed).png,qb7,a6b7,['a6c8'],0
+43,False,0,True,6.0,6k1/1p1R1p1p/p5p1/P3n3/5N1P/2P2Q2/5PPK/4rq2 w - - 0 1,c2_images_replacement4.png,,,['d7d8'],0
+43,False,0,True,7.0,rk2q2r/p1p2p1p/B1p3p1/3N1b2/3Npp2/5P2/PPP3PP/1K1Rb2R w - - 0 1,c3_images_kazicvukovic(reversed).png,,,['d5e7'],0
+43,False,0,True,8.0,1k1r4/8/R1p1p2b/1NN1qp2/8/1P3B2/2PP1K2/8 w - - 0 1,c3_images_malininandreev(reversed).png,,,"['a6a8', 'a6b6']",0
+43,False,0,True,9.0,k2r3r/pbQ1n2p/7b/2pNN2q/5Bp1/8/PPP4P/1KR1R3 w - - 0 1,c3_images_podzerovkuntzevic(reversed).png,,,['c7b8'],0
+43,False,0,True,10.0,1kr1q3/pp6/1bp5/4N3/5Q1R/8/PP6/K7 w - - 0 1,c3_images_studybyercoledelrio(reversed).png,,,['e5d7'],0
+43,False,0,True,11.0,3r2k1/pb1q1pp1/1p2pb1p/8/3N4/P2QB3/1P3PPP/1Br1R1K1 w - - 0 1,c3_images_tylorwinter.png,,,['d3h7'],0
+43,False,0,True,12.0,1rr4k/3qN1b1/2p2n1p/3p1Q2/1P1P3N/2P3P1/5P1P/6K1 w - - 0 1,c3_images_replacement3.png,,,['e7g6'],0
+43,False,0,True,13.0,2r1rq2/4b2k/1p2BBbp/p3pQ2/4N3/1P2P3/5PPP/6K1 w - - 0 1,c3_images_replacement5.png,,,"['e4g5', 'e6g8']",0
+43,False,0,True,14.0,kr4r1/p1pqn1b1/2p1p2p/2Pp2p1/Q2P4/2RB2B1/PP3PPP/1K5R w - - 0 1,c4_images_brankawittwer(reversed).png,,,['a4a7'],0
+43,False,0,True,15.0,1k6/pp6/q4p2/3p1B1p/5P1P/1PP1B1R1/r5bK/8 w - - 0 1,c4_images_ivanchuksavchenko(reversed).png,,,['g3g8'],0
+43,False,0,True,16.0,5k2/p4p1r/1n3b2/2p1Qp1p/1q2P3/1B4R1/Pr3PP1/2R2K2 w - - 0 1,c4_images_strekalovskyshaposhlikov.png,,,"['e5d6', 'g3g8']",0
+43,False,0,True,17.0,r1b2rk1/1pp2ppp/p1np1q2/8/1b2Q3/2PB1N2/PP1B1PPP/RN2K2R w - - 0 1,c5_images_easyposition2.png,,,['e4h7'],0
+43,False,0,True,18.0,2kr1r2/3bb3/1pp5/4B1p1/2BP3p/8/5P1P/3RRK2 w - - 0 1,c5_images_easyposition5(reversed).png,ba6,c4a6,['c4a6'],1
+43,False,0,True,19.0,1r4rk/6p1/1p5p/4N3/b7/3B4/PP6/K1R5 w - - 0 1,c5_images_easyposition6.png,nf7,e5f7,['e5f7'],1
+43,False,0,False,20.0,2r2r1k/1b5p/p2Q1qp1/3p1P2/3Pp3/8/6RP/6RK w - - 0 1,nc1_images_frombeautiful(nomate).png,,,[],1
+43,False,0,False,21.0,3q2kr/1p3pp1/p1p2R1p/5p2/7P/P3Q3/1P4P1/7K w - - 0 1,nc1_images_steinitznn(nomate).png,,,[],1
+43,False,0,False,22.0,1k6/ppp3pp/3ppb2/1P1P1Q2/3qr3/2R5/P1R4P/1K6 w - - 0 1,nc1_images_winterfriede(nomate)(reversed).png,rc7,c3c7,[],0
+43,False,0,False,23.0,1k6/1b1q2p1/2R4p/2QB4/1P2Pp2/P4P2/2r3rP/KR6 w - - 0 1,nc2_images_kekhayovpetrov(nomate)(reversed).png,,,[],1
+43,False,0,False,24.0,4rk2/1Qp2p1r/1p2bB2/p5Rp/P5pP/6P1/1Pq5/3R2K1 w - - 0 1,nc2_images_krausemeinhardt(nomate).png,qc6,b7c6,[],0
+43,False,0,False,25.0,k1n2b2/p1r3r1/QpP1pp2/3P4/3P3p/2P2PBq/3N1P1P/R3R1K1 w - - 0 1,nc2_images_skujarozenbergs(nomate)(reversed).png,qb7,a6b7,[],0
+43,False,0,False,26.0,6k1/1p1R1p2/p5pp/P3n3/5N1P/2P2Q2/5PPK/4rq2 w - - 0 1,nc2_images_replacement4(nomate).png,,,[],1
+43,False,0,False,27.0,rk2q2r/p1p2p1p/Bp4p1/3N1b2/3Npp2/5P2/PPP3PP/1K1Rb2R w - - 0 1,nc3_images_kazicvukovic(nomate)(reversed).png,,,[],1
+43,False,0,False,28.0,1k1r4/p7/R1p1p2b/1NN1qp2/8/1P3B2/2PP1K2/8 w - - 0 1,nc3_images_malininandreev(nomate)(reversed).png,,,[],1
+43,False,0,False,29.0,k2r3r/pbQ1n2p/3p3b/2pNN2q/5Bp1/8/PPP4P/1KR1R3 w - - 0 1,nc3_images_podzerovkuntzevic(nomate)(reversed).png,,,[],1
+43,False,0,False,30.0,1k2q3/ppr5/1bp5/4N3/5Q1R/8/PP6/K7 w - - 0 1,nc3_images_studybyercoledelrio(nomate)(reversed).png,,,[],1
+43,False,0,False,31.0,2r3k1/pb1q1p2/1p2pbpp/8/3N4/P2QB3/1P3PPP/1Br1R1K1 w - - 0 1,nc3_images_tylorwinter(nomate).png,,,[],1
+43,False,0,False,32.0,1rr4k/3qNpb1/2p2n1p/3p1Q2/1P1P3N/2P3P1/5P1P/6K1 w - - 0 1,nc3_images_replacement3(nomate).png,,,[],1
+43,False,0,False,33.0,2r1rq2/4b2k/1p2BBb1/p3pQ1p/4N3/1P2P3/5PPP/6K1 w - - 0 1,nc3_images_replacement5(nomate).png,,,[],1
+43,False,0,False,34.0,kr4r1/p1pqn1b1/2p1p2p/2Pp2p1/Q2P4/1PRB2B1/P4PPP/1K5R w - - 0 1,nc4_images_brankawittwer(nomate)(reversed).png,,,[],1
+43,False,0,False,35.0,1k6/pp4p1/q4p2/3p1B1p/5P1P/1PP1B1R1/r5bK/8 w - - 0 1,nc4_images_ivanchuksavchenko(nomate)(reversed).png,,,[],1
+43,False,0,False,36.0,5k2/p4p1r/1n3b2/2p1Qp1p/1q2P1p1/1B4R1/Pr3PP1/2R2K2 w - - 0 1,nc4_images_strekalovskyshaposhlikov(nomate).png,,,[],1
+43,False,0,False,37.0,r1b2rk1/1pp2p1p/p1np1qp1/8/1b2Q3/2PB1N2/PP1B1PPP/RN2K2R w - - 0 1,nc5_images_easyposition2(nomate).png,,,[],1
+43,False,0,False,38.0,2kr1r2/3bb3/2p5/1p2B1p1/2BP3p/8/5P1P/3RRK2 w - - 0 1,nc5_images_easyposition5(nomate)(reversed).png,ra1,d1a1,[],0
+43,False,0,False,39.0,1r4rk/8/1p4pp/4N3/b7/3B4/PP6/K1R5 w - - 0 1,nc5_images_easyposition6(nomate).png,,,[],1
+44,False,0,True,0.0,2r2r1k/1b5p/p2Q1q2/3p1P2/3Pp3/8/6RP/6RK w - - 0 1,c1_images_frombeautiful.png,,,['g2g8'],0
+44,False,0,True,1.0,r2q2kr/1p4p1/p1p2R1p/5p2/7P/P3Q3/1P4P1/7K w - - 0 1,c1_images_steinitznn.png,Qe6,e3e6,['e3e6'],1
+44,False,0,True,2.0,1k6/ppp3pp/3p1b2/1P1P1Q2/3qr3/2R5/P1R4P/1K6 w - - 0 1,c1_images_winterfriede(reversed).png,,,['f5c8'],0
+44,False,0,True,3.0,1k6/1b1q2p1/2R4p/2QB4/4Pp2/P4P2/6rP/KR6 w - - 0 1,c2_images_kekhayovpetrov(reversed).png,,,"['b1b7', 'c6e6', 'c5f8', 'c6a6']",0
+44,False,0,True,4.0,4rk2/1Q3p1r/1p2bB2/p5Rp/P5pP/6P1/1Pq5/3R2K1 w - - 0 1,c2_images_krausemeinhardt.png,,,"['b7e7', 'f6e7']",0
+44,False,0,True,5.0,k1n2br1/p1r5/QpP1pp2/3P4/3P3p/2P2PBq/3N1P1P/R3R1K1 w - - 0 1,c2_images_skujarozenbergs(reversed).png,Qb7,a6b7,['a6c8'],0
+44,False,0,True,6.0,6k1/1p1R1p1p/p5p1/P3n3/5N1P/2P2Q2/5PPK/4rq2 w - - 0 1,c2_images_replacement4.png,,,['d7d8'],0
+44,False,0,True,7.0,rk2q2r/p1p2p1p/B1p3p1/3N1b2/3Npp2/5P2/PPP3PP/1K1Rb2R w - - 0 1,c3_images_kazicvukovic(reversed).png,,,['d5e7'],0
+44,False,0,True,8.0,1k1r4/8/R1p1p2b/1NN1qp2/8/1P3B2/2PP1K2/8 w - - 0 1,c3_images_malininandreev(reversed).png,,,"['a6a8', 'a6b6']",0
+44,False,0,True,9.0,k2r3r/pbQ1n2p/7b/2pNN2q/5Bp1/8/PPP4P/1KR1R3 w - - 0 1,c3_images_podzerovkuntzevic(reversed).png,,,['c7b8'],0
+44,False,0,True,10.0,1kr1q3/pp6/1bp5/4N3/5Q1R/8/PP6/K7 w - - 0 1,c3_images_studybyercoledelrio(reversed).png,,,['e5d7'],0
+44,False,0,True,11.0,3r2k1/pb1q1pp1/1p2pb1p/8/3N4/P2QB3/1P3PPP/1Br1R1K1 w - - 0 1,c3_images_tylorwinter.png,Qh7,d3h7,['d3h7'],1
+44,False,0,True,12.0,1rr4k/3qN1b1/2p2n1p/3p1Q2/1P1P3N/2P3P1/5P1P/6K1 w - - 0 1,c3_images_replacement3.png,,,['e7g6'],0
+44,False,0,True,13.0,2r1rq2/4b2k/1p2BBbp/p3pQ2/4N3/1P2P3/5PPP/6K1 w - - 0 1,c3_images_replacement5.png,,,"['e4g5', 'e6g8']",0
+44,False,0,True,14.0,kr4r1/p1pqn1b1/2p1p2p/2Pp2p1/Q2P4/2RB2B1/PP3PPP/1K5R w - - 0 1,c4_images_brankawittwer(reversed).png,,,['a4a7'],0
+44,False,0,True,15.0,1k6/pp6/q4p2/3p1B1p/5P1P/1PP1B1R1/r5bK/8 w - - 0 1,c4_images_ivanchuksavchenko(reversed).png,,,['g3g8'],0
+44,False,0,True,16.0,5k2/p4p1r/1n3b2/2p1Qp1p/1q2P3/1B4R1/Pr3PP1/2R2K2 w - - 0 1,c4_images_strekalovskyshaposhlikov.png,,,"['e5d6', 'g3g8']",0
+44,False,0,True,17.0,r1b2rk1/1pp2ppp/p1np1q2/8/1b2Q3/2PB1N2/PP1B1PPP/RN2K2R w - - 0 1,c5_images_easyposition2.png,,,['e4h7'],0
+44,False,0,True,18.0,2kr1r2/3bb3/1pp5/4B1p1/2BP3p/8/5P1P/3RRK2 w - - 0 1,c5_images_easyposition5(reversed).png,Ba6,c4a6,['c4a6'],1
+44,False,0,True,19.0,1r4rk/6p1/1p5p/4N3/b7/3B4/PP6/K1R5 w - - 0 1,c5_images_easyposition6.png,,,['e5f7'],0
+44,False,0,False,20.0,2r2r1k/1b5p/p2Q1qp1/3p1P2/3Pp3/8/6RP/6RK w - - 0 1,nc1_images_frombeautiful(nomate).png,,,[],1
+44,False,0,False,21.0,3q2kr/1p3pp1/p1p2R1p/5p2/7P/P3Q3/1P4P1/7K w - - 0 1,nc1_images_steinitznn(nomate).png,,,[],1
+44,False,0,False,22.0,1k6/ppp3pp/3ppb2/1P1P1Q2/3qr3/2R5/P1R4P/1K6 w - - 0 1,nc1_images_winterfriede(nomate)(reversed).png,,,[],1
+44,False,0,False,23.0,1k6/1b1q2p1/2R4p/2QB4/1P2Pp2/P4P2/2r3rP/KR6 w - - 0 1,nc2_images_kekhayovpetrov(nomate)(reversed).png,,,[],1
+44,False,0,False,24.0,4rk2/1Qp2p1r/1p2bB2/p5Rp/P5pP/6P1/1Pq5/3R2K1 w - - 0 1,nc2_images_krausemeinhardt(nomate).png,,,[],1
+44,False,0,False,25.0,k1n2b2/p1r3r1/QpP1pp2/3P4/3P3p/2P2PBq/3N1P1P/R3R1K1 w - - 0 1,nc2_images_skujarozenbergs(nomate)(reversed).png,,,[],1
+44,False,0,False,26.0,6k1/1p1R1p2/p5pp/P3n3/5N1P/2P2Q2/5PPK/4rq2 w - - 0 1,nc2_images_replacement4(nomate).png,,,[],1
+44,False,0,False,27.0,rk2q2r/p1p2p1p/Bp4p1/3N1b2/3Npp2/5P2/PPP3PP/1K1Rb2R w - - 0 1,nc3_images_kazicvukovic(nomate)(reversed).png,,,[],1
+44,False,0,False,28.0,1k1r4/p7/R1p1p2b/1NN1qp2/8/1P3B2/2PP1K2/8 w - - 0 1,nc3_images_malininandreev(nomate)(reversed).png,,,[],1
+44,False,0,False,29.0,k2r3r/pbQ1n2p/3p3b/2pNN2q/5Bp1/8/PPP4P/1KR1R3 w - - 0 1,nc3_images_podzerovkuntzevic(nomate)(reversed).png,,,[],1
+44,False,0,False,30.0,1k2q3/ppr5/1bp5/4N3/5Q1R/8/PP6/K7 w - - 0 1,nc3_images_studybyercoledelrio(nomate)(reversed).png,,,[],1
+44,False,0,False,31.0,2r3k1/pb1q1p2/1p2pbpp/8/3N4/P2QB3/1P3PPP/1Br1R1K1 w - - 0 1,nc3_images_tylorwinter(nomate).png,,,[],1
+44,False,0,False,32.0,1rr4k/3qNpb1/2p2n1p/3p1Q2/1P1P3N/2P3P1/5P1P/6K1 w - - 0 1,nc3_images_replacement3(nomate).png,,,[],1
+44,False,0,False,33.0,2r1rq2/4b2k/1p2BBb1/p3pQ1p/4N3/1P2P3/5PPP/6K1 w - - 0 1,nc3_images_replacement5(nomate).png,,,[],1
+44,False,0,False,34.0,kr4r1/p1pqn1b1/2p1p2p/2Pp2p1/Q2P4/1PRB2B1/P4PPP/1K5R w - - 0 1,nc4_images_brankawittwer(nomate)(reversed).png,,,[],1
+44,False,0,False,35.0,1k6/pp4p1/q4p2/3p1B1p/5P1P/1PP1B1R1/r5bK/8 w - - 0 1,nc4_images_ivanchuksavchenko(nomate)(reversed).png,,,[],1
+44,False,0,False,36.0,5k2/p4p1r/1n3b2/2p1Qp1p/1q2P1p1/1B4R1/Pr3PP1/2R2K2 w - - 0 1,nc4_images_strekalovskyshaposhlikov(nomate).png,,,[],1
+44,False,0,False,37.0,r1b2rk1/1pp2p1p/p1np1qp1/8/1b2Q3/2PB1N2/PP1B1PPP/RN2K2R w - - 0 1,nc5_images_easyposition2(nomate).png,,,[],1
+44,False,0,False,38.0,2kr1r2/3bb3/2p5/1p2B1p1/2BP3p/8/5P1P/3RRK2 w - - 0 1,nc5_images_easyposition5(nomate)(reversed).png,,,[],1
+44,False,0,False,39.0,1r4rk/8/1p4pp/4N3/b7/3B4/PP6/K1R5 w - - 0 1,nc5_images_easyposition6(nomate).png,,,[],1
