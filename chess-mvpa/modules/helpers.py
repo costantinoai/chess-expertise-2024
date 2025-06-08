@@ -5,144 +5,28 @@ Created on Sat Jan 18 16:03:34 2025
 
 @author: costantino_ai
 """
-import inspect, os, shutil, random, sys
+import inspect
+import os
+import shutil
+import random
+import sys
 import numpy as np
-from datetime import datetime
 from pathlib import Path
 import pandas as pd
 
 from modules import logging, MANAGER, REGIONS_LABELS
+from common.helpers import (
+    OutputLogger,
+    create_run_id,
+    save_script_to_file,
+)
 
-class OutputLogger:
-    """
-    A context manager that logs output to a file and the console (stdout).
 
-    Attributes:
-      log (bool): Whether or not to log output to a file. If True, messages
-          will be written to file_path.
-      file_path (str): The file path where messages will be written if log is
-          True.
-      original_stdout (object): The original stdout stream, which will be
-          restored when the context is exited.
-      log_file (file object): The file object used to write output to the
-          file_path.
-
-    Methods:
-      __enter__: Called when the context is entered. If log is True, opens the
-          log file and redirects stdout to self.
-      __exit__: Called when the context is exited. If log is True, restores
-          stdout to its original state and closes the log file.
-      write: Writes a message to stdout and the log file (if log is True).
-      flush: Flushes the stdout and the log file (if log is True).
-    """
-
-    def __init__(self, log: bool, file_path: str):
-        """
-        Initializes the OutputLogger object.
-
-        Args:
-         log (bool): Whether or not to log output to a file. If True, messages
-             will be written to file_path.
-           file_path (str): The file path where messages will be written if log
-               is True.
-        """
-        self.log = log
-        self.file_path = file_path
-        self.original_stdout = sys.stdout
-        self.original_stderr = sys.stderr
-
-    def __enter__(self):
-        """
-        Called when the context is entered. If log is True, opens the log file
-        and redirects stdout to self.
-
-        Returns:
-          self: The OutputLogger object.
-        """
-        if self.log:
-            self.log_file = open(
-                self.file_path, "w"
-            )  # open the log file for writing
-            sys.stdout = self  # redirect stdout to this OutputLogger object
-            sys.stderr = self
-            # Reconfigure logging to use the new stderr
-            for handler in logging.root.handlers:
-                handler.stream = sys.stderr
-        return self
-
-    def __exit__(self, exc_type, exc_val, exc_tb):
-        """
-        Called when the context is exited. If log is True, restores stdout to
-        its original state and closes the log file.
-
-        Args:
-          exc_type (type): The exception type, if any.
-          exc_val (Exception): The exception value, if any.
-          exc_tb (traceback): The traceback object, if any.
-        """
-        if self.log:
-            # Restore logging to use the original stderr
-            for handler in logging.root.handlers:
-                handler.stream = self.original_stderr
-            sys.stdout = self.original_stdout
-            sys.stderr = self.original_stderr
-            self.log_file.close()
-
-    def write(self, message: str):
-        """
-        Writes a message to stdout and the log file (if log is True).
-
-        Args:
-          message (str): The message to write.
-        """
-        self.original_stdout.write(message)  # write the message to the console
-        if self.log and not self.log_file.closed:  # check if the file is not closed
-            self.log_file.write(message)  # write the message to the log file
-
-    def flush(self):
-        """
-        Flushes the stdout and the log file (if log is True).
-        """
-        self.original_stdout.flush()  # flush the console
-        if self.log and not self.log_file.closed:  # check if the file is not closed
-            self.log_file.flush()  # flush the log file
 
 def set_rnd_seed(seed=42):
     # Set random seeds for reproducibility
     np.random.seed(seed)
     random.seed(seed)
-
-def create_run_id() -> str:
-    """
-    Create a unique run ID based on the current timestamp.
-
-    Returns:
-        str: A string representing the current date and time in the format "YYYYMMDD-HHMMSS".
-    """
-    now = datetime.now()
-    return now.strftime("%Y%m%d-%H%M%S")
-
-def save_script_to_file(output_directory):
-    """
-    Save the calling script to a specified output directory.
-
-    This function obtains the filename of the script that directly calls this function
-    (i.e., the "caller frame") and copies that script to a target directory, providing
-    reproducibility by capturing the exact code used in the analysis.
-
-    Parameters
-    ----------
-    output_directory : str
-        Path to the directory where the script file will be copied.
-
-    Returns
-    -------
-    None
-    """
-    caller_frame = inspect.stack()[1]  # Stack frame of the caller
-    script_file = caller_frame.filename
-    script_file_out = os.path.join(output_directory, os.path.basename(script_file))
-    shutil.copy(script_file, script_file_out)
 
 def load_subject_data(
     root_path: Path, subject_list: list, is_expert: bool, level: str
