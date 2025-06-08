@@ -259,7 +259,10 @@ def plot_mvpa_barplot(
         - line_center (list): List of tuples (line_x, line_y, line_lower, line_upper, group).
         - _ax (matplotlib.axes.Axes): Axis object for the plot.
         """
-        chosen_p="p_corrected" if use_corrected_p == True else "p_corrected"
+        # Select the appropriate p-value column depending on whether
+        # FDR-corrected statistics should be used. When `use_corrected_p`
+        # is False we fall back to the uncorrected p-values.
+        chosen_p = "p_corrected" if use_corrected_p else "p_uncorrected"
 
         try:
             line_x, line_y, group, facecolor = line_center
