@@ -1,4 +1,11 @@
 # chess-expertise-2024
 
-Add info on steps from [lab wiki](https://hoplab-lbp.github.io/hoplab-wiki/fmri/fmri-andrea-workflow.html)
- 
+This repository contains scripts and helper modules used in the Chess Expertise study.
+
+The analysis is now divided into two submodules:
+
+- **chess-glm** – MATLAB utilities and helper scripts for first and second level GLM analysis.
+- **chess-mvpa** – MVPA and RSA analysis code along with general plotting utilities.
+
+Additional behavioural and dataset visualisation scripts can be found in their respective folders.
+
