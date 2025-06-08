@@ -1,8 +1,6 @@
 # -*- coding: utf-8 -*-
 import logging
-import seaborn as sns
-
-sns.set(style="darkgrid", palette="muted", font_scale=1.7)
+from common import plot_style
 
 # Setting up the logging
 logging.basicConfig(level=logging.DEBUG,
