@@ -20,24 +20,9 @@ import numpy as np
 from modules.config import (
     BRAIN_CMAP, TERM_ORDER,
     logger, PALETTE, LEVELS_MAPS,
-    COL_POS, COL_NEG
+    COL_POS, COL_NEG,
 )
-
-# --- Base font size ---
-base_font_size = 26
-
-# --- Global matplotlib settings using relative multipliers ---
-plt.rcParams.update({
-    'font.size': base_font_size,
-    'axes.titlesize': base_font_size * 1.4,   # 28
-    'axes.labelsize': base_font_size * 1.2,   # 24
-    'xtick.labelsize': base_font_size,        # 20
-    'ytick.labelsize': base_font_size,        # 20
-    'legend.fontsize': base_font_size,        # 20
-    'figure.figsize': (12, 9)
-})
-
-
+from common import plot_style
 
 def plot_map(arr, ref_img, title, outpath):
     """

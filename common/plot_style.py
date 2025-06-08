@@ -8,14 +8,30 @@ COL_POS = '#216421'
 COL_NEG = '#8B2E2E'
 PALETTE = [COL_POS, COL_NEG]
 
-# Apply global seaborn/matplotlib style
+# --- Base style settings ---
+# Master font size. All other sizes are expressed as multipliers of this value.
+BASE_FONT_SIZE = 22
+# Default figure size for all plots.
+FIG_SIZE = (12, 9)
+
 sns.set_style('white')
 sns.set_palette(sns.color_palette(PALETTE))
-plt.rcParams['font.family'] = 'Ubuntu Condensed'
-plt.rcParams['figure.figsize'] = (12, 9)
-plt.rcParams['font.size'] = 22
-plt.rcParams['axes.titlesize'] = 26
-plt.rcParams['axes.labelsize'] = 22
+plt.rcParams.update({
+    'font.family': 'Ubuntu Condensed',
+    'figure.figsize': FIG_SIZE,
+    'figure.dpi': 300,
+    'font.size': BASE_FONT_SIZE,
+    'axes.titlesize': BASE_FONT_SIZE * 1.2,
+    'axes.labelsize': BASE_FONT_SIZE,
+    'xtick.labelsize': BASE_FONT_SIZE * 0.8,
+    'ytick.labelsize': BASE_FONT_SIZE * 0.8,
+    'legend.fontsize': BASE_FONT_SIZE * 0.8,
+    'legend.title_fontsize': BASE_FONT_SIZE * 0.8,
+    'legend.frameon': False,
+    'legend.loc': 'best',
+    'savefig.bbox': 'tight',
+    'savefig.pad_inches': 0.1,
+})
 
 # Custom colormap used for brain plots (copied from neurosynth)
 def make_brain_cmap():
@@ -28,7 +44,7 @@ BRAIN_CMAP = make_brain_cmap()
 
 TITLE_FONT = {
     'fontfamily': 'Ubuntu Condensed',
-    'fontsize': 22,
+    'fontsize': BASE_FONT_SIZE,
     'fontweight': 'bold',
     'color': 'black',
     'backgroundcolor': 'white'

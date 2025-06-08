@@ -18,37 +18,6 @@ from common.helpers import (
 )
 
 
-def create_output_directory(directory_path):
-    """
-    Creates an output directory at the specified path.
-
-    Parameters:
-    - directory_path (str): The path where the output directory will be created.
-
-    The function attempts to create a directory at the given path.
-    It logs the process, indicating whether the directory creation was successful or if any error occurred.
-    If the directory already exists, it will not be created again, and this will also be logged.
-    """
-    try:
-        # Log the attempt to create the output directory
-        logging.debug(f"Attempting to create output directory at: {directory_path}")
-
-        # Check if directory already exists to avoid overwriting
-        if not os.path.exists(directory_path):
-            # Create the directory
-            os.makedirs(directory_path)
-            # Log the successful creation
-            logging.info("Output directory created successfully.")
-        else:
-            # Log if the directory already exists
-            logging.info("Output directory already exists.")
-    except Exception as e:
-        # Log any errors encountered during the directory creation
-        logging.error(
-            f"An error occurred while creating the output directory: {e}",
-            exc_info=True,
-        )
-
 def load_and_sort_data(dataset_path, net_responses_path, humans_response_path):
     """
     Load the datasets into Pandas DataFrames and sort them by 'stim_id'.
