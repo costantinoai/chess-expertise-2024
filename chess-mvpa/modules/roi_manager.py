@@ -637,6 +637,8 @@ class ROIManager:
 
         if self.MNINLinAsym_AFNI_img == None:
             atlas = self._load_MNINLinAsym_AFNI_img()
+        else:
+            atlas = self.MNINLinAsym_AFNI_img
 
         atlas_data = atlas.get_fdata()
 
@@ -652,7 +654,7 @@ class ROIManager:
             if hemi[0].lower() == "r":
                 region_id += 1000
 
-            mask[mask==region_id] = 1
+            mask[atlas_data == region_id] = 1
 
         return mask
 
