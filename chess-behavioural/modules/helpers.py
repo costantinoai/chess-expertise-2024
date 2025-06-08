@@ -179,7 +179,7 @@ def calculate_mean_and_ci(data):
     mean = np.mean(data)
     ci_lower, ci_upper = stats.t.interval(
         confidence=0.95, df=len(data)-1, loc=mean, scale=stats.sem(data))
-    return mean, ci_lower, ci_upper  # Set the overall aesthetics
+    return mean, ci_lower, ci_upper  # mean and 95% confidence interval
 
 def load_and_sort_data(dataset_path, net_responses_path, humans_response_path):
     """
