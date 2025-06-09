@@ -20,15 +20,21 @@ import os
 import logging
 from glob import glob
 
+from modules.run_utils import (
+    create_run_id,
+    create_output_directory,
+    save_script_to_file,
+    OutputLogger,
+)
+from logging_utils import setup_logging
+
 from modules.config          import LEVELS_MAPS
 from modules.io_utils        import load_term_maps, load_nifti
 from modules.stats_utils     import split_and_convert_t_to_z, compute_all_zmap_correlations, save_latex_correlation_tables
 from modules.plot_utils      import plot_term_maps, plot_map, plot_correlations, plot_difference
 
-# Configure a simple timestamped logger so progress is visible when running the
-# pipeline from the command line.
-logging.basicConfig(format="[%(levelname)s %(asctime)s] %(message)s",
-                    level=logging.INFO)
+# Configure a consistent logger
+setup_logging()
 logger = logging.getLogger(__name__)
 
 def main():
@@ -40,8 +46,10 @@ def main():
     # ------------------------------------------------------------------
     term_dir    = 'data/terms'
     brain_dir   = 'data/smooth4'
-    result_root = 'results/smooth4-new'
-    os.makedirs(result_root, exist_ok=True)
+    result_root = os.path.join('results', f"{create_run_id()}_neurosynth-full")
+    create_output_directory(result_root)
+    save_script_to_file(result_root)
+    out_text_file = os.path.join(result_root, 'console.log')
 
     term_maps = load_term_maps(term_dir)
     # plot_term_maps(term_maps, os.path.join(result_root, 'term_maps'))
@@ -49,68 +57,69 @@ def main():
     # ------------------------------------------------------------------
     # 2) Iterate over all statistical maps to correlate.
     # ------------------------------------------------------------------
-    for filepath in glob(os.path.join(brain_dir, '*.nii')):
-        run_id = os.path.splitext(os.path.basename(filepath))[0]
-        parts = run_id.split('_')
-        level1 = LEVELS_MAPS[parts[1]]
-        level2 = LEVELS_MAPS[parts[2]]
-        subtitle = f"{level1} | {level2}"
-        out_dir = os.path.join(result_root, run_id).replace(">", "-gt-")
-        os.makedirs(out_dir, exist_ok=True)
+    with OutputLogger(True, out_text_file):
+        for filepath in glob(os.path.join(brain_dir, '*.nii')):
+            run_id = os.path.splitext(os.path.basename(filepath))[0]
+            parts = run_id.split('_')
+            level1 = LEVELS_MAPS[parts[1]]
+            level2 = LEVELS_MAPS[parts[2]]
+            subtitle = f"{level1} | {level2}"
+            out_dir = os.path.join(result_root, run_id).replace(">", "-gt-")
+            create_output_directory(out_dir)
 
-        logger.info(f"Processing: {run_id}")
-        # Load the image and degrees of freedom (depends on the contrast).
-        ref_img = load_nifti(filepath)
-        tmap    = ref_img.get_fdata()
-        dof     = 38 if "exp>" in filepath else 19
+            logger.info(f"Processing: {run_id}")
+            # Load the image and degrees of freedom (depends on the contrast).
+            ref_img = load_nifti(filepath)
+            tmap    = ref_img.get_fdata()
+            dof     = 38 if "exp>" in filepath else 19
 
         # --------------------------------------------------------------
         # 2a) Convert the T-map into one-tailed Z-maps.  Positive values
         #     indicate expert > novice effects, negative values the opposite.
         # --------------------------------------------------------------
-        z_pos, z_neg = split_and_convert_t_to_z(tmap, dof)
+            z_pos, z_neg = split_and_convert_t_to_z(tmap, dof)
 
         # --------------------------------------------------------------
         # 2b) Visualise the maps so that we can spot any obvious issues.
         # --------------------------------------------------------------
-        plot_map(tmap, ref_img,
-                  f"{run_id}: T-map",
-                  os.path.join(out_dir, f"tmap_{run_id}.png"))
-        plot_map(z_pos, ref_img,
-                  f"{run_id}: Positive z-map",
-                  os.path.join(out_dir, f"zpos_{run_id}.png"))
-        plot_map(z_neg, ref_img,
-                  f"{run_id}: Negative z-map",
-                  os.path.join(out_dir, f"zneg_{run_id}.png"))
+            plot_map(tmap, ref_img,
+                     f"{run_id}: T-map",
+                     os.path.join(out_dir, f"tmap_{run_id}.png"))
+            plot_map(z_pos, ref_img,
+                     f"{run_id}: Positive z-map",
+                     os.path.join(out_dir, f"zpos_{run_id}.png"))
+            plot_map(z_neg, ref_img,
+                     f"{run_id}: Negative z-map",
+                     os.path.join(out_dir, f"zneg_{run_id}.png"))
 
         # --------------------------------------------------------------
         # 2c) Correlate the Z-maps with each term map.  The helper function
         #     returns DataFrames with bootstrap CIs and FDR-corrected p-values
         #     for both individual correlations and their difference.
         # --------------------------------------------------------------
-        df_pos, df_neg, df_diff = compute_all_zmap_correlations(
-            z_pos, z_neg, term_maps, ref_img,
-            n_boot=10000, fdr_alpha=0.05, ci_alpha=0.05,
-            n_jobs=-1
-        )
+            df_pos, df_neg, df_diff = compute_all_zmap_correlations(
+                z_pos, z_neg, term_maps, ref_img,
+                n_boot=10000, fdr_alpha=0.05, ci_alpha=0.05,
+                n_jobs=-1
+            )
 
         # 2d) Produce bar plots for the individual correlations and their
         #     difference.
-        corr_png = os.path.join(out_dir, f"correlations_{run_id}.png")
-        corr_csv = os.path.join(out_dir, f"correlations_{run_id}.csv")
-        plot_correlations(df_pos, df_neg, df_diff, corr_png, corr_csv, subtitle)
+            corr_png = os.path.join(out_dir, f"correlations_{run_id}.png")
+            corr_csv = os.path.join(out_dir, f"correlations_{run_id}.csv")
+            plot_correlations(df_pos, df_neg, df_diff, corr_png, corr_csv, subtitle)
 
         # Additional visualisation focusing solely on the differences.
-        diff_png = os.path.join(out_dir, f"diff_correlations_{run_id}.png")
-        plot_difference(df_diff, diff_png, subtitle)
+            diff_png = os.path.join(out_dir, f"diff_correlations_{run_id}.png")
+            plot_difference(df_diff, diff_png, subtitle)
 
         # Export nicely formatted LaTeX tables so the numbers can be directly
         # included in the manuscript or supplementary materials.
-        save_latex_correlation_tables(
-            df_pos, df_neg, df_diff,
-            run_id=run_id,
-            out_dir=os.path.join(out_dir, "latex_tables")
-        )
+            save_latex_correlation_tables(
+                df_pos, df_neg, df_diff,
+                run_id=run_id,
+                out_dir=os.path.join(out_dir, "latex_tables")
+            )
 
     logger.info("All analyses complete.")
 

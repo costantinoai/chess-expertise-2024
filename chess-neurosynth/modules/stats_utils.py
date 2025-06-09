@@ -45,56 +45,28 @@ def split_and_convert_t_to_z(t_map: np.ndarray, dof: int):
     return z_pos, z_neg
 
 
-def remove_useless_data(data: np.ndarray, dim: int = 2):
-    """
-    Remove "useless" rows or columns from a 2D array by:
-      1) Removing any slice containing NaN or Inf,
-      2) Removing any slice that is entirely zeros.
+def remove_useless_data(data: np.ndarray):
+    """Remove problematic voxels from stacked maps.
 
     Parameters
     ----------
-    data : np.ndarray, shape (n_samples, n_features)
-        2D array to be cleaned.
-    dim : int, {1, 2}, default=2
-        If dim == 2, operate on features (columns): drop columns
-        with any NaN/Inf or all zeros.
-        If dim == 1, operate on samples (rows): drop rows
-        with any NaN/Inf or all zeros.
+    data : np.ndarray, shape (n_maps, n_voxels)
+        Array containing different maps stacked by rows.
 
     Returns
     -------
     data_clean : np.ndarray
-        The filtered array, preserving the other axis.
-    keep_mask : np.ndarray of bools
-        Boolean mask for retained rows (if dim==1) or columns (if dim==2).
+        Data with unusable voxels removed.
+    keep_mask : np.ndarray of bool
+        Boolean mask indicating voxels that were kept.
     """
     if data.ndim != 2:
-        raise ValueError("remove_useless_data expects a 2D array.")
-    if dim not in (1, 2):
-        raise ValueError("dim must be 1 (rows) or 2 (columns).")
+        raise ValueError("remove_useless_data expects a 2D array")
 
-    # Determine axis: axis=0 for columns, axis=1 for rows
-    axis = 1 if dim == 1 else 0
-
-    # 1) Mask out any slice with NaN or Inf
-    finite_mask = np.all(np.isfinite(data), axis=axis)
-
-    # 2) Mask out any slice that is entirely zeros
-    if dim == 2:
-        zero_mask = np.all(data == 0, axis=0)
-    else:
-        zero_mask = np.all(data == 0, axis=1)
-
-    # Combine: keep finite & not all-zero
-    keep_mask = finite_mask & (~zero_mask)
-
-    # Apply mask
-    if dim == 2:
-        data_clean = data[:, keep_mask]
-    else:
-        data_clean = data[keep_mask, :]
-
-    return data_clean, keep_mask
+    finite_mask = np.all(np.isfinite(data), axis=0)
+    const_mask = np.ptp(np.round(data, 2), axis=0) == 0
+    keep_mask = finite_mask & (~const_mask)
+    return data[:, keep_mask], keep_mask
 
 def compute_all_zmap_correlations(z_pos, z_neg, term_maps, ref_img,
                                   n_boot=10000, fdr_alpha=0.05,
@@ -154,14 +126,8 @@ def compute_all_zmap_correlations(z_pos, z_neg, term_maps, ref_img,
         # three maps.  The latter effectively removes regions that carry no
         # variance and would otherwise bias the correlation.
         # --------------------------------------------------------------
-        stacked = np.vstack([flat_pos, flat_neg, flat_t]).T
-
-        # Keep voxels that are finite AND not all (abs) values are below threshold
-        ok = np.all(np.isfinite(stacked), axis=1)
-        # ok &= ~np.all(np.abs(stacked) < 1e-5, axis=1) # uncomment this to remove constant voxels
-        ok &= (stacked.max(axis=1) - stacked.min(axis=1)) > 0
-
-        x, y, t = stacked[ok, 0], stacked[ok, 1], stacked[ok, 2]
+        stacked, _ = remove_useless_data(np.vstack([flat_pos, flat_neg, flat_t]))
+        x, y, t = stacked
 
         # --- POSITIVE MAP ---
         res_pos = pg.corr(x=t, y=x, method='pearson',

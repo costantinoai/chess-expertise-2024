@@ -1,12 +1,12 @@
 # -*- coding: utf-8 -*-
 import logging
 import seaborn as sns
+from logging_utils import setup_logging
 
 sns.set(style="darkgrid", palette="muted", font_scale=1.7)
 
-# Setting up the logging
-logging.basicConfig(level=logging.DEBUG,
-                    format='%(asctime)s - %(levelname)s - %(message)s')
+# Configure logging consistently across modules
+setup_logging()
 logging.getLogger('matplotlib').setLevel(logging.WARNING)
 logging.getLogger('seaborn').setLevel(logging.WARNING)
 logging.getLogger('pandas').setLevel(logging.WARNING)
