@@ -95,10 +95,28 @@ def remove_useless_data(data: np.ndarray, dim: int = 2):
 
 
 def compute_all_zmap_correlations(z_pos, z_neg, term_maps, ref_img,
-                                  n_boot=10000, fdr_alpha=0.05):
+                                  n_boot=10000, fdr_alpha=0.05,
+                                  ci_alpha=0.05, random_state=None):
     """
-    Compute correlation statistics for positive and negative z-maps against term-maps,
-    along with their difference using Steiger's dependent correlation test.
+    Compute correlation statistics for positive and negative z-maps against
+    term-maps and estimate their difference using a bootstrap approach.
+
+    Parameters
+    ----------
+    z_pos, z_neg : np.ndarray
+        Positive and negative z-maps to correlate with the term maps.
+    term_maps : dict
+        Mapping from term name to NIfTI file path.
+    ref_img : nibabel.Nifti1Image
+        Reference image (for resampling term maps).
+    n_boot : int, optional
+        Number of bootstrap samples for the individual correlations.
+    fdr_alpha : float, optional
+        Alpha level for FDR-correction of the p-values.
+    ci_alpha : float, optional
+        Alpha level for confidence intervals on the difference of correlations.
+    random_state : int or None, optional
+        Seed for the random number generator used in bootstrapping.
 
     Returns:
     --------
@@ -112,6 +130,8 @@ def compute_all_zmap_correlations(z_pos, z_neg, term_maps, ref_img,
     records_pos = []
     records_neg = []
     records_diff = []
+
+    rng = np.random.default_rng(random_state)
 
     flat_pos = z_pos.ravel()
     flat_neg = z_neg.ravel()
@@ -145,24 +165,25 @@ def compute_all_zmap_correlations(z_pos, z_neg, term_maps, ref_img,
         ci_lo_neg, ci_hi_neg = res_neg['CI95%'].iloc[0]
         records_neg.append((term, r_neg, ci_lo_neg, ci_hi_neg, p_neg))
 
-        # --- DIFFERENCE (Steiger's test) ---
-        # Fisher-z transform and Steiger’s dependent r test
-        r_xt = r_pos
-        r_yt = r_neg
-        r_xy = np.corrcoef(x, y)[0, 1]
-
-        z1 = np.arctanh(np.clip(r_xt, -0.999999, 0.999999))
-        z2 = np.arctanh(np.clip(r_yt, -0.999999, 0.999999))
-        dz = z1 - z2
+        # --- DIFFERENCE (bootstrap) ---
         n = len(x)
-        se = np.sqrt(2 * (1 - r_xy) / (n - 3))
-        Z = dz / se
-        p_diff = 2 * (1 - norm.cdf(abs(Z)))
+        boot_diffs = np.empty(n_boot)
+        for bi in range(n_boot):
+            idx = rng.integers(0, n, size=n)
+            r_pos_b = np.corrcoef(t[idx], x[idx])[0, 1]
+            r_neg_b = np.corrcoef(t[idx], y[idx])[0, 1]
+            boot_diffs[bi] = r_pos_b - r_neg_b
 
-        crit = norm.ppf(1 - fdr_alpha / 2)
-        lo_r, hi_r = np.tanh([dz - crit * se, dz + crit * se])
+        boot_diffs.sort()
+        lo_r = np.percentile(boot_diffs, 100 * ci_alpha / 2)
+        hi_r = np.percentile(boot_diffs, 100 * (1 - ci_alpha / 2))
 
-        records_diff.append((term, r_pos, r_neg, r_pos - r_neg, lo_r, hi_r, p_diff))
+        diff_obs = r_pos - r_neg
+        tail_low = np.mean(boot_diffs <= 0)
+        tail_high = np.mean(boot_diffs >= 0)
+        p_diff = 2 * min(tail_low, tail_high)
+
+        records_diff.append((term, r_pos, r_neg, diff_obs, lo_r, hi_r, p_diff))
 
     # Assemble DataFrames
     df_pos = pd.DataFrame(records_pos, columns=['term', 'r', 'CI_low', 'CI_high', 'p_raw'])
