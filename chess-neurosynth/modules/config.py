@@ -17,8 +17,8 @@ import logging
 logger = logging.getLogger(__name__)
 
 # Colors
-COL_POS = '#216421'
-COL_NEG = '#8B2E2E'
+COL_POS = '#4c924c'
+COL_NEG = '#ad4c4c'
 PALETTE = [COL_POS, COL_NEG]
 
 # Plot styles

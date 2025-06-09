@@ -44,7 +44,7 @@ def main():
     os.makedirs(result_root, exist_ok=True)
 
     term_maps = load_term_maps(term_dir)
-    plot_term_maps(term_maps, os.path.join(result_root, 'term_maps'))
+    # plot_term_maps(term_maps, os.path.join(result_root, 'term_maps'))
 
     # ------------------------------------------------------------------
     # 2) Iterate over all statistical maps to correlate.
@@ -55,7 +55,7 @@ def main():
         level1 = LEVELS_MAPS[parts[1]]
         level2 = LEVELS_MAPS[parts[2]]
         subtitle = f"{level1} | {level2}"
-        out_dir = os.path.join(result_root, run_id)
+        out_dir = os.path.join(result_root, run_id).replace(">", "-gt-")
         os.makedirs(out_dir, exist_ok=True)
 
         logger.info(f"Processing: {run_id}")

@@ -12,10 +12,11 @@ import numpy as np
 from scipy.stats import t, norm
 from statsmodels.stats.multitest import fdrcorrection
 import pingouin as pg
-from modules.config import TERM_ORDER
 import pandas as pd
 from nilearn import image
 from joblib import Parallel, delayed
+from modules.plot_utils import plot_map
+
 
 def split_and_convert_t_to_z(t_map: np.ndarray, dof: int):
     """
@@ -96,7 +97,6 @@ def remove_useless_data(data: np.ndarray, dim: int = 2):
 
     return data_clean, keep_mask
 
-
 def compute_all_zmap_correlations(z_pos, z_neg, term_maps, ref_img,
                                   n_boot=10000, fdr_alpha=0.05,
                                   ci_alpha=0.05, random_state=None,
@@ -156,8 +156,12 @@ def compute_all_zmap_correlations(z_pos, z_neg, term_maps, ref_img,
         # variance and would otherwise bias the correlation.
         # --------------------------------------------------------------
         stacked = np.vstack([flat_pos, flat_neg, flat_t]).T
+
+        # Keep voxels that are finite AND not all (abs) values are below threshold
         ok = np.all(np.isfinite(stacked), axis=1)
+        # ok &= ~np.all(np.abs(stacked) < 1e-5, axis=1) # uncomment this to remove constant voxels
         ok &= (stacked.max(axis=1) - stacked.min(axis=1)) > 0
+
         x, y, t = stacked[ok, 0], stacked[ok, 1], stacked[ok, 2]
 
         # --- POSITIVE MAP ---
@@ -219,7 +223,7 @@ def compute_all_zmap_correlations(z_pos, z_neg, term_maps, ref_img,
     df_pos = pd.DataFrame(records_pos, columns=['term', 'r', 'CI_low', 'CI_high', 'p_raw'])
     df_neg = pd.DataFrame(records_neg, columns=['term', 'r', 'CI_low', 'CI_high', 'p_raw'])
     df_diff = pd.DataFrame(records_diff,
-                           columns=['term', 'r_pos', 'r_neg', 'r_diff', 'CI_low', 'CI_high', 'p_raw'])
+                            columns=['term', 'r_pos', 'r_neg', 'r_diff', 'CI_low', 'CI_high', 'p_raw'])
 
     # Apply Benjamini-Hochberg FDR correction across all terms
     for df in [df_pos, df_neg, df_diff]:
