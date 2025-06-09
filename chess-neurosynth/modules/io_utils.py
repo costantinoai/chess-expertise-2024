@@ -1,18 +1,16 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
-"""
-Created on Sat Jun  7 22:18:21 2025
-
-@author: costantino_ai
-"""
+"""Utility functions for loading Neuroimaging data used in the pipeline."""
 
 import os
 from nilearn import image
 from modules.config import logger
 
 def load_term_maps(map_dir):
-    """
-    Scan a directory for .nii/.nii.gz files, return dict term→filepath.
+    """Return a dictionary mapping each term name to its NIfTI file.
+
+    The filenames are converted to lowercase terms with underscores replaced by
+    spaces so that ``navigation.nii.gz`` becomes ``"navigation"``.
     """
     logger.info(f"Loading term maps from: {map_dir}")
     maps = {}
@@ -23,5 +21,5 @@ def load_term_maps(map_dir):
     return maps
 
 def load_nifti(path):
-    """Shortcut for nilearn.load_img."""
+    """Load an image file using nilearn and return the NIfTI image object."""
     return image.load_img(path)

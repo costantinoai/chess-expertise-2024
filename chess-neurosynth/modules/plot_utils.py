@@ -1,12 +1,11 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
-"""
-plot_utils.py
+"""Helper functions to visualise the results of the correlation analysis.
 
-Plotting utilities for z-map and term correlation analysis.
-Includes functions to produce glass brain maps, term maps,
-correlation bar plots, and difference bar plots with confidence
-intervals and significance annotations.
+The functions in this module produce brain overlays (glass brain images),
+per-term correlation bar plots and difference plots with bootstrap confidence
+intervals and significance annotations.  All plotting options are consistent
+with the styles defined in :mod:`modules.config`.
 """
 
 import os

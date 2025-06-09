@@ -1,9 +1,19 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
-"""
-Created on Sat Jun  7 22:19:02 2025
+"""Main entry point for the Chess-Neurosynth analysis pipeline.
 
-@author: costantino_ai
+The script iterates over all statistical maps in ``brain_dir`` and for each map
+performs the following high level steps:
+
+1. Convert the T-map to one-tailed positive/negative Z-maps.
+2. Plot the raw T-map and the derived Z-maps for visual inspection.
+3. Correlate each Z-map with a set of Neurosynth term maps using Pearson
+   correlation.  Bootstrapping is used to obtain confidence intervals and to
+   assess the significance of the difference between the two correlations.
+4. Produce bar plots summarising the correlations and their differences.
+5. Save LaTeX tables with the numeric results.
+
+All outputs are written under ``result_root`` organised by run identifier.
 """
 
 import os
@@ -15,11 +25,19 @@ from modules.io_utils        import load_term_maps, load_nifti
 from modules.stats_utils     import split_and_convert_t_to_z, compute_all_zmap_correlations, save_latex_correlation_tables
 from modules.plot_utils      import plot_term_maps, plot_map, plot_correlations, plot_difference
 
+# Configure a simple timestamped logger so progress is visible when running the
+# pipeline from the command line.
 logging.basicConfig(format="[%(levelname)s %(asctime)s] %(message)s",
                     level=logging.INFO)
 logger = logging.getLogger(__name__)
 
 def main():
+    """Run the full correlation analysis for every T-map in ``brain_dir``."""
+
+    # ------------------------------------------------------------------
+    # 1) Load meta-analytic term maps.  These serve as the reference
+    #    "Neurosynth" activation patterns that we correlate each brain map with.
+    # ------------------------------------------------------------------
     term_dir    = 'data/terms'
     brain_dir   = 'data/smooth4'
     result_root = 'results/smooth4-new'
@@ -28,6 +46,9 @@ def main():
     term_maps = load_term_maps(term_dir)
     plot_term_maps(term_maps, os.path.join(result_root, 'term_maps'))
 
+    # ------------------------------------------------------------------
+    # 2) Iterate over all statistical maps to correlate.
+    # ------------------------------------------------------------------
     for filepath in glob(os.path.join(brain_dir, '*.nii')):
         run_id = os.path.splitext(os.path.basename(filepath))[0]
         parts = run_id.split('_')
@@ -38,14 +59,20 @@ def main():
         os.makedirs(out_dir, exist_ok=True)
 
         logger.info(f"Processing: {run_id}")
+        # Load the image and degrees of freedom (depends on the contrast).
         ref_img = load_nifti(filepath)
         tmap    = ref_img.get_fdata()
         dof     = 38 if "exp>" in filepath else 19
 
-        # Convert to z-maps
+        # --------------------------------------------------------------
+        # 2a) Convert the T-map into one-tailed Z-maps.  Positive values
+        #     indicate expert > novice effects, negative values the opposite.
+        # --------------------------------------------------------------
         z_pos, z_neg = split_and_convert_t_to_z(tmap, dof)
 
-        # Glass brain plots
+        # --------------------------------------------------------------
+        # 2b) Visualise the maps so that we can spot any obvious issues.
+        # --------------------------------------------------------------
         plot_map(tmap, ref_img,
                   f"{run_id}: T-map",
                   os.path.join(out_dir, f"tmap_{run_id}.png"))
@@ -56,23 +83,29 @@ def main():
                   f"{run_id}: Negative z-map",
                   os.path.join(out_dir, f"zneg_{run_id}.png"))
 
-        # Compute all correlations and differences
+        # --------------------------------------------------------------
+        # 2c) Correlate the Z-maps with each term map.  The helper function
+        #     returns DataFrames with bootstrap CIs and FDR-corrected p-values
+        #     for both individual correlations and their difference.
+        # --------------------------------------------------------------
         df_pos, df_neg, df_diff = compute_all_zmap_correlations(
             z_pos, z_neg, term_maps, ref_img,
             n_boot=10000, fdr_alpha=0.05, ci_alpha=0.05,
             n_jobs=-1
         )
 
-        # Plot paired correlations
+        # 2d) Produce bar plots for the individual correlations and their
+        #     difference.
         corr_png = os.path.join(out_dir, f"correlations_{run_id}.png")
         corr_csv = os.path.join(out_dir, f"correlations_{run_id}.csv")
         plot_correlations(df_pos, df_neg, df_diff, corr_png, corr_csv, subtitle)
 
-        # Plot differences
+        # Additional visualisation focusing solely on the differences.
         diff_png = os.path.join(out_dir, f"diff_correlations_{run_id}.png")
         plot_difference(df_diff, diff_png, subtitle)
 
-        # Save LaTeX tables
+        # Export nicely formatted LaTeX tables so the numbers can be directly
+        # included in the manuscript or supplementary materials.
         save_latex_correlation_tables(
             df_pos, df_neg, df_diff,
             run_id=run_id,
