@@ -160,25 +160,27 @@ def compute_all_zmap_correlations(z_pos, z_neg, term_maps, ref_img,
             idx = sub_rng.integers(0, n, size=n)
             r_pos_b = np.corrcoef(t[idx], x[idx])[0, 1]
             r_neg_b = np.corrcoef(t[idx], y[idx])[0, 1]
-            return r_pos_b - r_neg_b
+            return (r_pos_b, r_neg_b, r_pos_b - r_neg_b)
 
         # Draw ``n_boot`` bootstrap samples. Multiprocessing is used when
         # ``n_jobs`` is not 1 to speed up the resampling step.
         seeds = rng.integers(0, 2**32 - 1, size=n_boot)
         if n_jobs == 1:
-            boot_diffs = np.array([_boot_one(s) for s in tqdm(seeds, desc="Bootstrapping")])
+            res = np.array([_boot_one(s) for s in tqdm(seeds, desc="Bootstrapping")])
         else:
-            boot_diffs = np.array(
+            res = np.array(
                 Parallel(n_jobs=n_jobs)(
                     delayed(_boot_one)(s) for s in tqdm(seeds, desc="Bootstrapping")
                 )
             )
+        _, _, boot_diffs = res[:, 0],res[:, 1],res[:, 2]
         boot_diffs.sort()
         # Percentile-based confidence interval of the difference
         lo_r = np.percentile(boot_diffs, 100 * ci_alpha / 2)
         hi_r = np.percentile(boot_diffs, 100 * (1 - ci_alpha / 2))
 
-        diff_obs = r_pos - r_neg
+        diff_obs = np.mean(boot_diffs)
+
         # Two-sided p-value: probability that the bootstrap difference crosses 0
         tail_low = np.mean(boot_diffs <= 0)
         tail_high = np.mean(boot_diffs >= 0)
