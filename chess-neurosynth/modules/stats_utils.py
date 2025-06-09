@@ -15,8 +15,7 @@ import pingouin as pg
 import pandas as pd
 from nilearn import image
 from joblib import Parallel, delayed
-from modules.plot_utils import plot_map
-
+from tqdm import tqdm
 
 def split_and_convert_t_to_z(t_map: np.ndarray, dof: int):
     """
@@ -201,10 +200,12 @@ def compute_all_zmap_correlations(z_pos, z_neg, term_maps, ref_img,
         # ``n_jobs`` is not 1 to speed up the resampling step.
         seeds = rng.integers(0, 2**32 - 1, size=n_boot)
         if n_jobs == 1:
-            boot_diffs = np.array([_boot_one(s) for s in seeds])
+            boot_diffs = np.array([_boot_one(s) for s in tqdm(seeds, desc="Bootstrapping")])
         else:
             boot_diffs = np.array(
-                Parallel(n_jobs=n_jobs)(delayed(_boot_one)(s) for s in seeds)
+                Parallel(n_jobs=n_jobs)(
+                    delayed(_boot_one)(s) for s in tqdm(seeds, desc="Bootstrapping")
+                )
             )
         boot_diffs.sort()
         # Percentile-based confidence interval of the difference

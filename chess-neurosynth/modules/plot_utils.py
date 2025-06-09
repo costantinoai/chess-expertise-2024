@@ -43,7 +43,7 @@ plt.rcParams.update(
 )
 
 
-def plot_map(arr, ref_img, title, outpath, thresh=None):
+def plot_map(arr, ref_img, title, outpath, thresh=1e-5):
     """
     Render and save a glass brain plot of a 3D array.
 
