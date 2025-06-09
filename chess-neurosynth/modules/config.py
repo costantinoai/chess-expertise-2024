@@ -1,9 +1,11 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
-"""
-Created on Sat Jun  7 22:17:34 2025
+"""Configuration and plotting utilities for the Chess-Neurosynth project.
 
-@author: costantino_ai
+This module centralises all colour choices, matplotlib settings and other
+constants so that plots across the different scripts share the same look and
+feel.  Importing it also exposes a ``logger`` object used throughout the
+package.
 """
 
 import numpy as np

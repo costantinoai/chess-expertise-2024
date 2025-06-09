@@ -1,9 +1,11 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
-"""
-Created on Sat Jun  7 22:18:33 2025
+"""Statistical helper functions for correlation analysis.
 
-@author: costantino_ai
+This module contains utilities to convert T-maps into one-tailed Z-maps,
+clean voxel data, compute correlation coefficients between brain maps and
+Neurosynth term maps and estimate the difference between correlations via
+bootstrap resampling.
 """
 
 import numpy as np
@@ -13,6 +15,7 @@ import pingouin as pg
 from modules.config import TERM_ORDER
 import pandas as pd
 from nilearn import image
+from joblib import Parallel, delayed
 
 def split_and_convert_t_to_z(t_map: np.ndarray, dof: int):
     """
@@ -95,10 +98,32 @@ def remove_useless_data(data: np.ndarray, dim: int = 2):
 
 
 def compute_all_zmap_correlations(z_pos, z_neg, term_maps, ref_img,
-                                  n_boot=10000, fdr_alpha=0.05):
+                                  n_boot=10000, fdr_alpha=0.05,
+                                  ci_alpha=0.05, random_state=None,
+                                  n_jobs=1):
     """
-    Compute correlation statistics for positive and negative z-maps against term-maps,
-    along with their difference using Steiger's dependent correlation test.
+    Compute correlation statistics for positive and negative z-maps against
+    term-maps and estimate their difference using a bootstrap approach.
+
+    Parameters
+    ----------
+    z_pos, z_neg : np.ndarray
+        Positive and negative z-maps to correlate with the term maps.
+    term_maps : dict
+        Mapping from term name to NIfTI file path.
+    ref_img : nibabel.Nifti1Image
+        Reference image (for resampling term maps).
+    n_boot : int, optional
+        Number of bootstrap samples for the individual correlations.
+    fdr_alpha : float, optional
+        Alpha level for FDR-correction of the p-values.
+    ci_alpha : float, optional
+        Alpha level for confidence intervals on the difference of correlations.
+    random_state : int or None, optional
+        Seed for the random number generator used in bootstrapping.
+    n_jobs : int, optional
+        Number of parallel jobs for bootstrap resampling of the correlation
+        difference. ``-1`` uses all available cores.
 
     Returns:
     --------
@@ -113,15 +138,23 @@ def compute_all_zmap_correlations(z_pos, z_neg, term_maps, ref_img,
     records_neg = []
     records_diff = []
 
+    rng = np.random.default_rng(random_state)
+
     flat_pos = z_pos.ravel()
     flat_neg = z_neg.ravel()
 
     for term, path in term_maps.items():
+        # Resample the term map onto the same grid as the subject map so that
+        # voxel-wise operations are valid.
         tpl = image.resample_to_img(image.load_img(path), ref_img,
                                     force_resample=True, copy_header=True)
         flat_t = tpl.get_fdata().ravel()
 
-        # Valid voxel mask
+        # --------------------------------------------------------------
+        # Mask out any voxels that are non-finite or identical across all
+        # three maps.  The latter effectively removes regions that carry no
+        # variance and would otherwise bias the correlation.
+        # --------------------------------------------------------------
         stacked = np.vstack([flat_pos, flat_neg, flat_t]).T
         ok = np.all(np.isfinite(stacked), axis=1)
         ok &= (stacked.max(axis=1) - stacked.min(axis=1)) > 0
@@ -145,24 +178,42 @@ def compute_all_zmap_correlations(z_pos, z_neg, term_maps, ref_img,
         ci_lo_neg, ci_hi_neg = res_neg['CI95%'].iloc[0]
         records_neg.append((term, r_neg, ci_lo_neg, ci_hi_neg, p_neg))
 
-        # --- DIFFERENCE (Steiger's test) ---
-        # Fisher-z transform and Steiger’s dependent r test
-        r_xt = r_pos
-        r_yt = r_neg
-        r_xy = np.corrcoef(x, y)[0, 1]
-
-        z1 = np.arctanh(np.clip(r_xt, -0.999999, 0.999999))
-        z2 = np.arctanh(np.clip(r_yt, -0.999999, 0.999999))
-        dz = z1 - z2
+        # --- DIFFERENCE (bootstrap) ---
         n = len(x)
-        se = np.sqrt(2 * (1 - r_xy) / (n - 3))
-        Z = dz / se
-        p_diff = 2 * (1 - norm.cdf(abs(Z)))
 
-        crit = norm.ppf(1 - fdr_alpha / 2)
-        lo_r, hi_r = np.tanh([dz - crit * se, dz + crit * se])
+        # The difference in correlations does not have a simple analytic
+        # standard error when the correlations are dependent.  We therefore
+        # estimate its sampling distribution by bootstrap resampling the voxels.
 
-        records_diff.append((term, r_pos, r_neg, r_pos - r_neg, lo_r, hi_r, p_diff))
+        def _boot_one(seed):
+            """Draw one bootstrap sample and compute the correlation difference."""
+            sub_rng = np.random.default_rng(seed)
+            idx = sub_rng.integers(0, n, size=n)
+            r_pos_b = np.corrcoef(t[idx], x[idx])[0, 1]
+            r_neg_b = np.corrcoef(t[idx], y[idx])[0, 1]
+            return r_pos_b - r_neg_b
+
+        # Draw ``n_boot`` bootstrap samples. Multiprocessing is used when
+        # ``n_jobs`` is not 1 to speed up the resampling step.
+        seeds = rng.integers(0, 2**32 - 1, size=n_boot)
+        if n_jobs == 1:
+            boot_diffs = np.array([_boot_one(s) for s in seeds])
+        else:
+            boot_diffs = np.array(
+                Parallel(n_jobs=n_jobs)(delayed(_boot_one)(s) for s in seeds)
+            )
+        boot_diffs.sort()
+        # Percentile-based confidence interval of the difference
+        lo_r = np.percentile(boot_diffs, 100 * ci_alpha / 2)
+        hi_r = np.percentile(boot_diffs, 100 * (1 - ci_alpha / 2))
+
+        diff_obs = r_pos - r_neg
+        # Two-sided p-value: probability that the bootstrap difference crosses 0
+        tail_low = np.mean(boot_diffs <= 0)
+        tail_high = np.mean(boot_diffs >= 0)
+        p_diff = 2 * min(tail_low, tail_high)
+
+        records_diff.append((term, r_pos, r_neg, diff_obs, lo_r, hi_r, p_diff))
 
     # Assemble DataFrames
     df_pos = pd.DataFrame(records_pos, columns=['term', 'r', 'CI_low', 'CI_high', 'p_raw'])
@@ -170,7 +221,7 @@ def compute_all_zmap_correlations(z_pos, z_neg, term_maps, ref_img,
     df_diff = pd.DataFrame(records_diff,
                            columns=['term', 'r_pos', 'r_neg', 'r_diff', 'CI_low', 'CI_high', 'p_raw'])
 
-    # FDR correction
+    # Apply Benjamini-Hochberg FDR correction across all terms
     for df in [df_pos, df_neg, df_diff]:
         rej, p_fdr = fdrcorrection(df['p_raw'], alpha=fdr_alpha)
         df['p_fdr'] = p_fdr
