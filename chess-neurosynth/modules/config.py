@@ -13,7 +13,9 @@ import matplotlib.pyplot as plt
 import seaborn as sns
 from matplotlib.colors import LinearSegmentedColormap
 import logging
+from logging_utils import setup_logging
 
+setup_logging()
 logger = logging.getLogger(__name__)
 
 # Colors
