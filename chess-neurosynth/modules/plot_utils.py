@@ -26,6 +26,8 @@ from modules.config import (
     COL_NEG,
 )
 
+YLIM = [-0.15, 0.25]
+
 # --- Base font size ---
 base_font_size = 26
 
@@ -178,7 +180,7 @@ def plot_correlations(df_pos, df_neg, df_diff, out_fig, out_csv, run_id):
 
     patches = ax.patches
     # data_range = plot_df["Correlation"].max() - plot_df["Correlation"].min()
-    data_range = 0.05 + 0.4
+    data_range = np.abs(YLIM[0]) + np.abs(YLIM[1])
     offset = data_range / 100 if data_range > 0 else 0.005
     group_heights = []
 
@@ -241,7 +243,7 @@ def plot_correlations(df_pos, df_neg, df_diff, out_fig, out_csv, run_id):
 
     # Save figure and CSV
     plt.tight_layout(rect=[0, 0, 0.85, 1])  # leave space for legend
-    ax.set_ylim([-0.05, 0.4])
+    ax.set_ylim(YLIM)
 
     plt.savefig(out_fig.replace(">", "-gt-"), dpi=300)
     plt.show()
@@ -314,7 +316,7 @@ def plot_difference(diff_df, out_fig, run_id, col_pos=COL_POS, col_neg=COL_NEG):
     ymin = min(ymin, -0.1)
     if annotation_levels:
         ymax = max(ymax, max(annotation_levels) + offset)
-    ax.set_ylim([-0.15, 0.3])
+    ax.set_ylim([-0.15, 0.35])
 
     # Add legend for direction of effects
     expert_patch = mpatches.Patch(color=col_pos, label="Experts > Novices")

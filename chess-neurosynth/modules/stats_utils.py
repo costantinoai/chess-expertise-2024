@@ -70,7 +70,7 @@ def remove_useless_data(data: np.ndarray):
 
 def compute_all_zmap_correlations(z_pos, z_neg, term_maps, ref_img,
                                   n_boot=10000, fdr_alpha=0.05,
-                                  ci_alpha=0.05, random_state=None,
+                                  ci_alpha=0.05, random_state=42,
                                   n_jobs=1):
     """
     Compute correlation statistics for positive and negative z-maps against

@@ -5,10 +5,6 @@ import shutil
 from datetime import datetime
 import logging
 
-from logging_utils import setup_logging
-
-setup_logging()
-
 class OutputLogger:
     """Context manager to duplicate stdout/stderr to a log file."""
     def __init__(self, log: bool, file_path: str):
