@@ -1,0 +1,14 @@
+numpy
+pandas
+scipy
+matplotlib
+seaborn
+nibabel
+nilearn
+scikit-learn
+statsmodels
+pingouin
+natsort
+pillow
+python-chess
+jupyter

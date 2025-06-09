@@ -1,0 +1,44 @@
+[build-system]
+requires = ["setuptools>=61.0"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "chess-expertise"
+version = "0.1.0"
+description = "Analysis tools for the Chess Expertise project"
+authors = [{name="Chess Expertise Team"}]
+readme = "README.md"
+requires-python = ">=3.8"
+
+dependencies = [
+    "numpy",
+    "pandas",
+    "scipy",
+    "matplotlib",
+    "seaborn",
+    "nibabel",
+    "nilearn",
+    "scikit-learn",
+    "statsmodels",
+    "pingouin",
+    "natsort",
+    "pillow",
+    "python-chess"
+]
+
+[tool.setuptools.packages.find]
+where = ["."]
+include = [
+    "chess_mvpa",
+    "chess_glm",
+    "chess_behavioural",
+    "chess_dataset_vis",
+    "chess_neurosynth"
+]
+
+[tool.setuptools.package-dir]
+chess_mvpa = "chess-mvpa"
+chess_glm = "chess-glm"
+chess_behavioural = "chess-behavioural"
+chess_dataset_vis = "chess-dataset-vis"
+chess_neurosynth = "chess-neurosynth"
