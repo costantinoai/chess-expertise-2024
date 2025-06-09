@@ -163,3 +163,5 @@ chess-dnn
 chess-results-vis
 chess-rois
 **/manim
+/chess-neurosynth/results
+/chess-neurosynth/results
