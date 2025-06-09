@@ -59,7 +59,8 @@ def main():
         # Compute all correlations and differences
         df_pos, df_neg, df_diff = compute_all_zmap_correlations(
             z_pos, z_neg, term_maps, ref_img,
-            n_boot=10000, fdr_alpha=0.05, ci_alpha=0.05
+            n_boot=10000, fdr_alpha=0.05, ci_alpha=0.05,
+            n_jobs=-1
         )
 
         # Plot paired correlations

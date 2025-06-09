@@ -13,6 +13,7 @@ import pingouin as pg
 from modules.config import TERM_ORDER
 import pandas as pd
 from nilearn import image
+from joblib import Parallel, delayed
 
 def split_and_convert_t_to_z(t_map: np.ndarray, dof: int):
     """
@@ -96,7 +97,8 @@ def remove_useless_data(data: np.ndarray, dim: int = 2):
 
 def compute_all_zmap_correlations(z_pos, z_neg, term_maps, ref_img,
                                   n_boot=10000, fdr_alpha=0.05,
-                                  ci_alpha=0.05, random_state=None):
+                                  ci_alpha=0.05, random_state=None,
+                                  n_jobs=1):
     """
     Compute correlation statistics for positive and negative z-maps against
     term-maps and estimate their difference using a bootstrap approach.
@@ -117,6 +119,9 @@ def compute_all_zmap_correlations(z_pos, z_neg, term_maps, ref_img,
         Alpha level for confidence intervals on the difference of correlations.
     random_state : int or None, optional
         Seed for the random number generator used in bootstrapping.
+    n_jobs : int, optional
+        Number of parallel jobs for bootstrap resampling of the correlation
+        difference. ``-1`` uses all available cores.
 
     Returns:
     --------
@@ -167,13 +172,21 @@ def compute_all_zmap_correlations(z_pos, z_neg, term_maps, ref_img,
 
         # --- DIFFERENCE (bootstrap) ---
         n = len(x)
-        boot_diffs = np.empty(n_boot)
-        for bi in range(n_boot):
-            idx = rng.integers(0, n, size=n)
+
+        def _boot_one(seed):
+            sub_rng = np.random.default_rng(seed)
+            idx = sub_rng.integers(0, n, size=n)
             r_pos_b = np.corrcoef(t[idx], x[idx])[0, 1]
             r_neg_b = np.corrcoef(t[idx], y[idx])[0, 1]
-            boot_diffs[bi] = r_pos_b - r_neg_b
+            return r_pos_b - r_neg_b
 
+        seeds = rng.integers(0, 2**32 - 1, size=n_boot)
+        if n_jobs == 1:
+            boot_diffs = np.array([_boot_one(s) for s in seeds])
+        else:
+            boot_diffs = np.array(
+                Parallel(n_jobs=n_jobs)(delayed(_boot_one)(s) for s in seeds)
+            )
         boot_diffs.sort()
         lo_r = np.percentile(boot_diffs, 100 * ci_alpha / 2)
         hi_r = np.percentile(boot_diffs, 100 * (1 - ci_alpha / 2))
