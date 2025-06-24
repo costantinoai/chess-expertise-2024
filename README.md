@@ -9,7 +9,7 @@ This repository contains the analysis code used in the Chess Expertise study. Co
 - `chess-behavioural/` – Behavioural analysis scripts and helper modules.
 - `chess-dataset-vis/` – Tools for visualising the chess stimulus set.
 - `chess-neurosynth/` – Scripts for meta-analytic lookups using Neurosynth.
-- `chess-representational-conn/` – Representational connectivity analysis tools.
+- `chess-representational-conn/` – Representational connectivity analysis tools (see `run_rc.py`).
 - `misc/` – Example JSON sidecars for the BIDS dataset.
 - `notebooks/` – Jupyter notebooks demonstrating selected analyses.
 
