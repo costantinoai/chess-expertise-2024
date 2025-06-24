@@ -4,13 +4,16 @@
 import os
 import re
 import logging
-
+import sys
 import numpy as np
 import nibabel as nib
 import scipy.io as sio
 from scipy.spatial.distance import pdist, squareform
 from scipy.stats import ttest_1samp, ttest_ind
 from statsmodels.stats.multitest import multipletests
+
+# Add the parent directory of 'modules' to sys.path
+sys.path.append('/home/eik-tb/OneDrive_andreaivan.costantino@kuleuven.be/GitHub/chess-expertise-2024/chess-mvpa')
 
 # Reuse constants and ROI manager from the MVPA module
 from modules import (
@@ -137,5 +140,3 @@ def group_difference(expert_mats: list[np.ndarray], novice_mats: list[np.ndarray
     reject = reject.reshape(pvals.shape)
     pvals_fdr = pvals_fdr.reshape(pvals.shape)
     return diff_mean, tstat, pvals, pvals_fdr, reject
-
-
