@@ -33,7 +33,8 @@ include = [
     "chess_glm",
     "chess_behavioural",
     "chess_dataset_vis",
-    "chess_neurosynth"
+    "chess_neurosynth",
+    "chess_representational_conn"
 ]
 
 [tool.setuptools.package-dir]
@@ -42,3 +43,4 @@ chess_glm = "chess-glm"
 chess_behavioural = "chess-behavioural"
 chess_dataset_vis = "chess-dataset-vis"
 chess_neurosynth = "chess-neurosynth"
+chess_representational_conn = "chess-representational-conn"

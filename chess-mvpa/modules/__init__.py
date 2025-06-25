@@ -11,11 +11,11 @@ import matplotlib.pyplot as plt
 from pathlib import Path
 import warnings
 import nibabel as nib
-from logging_utils import setup_logging
+# from logging_utils import setup_logging
 
 warnings.filterwarnings("ignore", category=FutureWarning)
 warnings.filterwarnings("ignore", category=RuntimeWarning)
-setup_logging()
+#setup_logging()
 
 # Global settings for publication-quality plots
 BASE_FONT_SIZE = 30  # Base font size for scaling (change this to scale all fonts)
