@@ -11,6 +11,7 @@ import scipy.io as sio
 from scipy.spatial.distance import pdist, squareform
 from scipy.stats import ttest_1samp, ttest_ind
 from statsmodels.stats.multitest import multipletests
+from sklearn.covariance import GraphicalLasso
 
 # Add the parent directory of 'modules' to sys.path
 sys.path.append('/home/eik-tb/OneDrive_andreaivan.costantino@kuleuven.be/GitHub/chess-expertise-2024/chess-mvpa')
@@ -93,50 +94,178 @@ def _flatten_upper(mat: np.ndarray) -> np.ndarray:
     return mat[idx]
 
 
+from sklearn.preprocessing import StandardScaler
+from sklearn.decomposition import PCA
+
+# def compute_subject_matrix(subject_id: str, atlas_path: str = ATLAS_FILE):
+#     """Return the representational connectivity matrix for one subject using Graphical Lasso with PCA."""
+#     logger.info(f"Processing subject {subject_id}")
+
+#     # Load atlas and extract ROI labels (excluding background/0)
+#     atlas = nib.load(atlas_path).get_fdata().astype(int)
+#     roi_labels = np.unique(atlas)[1:]
+
+#     # Load subject betas
+#     betas = load_spm_betas(subject_id)
+
+#     # Extract voxelwise data per ROI
+#     roi_data, _ = extract_roi_data(betas, atlas, roi_labels)
+
+#     # Compute RDMs after removing NaN or constant columns
+#     rdms = {}
+#     for roi, data in roi_data.items():
+#         valid_cols = ~np.isnan(data).any(axis=0) & (np.nanstd(data, axis=0) > 1e-5)
+#         clean_data = data[:, valid_cols]
+#         rdms[roi] = compute_rdm(clean_data)
+
+#     # Prepare matrix of flattened RDMs
+#     flat_rdms = []
+#     valid_rois = []
+#     for roi in roi_labels:
+#         vec = _flatten_upper(rdms[roi])
+#         if not np.all(np.isnan(vec)):
+#             flat_rdms.append(vec)
+#             valid_rois.append(roi)
+
+#     if len(flat_rdms) < 2:
+#         raise ValueError("Not enough valid ROIs for graphical lasso.")
+
+#     # Stack and standardize
+#     X = np.vstack(flat_rdms)
+#     X = StandardScaler().fit_transform(X)
+
+#     # Apply PCA to reduce dimensionality (at most n_rois - 1)
+#     X = PCA(n_components=22).fit_transform(X)
+
+#     # Fit Graphical Lasso
+#     model = GraphicalLasso(alpha=0.001, max_iter=500)
+#     model.fit(X)
+
+#     return model.precision_, np.array(roi_labels)
+
+from scipy.stats import spearmanr
+
 def compute_subject_matrix(subject_id: str, atlas_path: str = ATLAS_FILE):
-    """Return the representational connectivity matrix for one subject."""
+    """Return the lower-triangle (no diagonal) Spearman connectivity matrix for one subject."""
     logger.info(f"Processing subject {subject_id}")
+
+    # Load atlas and extract ROI labels (excluding background/0)
     atlas = nib.load(atlas_path).get_fdata().astype(int)
-    roi_labels = [r.region_id for r in MANAGER.rois]
+    roi_labels = np.unique(atlas)[1:]
+
+    # Load subject betas
     betas = load_spm_betas(subject_id)
+
+    # Extract voxelwise data per ROI
     roi_data, _ = extract_roi_data(betas, atlas, roi_labels)
-    rdms = {roi: compute_rdm(data) for roi, data in roi_data.items()}
-    n_rois = len(roi_labels)
-    conn = np.zeros((n_rois, n_rois), dtype=np.float32)
-    for i, r1 in enumerate(roi_labels):
-        v1 = _flatten_upper(rdms[r1])
-        for j, r2 in enumerate(roi_labels):
-            v2 = _flatten_upper(rdms[r2])
-            if np.all(np.isnan(v1)) or np.all(np.isnan(v2)):
-                conn[i, j] = np.nan
-            else:
-                conn[i, j] = np.corrcoef(v1, v2)[0, 1]
-    return conn, roi_labels
+
+    # Compute RDMs after cleaning
+    rdms = {}
+    for roi, data in roi_data.items():
+        valid_cols = ~np.isnan(data).any(axis=0) & (np.nanstd(data, axis=0) > 1e-5)
+        clean_data = data[:, valid_cols]
+        if clean_data.shape[1] > 1:
+            rdms[roi] = compute_rdm(clean_data)
+
+    # Flatten RDMs
+    flat_rdms = []
+    valid_rois = []
+    for roi in roi_labels:
+        if roi in rdms:
+            vec = _flatten_upper(rdms[roi])
+            if not np.all(np.isnan(vec)):
+                flat_rdms.append(vec)
+                valid_rois.append(roi)
+
+    if len(flat_rdms) < 2:
+        raise ValueError("Not enough valid ROIs for correlation matrix.")
+
+    # Stack into matrix (n_rois x n_features)
+    X = np.vstack(flat_rdms)
+
+    # Compute full Spearman correlation matrix
+    rho, _ = spearmanr(X, axis=1)
+    n = len(valid_rois)
+
+    # Create matrix and mask upper triangle and diagonal
+    mat = np.full((n, n), np.nan)
+    i_lower = np.tril_indices(n, k=-1)
+    mat[i_lower] = rho[i_lower]
+
+    return mat, np.array(valid_rois)
 
 
 def fisher_z(r: np.ndarray) -> np.ndarray:
     """Fisher r-to-z transform."""
     return np.arctanh(np.clip(r, -0.999999, 0.999999))
+# def fisher_z(r: np.ndarray) -> np.ndarray:
+#     """Fisher r-to-z transform."""
+#     return r
 
 
 def group_statistics(mats: list[np.ndarray]):
-    """Compute mean matrix and one-sample t-test across subjects."""
+    """Compute mean matrix and one-sample t-test across subjects, testing only lower triangle (no diagonal)."""
     data = np.stack(mats, axis=0)
     mean = np.nanmean(data, axis=0)
-    tstat, pvals = ttest_1samp(data, 0, nan_policy="omit")
-    reject, pvals_fdr, _, _ = multipletests(pvals.flatten(), method="fdr_bh")
-    reject = reject.reshape(pvals.shape)
-    pvals_fdr = pvals_fdr.reshape(pvals.shape)
+
+    # Get lower triangle indices (excluding diagonal)
+    n = mean.shape[0]
+    i_lower = np.tril_indices(n, k=-1)
+
+    # Extract lower triangle values across subjects
+    data_lt = data[:, i_lower[0], i_lower[1]]
+
+    # T-test on lower triangle values only
+    tstat_vec, pval_vec = ttest_1samp(data_lt, popmean=0, nan_policy="omit")
+
+    # FDR correction
+    reject_vec, pvals_fdr_vec, _, _ = multipletests(pval_vec, method="fdr_bh")
+
+    # Fill full matrices with NaN
+    tstat = np.full((n, n), np.nan)
+    pvals = np.full((n, n), np.nan)
+    pvals_fdr = np.full((n, n), np.nan)
+    reject = np.zeros((n, n), dtype=bool)
+
+    # Map results to lower triangle
+    tstat[i_lower] = tstat_vec
+    pvals[i_lower] = pval_vec
+    pvals_fdr[i_lower] = pvals_fdr_vec
+    reject[i_lower] = reject_vec
+
     return mean, tstat, pvals, pvals_fdr, reject
 
-
 def group_difference(expert_mats: list[np.ndarray], novice_mats: list[np.ndarray]):
-    """Difference between two groups."""
+    """Compute mean difference and t-test between groups, testing only lower triangle (no diagonal)."""
     a = np.stack(expert_mats)
     b = np.stack(novice_mats)
+
     diff_mean = np.nanmean(a, axis=0) - np.nanmean(b, axis=0)
-    tstat, pvals = ttest_ind(a, b, axis=0, nan_policy="omit")
-    reject, pvals_fdr, _, _ = multipletests(pvals.flatten(), method="fdr_bh")
-    reject = reject.reshape(pvals.shape)
-    pvals_fdr = pvals_fdr.reshape(pvals.shape)
+
+    # Get lower triangle indices
+    n = diff_mean.shape[0]
+    i_lower = np.tril_indices(n, k=-1)
+
+    # Extract values across subjects
+    a_lt = a[:, i_lower[0], i_lower[1]]
+    b_lt = b[:, i_lower[0], i_lower[1]]
+
+    # T-test
+    tstat_vec, pval_vec = ttest_ind(a_lt, b_lt, axis=0, nan_policy="omit")
+
+    # FDR correction
+    reject_vec, pvals_fdr_vec, _, _ = multipletests(pval_vec, method="fdr_bh")
+
+    # Fill full matrices with NaN
+    tstat = np.full((n, n), np.nan)
+    pvals = np.full((n, n), np.nan)
+    pvals_fdr = np.full((n, n), np.nan)
+    reject = np.zeros((n, n), dtype=bool)
+
+    # Map results to lower triangle
+    tstat[i_lower] = tstat_vec
+    pvals[i_lower] = pval_vec
+    pvals_fdr[i_lower] = pvals_fdr_vec
+    reject[i_lower] = reject_vec
+
     return diff_mean, tstat, pvals, pvals_fdr, reject
