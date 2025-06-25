@@ -130,7 +130,12 @@ with OutputLogger(True, log_file):
         diff_mean,
         title="Experts - Novices",
         out_path=os.path.join(group_dir, "difference.png"),
-        #mask=diff_sig,
+        mask=diff_sig,
+    )
+    plot_connectivity_matrix(
+        diff_mean,
+        title="Experts - Novices",
+        out_path=os.path.join(group_dir, "difference_masked.png"),
         mask=None,
     )
 
