@@ -165,3 +165,5 @@ chess-rois
 **/manim
 /chess-neurosynth/results
 /chess-neurosynth/results
+*.gz
+/data/cifar-100-python

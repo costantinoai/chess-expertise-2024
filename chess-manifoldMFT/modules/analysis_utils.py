@@ -10,7 +10,7 @@ from statsmodels.stats.multitest import multipletests
 from . import logger
 
 try:
-    from neural_manifolds_replicaMFT.manifold_analysis_correlation import (
+    from mftma.manifold_analysis_correlation import (
         manifold_analysis_corr,
     )
 except Exception:  # pragma: no cover - package may not be installed in tests
@@ -22,8 +22,8 @@ def compute_manifold(
     data: np.ndarray,
     labels: np.ndarray,
     *,
-    kappa: float = 1.0,
-    n_t: int = 50,
+    kappa: float = 0,
+    n_t: int = 200,
 ) -> tuple[float, float, float]:
     """Run manifold analysis and return mean capacity, radius and dimension.
 
@@ -55,13 +55,11 @@ def compute_manifold(
         # transpose so voxels/features are rows as expected by the library
         manifolds.append(data[mask].T)
 
-    try:
-        a_vec, r_vec, d_vec, _, _ = manifold_analysis_corr(
-            manifolds, kappa, n_t
-        )
-    except TypeError:
-        # Older versions may require margin only
-        a_vec, r_vec, d_vec, _, _ = manifold_analysis_corr(manifolds, kappa)
+    # list. each item is a class (as in, manifold class) as numpy array with
+    # shape n_obs, n_voxels
+    a_vec, r_vec, d_vec, _, _ = manifold_analysis_corr(
+        manifolds, kappa, n_t
+    )
 
     capacity = float(1 / np.mean(1 / np.asarray(a_vec)))
     radius = float(np.mean(r_vec))
