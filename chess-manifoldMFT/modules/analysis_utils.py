@@ -19,8 +19,26 @@ except Exception:  # pragma: no cover - package may not be installed in tests
     logger.warning("neural_manifolds_replicaMFT package not available.")
 
 
-def compute_manifold(data: np.ndarray, labels: np.ndarray) -> tuple[float, float]:
-    """Run manifold analysis and return radius and dimension."""
+def compute_manifold(
+    data: np.ndarray,
+    labels: np.ndarray,
+    *,
+    kappa: float = 1.0,
+    n_t: int = 50,
+) -> tuple[float, float]:
+    """Run manifold analysis and return mean radius and dimension.
+
+    Parameters
+    ----------
+    data : ndarray
+        2D array of shape (n_obs, n_features).
+    labels : ndarray
+        Integer labels assigning each observation to a manifold.
+    kappa : float, optional
+        Margin parameter passed to :func:`manifold_analysis_corr`.
+    n_t : int, optional
+        Number of Gaussian vectors used in the analysis.
+    """
     # Drop NaNs
     valid_mask = ~np.isnan(data).any(axis=0)
     data = data[:, valid_mask]
@@ -29,9 +47,25 @@ def compute_manifold(data: np.ndarray, labels: np.ndarray) -> tuple[float, float
     data = data[:, var > 0]
     if data.size == 0 or manifold_analysis_corr is None:
         return np.nan, np.nan
-    res = manifold_analysis_corr(data, labels)
-    radius = float(res.get("radius", np.nan))
-    dimension = float(res.get("dimension", np.nan))
+
+    # Split data into manifolds based on labels. Each manifold is an array of
+    # shape (n_features, n_samples).
+    manifolds = []
+    for lab in np.unique(labels):
+        mask = labels == lab
+        # transpose so voxels/features are rows as expected by the library
+        manifolds.append(data[mask].T)
+
+    try:
+        a_vec, r_vec, d_vec, _, _ = manifold_analysis_corr(
+            manifolds, kappa, n_t
+        )
+    except TypeError:
+        # Older versions may require margin only
+        a_vec, r_vec, d_vec, _, _ = manifold_analysis_corr(manifolds, kappa)
+
+    radius = float(np.mean(r_vec))
+    dimension = float(np.mean(d_vec))
     return radius, dimension
 
 
