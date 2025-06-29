@@ -4,7 +4,6 @@
 from __future__ import annotations
 
 import numpy as np
-from joblib import Parallel, delayed
 from scipy.stats import ttest_ind
 from statsmodels.stats.multitest import multipletests
 
@@ -25,8 +24,8 @@ def compute_manifold(
     *,
     kappa: float = 1.0,
     n_t: int = 50,
-) -> tuple[float, float]:
-    """Run manifold analysis and return mean radius and dimension.
+) -> tuple[float, float, float]:
+    """Run manifold analysis and return mean capacity, radius and dimension.
 
     Parameters
     ----------
@@ -46,7 +45,7 @@ def compute_manifold(
     var = np.var(data, axis=0)
     data = data[:, var > 0]
     if data.size == 0 or manifold_analysis_corr is None:
-        return np.nan, np.nan
+        return np.nan, np.nan, np.nan
 
     # Split data into manifolds based on labels. Each manifold is an array of
     # shape (n_features, n_samples).
@@ -64,9 +63,10 @@ def compute_manifold(
         # Older versions may require margin only
         a_vec, r_vec, d_vec, _, _ = manifold_analysis_corr(manifolds, kappa)
 
+    capacity = float(1 / np.mean(1 / np.asarray(a_vec)))
     radius = float(np.mean(r_vec))
     dimension = float(np.mean(d_vec))
-    return radius, dimension
+    return capacity, radius, dimension
 
 
 def fdr_ttest(
