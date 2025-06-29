@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Run ROI-wise manifold analysis comparing experts and novices (labels_b only)."""
+"""Run ROI-wise manifold analysis comparing experts and novices."""
 
 from __future__ import annotations
 
@@ -27,21 +27,26 @@ def process_subject(
     out_dir: str,
     roi_n_jobs: int = -1
 ) -> Tuple[np.ndarray, np.ndarray, np.ndarray]:
-    """Compute manifold metrics (labels_b) for each ROI for a single subject."""
-    betas, _ = load_all_betas(subject)
-    n_cond = betas.shape[0]
-    # only the paired‐condition labels
-    labels_b = np.concatenate([[i, i] for i in range(n_cond // 2)])
+    """Compute manifold metrics for each ROI for a single subject."""
+    betas_dict, labels = load_all_betas(subject)
 
-    # now 1D arrays: one metric per ROI
+    # ROI metrics arrays
     capacities = np.zeros(len(rois))
     radii      = np.zeros(len(rois))
     dims       = np.zeros(len(rois))
 
     def roi_metrics(roi: int):
-        mask    = atlas_data == roi
-        roi_vox = betas[:, mask]
-        c, r, d = compute_manifold(roi_vox, labels_b)
+        mask = atlas_data == roi
+        manifolds = []
+        for cond in labels:
+            roi_runs = betas_dict[cond][:, mask]
+            # standard scale each run within the ROI
+            mean = roi_runs.mean(axis=1, keepdims=True)
+            std = roi_runs.std(axis=1, keepdims=True)
+            std[std == 0] = 1.0
+            scaled = (roi_runs - mean) / std
+            manifolds.append(scaled.T)
+        c, r, d = compute_manifold(manifolds=manifolds)
         plot_subject_roi(d, r, subject, roi, os.path.join(out_dir, "subject"))
         return c, r, d
 
@@ -68,10 +73,7 @@ def run_group(
     subj_n_jobs: int = 1,
     roi_n_jobs: int = -1
 ):
-    """
-    Process a group of subjects, using joblib.Parallel if subj_n_jobs > 1,
-    otherwise falling back to a Python loop.  Only labels_b metrics computed.
-    """
+    """Process a group of subjects using joblib.Parallel if ``subj_n_jobs`` > 1."""
     def _run(s):
         return process_subject(s, atlas_data, rois, out_dir, roi_n_jobs)
 
@@ -101,7 +103,7 @@ def main() -> None:
         subj_n_jobs=-1, roi_n_jobs=-1
     )
 
-    # run FDR‐corrected t‐tests on the single‐metric (labels_b) arrays:
+    # run FDR‐corrected t-tests on the metric arrays:
     stats_c = fdr_ttest(exp_c, non_c, rois)
     stats_r = fdr_ttest(exp_r, non_r, rois)
     stats_d = fdr_ttest(exp_d, non_d, rois)

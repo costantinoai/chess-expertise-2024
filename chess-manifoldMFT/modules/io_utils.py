@@ -50,8 +50,8 @@ def get_spm_betas(subject_id: str) -> Dict[str, List[Dict[str, str]]]:
     return cond_info
 
 
-def load_all_betas(subject_id: str) -> Tuple[np.ndarray, List[str]]:
-    """Load all beta images for a subject and average across runs.
+def load_all_betas(subject_id: str) -> Tuple[Dict[str, np.ndarray], List[str]]:
+    """Load all beta images for a subject without averaging across runs.
 
     Parameters
     ----------
@@ -60,29 +60,25 @@ def load_all_betas(subject_id: str) -> Tuple[np.ndarray, List[str]]:
 
     Returns
     -------
-    betas : ndarray
-        Array of shape ``(n_conditions, X, Y, Z)`` with the mean beta image
-        for each condition averaged across runs.
+    betas : dict
+        Mapping from condition name to an array of shape ``(n_runs, X, Y, Z)``.
     labels : list of str
-        The condition labels corresponding to the returned beta images.
+        Sorted list of condition names.
     """
 
     info = get_spm_betas(subject_id)
 
     # Sort conditions alphabetically for reproducibility
     conditions = sorted(info.keys())
-    betas = []
-    labels = []
+    betas: Dict[str, np.ndarray] = {}
     for cond in conditions:
-        paths = [entry["beta_path"] for entry in info[cond]]
+        entries = sorted(info[cond], key=lambda x: x["run"])
+        paths = [entry["beta_path"] for entry in entries]
         imgs = [nib.load(p) for p in paths]
         data = [img.get_fdata(dtype=np.float32) for img in imgs]
-        mean_beta = np.mean(data, axis=0)
-        betas.append(mean_beta)
-        labels.append(cond)
+        betas[cond] = np.stack(data, axis=0)
 
-    stacked = np.stack(betas, axis=0)
-    return stacked, labels
+    return betas, conditions
 
 
 def load_atlas() -> Tuple[np.ndarray, np.ndarray]:
