@@ -51,13 +51,38 @@ def get_spm_betas(subject_id: str) -> Dict[str, List[Dict[str, str]]]:
 
 
 def load_all_betas(subject_id: str) -> Tuple[np.ndarray, List[str]]:
-    """Load all beta images for a subject into a 4D array."""
+    """Load all beta images for a subject and average across runs.
+
+    Parameters
+    ----------
+    subject_id : str
+        Subject identifier.
+
+    Returns
+    -------
+    betas : ndarray
+        Array of shape ``(n_conditions, X, Y, Z)`` with the mean beta image
+        for each condition averaged across runs.
+    labels : list of str
+        The condition labels corresponding to the returned beta images.
+    """
+
     info = get_spm_betas(subject_id)
-    beta_paths = [entry["beta_path"] for entries in info.values() for entry in entries]
-    beta_imgs = [nib.load(p) for p in beta_paths]
-    beta_data = [img.get_fdata(dtype=np.float32) for img in beta_imgs]
-    stacked = np.stack(beta_data, axis=0)
-    return stacked, beta_paths
+
+    # Sort conditions alphabetically for reproducibility
+    conditions = sorted(info.keys())
+    betas = []
+    labels = []
+    for cond in conditions:
+        paths = [entry["beta_path"] for entry in info[cond]]
+        imgs = [nib.load(p) for p in paths]
+        data = [img.get_fdata(dtype=np.float32) for img in imgs]
+        mean_beta = np.mean(data, axis=0)
+        betas.append(mean_beta)
+        labels.append(cond)
+
+    stacked = np.stack(betas, axis=0)
+    return stacked, labels
 
 
 def load_atlas() -> Tuple[np.ndarray, np.ndarray]:
