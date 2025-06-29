@@ -167,3 +167,4 @@ chess-rois
 /chess-neurosynth/results
 *.gz
 /data/cifar-100-python
+/chess-manifoldMFT/manifold_results

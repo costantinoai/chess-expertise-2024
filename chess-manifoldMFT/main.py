@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Run ROI-wise manifold analysis comparing experts and novices (labels_b only)."""
+"""Run ROI-wise manifold analysis comparing experts and novices."""
 
 from __future__ import annotations
 
@@ -19,32 +19,48 @@ from modules.plot_utils import (
     plot_group_heatmap,
 )
 
+from sklearn.preprocessing import StandardScaler
 
 def process_subject(
     subject: str,
     atlas_data: np.ndarray,
     rois: np.ndarray,
     out_dir: str,
-    roi_n_jobs: int = -1
+    roi_n_jobs: int = 1
 ) -> Tuple[np.ndarray, np.ndarray, np.ndarray]:
-    """Compute manifold metrics (labels_b) for each ROI for a single subject."""
-    betas, _ = load_all_betas(subject)
-    n_cond = betas.shape[0]
-    # only the paired‐condition labels
-    labels_b = np.concatenate([[i, i] for i in range(n_cond // 2)])
+    """Compute manifold metrics for each ROI for a single subject."""
+    betas_dict, labels = load_all_betas(subject)
 
-    # now 1D arrays: one metric per ROI
+    # ROI metrics arrays
     capacities = np.zeros(len(rois))
     radii      = np.zeros(len(rois))
     dims       = np.zeros(len(rois))
 
     def roi_metrics(roi: int):
-        mask    = atlas_data == roi
-        roi_vox = betas[:, mask]
-        c, r, d = compute_manifold(roi_vox, labels_b)
+        mask = atlas_data == roi
+        manifolds = []
+
+        for cond in labels:
+            # extract runs × voxels within this ROI
+            roi_runs = betas_dict[cond][:, mask]  # shape = (n_runs, n_voxels)
+
+            # identify columns (voxels) to keep: no NaNs and variance > 0
+            has_nan = np.isnan(roi_runs).any(axis=0)
+            valid_cols = ~has_nan
+
+            # filter out bad voxels
+            filtered = roi_runs[:, valid_cols]   # now (n_runs, n_valid_voxels)
+
+            # scale: observations are rows, features are columns
+            scaler = StandardScaler()
+            scaled = scaler.fit_transform(filtered)  # (n_runs, n_valid_voxels)
+
+            # compute_manifold expects features × observations
+            manifolds.append(scaled.T)
+
+        c, r, d = compute_manifold(manifolds=manifolds)
         plot_subject_roi(d, r, subject, roi, os.path.join(out_dir, "subject"))
         return c, r, d
-
     if roi_n_jobs == 1:
         results = [roi_metrics(roi) for roi in rois]
     else:
@@ -65,13 +81,10 @@ def run_group(
     atlas_data,
     rois,
     out_dir,
-    subj_n_jobs: int = 1,
+    subj_n_jobs: int = -1,
     roi_n_jobs: int = -1
 ):
-    """
-    Process a group of subjects, using joblib.Parallel if subj_n_jobs > 1,
-    otherwise falling back to a Python loop.  Only labels_b metrics computed.
-    """
+    """Process a group of subjects using joblib.Parallel if ``subj_n_jobs`` > 1."""
     def _run(s):
         return process_subject(s, atlas_data, rois, out_dir, roi_n_jobs)
 
@@ -88,20 +101,21 @@ def run_group(
 
 def main() -> None:
     atlas_data, rois = load_atlas()
+    rois = [1, 2, 21, 22]
     out_dir = "manifold_results"
     os.makedirs(out_dir, exist_ok=True)
 
     # fully parallel across ROIs and subjects by default:
     exp_c, exp_r, exp_d = run_group(
         EXPERTS, atlas_data, rois, out_dir,
-        subj_n_jobs=-1, roi_n_jobs=-1
+        subj_n_jobs=1, roi_n_jobs=-1
     )
     non_c, non_r, non_d = run_group(
         NONEXPERTS, atlas_data, rois, out_dir,
-        subj_n_jobs=-1, roi_n_jobs=-1
+        subj_n_jobs=1, roi_n_jobs=-1
     )
 
-    # run FDR‐corrected t‐tests on the single‐metric (labels_b) arrays:
+    # run FDR‐corrected t-tests on the metric arrays:
     stats_c = fdr_ttest(exp_c, non_c, rois)
     stats_r = fdr_ttest(exp_r, non_r, rois)
     stats_d = fdr_ttest(exp_d, non_d, rois)

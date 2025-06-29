@@ -27,7 +27,7 @@ def plot_subject_roi(
     ax.set_title(f"Sub {subject} ROI {roi}")
     os.makedirs(out_dir, exist_ok=True)
     fig.savefig(os.path.join(out_dir, f"sub-{subject}_roi-{roi}.png"), dpi=300)
-    plt.close(fig)
+    plt.show()
 
 
 def plot_group_comparison(df: pd.DataFrame, out_dir: str, metric: str) -> None:
@@ -39,7 +39,7 @@ def plot_group_comparison(df: pd.DataFrame, out_dir: str, metric: str) -> None:
     os.makedirs(out_dir, exist_ok=True)
     fig.tight_layout()
     fig.savefig(os.path.join(out_dir, f"group_{metric}.png"), dpi=300)
-    plt.close(fig)
+    plt.show()
 
 
 def plot_group_heatmap(values: np.ndarray, rois: Iterable[int], metric: str, out_dir: str) -> None:
@@ -60,4 +60,4 @@ def plot_group_heatmap(values: np.ndarray, rois: Iterable[int], metric: str, out
     os.makedirs(out_dir, exist_ok=True)
     fig.tight_layout()
     fig.savefig(os.path.join(out_dir, f"heatmap_{metric}.png"), dpi=300)
-    plt.close(fig)
+    plt.show()

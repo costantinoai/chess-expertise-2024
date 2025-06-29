@@ -19,9 +19,10 @@ except Exception:  # pragma: no cover - package may not be installed in tests
 
 
 def compute_manifold(
-    data: np.ndarray,
-    labels: np.ndarray,
+    data: np.ndarray | None = None,
+    labels: np.ndarray | None = None,
     *,
+    manifolds: list[np.ndarray] | None = None,
     kappa: float = 0,
     n_t: int = 200,
 ) -> tuple[float, float, float]:
@@ -29,37 +30,56 @@ def compute_manifold(
 
     Parameters
     ----------
-    data : ndarray
-        2D array of shape (n_obs, n_features).
-    labels : ndarray
-        Integer labels assigning each observation to a manifold.
+    data : ndarray, optional
+        2D array of shape ``(n_obs, n_features)``. ``labels`` must also be
+        provided in this case.
+    labels : ndarray, optional
+        Integer labels assigning each observation in ``data`` to a manifold.
+    manifolds : list of ndarray, optional
+        Precomputed list where each element has shape ``(n_features, n_samples)``
+        representing a single manifold. If provided, ``data`` and ``labels`` are
+        ignored.
     kappa : float, optional
         Margin parameter passed to :func:`manifold_analysis_corr`.
     n_t : int, optional
         Number of Gaussian vectors used in the analysis.
     """
-    # Drop NaNs
-    valid_mask = ~np.isnan(data).any(axis=0)
-    data = data[:, valid_mask]
-    # Drop zero-variance features
-    var = np.var(data, axis=0)
-    data = data[:, var > 0]
-    if data.size == 0 or manifold_analysis_corr is None:
-        return np.nan, np.nan, np.nan
 
-    # Split data into manifolds based on labels. Each manifold is an array of
-    # shape (n_features, n_samples).
-    manifolds = []
-    for lab in np.unique(labels):
-        mask = labels == lab
-        # transpose so voxels/features are rows as expected by the library
-        manifolds.append(data[mask].T)
+    if manifolds is None:
+        if data is None or labels is None:
+            raise ValueError("data and labels must be provided when manifolds is None")
 
-    # list. each item is a class (as in, manifold class) as numpy array with
-    # shape n_obs, n_voxels
-    a_vec, r_vec, d_vec, _, _ = manifold_analysis_corr(
-        manifolds, kappa, n_t
-    )
+        # Drop NaNs
+        valid_mask = ~np.isnan(data).any(axis=0)
+        data = data[:, valid_mask]
+        # Drop zero-variance features
+        var = np.var(data, axis=0)
+        data = data[:, var > 0]
+        if data.size == 0 or manifold_analysis_corr is None:
+            return np.nan, np.nan, np.nan
+
+        manifolds = []
+        for lab in np.unique(labels):
+            mask = labels == lab
+            # transpose so voxels/features are rows as expected by the library
+            manifolds.append(data[mask].T)
+    else:
+        if len(manifolds) == 0 or manifold_analysis_corr is None:
+            return np.nan, np.nan, np.nan
+
+        # assume all manifolds share the same feature dimension
+        n_feat = manifolds[0].shape[0]
+        valid_mask = np.ones(n_feat, dtype=bool)
+        for m in manifolds:
+            if m.shape[0] != n_feat:
+                raise ValueError("All manifolds must have the same number of features")
+            valid_mask &= ~np.isnan(m).any(axis=1)
+            valid_mask &= np.var(m, axis=1) > 0
+        manifolds = [m[valid_mask] for m in manifolds]
+        if manifolds[0].size == 0:
+            return np.nan, np.nan, np.nan
+
+    a_vec, r_vec, d_vec, _, _ = manifold_analysis_corr(manifolds, kappa, n_t)
 
     capacity = float(1 / np.mean(1 / np.asarray(a_vec)))
     radius = float(np.mean(r_vec))
