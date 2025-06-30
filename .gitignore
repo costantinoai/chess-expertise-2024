@@ -156,7 +156,7 @@ cython_debug/
 test
 misc
 chess-connectivity
-chess-manifold
+chess-manifold*
 chess-behavioural/data/sub
 chess-dnn
 **/old
@@ -164,11 +164,7 @@ chess-results-vis
 chess-rois
 **/manim
 /chess-neurosynth/results
-/chess-neurosynth/results
 /chess-representational-conn
-/chess-manifoldMFT/manifold_results
 /chess-mvpa/results
-/chess-mvpa/results
-/data/cifar-100-python
+/**/cifar-100-python
 *.gz
-/chess-manifoldMFT/data/cifar-100-python
