@@ -165,3 +165,9 @@ chess-rois
 **/manim
 /chess-neurosynth/results
 /chess-neurosynth/results
+/chess-representational-conn
+/chess-manifoldMFT/manifold_results
+/chess-mvpa/results
+/chess-mvpa/results
+/data/cifar-100-python
+*.gz
