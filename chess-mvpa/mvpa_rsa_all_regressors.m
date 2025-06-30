@@ -39,9 +39,9 @@ derivativesDir = '/data/projects/chess/data/BIDS/derivatives';
 spmRoot = fullfile(derivativesDir, 'fmriprep-SPM_smoothed-NO_GS-FD-HMP_brainmasked');
 
 roisRoots = {
-    %'/home/eik-tb/OneDrive_andreaivan.costantino@kuleuven.be/GitHub/chess-expertise-2024/chess-rois/results/bilalic_sphere_rois'
-    '/home/eik-tb/OneDrive_andreaivan.costantino@kuleuven.be/GitHub/chess-expertise-2024/chess-rois/results/glasser_regions_bilateral',
-    '/home/eik-tb/OneDrive_andreaivan.costantino@kuleuven.be/GitHub/chess-expertise-2024/chess-rois/results/glasser_cortex_bilateral'
+    '/home/eik-tb/OneDrive_andreaivan.costantino@kuleuven.be/GitHub/chess-expertise-2024/chess-rois/results/bilalic_sphere_rois'
+    '/home/eik-tb/OneDrive_andreaivan.costantino@kuleuven.be/GitHub/chess-expertise-2024/chess-rois/results/glasser_cortices_bilateral'
+    '/home/eik-tb/OneDrive_andreaivan.costantino@kuleuven.be/GitHub/chess-expertise-2024/chess-rois/results/glasser_regions_bilateral'
 };
 
 % Folder containing the ROIs. Typically a folder with one or more .nii files
@@ -140,7 +140,9 @@ for iRoi = 1:numel(roisRoots)
         'Mismatch between ROI data labels and TSV region IDs');
     
     % Now we start looping over each subject folder we found in subDirs.
-    parfor subIdx = 1:length(subDirs)
+    %for subIdx = 1:length(subDirs)
+
+    for subIdx = 1:length(subDirs)
         
         % Extract subject folder name (e.g., 'sub-01')
         subFolder = subDirs(subIdx).name;
@@ -239,11 +241,11 @@ for iRoi = 1:numel(roisRoots)
         %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
     
         % (A) SVM classifier
-        classifier = @cosmo_classify_lda;
-       
+        classifier = @cosmo_classify_svm;
+    
         % (B) RSA measure
-        rsa_measure = @cosmo_crossnobis_dist_measure;
-        rsa_args    = struct('center_data', false);
+        rsa_measure = @cosmo_target_dsm_corr_measure;
+        rsa_args    = struct('center_data', true);
         % Note: We will set rsa_args.target_dsm = regressors.(...).rdm later
     
         %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -310,9 +312,7 @@ for iRoi = 1:numel(roisRoots)
                     partitions = cosmo_balance_partitions(partitions, ds_slice, 'nmin', 1);
     
                     % (v) Run cross-validation
-                    opt = struct();
-                    opt.max_feature_count = 6000; % or any value > 5400
-                    [~, accuracy] = cosmo_crossvalidate(ds_slice, classifier, partitions,  opt);
+                    [~, accuracy] = cosmo_crossvalidate(ds_slice, classifier, partitions);
     
                     % (vi) Store the SVM accuracy for this regressor & ROI
                     results_svm_matrix(rIdx, colIdx) = accuracy;
@@ -341,7 +341,7 @@ for iRoi = 1:numel(roisRoots)
                 % (iii) Average the dataset by these stimulus-based targets
                 %       This collapses data across repeated presentations of
                 %       each stimulus, giving one sample per unique stimulus.
-                % ds_slice_rsa_averaged = cosmo_fx(ds_slice_rsa, @(x) mean(x,1), 'targets');
+                ds_slice_rsa_averaged = cosmo_fx(ds_slice_rsa, @(x) mean(x,1), 'targets');
     
                 % (iv) Prepare the correlation measure arguments
                 rsa_args.target_dsm = thisReg.rdm;
@@ -349,7 +349,7 @@ for iRoi = 1:numel(roisRoots)
                 %   derived from ds_slice_rsa_averaged.
     
                 % (v) Run the correlation measure
-                rsa_result = rsa_measure(ds_slice_rsa, rsa_args);
+                rsa_result = rsa_measure(ds_slice_rsa_averaged, rsa_args);
     
                 if ~isempty(rsa_result.samples)
                     % If successful, we get a single correlation value
@@ -546,13 +546,13 @@ motif_half_base = categorical(["deflection/pulling"; "defence removal"; ...
     "deflection/pulling"; "other (straightforward checkmate)"; ...
     "other (straightforward checkmate)"; "other (straightforward checkmate)"]);
 
-first_piece_half_base = categorical(["rook"; "queen"; "queen"; "rook"; "queen"; "rook"; ...
-    "queen"; "knight"; "rook"; "queen"; "knight"; "bishop"; "knight"; "queen"; ...
-    "queen"; "rook"; "rook"; "queen"; "bishop"; "knight"]);
-
-checkmate_piece_half_base = categorical(["queen"; "queen"; "rook"; "queen"; "rook"; "queen"; ...
-    "rook"; "knight"; "knight"; "knight"; "knight"; "queen"; "rook"; "bishop"; ...
-    "bishop"; "bishop"; "queen"; "queen"; "bishop"; "knight"]);
+% first_piece_half_base = categorical(["rook"; "queen"; "queen"; "rook"; "queen"; "rook"; ...
+%     "queen"; "knight"; "rook"; "queen"; "knight"; "bishop"; "knight"; "queen"; ...
+%     "queen"; "rook"; "rook"; "queen"; "bishop"; "knight"]);
+%
+% checkmate_piece_half_base = categorical(["queen"; "queen"; "rook"; "queen"; "rook"; "queen"; ...
+%     "rook"; "knight"; "knight"; "knight"; "knight"; "queen"; "rook"; "bishop"; ...
+%     "bishop"; "bishop"; "queen"; "queen"; "bishop"; "knight"]);
 
 %% ------------------------------------------------------------------------
 % E. Add regressors for the HALF dataset (ds_half)
@@ -566,8 +566,8 @@ addRegressor('check_n_half',  repeatForAllFolds(check_n_half_base,  ds_half),  '
 
 addRegressor('side_half',            repeatForAllFolds(side_half_base, ds_half),            'similarity', ds_half, 'ds_half');
 addRegressor('motif_half',           repeatForAllFolds(double(motif_half_base), ds_half),   'similarity', ds_half, 'ds_half');
-addRegressor('first_piece_half',     repeatForAllFolds(double(first_piece_half_base), ds_half), 'similarity', ds_half, 'ds_half');
-addRegressor('checkmate_piece_half', repeatForAllFolds(double(checkmate_piece_half_base), ds_half), 'similarity', ds_half, 'ds_half');
+% addRegressor('first_piece_half',     repeatForAllFolds(double(first_piece_half_base), ds_half), 'similarity', ds_half, 'ds_half');
+% addRegressor('checkmate_piece_half', repeatForAllFolds(double(checkmate_piece_half_base), ds_half), 'similarity', ds_half, 'ds_half');
 
 fprintf('[INFO] All regressors successfully created.\n');
 
@@ -672,475 +672,3 @@ fprintf('[INFO] All regressors successfully created.\n');
     end
 
 end
-% function ds_sa = cosmo_cv_dsm_measure(ds, varargin)
-% % measure correlation with target dissimilarity matrix
-% %
-% % ds_sa = cosmo_target_dsm_corr_measure(dataset, args)
-% %
-% % Inputs:
-% %   ds             dataset struct with field .samples PxQ for P samples and
-% %                  Q features
-% %   args           struct with fields:
-% %     .target_dsm  (optional) Either:
-% %                  - target dissimilarity matrix of size PxP. It should
-% %                    have zeros on the diagonal and be symmetric.
-% %                  - target dissimilarity vector of size Nx1, with
-% %                    N=P*(P-1)/2 the number of pairs of samples in ds.
-% %                  This option is mutually exclusive with the 'glm_dsm'
-% %                  option.
-% %     .metric      (optional) distance metric used in pdist to compute
-% %                  pair-wise distances between samples in ds. It accepts
-% %                  any metric supported by pdist (default: 'correlation')
-% %     .type        (optional) type of correlation between target_dsm and
-% %                  ds, one of 'Pearson' (default), 'Spearman', or
-% %                  'Kendall'.
-% %     .regress_dsm (optional) target dissimilarity matrix or vector (as
-% %                  .target_dsm), or a cell with matrices or vectors, that
-% %                  should be regressed out. If this option is provided then
-% %                  the output is the partial correlation between the
-% %                  pairwise distances between samples in ds and target_dsm,
-% %                  after controlling for the effect of the matrix
-% %                  (or matrices) in regress_dsm. (Using this option yields
-% %                  similar behaviour as the Matlab function
-% %                  'partial_corr')
-% %     .glm_dsm     (optional) cell with model dissimilarity matrices or
-% %                  vectors (as .target_dsm) for using a general linear
-% %                  model to get regression coefficients for each element in
-% %                  .glm_dsm. Both the input data and the dissimilarity
-% %                  matrices are z-scored before estimating the regression
-% %                  coefficients.
-% %                  This option is required when 'target_dsm' is not
-% %                  provided; it cannot cannot used together with
-% %                  .target_dsm or regress_dsm.
-% %                  When using this option, the 'type' option is ignored.
-% %                  For this option, the output has as many rows (samples)
-% %                  as there are elements (dissimilarity matrices) in
-% %                  .glm_dsm.
-% %     .center_data If set to true, then the mean of each feature (column in
-% %                  ds.samples) is subtracted from each column prior to
-% %                  computing the pairwise distances for all samples in ds.
-% %                  Default: false
-% %
-% % Output:
-% %    ds_sa         Dataset struct with fields:
-% %      .samples    Scalar correlation value between the pair-wise
-% %                  distances of the samples in ds and target_dsm; or
-% %                  (when 'glm_dsms' is supplied) a column vector with
-% %                  normalized beta coefficients. These values
-% %                  are untransformed (e.g. there is no Fisher transform).
-% %      .sa         Struct with field:
-% %        .labels   {'rho'}; or (when 'glm_dsm' is supplied) a cell
-% %                  {'beta1','beta2',...}.
-% %
-% % Examples:
-% %     % generate synthetic dataset with 6 classes (conditions),
-% %     % one sample per class
-% %     ds=cosmo_synthetic_dataset('ntargets',6,'nchunks',1);
-% %     %
-% %     % create target dissimilarity matrix to test whether
-% %     % - class 1 and 2 are similar (and different from classes 3-6)
-% %     % - class 3 and 4 are similar (and different from classes 1,2,5,6)
-% %     % - class 5 and 6 are similar (and different from classes 1-4)
-% %     target_dsm=1-kron(eye(3),ones(2));
-% %     %
-% %     % show the target dissimilarity matrix
-% %     cosmo_disp(target_dsm);
-% %     > [ 0         0         1         1         1         1
-% %     >   0         0         1         1         1         1
-% %     >   1         1         0         0         1         1
-% %     >   1         1         0         0         1         1
-% %     >   1         1         1         1         0         0
-% %     >   1         1         1         1         0         0 ]
-% %     %
-% %     % compute similarity between pairw-wise similarity of the
-% %     % patterns in the dataset and the target dissimilarity matrix
-% %     dcm_ds=cosmo_target_dsm_corr_measure(ds,'target_dsm',target_dsm);
-% %     %
-% %     % Pearson correlation is about 0.56
-% %     cosmo_disp(dcm_ds)
-% %     > .samples
-% %     >   [ 0.562 ]
-% %     > .sa
-% %     >   .labels
-% %     >     { 'rho' }
-% %     >   .metric
-% %     >     { 'correlation' }
-% %     >   .type
-% %     >     { 'Pearson' }
-% %
-% % Notes:
-% %   - for group analysis, correlations can be fisher-transformed
-% %     through:
-% %       dcm_ds.samples=atanh(dcm_ds.samples)
-% %   - it is recommended to set the 'center_data' to true when using
-% %     the default 'correlation' metric, as this removes a main effect
-% %     common to all samples; but note that this option is disabled by
-% %     default due to historical reasons.
-% %
-% % #   For CoSMoMVPA's copyright information and license terms,   #
-% % #   see the COPYING file distributed with CoSMoMVPA.           #
-% 
-% % process input arguments
-% params=cosmo_structjoin('type','Pearson',... % set default
-%     'metric','correlation',...
-%     'center_data',false,...
-%     varargin);
-% 
-% check_input(ds);
-% check_params(params);
-% 
-% % - compute the pair-wise distance between all dataset samples using
-% %   cosmo_pdist
-% 
-% samples=ds.samples;
-% if params.center_data
-%     samples=bsxfun(@minus,samples,mean(samples,1));
-% end
-% 
-% % --------------------------------------------------------------------
-% 
-% 
-% % MODIFIED BY MORITZ: use partitions (for cross RSA or leave-one-out RSA)
-% if isfield(params,'partitions')
-%     ds_corr = cosmo_correlation_measure(ds,'output','correlation','partitions',params.partitions); % fisher transformation by default
-%     corrMat = real(cosmo_unflatten(ds_corr,1));
-%     if isfield(params,'RSAz')
-%         zMat=logical(tril(ones(8),0));  
-%         ds_pdist = 1 - tanh(corrMat(zMat))'; % transform back to orig correlation values, convert to dissimilairty values        
-%     else
-%         corrMat(logical(eye(size(corrMat)))) = 0;
-%         ds_pdist = 1 - tanh(squareform(corrMat)); % transform back to orig correlation values, convert to dissimilairty values
-%     end
-% else
-%     ds_pdist = cosmo_pdist(ds.samples, params.metric)';
-% end
-% 
-% 
-% % --------------------------------------------------------------------
-% 
-% 
-% 
-% has_model_dsms=isfield(params,'glm_dsm');
-% 
-% if has_model_dsms
-%     ds_sa=linear_regression_dsm(ds_pdist, params);
-% else
-%     ds_sa=correlation_dsm(ds_pdist,params);
-% end
-% 
-% check_output(ds,ds_sa);
-% end
-% function check_output(input_ds,output_ds_sa)
-% if any(isnan(output_ds_sa.samples))
-%     if any(isnan(input_ds.samples(:)))
-%         msg=['Input dataset has NaN values, which results in '...
-%             'NaN values in the output. Consider masking the '...
-%             'dataset to remove NaN values'];
-%     elseif any(var(input_ds.samples)==0)
-%         msg=['Input dataset has constant or infinite features, ',...
-%             'which results in NaN values in the output. '...
-%             'Consider masking the dataset to remove constant '...
-%             'or non-finite features, for example using '...
-%             'cosmo_remove_useless_data'];
-%     else
-%         msg=['Output has NaN values, even though the input does '...
-%             'not. This can be due to the presence of constant '...
-%             'features and/or non-finite values in the input, '...
-%             'and/or target similarity structures with constant '...
-%             'and/of non-finite data. When in doubt, please '...
-%             'contact the CoSMoMVPA developers'];
-%     end
-%     cosmo_warning(msg);
-% end
-% 
-% end
-
-function ds_sa = cosmo_crossnobis_dist_measure(ds, varargin)
-% COSMO_CROSSNOBIS_DIST_MEASURE
-% Computes a cross-validated Mahalanobis (cross-nobis) RDM from multivariate
-% activity patterns, then correlates it with a user-specified target DSM.
-%
-% This function is intended for Representational Similarity Analysis (RSA).
-%
-% INPUT:
-%   ds         : CoSMoMVPA dataset with the following required fields:
-%       ds.samples      [P × Q]  - data matrix (patterns × features)
-%       ds.sa.targets   [P × 1]  - condition labels (e.g., stimuli)
-%       ds.sa.chunks    [P × 1]  - run labels (used for cross-validation)
-%
-%   varargin   : Optional parameters (name-value pairs)
-%       'target_dsm'      - reference DSM (vector or square matrix) [required]
-%       'type'            - correlation type for RSA
-%                            ('Pearson' | 'Spearman' | 'Kendall')
-%                            [default: 'Spearman']
-%
-% OUTPUT:
-%   ds_sa : Struct with RSA result:
-%       ds_sa.samples    - [1 × 1] scalar correlation (rho)
-%       ds_sa.sa.labels  - label name for the correlation
-%       ds_sa.sa.metric  - distance metric used (here: 'crossnobis')
-%       ds_sa.sa.type    - correlation type used
-
-% -------------------------------------------------------------------------
-% Parse and validate parameters
-params = cosmo_structjoin('type','Spearman', varargin{:});
-assert(isfield(params,'target_dsm'), 'Missing required input: ''target_dsm''');
-
-% -------------------------------------------------------------------------
-% Compute the cross-validated Mahalanobis RDM from data
-RDM = compute_crossnobis_rdm(ds);              % [nStim × nStim] matrix
-
-% -------------------------------------------------------------------------
-% Compute correlation between empirical RDM and target DSM
-rdm_vec = cosmo_squareform(RDM, 'tovector');
-target_vec = cosmo_squareform(params.target_dsm, 'tovector');
-
-rho = cosmo_corr(rdm_vec(:), target_vec(:), params.type);
-
-% -------------------------------------------------------------------------
-% Package RSA result into a CoSMo-compatible output structure
-ds_sa             = struct();
-ds_sa.samples     = rho;                     % scalar correlation
-ds_sa.sa.labels   = {'rho'};                % output label
-ds_sa.sa.metric   = {'crossnobis'};         % distance metric used
-ds_sa.sa.type     = {params.type};          % RSA correlation type
-end
-
-function RDM = compute_crossnobis_rdm(ds)
-% COMPUTE_CROSSNOBIS_RDM
-% -------------------------------------------------------------------------
-% Cross-validated Mahalanobis (Crossnobis) RDM Computation
-%
-% This code block computes a cross-validated Representational Dissimilarity
-% Matrix (RDM) using the crossnobis distance metric. It is intended for
-% Representational Similarity Analysis (RSA) on multivariate neural or
-% model activation patterns.
-%
-% -------------------------------------------------------------------------
-% INPUT:
-%   ds : CoSMoMVPA dataset with the following required fields:
-%        - ds.samples      [P × Q] matrix
-%            Rows are pattern observations (e.g., trials, conditions).
-%            Columns are features (e.g., voxels, channels, units).
-%
-%        - ds.sa.targets   [P × 1] vector
-%            Condition/stimulus labels for each sample.
-%
-%        - ds.sa.chunks    [P × 1] vector
-%            Run/session labels used for cross-validation folds.
-%            Each unique chunk forms a test set in leave-one-out CV.
-%
-% -------------------------------------------------------------------------
-% OUTPUT (within the calling function):
-%   RDM : [nStim × nStim] symmetric dissimilarity matrix
-%         Contains average cross-validated Mahalanobis distances between
-%         all pairs of stimulus conditions.
-%
-% -------------------------------------------------------------------------
-% METHOD DESCRIPTION:
-% This implementation follows the standard protocol for computing the
-% crossnobis (cross-validated Mahalanobis) distance:
-%
-% 1. Leave-one-run-out cross-validation is applied using the chunk labels.
-% 2. For each fold:
-%    a. Compute mean activation vectors per stimulus in train and test sets.
-%    b. Estimate noise covariance from residuals in the training set:
-%         residual = pattern - stimulus mean
-%       Use Ledoit–Wolf shrinkage for stability.
-%    c. Invert the noise covariance to obtain a precision matrix.
-%    d. For each pair of stimuli (i, j), compute:
-%
-%         d_ij = Δ_testᵀ * Σ⁻¹ * Δ_train
-%
-%       where Δ is the difference vector between stimulus means.
-%    e. Accumulate distances across folds.
-%
-% 3. Average across folds and symmetrize the result:
-%         RDM(i,j) = mean distance across folds
-%         RDM(j,i) = RDM(i,j)
-%
-% -------------------------------------------------------------------------
-% NOTES:
-% - The crossnobis distance is unbiased under the null (mean zero), unlike
-%   Euclidean or correlation distances.
-% - Values may be negative — this is expected due to cross-validation.
-% - The use of Ledoit–Wolf shrinkage ensures well-conditioned covariance
-%   estimates even when p ≫ n.
-% - Output RDM is suitable for correlation-based RSA against theoretical
-%   or behavioral DSMs.
-%
-% -------------------------------------------------------------------------
-% REFERENCE:
-%   Walther et al. (2016). Reliability of dissimilarity measures for
-%   multi-voxel pattern analysis. NeuroImage.
-%
-%   Ledoit & Wolf (2004). A well-conditioned estimator for large-dimensional
-%   covariance matrices. J. Multivariate Analysis.
-%
-% -------------------------------------------------------------------------
-%
-% INPUT:
-%   ds : CoSMoMVPA dataset with .samples, .sa.targets, .sa.chunks
-%
-% OUTPUT:
-%   RDM : [nStim × nStim] crossnobis rdm (symmetric)
-
-% -------------------------------------------------------------------------
-% Get stimulus conditions and feature dimensionality
-targets     = unique(ds.sa.targets);           % unique conditions
-nStim       = numel(targets);                  % number of unique stimuli
-nFeat       = size(ds.samples,2);              % number of features (voxels, etc.)
-
-% Partition data using leave-one-run-out cross-validation
-partitions  = cosmo_nfold_partitioner(ds);     % chunk-wise CV splits
-nFolds      = numel(partitions);               % number of folds = #chunks
-
-% Initialize RDM
-RDM = zeros(nStim);                            % accumulator
-
-% -------------------------------------------------------------------------
-% Iterate over folds and compute cross-validated distances
-for f = 1:nFolds
-    % Training and test split for fold f
-    tr_idx = partitions.train_indices{f};
-    te_idx = partitions.test_indices{f};
-
-    ds_tr = cosmo_slice(ds, tr_idx);           % training data
-    ds_te = cosmo_slice(ds, te_idx);           % test data
-
-    % Compute mean activation patterns per stimulus for train/test
-    M_tr = compute_means(ds_tr, targets);      % [nStim × nFeat]
-    M_te = compute_means(ds_te, targets);      % [nStim × nFeat]
-
-    % ---------------------------------------------------------------------
-    % Estimate noise covariance from residuals (training data only)
-    % Residuals = pattern - class mean for that pattern
-    [~, tr_lab] = ismember(ds_tr.sa.targets, targets); % indices in 1:nStim
-    resid       = ds_tr.samples - M_tr(tr_lab,:);      % [nTr × nFeat]
-    Sigma       = ledoit_wolf_cov(resid);              % shrinkage covariance
-    Pinv        = pinv(Sigma);                         % precision matrix (inverse)
-
-    % ---------------------------------------------------------------------
-    % Compute pairwise cross-validated distances
-    for i = 1:nStim-1
-        for j = i+1:nStim
-            delta_tr = M_tr(i,:) - M_tr(j,:);          % train difference
-            delta_te = M_te(i,:) - M_te(j,:);          % test difference
-
-            % Compute crossnobis distance (symmetric dot product)
-            d = delta_te * Pinv * delta_tr';           % cross-validated Mahalanobis
-
-            RDM(i,j) = RDM(i,j) + d;                   % accumulate across folds
-        end
-    end
-end
-
-% -------------------------------------------------------------------------
-% Average distances across folds
-RDM = RDM / nFolds;
-
-% Symmetrize by copying upper triangle to lower
-RDM = RDM + RDM';   % symmetric: RDM(i,j) = RDM(j,i)
-
-end
-
-
-% -------------------------------------------------------------------------
-function M = compute_means(ds, target_levels)
-% Returns an [nStim × nFeat] matrix of stimulus means.
-nStim = numel(target_levels);
-nFeat = size(ds.samples,2);
-M     = zeros(nStim, nFeat);
-for k = 1:nStim
-    idx = ds.sa.targets == target_levels(k);
-    M(k,:) = mean(ds.samples(idx,:), 1);
-end
-end
-
-% -------------------------------------------------------------------------
-function Sigma = ledoit_wolf_cov(X)
-% LEDOIT_WOLF_COV  Computes a shrinkage estimator of the covariance matrix.
-%
-%   Sigma = ledoit_wolf_cov(X)
-%
-%   This function implements the Ledoit–Wolf shrinkage estimator for the
-%   covariance matrix, which provides a regularized, better-conditioned
-%   estimate of the true covariance matrix, especially in high-dimensional
-%   settings (p >> n).
-%
-%   INPUT:
-%       X : [n × p] data matrix
-%           Each row is an observation, each column is a variable (feature).
-%           The function assumes that the noise structure is represented by
-%           X (e.g., residuals from condition means).
-%
-%   OUTPUT:
-%       Sigma : [p × p] shrinkage covariance matrix estimate
-%           The estimate is a convex combination of:
-%               - The empirical sample covariance matrix S
-%               - A shrinkage target T = mu * I (scaled identity)
-%
-%   The formula is:
-%       Sigma = (1 - delta) * S + delta * T
-%   where delta ∈ [0,1] is the optimal shrinkage intensity.
-%
-%   Reference:
-%       Ledoit & Wolf (2004). A well-conditioned estimator for large-dimensional
-%       covariance matrices. Journal of Multivariate Analysis.
-
-% -------------------------------------------------------------------------
-% Step 1: Dimensions
-[n, p] = size(X);  % n = number of samples, p = number of variables/features
-
-% -------------------------------------------------------------------------
-% Step 2: Center each column (feature-wise mean subtraction)
-%         This ensures that the sample covariance is unbiased.
-X = bsxfun(@minus, X, mean(X,1));  % zero-mean per feature (column-wise)
-
-% -------------------------------------------------------------------------
-% Step 3: Compute the empirical (sample) covariance matrix
-%         Formula: S = (1/n) * (X' * X)
-S = (X' * X) / n;  % [p × p] covariance matrix
-
-% -------------------------------------------------------------------------
-% Step 4: Define the shrinkage target: mu * I
-%         The target is a scaled identity matrix with the same average
-%         variance as the diagonal of the sample covariance matrix.
-mu = trace(S) / p;         % average variance across features
-T  = mu * eye(p);          % target matrix (scaled identity)
-
-% -------------------------------------------------------------------------
-% Step 5: Estimate φ (phi)
-%         φ measures the variance of the individual covariance estimates.
-%         It is the average squared Frobenius norm of deviations:
-%             φ = (1/n) ∑₁ⁿ ‖xᵢxᵢᵗ - S‖²_F
-%         This reflects how much individual outer products deviate from S.
-phi = 0;
-for i = 1:n
-    xi   = X(i,:)';                      % [p × 1] column vector for sample i
-    Si   = xi * xi';                     % [p × p] outer product: xᵢxᵢᵗ
-    diff = Si - S;                       % deviation from sample covariance
-    phi  = phi + norm(diff, 'fro')^2;   % squared Frobenius norm
-end
-phi = phi / n;  % average over all samples
-
-% -------------------------------------------------------------------------
-% Step 6: Compute ρ (rho)
-%         ρ is the squared Frobenius distance between the sample covariance
-%         and the shrinkage target:
-%             ρ = ‖S - T‖²_F
-rho = norm(S - T, 'fro')^2;
-
-% -------------------------------------------------------------------------
-% Step 7: Compute the optimal shrinkage intensity delta
-%         Ensures delta ∈ [0,1] to produce a valid convex combination
-delta = max(0, min(1, phi / rho));
-
-% -------------------------------------------------------------------------
-% Step 8: Compute the final shrinkage estimator
-%         Convex combination of S and T
-Sigma = (1 - delta) * S + delta * T;
-
-end
-
-
