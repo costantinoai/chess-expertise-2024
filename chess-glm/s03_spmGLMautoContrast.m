@@ -66,7 +66,6 @@ atlasPath = '/data/projects/chess/data/misc/afni_glasser/MNI_Glasser_HCP_v1.0_re
 % outRoot = '/home/eik-tb/Desktop/New Folder';
 
 % Files to select
-% selectedSubjectsList = '*';        % Must be list of integers or '*'
 selectedSubjectsList = '*';     % Must be list of integers or '*'
 selectedRuns = '*';                         % Must be integer or '*'
 
