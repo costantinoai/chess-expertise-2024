@@ -1,0 +1,3 @@
+roi_index,sub,exp,alpha_M,R_M,D_M,rho_center,D_participation_ratio,D_explained_variance,D_feature
+08_body_spatial.0,exp,True,1.995644454085719,0.0,0.0,0.10371456193218216,17.283832051776283,16,5000
+08_body_spatial.0,nonexp,False,2.0062198484731617,0.0,0.0,0.14107149798441707,11.5908290275517,15,5000

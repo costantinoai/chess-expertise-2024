@@ -156,7 +156,7 @@ cython_debug/
 test
 misc
 chess-connectivity
-chess-manifold*
+# chess-manifold*
 chess-behavioural/data/sub
 chess-dnn
 **/old
