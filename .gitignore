@@ -171,3 +171,4 @@ chess-rois
 /chess-mvpa/results
 /data/cifar-100-python
 *.gz
+/chess-manifoldMFT/data/cifar-100-python
