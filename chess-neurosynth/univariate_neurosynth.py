@@ -57,8 +57,6 @@ term_maps = load_term_maps(term_dir)
 # ------------------------------------------------------------------
 with OutputLogger(True, out_text_file):
     for filepath in glob(os.path.join(brain_dir, '*.nii')):
-        if "exp>nov" not in filepath:
-            continue
         run_id = os.path.splitext(os.path.basename(filepath))[0]
         parts = run_id.split('_')
         level1 = LEVELS_MAPS[parts[1]]

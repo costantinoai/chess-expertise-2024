@@ -16,6 +16,37 @@ import pandas as pd
 from nilearn import image
 from joblib import Parallel, delayed
 from tqdm import tqdm
+import os
+
+def get_brain_mask(ref):
+    """
+    Loads the ICBM152 GM brain mask and resamples it to match the reference image.
+    Binarizes the mask such that voxels > 0.25 are True.
+
+    Parameters
+    ----------
+    ref : Nifti1Image
+        The reference image to which the mask should be resampled.
+
+    Returns
+    -------
+    binary_mask : Nifti1Image
+        A binarized brain mask in the same space as `ref`.
+    """
+    from nilearn import datasets, image
+    from nilearn.image import math_img
+    import nibabel as nib
+
+    # Fetch and load the ICBM152 GM mask
+    mni = datasets.fetch_icbm152_2009()
+    brain_mask = nib.load(mni['gm'])
+
+    # Resample to the reference image
+    resampled_mask = image.resample_to_img(brain_mask, ref, interpolation='nearest')
+
+    # Threshold and binarize the mask
+    binary_mask = math_img('img > 0.25', img=resampled_mask)
+    return binary_mask
 
 def split_and_convert_t_to_z(t_map: np.ndarray, dof: int):
     """
@@ -45,13 +76,38 @@ def split_and_convert_t_to_z(t_map: np.ndarray, dof: int):
     return z_pos, z_neg
 
 
-def remove_useless_data(data: np.ndarray):
+# def remove_useless_data(data: np.ndarray, brain_mask_flat=None):
+#     """Remove problematic voxels from stacked maps.
+
+#     Parameters
+#     ----------
+#     data : np.ndarray, shape (n_maps, n_voxels)
+#         Array containing different maps stacked by rows.
+
+#     Returns
+#     -------
+#     data_clean : np.ndarray
+#         Data with unusable voxels removed.
+#     keep_mask : np.ndarray of bool
+#         Boolean mask indicating voxels that were kept.
+#     """
+#     if data.ndim != 2:
+#         raise ValueError("remove_useless_data expects a 2D array")
+
+#     finite_mask = np.all(np.isfinite(data), axis=0)
+#     const_mask = np.ptp(np.round(data, 2), axis=0) == 0
+#     keep_mask = finite_mask & (~const_mask) if brain_mask_flat == None else finite_mask & (~const_mask) & brain_mask_flat
+#     return data[:, keep_mask], keep_mask
+
+def remove_useless_data(data: np.ndarray, brain_mask_flat: np.ndarray = None):
     """Remove problematic voxels from stacked maps.
 
     Parameters
     ----------
     data : np.ndarray, shape (n_maps, n_voxels)
         Array containing different maps stacked by rows.
+    brain_mask_flat : np.ndarray of bool, optional
+        1D boolean brain mask to restrict analysis to valid brain voxels.
 
     Returns
     -------
@@ -63,10 +119,40 @@ def remove_useless_data(data: np.ndarray):
     if data.ndim != 2:
         raise ValueError("remove_useless_data expects a 2D array")
 
+    n_voxels = data.shape[1]
+    print(f"Initial number of voxels: {n_voxels}")
+
+    # Mask: finite values across all maps
     finite_mask = np.all(np.isfinite(data), axis=0)
-    const_mask = np.ptp(np.round(data, 2), axis=0) == 0
-    keep_mask = finite_mask & (~const_mask)
+    print(f"Voxels with all finite values: {np.sum(finite_mask)} "
+          f"({n_voxels - np.sum(finite_mask)} removed)")
+
+    # Mask: variance > 0 across maps (remove flat voxels)
+    variance = np.var(data, axis=0)
+    var_thresh = 1e-5
+    low_variance_mask = variance < var_thresh
+    print(f"Voxels with variance >= {var_thresh}: {np.sum(~low_variance_mask)} "
+          f"({np.sum(low_variance_mask)} removed)")
+
+    # Combine masks
+    keep_mask = finite_mask & (~low_variance_mask)
+
+    # Apply brain mask if provided
+    if brain_mask_flat is not None:
+        if brain_mask_flat.shape[0] != data.shape[1]:
+            raise ValueError("brain_mask_flat must have shape (n_voxels,)")
+        brain_mask_flat = brain_mask_flat.astype(bool)
+        print(f"Voxels in brain mask: {np.sum(brain_mask_flat)} "
+              f"({n_voxels - np.sum(brain_mask_flat)} excluded outside brain)")
+        keep_mask &= brain_mask_flat
+
+    # Final count
+    print(f"Final number of voxels retained: {np.sum(keep_mask)} "
+          f"({n_voxels - np.sum(keep_mask)} total removed)")
+
     return data[:, keep_mask], keep_mask
+
+
 
 def compute_all_zmap_correlations(z_pos, z_neg, term_maps, ref_img,
                                   n_boot=10000, fdr_alpha=0.05,
@@ -113,6 +199,7 @@ def compute_all_zmap_correlations(z_pos, z_neg, term_maps, ref_img,
 
     flat_pos = z_pos.ravel()
     flat_neg = z_neg.ravel()
+    flat_mask = get_brain_mask(ref_img).get_fdata().ravel()
 
     for term, path in term_maps.items():
         # Resample the term map onto the same grid as the subject map so that
@@ -126,8 +213,10 @@ def compute_all_zmap_correlations(z_pos, z_neg, term_maps, ref_img,
         # three maps.  The latter effectively removes regions that carry no
         # variance and would otherwise bias the correlation.
         # --------------------------------------------------------------
-        stacked, _ = remove_useless_data(np.vstack([flat_pos, flat_neg, flat_t]))
-        x, y, t = stacked
+        stacked, _ = remove_useless_data(np.vstack([flat_pos, flat_neg, flat_t]), flat_mask)
+        # x, y, t = stacked
+
+        x, y, t = flat_pos, flat_neg, flat_t
 
         # --- POSITIVE MAP ---
         res_pos = pg.corr(x=t, y=x, method='pearson',
@@ -142,9 +231,15 @@ def compute_all_zmap_correlations(z_pos, z_neg, term_maps, ref_img,
         res_neg = pg.corr(x=t, y=y, method='pearson',
                           bootstraps=n_boot, confidence=0.95,
                           method_ci='percentile', alternative='two-sided')
+
+
         r_neg = res_neg['r'].iloc[0]
         p_neg = res_neg['p-val'].iloc[0]
-        ci_lo_neg, ci_hi_neg = res_neg['CI95%'].iloc[0]
+        try:
+            ci_lo_neg, ci_hi_neg = res_neg['CI95%'].iloc[0]
+        except:
+            ci_lo_neg, ci_hi_neg = np.nan, np.nan
+
         records_neg.append((term, r_neg, ci_lo_neg, ci_hi_neg, p_neg))
 
         # --- DIFFERENCE (bootstrap) ---
@@ -202,7 +297,6 @@ def compute_all_zmap_correlations(z_pos, z_neg, term_maps, ref_img,
 
     return df_pos, df_neg, df_diff
 
-import os
 def save_latex_correlation_tables(df_pos, df_neg, diff_df, run_id, out_dir):
     """
     Save and print LaTeX tables for positive/negative/difference z-map correlations.

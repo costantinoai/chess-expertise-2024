@@ -26,7 +26,7 @@ from modules.config import (
     COL_NEG,
 )
 
-YLIM = [-0.15, 0.25]
+YLIM = [-0.15, 0.3]
 
 # --- Base font size ---
 base_font_size = 26
@@ -90,12 +90,15 @@ def plot_map(arr, ref_img, title, outpath, thresh=1e-5):
     disp.title(title, size=28, color="black", bgcolor="white", weight="bold")
 
     # --- Set colorbar ticks to min, 0, max ---
-    data_max = np.nanmax(arr)
-    data_min = np.nanmin(arr)
-    lim = np.max([np.abs(data_max), np.abs(data_min)])
-    cbar_ax = disp._cbar.ax  # colorbar is usually the last axis in the figure
-    cbar_ax.set_yticks([-lim, 0, lim])
-    cbar_ax.set_yticklabels([f"{-lim:.2f}", "0", f"{lim:.2f}"])
+    # data_max = np.nanmax(arr)
+    # data_min = np.nanmin(arr)
+    # lim = np.max([np.abs(data_max), np.abs(data_min)])
+    # try:
+    #     cbar_ax = disp._cbar.ax  # colorbar is usually the last axis in the figure
+    #     cbar_ax.set_yticks([-lim, 0, lim])
+    #     cbar_ax.set_yticklabels([f"{-lim:.2f}", "0", f"{lim:.2f}"])
+    # except:
+    #     pass
 
     # Save using the correct figure
     disp.savefig(outpath.replace(">", "-gt-"), dpi=300)
@@ -128,7 +131,7 @@ def plot_term_maps(term_maps, out_dir):
         )
 
 
-def plot_correlations(df_pos, df_neg, df_diff, out_fig, out_csv, run_id):
+def plot_correlations(df_pos, df_neg, df_diff, out_fig=None, out_csv=None, run_id=None):
     """
     Create a paired bar plot for positive vs negative map correlations,
     annotate bootstrap CIs and significance stars (indiv. and diff.).
@@ -244,17 +247,16 @@ def plot_correlations(df_pos, df_neg, df_diff, out_fig, out_csv, run_id):
     # Save figure and CSV
     plt.tight_layout(rect=[0, 0, 0.85, 1])  # leave space for legend
     ax.set_ylim(YLIM)
-
-    plt.savefig(out_fig.replace(">", "-gt-"), dpi=300)
-    plt.show()
     plot_df["p_fdr_indiv"] = list(df_pos["p_fdr"]) + list(df_neg["p_fdr"])
     plot_df["p_fdr_diff"] = list(df_diff["p_fdr"]) * 2
-    plot_df.to_csv(out_csv, index=False)
-
+    if out_fig != None:
+        plot_df.to_csv(out_csv, index=False)
+        plt.savefig(out_fig.replace(">", "-gt-"), dpi=300)
+    plt.show()
     return plot_df
 
 
-def plot_difference(diff_df, out_fig, run_id, col_pos=COL_POS, col_neg=COL_NEG):
+def plot_difference(diff_df, out_fig=None, run_id=None, col_pos=COL_POS, col_neg=COL_NEG):
     """
     Plot bar chart of correlation differences (pos - neg) with CIs and sig.
 
@@ -284,7 +286,7 @@ def plot_difference(diff_df, out_fig, run_id, col_pos=COL_POS, col_neg=COL_NEG):
 
     # Draw bars
     for i, v in enumerate(r_diff):
-        ax.bar(i, v, color=col_pos if v >= 0 else col_neg, edgecolor="k")
+        ax.bar(i, v, color=col_pos if v >= 0 else col_neg)
 
     # Error bars and significance stars
     offset = 0.005
@@ -299,7 +301,7 @@ def plot_difference(diff_df, out_fig, run_id, col_pos=COL_POS, col_neg=COL_NEG):
             fmt="none",
             ecolor="k",
             elinewidth=1.5,
-            capsize=4,
+            capsize=5,
             capthick=1.5,
         )
         if p < 0.05:
@@ -316,7 +318,7 @@ def plot_difference(diff_df, out_fig, run_id, col_pos=COL_POS, col_neg=COL_NEG):
     ymin = min(ymin, -0.1)
     if annotation_levels:
         ymax = max(ymax, max(annotation_levels) + offset)
-    ax.set_ylim([-0.15, 0.35])
+    ax.set_ylim([-0.2, 0.35])
 
     # Add legend for direction of effects
     expert_patch = mpatches.Patch(color=col_pos, label="Experts > Novices")
@@ -341,5 +343,6 @@ def plot_difference(diff_df, out_fig, run_id, col_pos=COL_POS, col_neg=COL_NEG):
 
     # Save and show
     plt.tight_layout()
-    plt.savefig(out_fig.replace(">", "-gt-"), dpi=300)
+    if out_fig != None:
+        plt.savefig(out_fig.replace(">", "-gt-"), dpi=300)
     plt.show()
