@@ -69,34 +69,52 @@ def compute_manifold(
 
     return manifold_results
 
+def build_metric_array(df, subjects, rois, metric):
+    import numpy as np
+    arr = np.full((len(subjects), len(rois)), np.nan)
+    for i, subj in enumerate(subjects):
+        for j, roi in enumerate(rois):
+            val = df[(df["subject"]==subj) & (df["roi"]==roi)][metric]
+            if not val.empty:
+                arr[i, j] = val.values[0]
+    return arr
 
-def fdr_ttest(
-    group1: np.ndarray, group2: np.ndarray, labels: np.ndarray, alpha: float = 0.05
-) -> "pd.DataFrame":
-    """Return DataFrame with t-test and FDR correction across ROIs."""
+# --- Helper: FDR t-test function with full stats (moved from main_noavg.py) ---
+def fdr_ttest(group1_vals, group2_vals, roi_labels, alpha=0.05):
+    import numpy as np
     import pandas as pd
-
-    n_rois = group1.shape[1]
-    tvals = np.zeros(n_rois)
-    pvals = np.ones(n_rois)
-    for i in range(n_rois):
-        g1 = group1[:, i]
-        g2 = group2[:, i]
-        g1 = g1[~np.isnan(g1)]  # type: ignore
-        g2 = g2[~np.isnan(g2)]  # type: ignore
+    from statsmodels.stats.multitest import multipletests
+    from scipy.stats import ttest_ind, t
+    results = []
+    for i, roi in enumerate(roi_labels):
+        g1 = group1_vals[:, i]
+        g2 = group2_vals[:, i]
+        g1 = g1[~np.isnan(g1)]
+        g2 = g2[~np.isnan(g2)]
         if len(g1) < 2 or len(g2) < 2:
+            results.append({
+                "ROI_Label": roi, "t_stat": np.nan, "p_val": np.nan, "dof": np.nan,
+                "cohen_d": np.nan, "mean_diff": np.nan, "ci95_low": np.nan, "ci95_high": np.nan
+            })
             continue
-        t_stat, p_val = ttest_ind(np.sort(g1), np.sort(g2), nan_policy="omit")
-        tvals[i] = t_stat
-        pvals[i] = p_val
-    reject, p_fdr, _, _ = multipletests(pvals, alpha=alpha, method="fdr_bh")
-    df = pd.DataFrame(
-        {
-            "ROI": labels,
-            "t_stat": tvals,
-            "p_val": pvals,
-            "p_fdr": p_fdr,
-            "significant": reject,
-        }
-    )
+        res = ttest_ind(g1, g2, equal_var=False)
+        diff = np.mean(g1) - np.mean(g2)
+        se = np.sqrt(np.var(g1, ddof=1)/len(g1) + np.var(g2, ddof=1)/len(g2))
+        dof = (np.var(g1, ddof=1)/len(g1) + np.var(g2, ddof=1)/len(g2))**2 / (
+            ((np.var(g1, ddof=1)/len(g1))**2)/(len(g1)-1) + ((np.var(g2, ddof=1)/len(g2))**2)/(len(g2)-1)
+        )
+        ci = t.interval(0.95, dof, loc=diff, scale=se)
+        pooled_sd = np.sqrt(((len(g1)-1)*np.var(g1, ddof=1) + (len(g2)-1)*np.var(g2, ddof=1)) / (len(g1)+len(g2)-2))
+        d = diff / pooled_sd if pooled_sd > 0 else np.nan
+        results.append({
+            "ROI_Label": roi, "t_stat": res.statistic, "p_val": res.pvalue, "dof": dof,
+            "cohen_d": d, "mean_diff": diff, "ci95_low": ci[0], "ci95_high": ci[1]
+        })
+    df = pd.DataFrame(results)
+    corrected_p = df["p_val"].copy()
+    corrected_p[df["p_val"].isna()] = 1.0
+    reject, pval_fdr, _, _ = multipletests(corrected_p, alpha=alpha, method='fdr_bh')
+    df["p_val_fdr"] = pval_fdr
+    df["significant_fdr"] = reject
+    df["significant"] = df["p_val"] < 0.05
     return df
