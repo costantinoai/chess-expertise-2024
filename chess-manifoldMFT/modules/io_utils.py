@@ -101,3 +101,67 @@ def load_atlas() -> Tuple[np.ndarray, np.ndarray]:
     labels = np.unique(data)
     labels = labels[labels != 0]
     return data, labels
+
+def assign_manifold_labels(labels, strategy):
+    """
+    Assigns each label to a manifold according to the selected strategy.
+    Args:
+        labels (list of str): The original condition labels.
+        strategy (str): One of 'stimuli', 'checkmate', 'visual', 'strategy'.
+    Returns:
+        list of int: List of manifold indices for each label.
+        list of str: List of unique manifold names (for reference).
+    """
+    import re
+    if strategy == 'stimuli':
+        # Each label is its own manifold
+        return list(range(len(labels))), labels
+    elif strategy == 'checkmate':
+        # All labels starting with 'C' (case-insensitive) to one manifold, 'N' to the other
+        manifolds = []
+        for l in labels:
+            if l.upper().startswith('C'):
+                manifolds.append(0)
+            elif l.upper().startswith('N'):
+                manifolds.append(1)
+            else:
+                manifolds.append(-1)  # unknown
+        return manifolds, ['C', 'N']
+    elif strategy == 'visual':
+        # Assign 1/21, 2/22, ... to the same manifold
+        manifolds = []
+        mapping = {}
+        idx = 0
+        for l in labels:
+            m = re.match(r'(\d+)', l)
+            if m:
+                num = int(m.group(1))
+                group = num if num <= 20 else num - 20
+                if group not in mapping:
+                    mapping[group] = idx
+                    idx += 1
+                manifolds.append(mapping[group])
+            else:
+                manifolds.append(-1)
+        # Sort mapping by group number
+        sorted_groups = [k for k, v in sorted(mapping.items(), key=lambda x: x[1])]
+        return manifolds, [str(g) for g in sorted_groups]
+    elif strategy == 'strategy':
+        # Labels like 'C1', 'NC1', etc. Each unique prefix+digit is a manifold
+        manifolds = []
+        mapping = {}
+        idx = 0
+        for l in labels:
+            m = re.match(r'([A-Za-z]+\d+)', l)
+            if m:
+                group = m.group(1)
+                if group not in mapping:
+                    mapping[group] = idx
+                    idx += 1
+                manifolds.append(mapping[group])
+            else:
+                manifolds.append(-1)
+        sorted_groups = [k for k, v in sorted(mapping.items(), key=lambda x: x[1])]
+        return manifolds, sorted_groups
+    else:
+        raise ValueError(f"Unknown strategy: {strategy}")
