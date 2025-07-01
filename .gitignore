@@ -168,3 +168,6 @@ chess-rois
 /chess-mvpa/results
 /**/cifar-100-python
 *.gz
+/chess-manifoldMFT/results
+chess-manifoldMFT/modules/__init__.py
+chess-manifoldMFT/modules/__init__.py
