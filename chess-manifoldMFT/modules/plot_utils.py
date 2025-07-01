@@ -1,7 +1,6 @@
 #!/usr/bin/env python3
 """Plotting helpers for manifold analysis."""
 
-from __future__ import annotations
 
 import os
 from typing import Iterable

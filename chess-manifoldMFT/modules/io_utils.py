@@ -1,7 +1,6 @@
 #!/usr/bin/env python3
 """Input/output helpers for the manifold analysis module."""
 
-from __future__ import annotations
 
 import os
 import re
@@ -17,14 +16,14 @@ from . import logger, BASE_GLM_PATH, ATLAS_FILE
 
 def get_spm_betas(subject_id: str) -> Dict[str, List[Dict[str, str]]]:
     """Return mapping of condition name to a list of beta file info."""
-    spm_mat = os.path.join(BASE_GLM_PATH, f"sub-{subject_id}", "exp", "SPM.mat")
+    spm_dir = os.path.join(BASE_GLM_PATH, f"sub-{subject_id}", "exp")
+    spm_mat = os.path.join(spm_dir, "SPM.mat")
     if not os.path.isfile(spm_mat):
         raise FileNotFoundError(f"SPM.mat not found for sub-{subject_id}: {spm_mat}")
 
     spm = sio.loadmat(spm_mat, struct_as_record=False, squeeze_me=True)["SPM"]
     beta_info = spm.Vbeta
     regressor_names = spm.xX.name
-    spm_dir = getattr(spm, "swd", os.path.dirname(spm_mat))
 
     cond_info: Dict[str, List[Dict[str, str]]] = {}
     pattern = r"Sn\((\d+)\)\s+(.*?)\*bf\(1\)"
@@ -76,7 +75,12 @@ def load_all_betas(subject_id: str) -> Tuple[Dict[str, np.ndarray], List[str]]:
         paths = [entry["beta_path"] for entry in entries]
         imgs = [nib.load(p) for p in paths]
         data = [img.get_fdata(dtype=np.float32) for img in imgs]
-        betas[cond] = np.stack(data, axis=0)
+        betas[cond] = np.average(np.stack(data, axis=0), axis=0)
+        # print the old and new sizes
+        logger.info(
+            f"Loaded {len(entries)} runs for condition '{cond}': "
+            f"{data[0].shape} -> {betas[cond].shape}"
+        )
 
     return betas, conditions
 
