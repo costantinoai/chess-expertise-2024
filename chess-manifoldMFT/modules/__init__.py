@@ -4,7 +4,6 @@
 from __future__ import annotations
 
 import logging
-from pathlib import Path
 
 logging.basicConfig(
     level=logging.INFO, format="[%(levelname)s %(asctime)s] %(message)s"

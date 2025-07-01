@@ -15,20 +15,6 @@ from . import logger
 sns.set_style("whitegrid")
 
 
-def plot_subject_roi(
-    radius: float, dimension: float, subject: str, roi: int, out_dir: str
-) -> None:
-    """Save a simple scatter plot for a subject/ROI."""
-    fig, ax = plt.subplots(figsize=(4, 4))
-    ax.scatter(dimension, radius, color="tab:blue")
-    ax.set_xlabel("Dimension")
-    ax.set_ylabel("Radius")
-    ax.set_title(f"Sub {subject} ROI {roi}")
-    os.makedirs(out_dir, exist_ok=True)
-    fig.savefig(os.path.join(out_dir, f"sub-{subject}_roi-{roi}.png"), dpi=300)
-    plt.show()
-
-
 def plot_group_comparison(df: pd.DataFrame, out_dir: str, metric: str) -> None:
     """Plot boxplots comparing groups for a metric across ROIs."""
     fig, ax = plt.subplots(figsize=(10, 6))

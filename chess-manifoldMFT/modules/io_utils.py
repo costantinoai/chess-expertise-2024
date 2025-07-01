@@ -49,7 +49,7 @@ def get_spm_betas(subject_id: str) -> Dict[str, List[Dict[str, str]]]:
     return cond_info
 
 
-def load_all_betas(subject_id: str) -> Tuple[Dict[str, np.ndarray], List[str]]:
+def load_all_betas(subject_id: str, avg_runs: bool) -> Tuple[Dict[str, np.ndarray], List[str]]:
     """Load all beta images for a subject without averaging across runs.
 
     Parameters
@@ -75,11 +75,20 @@ def load_all_betas(subject_id: str) -> Tuple[Dict[str, np.ndarray], List[str]]:
         paths = [entry["beta_path"] for entry in entries]
         imgs = [nib.load(p) for p in paths]
         data = [img.get_fdata(dtype=np.float32) for img in imgs]
-        betas[cond] = np.average(np.stack(data, axis=0), axis=0)
-        # print the old and new sizes
+        if avg_runs:
+            betas[cond] = np.nanmean(np.stack(data, axis=0), axis=0)
+            total_voxels = np.prod(betas[cond].shape)
+            nans = np.isnan(betas[cond]).sum()
+        else:
+            betas[cond] = data
+            total_voxels = np.prod(betas[cond][0].shape)
+            nans = np.isnan(betas[cond][0]).sum()
+
+        # Print th number of total voxels and the number of nans
+
         logger.info(
-            f"Loaded {len(entries)} runs for condition '{cond}': "
-            f"{data[0].shape} -> {betas[cond].shape}"
+            f"Condition '{cond}' has {total_voxels} total voxels, "
+            f"{nans} of which are NaN."
         )
 
     return betas, conditions
