@@ -19,7 +19,7 @@ from modules.plot_utils import (
 # from sklearn.preprocessing import StandardScaler
 
 AVG_RUNS = True
-PARALLEL=True
+PARALLEL= True
 
 def process_subject(
     subject: str,

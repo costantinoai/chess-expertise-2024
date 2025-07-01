@@ -44,16 +44,16 @@ def compute_manifold(
         if m.shape[0] != n_feat:
             raise ValueError("All manifolds must have the same number of features")
         valid_mask &= ~np.isnan(m).any(axis=1)  # type: ignore
-        valid_mask &= np.var(m, axis=1) > 0
-    manifolds = [m[valid_mask] for m in manifolds]
-    if manifolds[0].size == 0:
+        # valid_mask &= np.var(m, axis=1) > 0 # FIXME: this does not work for single vectors!
+    manifolds_clean = [m[valid_mask] for m in manifolds]
+    if manifolds_clean[0].size == 0:
         return np.nan, np.nan, np.nan
 
     # Perform Manifold Analysis
     # Core manifold analysis
-    a, r, d, rho0, K = manifold_analysis_corr(manifolds, kappa, n_t)
+    a, r, d, rho0, K = manifold_analysis_corr(manifolds_clean, kappa, n_t)
     # Additional dimension analyses
-    D_pr, D_ev, D_feat = alldata_dimension_analysis(manifolds, perc=0.9)
+    D_pr, D_ev, D_feat = alldata_dimension_analysis(manifolds_clean, perc=0.9)
 
     # Aggregate results
     manifold_results = {
