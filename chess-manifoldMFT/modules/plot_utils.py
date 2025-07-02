@@ -89,30 +89,4 @@ def plot_all_group_manifold_plots(full_df, out_dir, metrics_to_plot, rois, roi_n
     plt.tight_layout()
     plt.savefig(os.path.join(out_dir, "all_metrics_differences.png"), dpi=300)
     plt.close()
-    # --- Plot 3: Line plots for all metrics by ROI and expertise ---
-    sns.set(style="whitegrid")
-    n_metrics = len(metrics_to_plot)
-    n_cols = 4
-    n_rows = int(np.ceil(n_metrics / n_cols))
-    fig, axes = plt.subplots(n_rows, n_cols, figsize=(n_cols * 4, n_rows * 4), sharey=False)
-    axes = axes.flatten()
-    for ax, metric in zip(axes, metrics_to_plot):
-        sns.lineplot(
-            data=full_df,
-            x="roi",
-            y=metric,
-            hue="expertise",
-            ci=95,
-            marker="o",
-            err_style="band",
-            ax=ax
-        )
-        ax.set_title(f"{metric} by ROI and Expertise")
-        ax.set_xlabel("ROI")
-        ax.set_ylabel(metric)
-        ax.tick_params(axis="x", rotation=90)
-        ax.legend(title="Expertise", loc="upper right", fontsize="small", title_fontsize="small")
-    for unused_ax in axes[n_metrics:]:
-        fig.delaxes(unused_ax)
-    fig.tight_layout()
-    plt.show()
+ 
