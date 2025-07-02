@@ -127,25 +127,22 @@ def assign_manifold_labels(labels, strategy):
             else:
                 manifolds.append(-1)  # unknown
         return manifolds, ['C', 'N']
+
     elif strategy == 'visual':
-        # Assign 1/21, 2/22, ... to the same manifold
+        # Assign a unique number to each visual manifold (based on token after '_')
         manifolds = []
         mapping = {}
         idx = 0
+
         for l in labels:
-            m = re.match(r'(\d+)', l)
-            if m:
-                num = int(m.group(1))
-                group = num if num <= 20 else num - 20
-                if group not in mapping:
-                    mapping[group] = idx
-                    idx += 1
-                manifolds.append(mapping[group])
-            else:
-                manifolds.append(-1)
-        # Sort mapping by group number
-        sorted_groups = [k for k, v in sorted(mapping.items(), key=lambda x: x[1])]
-        return manifolds, [str(g) for g in sorted_groups]
+            m = l.split("_")[1].split("(")[0].lower()  # e.g. "12" from "bishop_12(C1)"
+            if m not in mapping:
+                mapping[m] = idx
+                idx += 1
+            manifolds.append(mapping[m])
+
+        return manifolds, [str(g) for g in mapping.keys()]
+
     elif strategy == 'strategy':
         # Labels like 'C1', 'NC1', etc. Each unique prefix+digit is a manifold
         manifolds = []
