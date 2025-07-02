@@ -14,40 +14,6 @@ from . import logger
 
 sns.set_style("whitegrid")
 
-
-def plot_group_comparison(df: pd.DataFrame, out_dir: str, metric: str) -> None:
-    """Plot boxplots comparing groups for a metric across ROIs."""
-    fig, ax = plt.subplots(figsize=(10, 6))
-    sns.boxplot(data=df, x="ROI", y=metric, hue="group", ax=ax)
-    ax.set_title(f"Group comparison: {metric}")
-    plt.xticks(rotation=90)
-    os.makedirs(out_dir, exist_ok=True)
-    fig.tight_layout()
-    fig.savefig(os.path.join(out_dir, f"group_{metric}.png"), dpi=300)
-    plt.show()
-
-
-def plot_group_heatmap(values: np.ndarray, rois: Iterable[int], metric: str, out_dir: str) -> None:
-    """Plot heatmap of mean metric per ROI for experts and nonexperts."""
-    fig, ax = plt.subplots(figsize=(6, max(4, len(rois) * 0.25)))
-    sns.heatmap(
-        values,
-        annot=True,
-        fmt=".2f",
-        cmap="coolwarm",
-        yticklabels=rois,
-        xticklabels=["expert", "nonexpert"],
-        ax=ax,
-    )
-    ax.set_xlabel("Group")
-    ax.set_ylabel("ROI")
-    ax.set_title(metric.capitalize())
-    os.makedirs(out_dir, exist_ok=True)
-    fig.tight_layout()
-    fig.savefig(os.path.join(out_dir, f"heatmap_{metric}.png"), dpi=300)
-    plt.show()
-
-
 def plot_all_group_manifold_plots(full_df, out_dir, metrics_to_plot, rois, roi_name_map, exp_subs, nov_subs):
     import numpy as np
     import pandas as pd
@@ -61,8 +27,8 @@ def plot_all_group_manifold_plots(full_df, out_dir, metrics_to_plot, rois, roi_n
     ]
     # --- Plot 1: Barplot per ROI, experts vs non-experts ---
     for metric in metrics_to_plot:
-        exp_arr = build_metric_array(full_df, exp_subs, metric)
-        nov_arr = build_metric_array(full_df, nov_subs, metric)
+        exp_arr = build_metric_array(full_df, exp_subs, rois, metric)
+        nov_arr = build_metric_array(full_df, nov_subs, rois, metric)
         stats_df = fdr_ttest(exp_arr, nov_arr, rois, alpha=0.05)
         mean_exp = np.nanmean(exp_arr, axis=0)
         mean_nov = np.nanmean(nov_arr, axis=0)
@@ -71,7 +37,7 @@ def plot_all_group_manifold_plots(full_df, out_dir, metrics_to_plot, rois, roi_n
             "ExpertMean": mean_exp,
             "NonExpertMean": mean_nov
         })
-        merged = pd.merge(stats_df, group_means_df, left_on="ROI", right_on="ROI_Label")
+        merged = pd.merge(stats_df, group_means_df, on="ROI_Label")
         merged["ROI_Name"] = merged["ROI_Label"].map(roi_name_map)
         fig, ax = plt.subplots(figsize=(14, 6))
         x = np.arange(len(rois))
@@ -102,8 +68,8 @@ def plot_all_group_manifold_plots(full_df, out_dir, metrics_to_plot, rois, roi_n
     if len(metrics_to_plot) == 1:
         axes = [axes]
     for idx, metric in enumerate(metrics_to_plot):
-        exp_arr = build_metric_array(full_df, exp_subs, metric)
-        nov_arr = build_metric_array(full_df, nov_subs, metric)
+        exp_arr = build_metric_array(full_df, exp_subs, rois, metric)
+        nov_arr = build_metric_array(full_df, nov_subs, rois, metric)
         stats_df = fdr_ttest(exp_arr, nov_arr, rois, alpha=0.05)
         diff = stats_df["mean_diff"]
         ci_low = stats_df["ci95_low"]
