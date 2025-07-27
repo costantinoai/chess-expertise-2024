@@ -56,7 +56,7 @@ function WithinGroup_SecondLevel_MultiContrast(smoothBool)
     
     %% 1. Check input argument
     if nargin < 1
-        smoothBool = false; % Default: no smoothing if not specified
+        smoothBool = true; % Default: no smoothing if not specified
     end
     fprintf('Smoothing is set to: %s\n', string(smoothBool));
     
@@ -76,7 +76,7 @@ function WithinGroup_SecondLevel_MultiContrast(smoothBool)
     };
 
     %% 3. Set up parameters
-    rootDir    = '/data/projects/chess/data/BIDS/derivatives/fmriprep-SPM_smoothed-6_GS-FD-HMP_brainmasked/MNI/fmriprep-SPM-MNI/GLM';
+    rootDir    = '/data/projects/chess/data/BIDS/derivatives/fmriprep-SPM_smoothed-4_GS-FD-HMP_brainmasked/MNI/fmriprep-SPM-MNI/GLM';
     
     % Here you define all the contrast files you want to analyze 
     % (already computed at the subject level):
@@ -87,7 +87,7 @@ function WithinGroup_SecondLevel_MultiContrast(smoothBool)
     };
     
     % Smoothing kernel (for second-level smoothing, if applied)
-    fwhm = [9 9 9];  % 9mm isotropic (you can adjust)
+    fwhm = [6 6 6];  % 9mm isotropic (you can adjust)
 
     %% 4. Loop over each contrast
     for c = 1:numel(contrastFiles)
@@ -97,8 +97,8 @@ function WithinGroup_SecondLevel_MultiContrast(smoothBool)
         [~, cbase, ~] = fileparts(contrastFile);  % e.g., 'con_0001'
 
         % Construct second-level output folders specifically for each contrast
-        secondLevelExperts    = fullfile(rootDir, ['2ndLevel_Experts_' cbase]);
-        secondLevelNonExperts = fullfile(rootDir, ['2ndLevel_NonExperts_' cbase]);
+        secondLevelExperts    = fullfile(rootDir, ['2ndLevel_Experts_smooth-4-6_' cbase]);
+        secondLevelNonExperts = fullfile(rootDir, ['2ndLevel_NonExperts_smooth-4-6_' cbase]);
 
         if ~exist(secondLevelExperts,    'dir'), mkdir(secondLevelExperts);    end
         if ~exist(secondLevelNonExperts, 'dir'), mkdir(secondLevelNonExperts); end
