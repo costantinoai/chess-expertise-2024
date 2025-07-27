@@ -27,6 +27,10 @@ import matplotlib.pyplot as plt
 
 from modules.helpers import create_run_id
 
+# Define base font size and update global rcParams
+plt.rcParams.update({
+    "font.family": "Ubuntu Condensed"
+})
 
 def format_contrast(s):
     """
@@ -79,11 +83,12 @@ chance_level = (0.0,)
 plot_nonsig_labels = True
 
 # Contrasts you want to plot
-contrasts = ["experts_vs_nonexperts", "nonexperts_vs_chance", "experts_vs_chance"]
+# contrasts = ["experts_vs_nonexperts", "nonexperts_vs_chance", "experts_vs_chance"]
+contrasts = ["experts_vs_nonexperts"]
 
 # Analyses (e.g., "svm" or "rsa_corr")
-# analyses = ["svm", "rsa_corr"]
-analyses = ["rsa_corr"]
+analyses = ["svm", "rsa_corr"]
+# analyses = ["rsa_corr"]
 
 # -----------------------------------------------------------------------------
 # Helper Functions
@@ -280,12 +285,12 @@ def plot_expert_vs_novice(
         plot_nonsig_labels (bool): If True, color non-significant ROI labels grey; otherwise keep them black.
     """
     # === CONFIGURATION ===
-    fig_width = 14
-    fig_height = 8
-    tick_fontsize = 12
-    label_fontsize = 12
-    title_fontsize = 20
-    asterisk_fontsize = 18
+    fig_width = 21
+    fig_height = 11
+    tick_fontsize = 12*2
+    label_fontsize = 14*2
+    title_fontsize = 20*2
+    asterisk_fontsize = 18*2.3
 
     # === MERGE STATS INTO A SUMMARY FOR SIDE-BY-SIDE PLOTTING ===
     # Our df has one row per ROI per group. We want one row per ROI containing:
@@ -491,7 +496,7 @@ def plot_expert_vs_novice(
         name = label_obj.get_text()
         is_sig = summary.loc[summary["ROI_Name"] == name, "sig_diff"].values[0]
         if not is_sig and plot_nonsig_labels:
-            label_obj.set_color("grey")
+            label_obj.set_color("lightgrey")
         else:
             label_obj.set_color(bar_colors.get(name, "black"))
 
@@ -504,7 +509,8 @@ def plot_expert_vs_novice(
     ci_highs = ci_highs[~np.isnan(ci_highs)]
 
     y_min = -0.01
-    y_max = 0.25
+    # y_max = .6 if "rsa" in analysis_type else .35
+    y_max = .25
     margin = 0.05 * (y_max - y_min)
     ax.set_ylim(y_min - margin, y_max + margin)
 
@@ -512,7 +518,7 @@ def plot_expert_vs_novice(
         loc="upper right",
         # bbox_to_anchor=(1, 1.15),
         ncol=2,  # optional: lay out legend entries in two columns
-        fontsize=16,
+        fontsize=24,
         frameon=False
     )
 
@@ -529,7 +535,7 @@ def plot_expert_vs_novice(
     print(f"Figure saved: {fname}")
 
 # -----------------------------------------------------------------------------
-# Top-Level Script (No 'main' function, per user request)
+# Top-Level Script (No 'main' function)
 # -----------------------------------------------------------------------------
 
 # Assumed pre-defined variables in the environment:

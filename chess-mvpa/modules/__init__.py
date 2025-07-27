@@ -11,7 +11,7 @@ import matplotlib.pyplot as plt
 from pathlib import Path
 import warnings
 import nibabel as nib
-from logging_utils import setup_logging
+from modules.logging_utils import setup_logging
 
 warnings.filterwarnings("ignore", category=FutureWarning)
 warnings.filterwarnings("ignore", category=RuntimeWarning)
@@ -344,7 +344,7 @@ REGIONS_LABELS = (
     (180, "Area posterior 24"),
 )
 
-from .roi_manager import ROIManager
+from modules.roi_manager import ROIManager
 
 # 2) Initialize ROIManager
 MANAGER = ROIManager(

@@ -8,10 +8,10 @@ from natsort import natsorted
 
 import nibabel as nib
 import scipy.io as sio
-from scipy import stats
+from scipy.stats import ttest_ind, ttest_1samp
+from statsmodels.stats.multitest import fdrcorrection
 
 from sklearn.decomposition import PCA
-from scipy.stats import ttest_ind
 from statsmodels.stats.multitest import multipletests
 from pingouin import compute_effsize
 
@@ -20,6 +20,23 @@ import logging
 
 from modules.helpers import create_run_id, save_script_to_file
 
+# Plot styles
+sns.set_style("white", {"axes.grid": False})
+base_font_size = 28
+plt.rcParams.update(
+    {
+        "font.family": "Ubuntu Condensed",
+        "font.size": base_font_size,
+        "axes.titlesize": base_font_size * 1.4,  # 36.4 ~ 36
+        "axes.labelsize": base_font_size * 1.2,  # 31.2 ~ 31
+        "xtick.labelsize": base_font_size,  # 26
+        "ytick.labelsize": base_font_size,  # 26
+        "legend.fontsize": base_font_size,  # 26
+        "figure.figsize": (21, 11),  # wide figures
+    }
+)
+
+
 
 ##############################################################################
 #                                 CONSTANTS
@@ -27,13 +44,13 @@ from modules.helpers import create_run_id, save_script_to_file
 
 # Define any constants or paths used throughout the script.
 CUSTOM_COLORS = [
-    "#c6dbef", "#c6dbef",   # Light blue (2)
-    "#2171b5", "#2171b5", "#2171b5",  # Dark blue (3)
-    "#a1d99b", "#a1d99b", "#a1d99b", "#a1d99b",  # Light green (4)
-    "#00441b", "#00441b", "#00441b",  # Dark green (3)
-    "#fbb4b9", "#fbb4b9",  # Pink (2)
-    "#cb181d", "#cb181d", "#cb181d", "#cb181d",  # Red (4)
-    "#fec44f", "#fec44f", "#fec44f", "#fec44f"   # Gold (4)
+    "#a6cee3", "#a6cee3",  # Early Visual (2)
+    "#1f78b4", "#1f78b4", "#1f78b4",  # Intermediate Visual (3)
+    "#b2df8a", "#b2df8a", "#b2df8a", "#b2df8a",  # Sensorimotor (4)
+    "#33a02c", "#33a02c", "#33a02c",  # Auditory (3)
+    "#fb9a99", "#fb9a99",  # Temporal (2)
+    "#e31a1c", "#e31a1c", "#e31a1c", "#e31a1c",  # Posterior (4)
+    "#fdbf6f", "#fdbf6f", "#fdbf6f", "#fdbf6f"   # Anterior (4)
 ]
 
 EXPERT_SUBJECTS = [
@@ -136,7 +153,6 @@ def get_spm_info(subject_id):
         Keys are condition names (e.g., 'C1', 'C2', ...), values are in-memory
         Nifti1Image objects representing the average beta image for that condition.
     """
-    import re
 
     # Construct the full path to the SPM.mat file
     spm_mat_path = os.path.join(BASE_PATH, f"sub-{subject_id}", "exp", SPM_FILENAME)
@@ -378,202 +394,6 @@ def fdr_ttest(group1_vals, group2_vals, roi_labels, alpha=0.05):
     return df
 
 
-def plot_all_rois_with_significance(
-    stat_df,
-    measure_name,
-    group_means_df,
-    expert_vals,
-    nonexpert_vals,
-    output_dir,
-    use_fdr=True,
-    sort_by="roi",
-    custom_colors=CUSTOM_COLORS
-):
-    """
-    Plots ROI results for a given measure (e.g., Participation Ratio),
-    showing the difference between groups (Experts - Novices) for all ROIs.
-
-    For each ROI:
-    1. A bar (or box) shows the distribution of subject-level differences.
-    2. Asterisks (*) mark significant ROIs based on FDR or raw p-values.
-
-    Parameters
-    ----------
-    stat_df : DataFrame
-        Contains T-test results (ROI_Label, p_val, p_val_fdr, etc.).
-    measure_name : str
-        Name of the measure (e.g., "PR").
-    group_means_df : DataFrame
-        Contains the mean values for experts/nonexperts per ROI (ROI_Label, measure columns).
-    expert_vals : ndarray
-        Subject-level data for experts, shape (n_experts, n_rois).
-    nonexpert_vals : ndarray
-        Subject-level data for non-experts, shape (n_nonexperts, n_rois).
-    output_dir : str
-        Path to the directory where the plot will be saved.
-    use_fdr : bool
-        Whether to use the FDR-corrected p-values for significance.
-    sort_by : str
-        "roi" to sort by ROI_Label ascending, or "diff" to sort by group difference.
-    custom_colors : list of str or None
-        Custom color palette for the bars. If None, Seaborn defaults are used.
-
-    Returns
-    -------
-    None
-        Saves the figure to the specified `output_dir`.
-    """
-    sns.set_style("white", {'axes.grid': False})
-
-    # A user-friendly mapping from ROI integer labels to textual names
-    roi_name_map = {
-        1: "Primary Visual",
-        2: "Early Visual",
-        3: "Dorsal Stream Visual",
-        4: "Ventral Stream Visual",
-        5: "MT+ Complex",
-        6: "Somatosensory and Motor",
-        7: "Paracentral Lobular and Mid Cing",
-        8: "Premotor",
-        9: "Posterior Opercular",
-        10: "Early Auditory",
-        11: "Auditory Association",
-        12: "Insular and Frontal Opercular",
-        13: "Medial Temporal",
-        14: "Lateral Temporal",
-        15: "Temporo-Parieto Occipital Junction",
-        16: "Superior Parietal",
-        17: "Inferior Parietal",
-        18: "Posterior Cing",
-        19: "Anterior Cing and Medial Prefrontal",
-        20: "Orbital and Polar Frontal",
-        21: "Inferior Frontal",
-        22: "Dorsolateral Prefrontal"
-    }
-
-    from natsort import natsorted
-
-    # === CONFIGURATION ===
-    fig_width = 11
-    fig_height = 6
-    tick_fontsize = 12
-    label_fontsize = 12
-    title_fontsize = 18
-    asterisk_fontsize = 22
-
-    # === MERGE STATS AND METADATA ===
-    merged = pd.merge(stat_df, group_means_df, on="ROI_Label", how="inner")
-    merged["ROI_Name"] = merged["ROI_Label"].map(roi_name_map)
-
-    # === ORDER BY ROI or EFFECT ===
-    if sort_by == "roi":
-        merged = merged.sort_values("ROI_Label")
-    elif sort_by == "diff":
-        merged = merged.sort_values("mean_diff", ascending=False)
-
-    # === BUILD COLOR PALETTE ===
-    if custom_colors is not None:
-        ordered_pairs = merged[["ROI_Label", "ROI_Name"]].drop_duplicates()
-        ordered_pairs["ROI_Label"] = ordered_pairs["ROI_Label"].astype(int)
-        ordered_pairs = ordered_pairs.sort_values("ROI_Label", key=natsorted)
-        palette_dict = {
-            row.ROI_Name: custom_colors[i % len(custom_colors)]
-            for i, row in enumerate(ordered_pairs.itertuples(index=False))
-        }
-    else:
-        palette_dict = sns.color_palette("husl", len(merged["ROI_Label"].unique()))
-
-    # === PREPARE PLOTTING DATA ===
-    x_coords = np.arange(len(merged))
-    roi_names = merged["ROI_Name"].values
-
-    # === CREATE FIGURE ===
-    fig, ax = plt.subplots(figsize=(fig_width, fig_height))
-
-    # === BARPLOT: Mean Group Difference ===
-    sns.barplot(
-        x="ROI_Name", y="mean_diff", data=merged,
-        palette=palette_dict, ax=ax, order=roi_names
-    )
-
-    # === ERROR BARS: 95% CI ===
-    for i, row in enumerate(merged.itertuples()):
-        ax.errorbar(
-            x=i, y=row.mean_diff,
-            yerr=[[row.mean_diff - row.ci95_low], [row.ci95_high - row.mean_diff]],
-            fmt='none', ecolor='black', elinewidth=1, capsize=0, zorder=2
-        )
-
-    # === SIGNIFICANCE ASTERISKS ===
-    sig_offset = 0.5
-    for i, row in enumerate(merged.itertuples()):
-        if row.significant_fdr:
-            if row.mean_diff >= 0:
-                y_pos = row.ci95_high + sig_offset
-                va_align = "center"  # so asterisk sits just above the y_pos
-            else:
-                y_pos = row.ci95_low - sig_offset
-                va_align = "top"  # so asterisk sits just below the y_pos
-
-            ax.text(
-                x_coords[i], y_pos, "*",
-                ha="center",
-                va=va_align,
-                fontsize=asterisk_fontsize,
-                # color="red"
-            )
-
-    # === AXIS FORMAT ===
-    ax.set_xticks(x_coords)
-    ax.set_xticklabels(roi_names, rotation=30, ha="right", fontsize=tick_fontsize)
-    ax.set_ylabel("Participation Ratio Δ (Experts - Non-Experts)", fontsize=label_fontsize)
-    ax.set_xlabel("")
-    ax.set_title(
-        f"Participation Ratio Differences ({'FDR' if use_fdr else 'Raw'} p < 0.05)",
-        fontsize=title_fontsize,
-        pad=20
-        )
-
-    # === SPINES & GRID ===
-    ax.axhline(0, color="black", linestyle="--", linewidth=1)
-    ax.spines["top"].set_visible(False)
-    ax.spines["right"].set_visible(False)
-    ax.spines["left"].set_linewidth(0.5)
-    ax.spines["bottom"].set_linewidth(0.5)
-    ax.spines["bottom"].set_visible(False)
-    ax.tick_params(axis="y", labelsize=tick_fontsize)
-
-    # === COLOR X-TICK LABELS BASED ON SIGNIFICANCE ===
-    bar_colors = {roi: patch.get_facecolor() for roi, patch in zip(roi_names, ax.patches)}
-    for label_obj in ax.get_xticklabels():
-        name = label_obj.get_text()
-        is_sig = merged.loc[merged["ROI_Name"] == name, "significant_fdr"].values[0]
-        label_obj.set_color("grey" if not is_sig else bar_colors.get(name, "black"))
-
-    # === Y-LIMITS: Autoscale from bar heights, CI bounds, and asterisks only ===
-    # Find global bounds from confidence intervals
-    y_min = merged["ci95_low"].min() - sig_offset
-    y_max = merged["ci95_high"].max() + sig_offset
-
-    # Include space for asterisks (above/below CI bounds if significant)
-    for row in merged.itertuples():
-        if row.significant_fdr:
-            if row.mean_diff >= 0:
-                y_max = max(y_max, row.ci95_high + sig_offset)
-            else:
-                y_min = min(y_min, row.ci95_low - sig_offset)
-
-    # Apply to plot
-    margin = 0.1
-    ax.set_ylim(y_min-margin, y_max+margin)
-
-    # === FINALIZE ===
-    plt.tight_layout()
-    fname = os.path.join(output_dir, f"all_rois_{measure_name}_bar_scatter.png")
-    plt.savefig(fname, dpi=300, bbox_inches='tight')
-    plt.show()
-    plt.close()
-
 
 def process_subject(subject_id, atlas_data, unique_rois):
     """
@@ -614,6 +434,7 @@ def process_subject(subject_id, atlas_data, unique_rois):
     logger.info(f"[Subject {subject_id}] Done processing. Returning PR array.")
     return subj_pr
 
+
 def plot_grouped_roi_bars_with_dots(
     stat_df, measure_name, group_means_df,
     expert_vals, nonexpert_vals, output_dir,
@@ -621,46 +442,13 @@ def plot_grouped_roi_bars_with_dots(
 ):
     """
     Plots ROI-wise bar plots with 95% CI and individual data points for Experts and Non-Experts.
-
-    Parameters
-    ----------
-    stat_df : pd.DataFrame
-        Statistical results including p-values per ROI.
-    measure_name : str
-        Name of the measure being plotted (used in output filename).
-    group_means_df : pd.DataFrame
-        Group-wise mean data per ROI.
-    expert_vals : np.ndarray
-        Array of shape (n_subjects, n_rois) for expert group values.
-    nonexpert_vals : np.ndarray
-        Array of same shape for non-experts.
-    output_dir : str
-        Path to save the output figure.
-    use_fdr : bool
-        Whether to use FDR-corrected p-values.
-    sort_by : str
-        Either "roi" (by label number) or "diff" (descending effect size).
-    custom_colors : list
-        Optional list of colors to use for ROIs.
-    sig_level : float
-        p-value threshold for significance (e.g., 0.05).
-    show_nonsig_labels : bool
-        Whether to color ROI labels grey if not significant.
     """
 
-    sns.set_style("white")  # Ensure white background
-
-    # === CONFIGURATION ===
-    fig_width = 14
-    fig_height = 6
-    tick_fontsize = 12
-    label_fontsize = 12
-    title_fontsize = 18
-    asterisk_fontsize = 22
+    # === Constants ===
     bar_width = 0.35
     sig_offset = 0.5
+    asterisk_fontsize = plt.rcParams["font.size"] * 1.2
 
-    # === ROI LABEL TO NAME ===
     roi_name_map = {
         1: "Primary Visual", 2: "Early Visual", 3: "Dorsal Stream Visual",
         4: "Ventral Stream Visual", 5: "MT+ Complex", 6: "Somatosensory and Motor",
@@ -672,20 +460,10 @@ def plot_grouped_roi_bars_with_dots(
         21: "Inferior Frontal", 22: "Dorsolateral Prefrontal"
     }
 
-    def ci_95(x):
-        """Match ttest_ind internal CI computation"""
-        x = x[~np.isnan(x)]
-        n = len(x)
-        mean = np.mean(x)
-        sem = stats.sem(x)
-        h = stats.t.ppf(0.975, df=n - 1) * sem
-        return mean, h
 
-    # === MERGE STATS + ROI NAMES ===
     merged = pd.merge(stat_df, group_means_df, on="ROI_Label", how="inner")
     merged["ROI_Name"] = merged["ROI_Label"].map(roi_name_map)
 
-    # === SORTING ===
     if sort_by == "roi":
         merged = merged.sort_values("ROI_Label", key=natsorted)
     elif sort_by == "diff":
@@ -696,111 +474,103 @@ def plot_grouped_roi_bars_with_dots(
     roi_labels = merged["ROI_Label"].values
     x_coords = np.arange(len(roi_names))
 
-    # === COMPUTE MEANS + CI ===
     expert_means, expert_cis = [], []
     nonexpert_means, nonexpert_cis = [], []
+    diff_means, diff_cis = [], []
+    pvals = []
 
+    # Collect all statistics first
     for roi_label in roi_labels:
         roi_idx = np.where(stat_df["ROI_Label"] == roi_label)[0][0]
-        m_e, h_e = ci_95(expert_vals[:, roi_idx])
-        m_n, h_n = ci_95(nonexpert_vals[:, roi_idx])
-        expert_means.append(m_e)
-        expert_cis.append(h_e)
-        nonexpert_means.append(m_n)
-        nonexpert_cis.append(h_n)
+        expert_data = expert_vals[:, roi_idx]
+        nonexpert_data = nonexpert_vals[:, roi_idx]
 
-    # === SIGNIFICANCE ===
-    pvals = merged["p_val_fdr" if use_fdr else "p_val"].values
-    is_sig = pvals < ALPHA_FDR
+        # Drop NaNs
+        expert_data = expert_data[~np.isnan(expert_data)]
+        nonexpert_data = nonexpert_data[~np.isnan(nonexpert_data)]
 
-    # === PALETTE ===
+        # Group means
+        expert_mean = np.mean(expert_data)
+        nonexpert_mean = np.mean(nonexpert_data)
+        expert_means.append(expert_mean)
+        nonexpert_means.append(nonexpert_mean)
+
+        # Confidence intervals for individual groups (1-sample t-tests)
+        expert_ci = ttest_1samp(expert_data, popmean=0).confidence_interval(0.95)
+        nonexpert_ci = ttest_1samp(nonexpert_data, popmean=0).confidence_interval(0.95)
+        expert_cis.append(expert_ci)
+        nonexpert_cis.append(nonexpert_ci)
+
+        # Group difference (independent t-test)
+        res = ttest_ind(expert_data, nonexpert_data, equal_var=False, nan_policy="omit")
+        pvals.append(res.pvalue)
+        diff_means.append(expert_mean - nonexpert_mean)
+        diff_cis.append(res.confidence_interval(0.95))
+
+    # FDR correction
+    pvals = np.array(pvals)
+    pvals_fdr = fdrcorrection(pvals, alpha=ALPHA_FDR)[1]
+    is_sig = pvals_fdr < ALPHA_FDR if use_fdr else pvals < ALPHA_FDR
+
+    # Color palette
     if custom_colors is not None:
-        ordered_pairs = merged[["ROI_Label", "ROI_Name"]].drop_duplicates()
-        ordered_pairs = ordered_pairs.sort_values("ROI_Label", key=natsorted)
+        ordered = merged[["ROI_Label", "ROI_Name"]].drop_duplicates()
+        ordered = ordered.sort_values("ROI_Label", key=natsorted)
         palette_dict = {
             row.ROI_Name: custom_colors[i % len(custom_colors)]
-            for i, row in enumerate(ordered_pairs.itertuples(index=False))
+            for i, row in enumerate(ordered.itertuples(index=False))
         }
     else:
         palette_dict = {name: c for name, c in zip(roi_names, sns.color_palette("husl", len(roi_names)))}
 
-    # === FIGURE ===
-    fig, ax = plt.subplots(figsize=(fig_width, fig_height))
+    fig, ax = plt.subplots()
 
-    # === PLOTTING ===
     for i, roi in enumerate(roi_names):
         color = palette_dict[roi]
-        # Bars
+
+        expert_err = [[expert_means[i] - expert_cis[i].low], [expert_cis[i].high - expert_means[i]]]
+        nonexpert_err = [[nonexpert_means[i] - nonexpert_cis[i].low], [nonexpert_cis[i].high - nonexpert_means[i]]]
+
         ax.bar(x_coords[i] - bar_width / 2, expert_means[i], bar_width,
-               yerr=expert_cis[i], capsize=4, color=color, edgecolor='black',
+               yerr=expert_err, capsize=4, color=color, edgecolor='black',
                label="Expert" if i == 0 else "", zorder=2)
+
         ax.bar(x_coords[i] + bar_width / 2, nonexpert_means[i], bar_width,
-               yerr=nonexpert_cis[i], capsize=4, color=color, edgecolor='black',
+               yerr=nonexpert_err, capsize=4, color=color, edgecolor='black',
                hatch="//", label="Novice" if i == 0 else "", zorder=2)
 
-        # Significance line and asterisk
         if is_sig[i]:
-            y_bar_top = max(expert_means[i] + expert_cis[i], nonexpert_means[i] + nonexpert_cis[i])
+            y_top = max(expert_cis[i].high, nonexpert_cis[i].high)
+            y_line = y_top + sig_offset * 1.2
+            y_ast = y_line + sig_offset * 0.05
+            ax.plot([x_coords[i] - bar_width / 2, x_coords[i] + bar_width / 2],
+                    [y_line, y_line], color="black", linewidth=1.2)
+            ax.text(x_coords[i], y_ast, "*", ha="center", va="bottom",
+                    fontsize=asterisk_fontsize, zorder=5)
 
-            # Increase distance between bar and line
-            line_offset = sig_offset * 1.2   # e.g., sig_offset=0.5 → line is 0.6 above bar
-            # Place asterisk very close to the line
-            asterisk_offset = sig_offset * 0.05  # small distance above the line
-
-            y_line = y_bar_top + line_offset
-            y_asterisk = y_line + asterisk_offset
-
-            # Draw horizontal line
-            ax.plot(
-                [x_coords[i] - bar_width / 2, x_coords[i] + bar_width / 2],
-                [y_line, y_line],
-                color="black", linewidth=1.2
-            )
-
-            # Draw asterisk just above the line
-            ax.text(
-                x_coords[i], y_asterisk, "*",
-                ha="center", va="bottom",
-                fontsize=asterisk_fontsize, color="black", zorder=5
-            )
-
-
-    # === AESTHETICS ===
     ax.set_xticks(x_coords)
-    ax.set_xticklabels(roi_names, rotation=30, ha="right", fontsize=tick_fontsize)
-    ax.set_ylabel("Participation Ratio", fontsize=label_fontsize)
-    ax.set_title(
-        f"Participation Ratio by ROI ({'FDR' if use_fdr else 'Raw'} p < {ALPHA_FDR})",
-        fontsize=title_fontsize, pad=20
-    )
+    ax.set_xticklabels(roi_names, rotation=30, ha="right")
+    ax.set_ylabel("Participation Ratio")
+    ax.set_title(f"Participation Ratio by ROI ({'FDR' if use_fdr else 'Raw'} p < {ALPHA_FDR})")
     ax.axhline(0, color="black", linestyle="--", linewidth=1)
+
+    for tick, roi, sig in zip(ax.get_xticklabels(), roi_names, is_sig):
+        tick.set_color(palette_dict[roi] if sig else "lightgrey")
+
+    y_min = min(ci.low for ci in expert_cis + nonexpert_cis)
+    y_max = max(ci.high for ci in expert_cis + nonexpert_cis)
+    if np.any(~np.isnan(is_sig)):
+        y_min = min(y_min, y_min - sig_offset)
+    if np.any(is_sig):
+        y_max = max(y_max, y_max + sig_offset)
+    ax.set_ylim(y_min - 0.1, y_max + (y_max * 0.1))
+
     ax.spines["top"].set_visible(False)
     ax.spines["right"].set_visible(False)
     ax.spines["left"].set_linewidth(0.5)
     ax.spines["bottom"].set_linewidth(0.5)
-    # ax.spines["bottom"].set_visible(False)
-    ax.tick_params(axis="y", labelsize=tick_fontsize)
-    # ax.yaxis.set_major_locator(MultipleLocator(0.1))
 
-    # === X-TICK LABEL COLOR BY SIGNIFICANCE ===
-    for tick, roi, sig in zip(ax.get_xticklabels(), roi_names, is_sig):
-        tick.set_color(palette_dict[roi] if sig else "grey")
-
-    # === DYNAMIC Y-LIMITS ===
-    y_min = min((m - c) for m, c in zip(expert_means + nonexpert_means, expert_cis + nonexpert_cis))
-    y_max = max((m + c) for m, c in zip(expert_means + nonexpert_means, expert_cis + nonexpert_cis))
-    y_min = min(y_min, y_min - sig_offset) if any(~np.isnan(is_sig)) else y_min
-    y_max = max(y_max, y_max + sig_offset) if any(is_sig) else y_max
-    ax.set_ylim(y_min - 0.1, y_max + 0.1)
-
-    # === FINALIZE ===
-    ax.legend(
-        loc="upper right",
-        bbox_to_anchor=(1, 1.15),
-        ncol=2,  # optional: lay out legend entries in two columns
-        fontsize=10,
-        frameon=False
-    )
+    ax.legend(loc="upper right", bbox_to_anchor=(1, 1.15), ncol=2, frameon=False)
 
     plt.tight_layout()
     fname = os.path.join(output_dir, f"roi_bars_{measure_name}_grouped_with_dots.png")
@@ -808,6 +578,91 @@ def plot_grouped_roi_bars_with_dots(
     plt.show()
     plt.close()
     print(f"Saved: {fname}")
+
+
+    # === SECOND PLOT: Difference with CI and significance ===
+
+    # Build dataframe for plotting
+    diff_data = []
+    for i, roi in enumerate(roi_names):
+        ci = diff_cis[i]
+        diff_data.append({
+            "ROI_Label": roi_labels[i],
+            "ROI_Name": roi,
+            "mean_diff": diff_means[i],
+            "ci95_low": ci.low,
+            "ci95_high": ci.high,
+            "significant_fdr": is_sig[i]
+        })
+
+    diff_df = pd.DataFrame(diff_data)
+
+    if sort_by == "roi":
+        diff_df = diff_df.sort_values("ROI_Label", key=natsorted)
+    elif sort_by == "diff":
+        diff_df = diff_df.sort_values("mean_diff", ascending=False)
+
+    x_coords = np.arange(len(diff_df))
+    roi_names = diff_df["ROI_Name"].values
+
+    fig, ax = plt.subplots()
+    sns.barplot(
+        x="ROI_Name", y="mean_diff", data=diff_df,
+        palette=[palette_dict[name] for name in roi_names], ax=ax
+    )
+
+    # Error bars
+    for i, row in enumerate(diff_df.itertuples()):
+        ax.errorbar(
+            x=i, y=row.mean_diff,
+            yerr=[[row.mean_diff - row.ci95_low], [row.ci95_high - row.mean_diff]],
+            fmt='none', ecolor='black', elinewidth=1.5, capsize=4, zorder=2
+        )
+
+    # Significance stars
+    for i, row in enumerate(diff_df.itertuples()):
+        if row.significant_fdr:
+            if row.mean_diff >= 0:
+                y_pos = row.ci95_high + sig_offset
+                va = "bottom"
+            else:
+                y_pos = row.ci95_low - sig_offset
+                va = "top"
+            ax.text(x_coords[i], y_pos, "*", ha="center", va=va,
+                    fontsize=asterisk_fontsize, zorder=5)
+
+    # Axis formatting
+    ax.set_xticks(x_coords)
+    ax.set_xticklabels(roi_names, rotation=30, ha="right")
+    ax.set_ylabel("ΔPR (Experts - Non-Experts)")
+    ax.set_title(f"Participation Ratio Differences ({'FDR' if use_fdr else 'Raw'} p < {ALPHA_FDR})", pad=20)
+    ax.axhline(0, color="black", linestyle="--", linewidth=1)
+
+    # Color non-significant ticks
+    for label in ax.get_xticklabels():
+        roi = label.get_text()
+        is_sig_roi = diff_df.loc[diff_df["ROI_Name"] == roi, "significant_fdr"].values[0]
+        label.set_color("lightgrey" if not is_sig_roi else palette_dict.get(roi, "black"))
+
+    # Y-limits
+    # y_min = diff_df["ci95_low"].min() - sig_offset
+    # y_max = diff_df["ci95_high"].max() + sig_offset
+    ax.set_ylim(-12,12)
+
+    ax.spines["top"].set_visible(False)
+    ax.spines["right"].set_visible(False)
+    ax.spines["left"].set_linewidth(0.5)
+    ax.spines["bottom"].set_linewidth(0.5)
+    ax.spines["bottom"].set_visible(False)
+
+    plt.tight_layout()
+    fname2 = os.path.join(output_dir, f"roi_diff_{measure_name}_bar_ci.png")
+    plt.savefig(fname2, dpi=300, bbox_inches="tight")
+    plt.show()
+    plt.close()
+    print(f"Saved: {fname2}")
+
+
 
 ##############################################################################
 #                                  MAIN SCRIPT
@@ -890,19 +745,19 @@ summary_csv = os.path.join(output_dir, "roi_group_means.csv")
 summary_df.to_csv(summary_csv, index=False)
 logger.info(f"Saved ROI group means to {summary_csv}")
 
-# Plot all ROIs (PR)
-# Plot difference scatter
-logger.info("Plotting ROI-wise differences for PR with significance markers...")
-plot_all_rois_with_significance(
-    stat_df=pr_stats_df,
-    measure_name="PR",
-    group_means_df=summary_df,
-    expert_vals=expert_pr_arr,
-    nonexpert_vals=nonexpert_pr_arr,
-    output_dir=output_dir,
-    use_fdr=use_fdr,
-    sort_by="roi"
-)
+# # Plot all ROIs (PR)
+# # Plot difference scatter
+# logger.info("Plotting ROI-wise differences for PR with significance markers...")
+# plot_all_rois_with_significance(
+#     stat_df=pr_stats_df,
+#     measure_name="PR",
+#     group_means_df=summary_df,
+#     expert_vals=expert_pr_arr,
+#     nonexpert_vals=nonexpert_pr_arr,
+#     output_dir=output_dir,
+#     use_fdr=use_fdr,
+#     sort_by="roi"
+# )
 
 # Plot grouped barplots
 logger.info("Plotting grouped barplots for PR with significance markers...")
@@ -919,7 +774,6 @@ plot_grouped_roi_bars_with_dots(
 
 logger.info(f"All done. Results and figures saved in: {output_dir}")
 
-import pandas as pd
 
 # Clean and format table for LaTeX output
 def format_latex_row(row):
@@ -928,7 +782,7 @@ def format_latex_row(row):
     dof = f"{row['dof']:.1f}"
     p_val = row["p_val"]
     p_fmt = (
-        f"$< .001$" if p_val < 0.001 else f"$= {p_val:.3f}$"
+        "$< .001$" if p_val < 0.001 else f"$= {p_val:.3f}$"
     )
     ci_low = f"{row['ci95_low']:.2f}"
     ci_high = f"{row['ci95_high']:.2f}"
