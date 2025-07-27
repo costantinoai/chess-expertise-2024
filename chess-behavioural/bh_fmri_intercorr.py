@@ -1,8 +1,9 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 """
-Refactored Chess Expertise Analysis Script with Modular Functions (Enhanced Plot Formatting + Inline Comments)
+Created on Tue Jul 15 17:24:31 2025
 
+@author: costantino_ai
 """
 
 import os                                                      # Provides functions for interacting with the operating system
@@ -18,29 +19,29 @@ from matplotlib.colors import LinearSegmentedColormap          # To create custo
 import pingouin as pg                                          # Statistical package (used here for bootstrapped correlations)
 import mat73                                                   # For loading MATLAB v7.3 .mat files
 import scipy.io                                                # For loading MATLAB < v7.3 .mat files
-from sklearn.manifold import MDS                               # Multi-dimensional scaling algorithm
 from modules.helpers import create_run_id                       # Helper function to create a unique run identifier
-
+import scipy.stats
+from scipy.spatial.distance import squareform
 import multiprocessing                                         # Python's multiprocessing module for parallel execution
-
 
 # ----------------------------------------
 # GLOBAL SETTINGS
 # ----------------------------------------
 
 SF = 1.0                                                      # Scaling factor for all font sizes
-FONT_FAMILY = 'Ubuntu Condensed'                                        # Global font family
-TITLE_FS = 32 * SF                                            # Font size for plot titles
-LABEL_FS = 26 * SF                                            # Font size for axis labels
-TICK_FS = 20 * SF                                             # Font size for tick labels
-COLORBAR_LABEL_FS = 22 * SF                                   # Font size for colorbar labels
-COLORBAR_TICK_FS = 18 * SF                                    # Font size for colorbar tick labels
+FONT_FAMILY = 'Ubuntu'                                        # Global font family
+TITLE_FS = 26 * 1.4 * SF                                      # Font size for plot titles (≈36.4)
+LABEL_FS = 26 * 1.2 * SF                                      # Font size for axis labels (≈31.2)
+TICK_FS = 26 * SF                                             # Font size for tick labels (26)
+COLORBAR_LABEL_FS = 26 * 1.1 * SF                             # Font size for colorbar labels (≈28.6)
+COLORBAR_TICK_FS = 26 * 0.9 * SF                              # Font size for colorbar tick labels (≈23.4)
 
-FIGSIZE = (10, 8)                                             # Default figure size (width, height) for all plots
+FIGSIZE = (12, 9)                                             # Default figure size (width, height) for all plots
 
 mpl.rcParams['font.family'] = FONT_FAMILY                     # Apply global font family for Matplotlib
 mpl.rcParams['font.size'] = TICK_FS                           # Apply default font size for most text
 sns.set_style("white")                                        # Use Seaborn's white style for all plots
+
 
 warnings.filterwarnings("ignore", category=FutureWarning)     # Suppress FutureWarnings
 warnings.filterwarnings("ignore", category=UserWarning)       # Suppress UserWarnings
@@ -107,33 +108,6 @@ STRAT_COLORS, STRAT_ALPHAS = compute_strategy_colors_alphas(STRATEGIES)  # Preco
 # PLOTTING FUNCTIONS
 # ----------------------------------------
 
-def plot_shared_colorbar(cmap, vmin=-18, vmax=18):             # Display a standalone colorbar for a diverging colormap
-    """
-    Display a standalone colorbar for a diverging colormap (range vmin→vmax),
-    with ticks and label on the left side.
-    Useful when individual heatmaps omit their own colorbars.
-    """
-    fig, ax = plt.subplots(figsize=FIGSIZE, facecolor='white')  # Create a new figure and axis
-    fig.subplots_adjust(left=0.3)                                # Leave space on the left for colorbar
-
-    norm = mpl.colors.Normalize(vmin=vmin, vmax=vmax)            # Normalize data range for color mapping
-    sm = mpl.cm.ScalarMappable(cmap=cmap, norm=norm)             # Create a ScalarMappable for the colorbar
-    sm.set_array([])                                             # Dummy array (required)
-
-    # Add colorbar to the left
-    cbar = fig.colorbar(
-        sm, ax=ax, fraction=0.05, pad=0.02,
-        location="left"
-    )
-    cbar.set_label("Dissimilarity Value", fontsize=COLORBAR_LABEL_FS)   # Set label text
-    cbar.ax.tick_params(labelsize=COLORBAR_TICK_FS)                     # Set tick label size
-
-    ax.set_axis_off()                                            # Hide dummy axis
-    save_path = os.path.join(OUT_ROOT, "symmetric_colorbar.png") # Output path
-    plt.savefig(save_path, bbox_inches='tight', pad_inches=0.1, facecolor='white')  # Save to file
-    plt.show()                                                   # Display figure
-
-
 def plot_rdm_heatmap(rdm, bold_title, expertise_label, colormap="RdPu", vmin=0, vmax=18):
     """
     Plot a representational dissimilarity matrix (RDM) as a square heatmap without inline colorbar.
@@ -195,203 +169,6 @@ def plot_rdm_heatmap(rdm, bold_title, expertise_label, colormap="RdPu", vmin=0, 
     save_path = os.path.join(OUT_ROOT, bold_title.replace(" ", "_") + f"_{expertise_label}.png")  # Construct filename
     plt.savefig(save_path, bbox_inches='tight', pad_inches=0.1, facecolor='white')  # Save figure to file
     plt.show()                                                  # Display the plot
-
-
-def plot_mds(dissimilarity_matrix, bold_title, expertise_label):
-    """
-    Perform Multidimensional Scaling (MDS) on a precomputed dissimilarity matrix and plot the 2D embedding.
-    Points are colored/translucent according to global STRAT_COLORS & STRAT_ALPHAS.
-    Title is two lines: bold_title (bold) on line 1, expertise_label on line 2 (normal).
-    """
-    mds = MDS(n_components=2, dissimilarity="precomputed", random_state=42)  # Initialize MDS model
-    coords = mds.fit_transform(dissimilarity_matrix)                         # Compute 2D embedding
-
-    fig, ax = plt.subplots(figsize=FIGSIZE, facecolor='white')               # Create figure and axis
-    for x, y, color in zip(coords[:, 0], coords[:, 1], STRAT_COLORS):
-        ax.scatter(x, y, color=color, marker='o', alpha=0.7, s=200)         # Scatter points with color & alpha
-
-    title_text = f"{bold_title}\n{expertise_label}"
-    # Two-line title text
-    ax.set_title(title_text, fontsize=TITLE_FS, pad=25)                        # Set plot title
-    ax.set_xticks([])                                                          # Remove x-axis ticks
-    ax.set_yticks([])                                                          # Remove y-axis ticks
-    for spine in ax.spines.values():                                           # Iterate through plot spines
-        spine.set_edgecolor('black')                                            # Set spine edge color
-        spine.set_linewidth(1.5)       # Set spine line width
-
-    save_path = os.path.join(OUT_ROOT, bold_title.replace(" ", "_") + f"_{expertise_label}.png")  # Filename
-    plt.savefig(save_path, bbox_inches='tight', pad_inches=0.1, facecolor='white')  # Save figure
-    plt.show()                                                                # Display plot
-
-
-def plot_choice_frequency(data, expertise_label):
-    """
-    Create a bar plot showing how often each stimulus (by ID) was chosen in pairwise comparisons.
-    Bars are colored/translucent according to global STRAT_COLORS & STRAT_ALPHAS.
-    Title is two lines: "Stimulus Selection Frequency" (bold) and expertise_label (normal).
-    """
-    freq = data['better'].value_counts().sort_index()                          # Compute frequency of 'better' stimuli
-
-    fig, ax = plt.subplots(figsize=FIGSIZE, facecolor='white')                 # Create figure and axis
-    bar_plot = sns.barplot(                                                     # Plot bar chart
-        x=freq.index,                                                           # X-axis stimulus IDs
-        y=freq.values,                                                          # Y-axis selection counts
-        palette=STRAT_COLORS[:len(freq)],                                       # Use precomputed colors
-        ax=ax                                                                   # Plot on this axis
-    )
-    for bar, alpha in zip(bar_plot.patches, STRAT_ALPHAS[:len(freq)]):          # Iterate through bars
-        bar.set_alpha(alpha)                                                    # Set transparency for each bar
-
-    bold_line = f"Stimulus Selection Frequency\n{expertise_label}"                                  # First line for title (bold)
-    title_text = f"{bold_line}"
-    # Two-line title
-    ax.set_title(title_text, fontsize=TITLE_FS, pad=25)                         # Set title with padding
-
-    ax.set_xlabel('Stimulus ID', fontsize=LABEL_FS)                             # Set x-axis label
-    ax.set_ylabel('Selection Count', fontsize=LABEL_FS)                         # Set y-axis label
-    ax.set_xticks([])                                                           # Remove x-axis ticks
-    ax.tick_params(labelsize=TICK_FS)                                           # Set tick label size
-
-    for spine_loc in ["left", "bottom"]:                                        # Show only left and bottom spines
-        ax.spines[spine_loc].set_visible(True)                                   # Make spine visible
-        ax.spines[spine_loc].set_linewidth(1.5)                                  # Set spine line width
-        ax.spines[spine_loc].set_edgecolor("black")                              # Set spine color
-    for spine_loc in ["top", "right"]:                                           # Hide top and right spines
-        ax.spines[spine_loc].set_visible(False)                                  # Make spine invisible
-
-    save_path = os.path.join(OUT_ROOT, f"Stimulus_Selection_Frequency_{expertise_label}.png")  # Filename
-    plt.savefig(save_path, bbox_inches='tight', pad_inches=0.1, facecolor='white')  # Save figure
-    plt.show()                                                                  # Display plot
-
-
-def plot_model_behavior_correlations(expert_results, novice_results, column_labels):
-    """
-    Generate a side-by-side barplot of bootstrapped Pearson correlations (with 95% CI)
-    for Experts vs. Novices across specified model dimensions.
-    Title is two lines: "Behavioral vs. Model Dissimilarity Correlations" (bold) and "(Experts vs. Novices)".
-    """
-    # Each tuple in expert_results/novice_results: (col, r, p, ci_lower, ci_upper)
-    r_exp = [tup[1] for tup in expert_results]                                 # Extract r-values for Experts
-    ci_exp = [(tup[3], tup[4]) for tup in expert_results]                       # Extract (ci_lower, ci_upper) for Experts
-    r_nov = [tup[1] for tup in novice_results]                                   # Extract r-values for Novices
-    ci_nov = [(tup[3], tup[4]) for tup in novice_results]                       # Extract (ci_lower, ci_upper) for Novices
-
-    def ci_to_yerr(ci_list, r_list):                                            # Convert CI tuples to yerr format
-        lowers, uppers = [], []                                                  # Initialize lists for lower & upper errors
-        for (ci_l, ci_u), r_val in zip(ci_list, r_list):                         # Iterate through each (ci_l, ci_u) and r
-            lowers.append(r_val - ci_l)                                          # Lower error = r - ci_lower
-            uppers.append(ci_u - r_val)                                          # Upper error = ci_upper - r
-        return np.array([lowers, uppers])                                        # Return 2 x N array
-
-    yerr_exp = ci_to_yerr(ci_exp, r_exp)                                          # Compute yerr for Experts
-    yerr_nov = ci_to_yerr(ci_nov, r_nov)                                          # Compute yerr for Novices
-
-    new_order_raw = ["visual", "strategy", "check"]                               # Desired ordering of columns
-    new_order_pretty = ["Visual\nSimilarity", "Strategy", "Checkmate"]             # Pretty labels for x-axis
-    idx_order = [column_labels.index(lbl) for lbl in new_order_raw]               # Indices in original order
-
-    labels_pretty = new_order_pretty                                            # Use pretty labels
-    r_exp = [r_exp[i] for i in idx_order]                                         # Reorder r-values for Experts
-    r_nov = [r_nov[i] for i in idx_order]                                         # Reorder r-values for Novices
-    yerr_exp = yerr_exp[:, idx_order]                                             # Reorder yerr for Experts
-    yerr_nov = yerr_nov[:, idx_order]                                             # Reorder yerr for Novices
-
-    x = np.arange(len(labels_pretty))                                             # X positions for bars
-    width = 0.35                                                                   # Width of each bar
-
-    fig, ax = plt.subplots(figsize=FIGSIZE, facecolor="white")                    # Create figure and axis
-    ax.bar(                                                                        # Plot Experts' bars
-        x - width/2, r_exp, width=width,
-        yerr=yerr_exp, capsize=5,
-        color=COL_GREEN, label="Experts",
-        alpha=0.7
-    )
-    ax.bar(                                                                        # Plot Novices' bars
-        x + width/2, r_nov, width=width,
-        yerr=yerr_nov, capsize=5,
-        color=COL_RED, label="Novices",
-        alpha=0.7
-    )
-
-    ax.set_xticks(x)                                                               # Set x-axis tick positions
-    # ax.set_xticklabels(labels_pretty, rotation=45, ha="right", fontsize=LABEL_FS)  # Set x-axis tick labels
-    ax.set_xticklabels(labels_pretty, ha="center", fontsize=LABEL_FS)  # Set x-axis tick labels
-    ax.set_ylim(-0.2, 1.0)                                                          # Set y-axis limits
-    ax.set_ylabel(r"Pearson $\it{r}$ (95% CI via bootstrapping)", fontsize=LABEL_FS)  # Set y-axis label
-
-    bold_line = "Behavioral-Model RDMs Correlations\nExperts vs. Novices"                     # First line for title (bold)
-    title_text = f"{bold_line}"
-                                           # Second line for title (normal)
-    ax.set_title(title_text, fontsize=TITLE_FS, pad=25)                              # Set plot title
-
-    ax.axhline(0, linestyle="--", color="gray", linewidth=1)                         # Add horizontal zero line
-    ax.legend(loc="upper left", frameon=False, fontsize=LABEL_FS)                    # Add legend
-
-    # Add stars for significance (if p < 0.05) above each Experts bar
-    # Add stars for significance (if p < 0.05) above each bar (Experts and Novices)
-    for i in range(len(labels_pretty)):
-        # Extract values for Experts
-        _, _, p_exp, _, _ = expert_results[idx_order[i]]
-        r_exp_val = r_exp[i]
-
-        # Extract values for Novices
-        _, _, p_nov, _, _ = novice_results[idx_order[i]]
-        r_nov_val = r_nov[i]
-
-        # Determine star string for Experts
-        if p_exp < 0.001:
-            stars_exp = "***"
-        elif p_exp < 0.01:
-            stars_exp = "**"
-        elif p_exp < 0.05:
-            stars_exp = "*"
-        else:
-            stars_exp = None
-
-        # Determine star string for Novices
-        if p_nov < 0.001:
-            stars_nov = "***"
-        elif p_nov < 0.01:
-            stars_nov = "**"
-        elif p_nov < 0.05:
-            stars_nov = "*"
-        else:
-            stars_nov = None
-
-        # Plot stars for Experts
-        if stars_exp:
-            xpos = x[i] - width / 2                           # X-position of Experts bar
-            y_pos = r_exp_val + yerr_exp[1, i] + 0.03         # Y-position just above error bar
-            ax.text(
-                xpos, y_pos, stars_exp,
-                ha="center", va="bottom",
-                fontsize=TITLE_FS * 0.6, fontweight="bold"
-            )
-
-        # Plot stars for Novices
-        if stars_nov:
-            xpos = x[i] + width / 2                           # X-position of Novices bar
-            y_pos = r_nov_val + yerr_nov[1, i] + 0.03         # Y-position just above error bar
-            ax.text(
-                xpos, y_pos, stars_nov,
-                ha="center", va="bottom",
-                fontsize=TITLE_FS * 0.6, fontweight="bold"
-            )
-
-
-    for spine_loc in ["left", "bottom"]:                                             # Customize spines
-        ax.spines[spine_loc].set_visible(True)                                        # Show left/bottom spines
-        ax.spines[spine_loc].set_linewidth(1.5)                                       # Set spine width
-        ax.spines[spine_loc].set_edgecolor("black")                                   # Set spine color
-    for spine_loc in ["top", "right"]:                                               # Hide top/right spines
-        ax.spines[spine_loc].set_visible(False)                                       # Make spine invisible
-
-    fig.tight_layout()                                                                # Adjust layout
-    save_path = os.path.join(OUT_ROOT, "Behavioral_Model_RDMs_Correlations.png")      # Define output path
-    plt.savefig(save_path, bbox_inches='tight', pad_inches=0.1, facecolor='white')    # Save the plot
-    plt.show()                                                                         # Display plot
-                                                                      # Display plot
-
 
 # ----------------------------------------
 # DATA PROCESSING FUNCTIONS
@@ -534,13 +311,13 @@ def process_single_participant(sub_id, is_expert, sourcedata_root, columns):
 
         run_df = pd.DataFrame(trials, columns=columns)                   # Create DataFrame for this run
         if run_df["response"].sum() <= 0:                                # If no valid responses in this run
-            warnings.warn(f"No valid responses for {sub_id}, run {run}")  # Warn user
+            logging.warning(f"No valid responses for {sub_id}, run {run}")  # Warn user
             continue                                                     # Skip this run
 
         single_df = pd.concat([single_df, run_df], ignore_index=True)   # Append run data to subject DataFrame
 
     if single_df["response"].sum() <= 0:                                # If no valid responses across all runs
-        warnings.warn(f"No valid responses across runs for {sub_id}")  # Warn user
+        logging.warning(f"No valid responses across runs for {sub_id}")  # Warn user
         return None                                                     # Return None to indicate skipping
 
     return single_df                                                    # Return concatenated DataFrame for this subject
@@ -565,20 +342,6 @@ def worker_process(sub_info):
 # ----------------------------------------
 # GROUP-LEVEL ANALYSIS FUNCTIONS
 # ----------------------------------------
-
-def load_stimulus_categories(cat_path):
-    """
-    Load stimulus categories from an Excel file and filter valid stim_id range.
-    Returns:
-        df_cat (DataFrame with columns ['stim_id', 'check', 'visual', 'strategy'])
-    """
-    df_cat = pd.read_excel(cat_path)                                      # Read category Excel
-    df_cat = df_cat[
-        (df_cat["stim_id"] >= 1) &                                        # Filter stim_id >=1
-        (df_cat["stim_id"] <= len(df_cat["stim_id"].unique()))            # Filter stim_id <= number of unique
-    ].reset_index(drop=True)                                               # Reset index after filtering
-    return df_cat[["stim_id", "check", "visual", "strategy"]]             # Return only relevant columns
-
 
 def correlate_model_behavior(d_group, df_cat, expertise_label):
     """
@@ -637,139 +400,358 @@ def correlate_model_behavior(d_group, df_cat, expertise_label):
 
     return results, labels                                                  # Return correlation results and labels
 
-
-def analyze_group(df_group, expertise_label, df_cat):
+def compute_reliabilities_from_trials(trial_df_dict):
     """
-    Complete analysis pipeline for a single group (Experts or Novices):
-      1. Plot choice-frequency.
-      2. Compute & plot symmetric RDM.
-      3. Compute & plot MDS on RDM.
-      4. Compute & plot directional DSM.
-      5. Correlate group RDM with model RDMs from df_cat.
+    Compute within-group and between-group RDM reliability from raw trial data (not precomputed RDMs).
+    Uses leave-one-subject-out strategy with RDMs built from pooled trial data, as in the original script.
+
+    Args:
+        trial_df_dict (dict):
+            {
+                "GroupName": {
+                    "sub-01": DataFrame (raw trials),
+                    ...
+                },
+                ...
+            }
+
     Returns:
-        group_rdm: the symmetric RDM for the entire group.
-        correlation_results: list of (col, r, p, ci_l, ci_u).
-        column_labels: list of column names corresponding to results.
+        dict: {
+            "GroupName": {
+                "within": [...],
+                "between": [...]
+            },
+            ...
+        }
     """
-    pairwise_all = create_pairwise_df(df_group)                             # Convert trials to pairwise comparisons
-    plot_choice_frequency(pairwise_all, expertise_label)                     # Plot choice-frequency distribution
+    results = {}
 
-    group_rdm = compute_symmetric_rdm(pairwise_all, expertise_label, do_plot=True)  # Compute and plot group RDM
+    for group_name, subj_data in trial_df_dict.items():
+        group_subs = list(subj_data.keys())
+        within_scores = []
 
-    df_for_mds = pd.DataFrame(group_rdm, columns=list(range(group_rdm.shape[0])))     # Create DataFrame for MDS
-    plot_mds(df_for_mds, "MDS Embedding of RDM", expertise_label)  # Plot MDS embedding
+        for sub_id in group_subs:
+            # Get trials for subject i
+            df_i = subj_data[sub_id]
+            pairwise_i = create_pairwise_df(df_i)
+            rdm_i = compute_symmetric_rdm(pairwise_i, expertise_label="Individual", do_plot=False)
 
-    _ = compute_directional_dsm(pairwise_all, expertise_label, do_plot=True)    # Compute and plot directional DSM
+            # Get pooled trials from all other subjects
+            others_dfs = [df for sid, df in subj_data.items() if sid != sub_id]
+            if not others_dfs:
+                continue  # skip leave-one-out if only one subject
+            df_others = pd.concat(others_dfs, ignore_index=True)
+            pairwise_others = create_pairwise_df(df_others)
+            rdm_others = compute_symmetric_rdm(pairwise_others, expertise_label="Group", do_plot=False)
 
-    corr_results, col_labels = correlate_model_behavior(group_rdm, df_cat, expertise_label)  # Correlate group RDM with model RDMs
+            # Compare lower triangles
+            idx = np.tril_indices(rdm_i.shape[0], k=-1)
+            vec_i = rdm_i[idx]
+            vec_others = rdm_others[idx]
+            r, _ = scipy.stats.spearmanr(vec_i, vec_others)
+            within_scores.append(r)
 
-    print(f"--- Correlation Results ({expertise_label}) ---")                  # Print header for correlation results
-    for col, r_val, p_val, ci_l, ci_u in corr_results:                          # Iterate through results
-        print(f"Column: {col}")                                                 # Print column name
-        print(f"  r = {r_val:.3f}, p = {p_val:.3e}, 95% CI = [{ci_l:.3f}, {ci_u:.3f}]\n")  # Print stats
+        results[group_name] = {"within": within_scores}
 
-    return group_rdm, corr_results, col_labels                                    # Return group RDM and correlation info
+    # If multiple groups, compute between-group reliabilities
+    if len(trial_df_dict) > 1:
+        group_names = list(trial_df_dict.keys())
+        for g1 in group_names:
+            # vecs1 = results[g1]["within"]
+            others = [g2 for g2 in group_names if g2 != g1]
+            between_scores = []
+
+            for sub_id, df in trial_df_dict[g1].items():
+                pairwise_i = create_pairwise_df(df)
+                rdm_i = compute_symmetric_rdm(pairwise_i, expertise_label="Individual", do_plot=False)
+                idx = np.tril_indices(rdm_i.shape[0], k=-1)
+                vec_i = rdm_i[idx]
+
+                # Average other group RDMs
+                dfs_others = [trial_df_dict[g2][sid] for g2 in others for sid in trial_df_dict[g2]]
+                df_others = pd.concat(dfs_others, ignore_index=True)
+                pairwise_others = create_pairwise_df(df_others)
+                rdm_others = compute_symmetric_rdm(pairwise_others, expertise_label="Group", do_plot=False)
+                vec_others = rdm_others[idx]
+
+                r, _ = scipy.stats.spearmanr(vec_i, vec_others)
+                between_scores.append(r)
+
+            results[g1]["between"] = between_scores
+
+    return results
+
+def plot_reliability_bars(plot_data, out_fig=None, out_csv=None, run_id=None):
+    """
+    Plot within- and between-group RDM reliability for Experts and Novices,
+    with 95% CI error bars, significance asterisks, and between-group comparisons.
+
+    Parameters
+    ----------
+    plot_data : dict
+        Dictionary containing bar plot data and stats:
+        - x: np.ndarray of x positions
+        - width: float, bar width
+        - means_exp, means_nov: mean r values
+        - ci_exp, ci_nov: confidence intervals (2 x 2 arrays)
+        - summary: dict with individual stats and p-values
+        - p_vals_between: dict with p-values for between-group diffs
+    out_fig : str
+        Path to save the figure.
+    out_csv : str
+        Path to save the CSV with annotated data.
+    run_id : str
+        Title identifier for the plot.
+
+    Returns
+    -------
+    pd.DataFrame
+        Annotated DataFrame used for plotting.
+    """
+    import matplotlib.pyplot as plt
+    import seaborn as sns
+    import numpy as np
+    import pandas as pd
+
+    COL_GREEN = "#4daf4a"
+    COL_RED = "#e41a1c"
+    means_exp = plot_data["means_exp"]
+    means_nov = plot_data["means_nov"]
+    ci_exp = plot_data["ci_exp"]
+    ci_nov = plot_data["ci_nov"]
+    summary = plot_data["summary"]
+    p_vals_between = plot_data["p_vals_between"]
+
+    terms = ["Within-group", "Between-group"]
+    plot_df = pd.DataFrame({
+        "Term": terms * 2,
+        "Correlation": list(means_exp) + list(means_nov),
+        "CI_low": list(means_exp - ci_exp[0]) + list(means_nov - ci_nov[0]),
+        "CI_high": list(means_exp + ci_exp[1]) + list(means_nov + ci_nov[1]),
+        "Group": ["Experts"] * 2 + ["Novices"] * 2,
+    })
+
+    fig, ax = plt.subplots()
+    sns.barplot(
+        data=plot_df,
+        x="Term",
+        y="Correlation",
+        hue="Group",
+        palette=[COL_GREEN, COL_RED],
+        dodge=True,
+        errorbar=None,
+        ax=ax,
+    )
+
+    patches = ax.patches
+    data_range = np.abs(plot_df["Correlation"]).max() + np.abs(plot_df["CI_high"]).max()
+    offset = data_range / 100 if data_range > 0 else 0.005
+    group_heights = []
+
+    # Individual error bars and stars
+    for idx, row in plot_df.iterrows():
+        patch = patches[idx]
+        x_c = patch.get_x() + patch.get_width() / 2
+        r = row["Correlation"]
+        lo = row["CI_low"]
+        hi = row["CI_high"]
+        err_low = abs(r - lo)
+        err_high = abs(hi - r)
+        ax.errorbar(
+            x_c, r,
+            yerr=[[err_low], [err_high]],
+            fmt="none", ecolor="k", capsize=5, capthick=1.5
+        )
+        group = row["Group"]
+        label = "within" if row["Term"].lower().startswith("within") else "between"
+        p = summary[group][label]["p"]
+
+        if p < 0.001:
+            star = "***"
+        elif p < 0.01:
+            star = "**"
+        elif p < 0.05:
+            star = "*"
+        else:
+            star = None
+
+        if star:
+            y_star, va = hi + offset, "bottom"
+            ax.text(x_c, y_star, star, ha="center", va=va, color="gray", fontsize=18, fontweight="bold")
+            group_heights.append(y_star)
+        else:
+            group_heights.append(hi)
+
+    # Between-group comparisons
+    for i, term in enumerate(["within", "between"]):
+        p = p_vals_between[term]["p"]
+        if p >= 0.05:
+            continue
+
+        bar1, bar2 = patches[i], patches[i + 2]
+        x1 = bar1.get_x() + bar1.get_width() / 2
+        x2 = bar2.get_x() + bar2.get_width() / 2
+        max_y = max(group_heights[i], group_heights[i + 2])
+        y_line = max_y + offset * 8
+
+        ax.plot([x1, x2], [y_line, y_line], "k-", linewidth=1.5)
+        star = "***" if p < 0.001 else ("**" if p < 0.01 else "*")
+        ax.text((x1 + x2) / 2, y_line + offset, star, ha="center", va="bottom", color="black")
+
+    ax.set_xlabel("Group", fontweight="bold")
+    ax.set_ylabel("Spearman r (95% CI)", fontweight="bold")
+    ax.set_title(f"{run_id or 'RDM Reliability'}\nExperts vs. Novices", pad=20)
+    ax.set_xticklabels(terms, rotation=0)
+    ax.legend(loc="upper left", frameon=False)
+    sns.despine(ax=ax, top=True, right=True, left=False, bottom=False)
+    ax.spines["left"].set_linewidth(1.0)
+    ax.spines["bottom"].set_linewidth(1.0)
+    ax.axhline(0, linestyle="--", color="gray", linewidth=1)
+    plt.tight_layout()
+
+    # Save outputs
+    if out_fig:
+        plot_df.to_csv(out_csv, index=False)
+        plt.savefig(out_fig, dpi=300, bbox_inches="tight", pad_inches=0.1, facecolor="white")
+    plt.show()
+
+    return plot_df
 
 
 # ----------------------------------------
 # MAIN EXECUTION FLOW
 # ----------------------------------------
+sourcedata_root="/media/costantino_ai/eik-T9/projects_backup/2024_chess-expertise/data/sourcedata"
 
-participants_list, (num_exp, num_non) = load_participants(                        # Load participants and counts
+participants_list, (num_exp, num_non) = load_participants(
     participants_xlsx_path="data/participants.xlsx",
-    sourcedata_root="/media/costantino_ai/eik-T9/projects_backup/2024_chess-expertise/data/sourcedata"
+    sourcedata_root=sourcedata_root
 )
-print(f"Number of Experts: {num_exp} | Number of Non-Experts: {num_non}")          # Print participant counts
+print(f"Number of Experts: {num_exp} | Number of Non-Experts: {num_non}")
 
-trial_columns = [                                                                 # Define column names for trial DataFrames
+trial_columns = [
     "sub_id", "run", "run_trial_n", "stim_id",
     "stim_onset_real", "response", "stim_onset_expected",
     "button_mapping"
 ]
 
-experts_df = pd.DataFrame([], columns=trial_columns)                               # Initialize empty DataFrame for Experts
-novices_df = pd.DataFrame([], columns=trial_columns)                                # Initialize empty DataFrame for Novices
-experts_rdms = []                                                                  # List to store each Expert's individual RDM
-novices_rdms = []                                                                  # List to store each Novice's individual RDM
+experts_df = pd.DataFrame([], columns=trial_columns)
+novices_df = pd.DataFrame([], columns=trial_columns)
 
-sourcedata_root = "/media/costantino_ai/eik-T9/projects_backup/2024_chess-expertise/data/sourcedata"  # Root path for source data
+# Initialize RDM storage in dictionary format
+rdms_dict = {
+    "Experts": {},
+    "Novices": {}
+}
 
-if MULTIPROCESS:                                                                   # If multiprocessing is enabled
-    n_cpu = max(1, multiprocessing.cpu_count() - 1)                                # Use all but one CPU core
-    with multiprocessing.Pool(processes=n_cpu) as pool:                             # Create a pool of worker processes
-        args = [                                                                   # Prepare arguments for each subject
-            (sub_id, is_expert, sourcedata_root, trial_columns)
-            for sub_id, is_expert in participants_list
-        ]
-        results = pool.map(worker_process, args)                                   # Map worker_process over all subjects
+import logging
 
-    for sub_id, single_df, is_expert, rdm_ind, dsm_ind in results:                 # Iterate through worker results
-        if single_df is None:                                                       # If subject had no valid data
-            continue                                                                # Skip to next
-        if is_expert:                                                               # If subject is an Expert
-            experts_rdms.append(rdm_ind)                                            # Store individual RDM
-            experts_df = pd.concat([experts_df, single_df], ignore_index=True)      # Append trials to Experts DataFrame
-        else:                                                                       # If subject is a Novice
-            novices_rdms.append(rdm_ind)                                            # Store individual RDM
-            novices_df = pd.concat([novices_df, single_df], ignore_index=True)      # Append trials to Novices DataFrame
+# Define CPU usage
+n_cpu = max(1, multiprocessing.cpu_count() - 1)
+logging.info(f"Using {n_cpu} CPU cores for parallel processing.")
 
-else:                                                                              # If multiprocessing is disabled
-    for sub_id, is_expert in participants_list:                                    # Iterate through each subject
-        print(f"Processing participant: {sub_id} | Expert: {is_expert}")            # Print subject info
-        single_df = process_single_participant(                                     # Process subject sequentially
-            sub_id=sub_id,
-            is_expert=is_expert,
-            sourcedata_root=sourcedata_root,
-            columns=trial_columns
-        )
-        if single_df is None:                                                       # If subject had no valid data
-            continue                                                                # Skip to next
-        pairwise_df = create_pairwise_df(single_df)                                  # Convert trials to pairwise comparisons
-        rdm_ind = compute_symmetric_rdm(pairwise_df, "Individual", do_plot=False)    # Compute individual symmetric RDM
-        dsm_ind = compute_directional_dsm(pairwise_df, "Individual", do_plot=False)  # Compute individual directional DSM
+# Prepare participant arguments
+args = [
+    (sub_id, is_expert, sourcedata_root, trial_columns)
+    for sub_id, is_expert in participants_list
+]
 
-        if is_expert:                                                               # If subject is an Expert
-            experts_rdms.append(rdm_ind)                                            # Store individual RDM
-            experts_df = pd.concat([experts_df, single_df], ignore_index=True)      # Append trials to Experts DataFrame
-        else:                                                                       # If subject is a Novice
-            novices_rdms.append(rdm_ind)                                            # Store individual RDM
-            novices_df = pd.concat([novices_df, single_df], ignore_index=True)      # Append trials to Novices DataFrame
+# Process data in parallel
+logging.info("Starting multiprocessing pool...")
+with multiprocessing.Pool(processes=n_cpu) as pool:
+    results = pool.map(worker_process, args)
 
-category_df = load_stimulus_categories(                                           # Load stimulus category data
-    cat_path="/home/eik-tb/OneDrive_andreaivan.costantino@kuleuven.be/"
-             "GitHub/chess-expertise-2024/chess-dataset-vis/data/categories.xlsx"
-)
+# Handle results
+logging.info("Processing subject data...")
+for i, (sub_id, single_df, is_expert, rdm_ind, dsm_ind) in enumerate(results):
+    if rdm_ind is None:
+        continue
 
-expert_rdm, expert_corrs, expert_cols = analyze_group(                             # Analyze Experts group
-    df_group=experts_df,
-    expertise_label="Experts",
-    df_cat=category_df
-)
+    group_label = "Expert" if is_expert else "Novice"
 
-novice_rdm, novice_corrs, novice_cols = analyze_group(                             # Analyze Novices group
-    df_group=novices_df,
-    expertise_label="Novices",
-    df_cat=category_df
-)
+    if single_df is None:
+        logging.warning(f"[{group_label} | {sub_id}] Skipped: No valid data found.")
+        continue
 
-if expert_cols != novice_cols:                                                     # Ensure column labels match
-    raise ValueError("Mismatch in column labels between expert and novice results!")
+    if is_expert:
+        experts_df = pd.concat([experts_df, single_df], ignore_index=True)
+        rdms_dict["Experts"][sub_id] = rdm_ind
+    else:
+        novices_df = pd.concat([novices_df, single_df], ignore_index=True)
+        rdms_dict["Novices"][sub_id] = rdm_ind
 
-plot_model_behavior_correlations(                                                  # Plot final correlation comparison
-    expert_results=expert_corrs,
-    novice_results=novice_corrs,
-    column_labels=expert_cols
-)
+    logging.info(f"[{group_label} | {sub_id}] Data processed successfully.")
 
-pretty_labels = ["Visual Similarity", "Strategy", "Checkmate"]                    # Pretty labels for final summary table
-stats_df = pd.DataFrame({                                                          # Build summary DataFrame
-    "Dimension": pretty_labels,                                                     # Model dimension names
-    "r_Experts": [f"{tup[1]:.3f}" for tup in expert_corrs],                         # Expert correlation r-values
-    "95% CI Experts": [f"[{tup[3]:.3f}, {tup[4]:.3f}]" for tup in expert_corrs],     # Expert 95% confidence intervals
-    "r_Novices": [f"{tup[1]:.3f}" for tup in novice_corrs],                          # Novice correlation r-values
-    "95% CI Novices": [f"[{tup[3]:.3f}, {tup[4]:.3f}]" for tup in novice_corrs],      # Novice 95% confidence intervals
-})
-print("\n=== Behavioral RDM Correlations (Experts vs. Novices) ===\n")               # Print header for summary table
-print(stats_df.to_string(index=False))                                             # Print summary table without index
+# Summary
+logging.info(f"Finished processing {len(results)} participants.")
+logging.info(f"Total valid Experts: {len(rdms_dict['Experts'])}")
+logging.info(f"Total valid Novices: {len(rdms_dict['Novices'])}")
 
-plot_shared_colorbar(CUSTOM_CMAP, vmin=-18, vmax=18)                                # Display the standalone colorbar for DSMs
+# Build trial-level data per subject per group
+trial_df_dict = {
+    "Experts": {sub_id: df for sub_id, df in zip(experts_df["sub_id"].unique(), [experts_df[experts_df["sub_id"] == sid] for sid in experts_df["sub_id"].unique()])},
+    "Novices": {sub_id: df for sub_id, df in zip(novices_df["sub_id"].unique(), [novices_df[novices_df["sub_id"] == sid] for sid in novices_df["sub_id"].unique()])}
+}
+
+# Run updated reliability calculation
+results = compute_reliabilities_from_trials(trial_df_dict)
+
+# Step 1: Compute group-level stats with Pingouin
+summary = {}
+for group in ["Experts", "Novices"]:
+    summary[group] = {}
+    for typ in ["within", "between"]:
+        data = pd.Series(results[group][typ])
+        ttest = pg.ttest(data, 0, alternative='two-sided')
+        row = ttest.iloc[0]
+        summary[group][typ] = {
+            "mean": data.mean(),
+            "ci95%": (row['CI95%'][0], row['CI95%'][1]),
+            "p": row['p-val']
+        }
+
+# Step 2: Between-group comparisons using independent t-tests
+p_vals_between = {}
+for typ in ["within", "between"]:
+    data_exp = pd.Series(results["Experts"][typ])
+    data_nov = pd.Series(results["Novices"][typ])
+    ttest = pg.ttest(data_exp, data_nov, paired=False, alternative='two-sided')
+    row = ttest.iloc[0]
+    p_vals_between[typ] = {
+        "p": row["p-val"],
+        "ci95%": row["CI95%"]
+    }
+
+# Step 3: Prepare data for plotting
+labels = ["Within", "Between"]
+x = np.arange(len(labels))
+width = 0.35
+
+means_exp = [summary["Experts"]["within"]["mean"], summary["Experts"]["between"]["mean"]]
+means_nov = [summary["Novices"]["within"]["mean"], summary["Novices"]["between"]["mean"]]
+
+ci_exp = np.array([
+    [summary["Experts"][k]["mean"] - summary["Experts"][k]["ci95%"][0],
+     summary["Experts"][k]["ci95%"][1] - summary["Experts"][k]["mean"]]
+    for k in ["within", "between"]
+]).T
+
+ci_nov = np.array([
+    [summary["Novices"][k]["mean"] - summary["Novices"][k]["ci95%"][0],
+     summary["Novices"][k]["ci95%"][1] - summary["Novices"][k]["mean"]]
+    for k in ["within", "between"]
+]).T
+
+# Optional: save for use in plotting
+plot_data = {
+    "x": x,
+    "width": width,
+    "means_exp": means_exp,
+    "means_nov": means_nov,
+    "ci_exp": ci_exp,
+    "ci_nov": ci_nov,
+    "summary": summary,
+    "p_vals_between": p_vals_between
+}
+
+plot_reliability_bars(plot_data)
