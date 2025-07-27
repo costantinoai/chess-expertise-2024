@@ -85,6 +85,102 @@ def plot_all_stimuli(df, stim_dir, outpath):
     plt.close(fig)
 
 # -------------------------------------------------------------------
+# 5.1) New: All stimuli with descriptive tags
+# -------------------------------------------------------------------
+def plot_all_stimuli_with_dynamic_borders(df, stim_dir, outpath):
+    """
+    Plot all stimuli with discrete, visibly distinct borders based on 'check' and 'strategy'.
+    Green shades for checkmate, red for non-checkmate. Strategy level determines shade.
+    """
+    n_cols = 5
+    n_rows = 8
+    fig_width = 15
+    fig_height = 24
+    border_width = 8
+    fontsize = 18
+    fontname = "Ubuntu Condensed"
+
+    fig, axes = plt.subplots(nrows=n_rows, ncols=n_cols,
+                             figsize=(fig_width, fig_height))
+    axes = axes.flatten()
+
+    # Suptitle
+    plt.suptitle("Full Dataset", fontsize=40, fontname=fontname, weight='bold')
+
+    # Separate checkmate and non-checkmate
+    df_check = df[df['check'] == 1].copy()
+    df_nocheck = df[df['check'] == 0].copy()
+
+    # Rank strategy values
+    df_check['strategy_rank'] = df_check['strategy'].rank(method='dense').astype(int)
+    df_nocheck['strategy_rank'] = df_nocheck['strategy'].rank(method='dense').astype(int)
+
+    # Palettes
+    check_palette = sns.light_palette("green", n_colors=df_check['strategy_rank'].nunique() + 2)[1:-1]
+    nocheck_palette = sns.light_palette("red", n_colors=df_nocheck['strategy_rank'].nunique() + 2)[1:-1]
+
+    check_color_map = {
+        rank: color for rank, color in zip(sorted(df_check['strategy_rank'].unique()), check_palette)
+    }
+    nocheck_color_map = {
+        rank: color for rank, color in zip(sorted(df_nocheck['strategy_rank'].unique()), nocheck_palette)
+    }
+
+    # Merge strategy rank into main DataFrame
+    df = df.copy()
+    df['strategy_rank'] = -1
+    df.loc[df_check.index, 'strategy_rank'] = df_check['strategy_rank']
+    df.loc[df_nocheck.index, 'strategy_rank'] = df_nocheck['strategy_rank']
+
+    for i, (idx, row) in enumerate(df.iterrows()):
+        if i >= len(axes): break
+
+        ax = axes[i]
+        ax.set_axis_off()
+
+        img_path = os.path.join(stim_dir, row['filename'])
+        if not os.path.isfile(img_path):
+            print(f"Image not found: {img_path}")
+            continue
+
+        img = mpimg.imread(img_path)
+        ax.imshow(img)
+
+        # Tag
+        try:
+            stim_id = idx + 1
+            check = "C" if int(row['check']) == 1 else "NC"
+            strategy = int(row['strategy']) + 1
+            visual = int(row['visual']) + 1
+            # tag = f"S{stim_id} • {check} • SY{strategy} • P{visual}"
+            tag = fr"$\bf{{S{stim_id}}}$•{check}•SY{strategy}•P{visual}"
+        except KeyError as e:
+            raise KeyError(f"Missing required column for tag: {e}")
+
+        # Add tag below image using text
+        ax.set_title(tag, fontsize=fontsize, pad=4, loc='center')
+
+        # Border
+        strat_rank = row['strategy_rank']
+        if strat_rank == -1:
+            border_color = "gray"
+        else:
+            border_color = check_color_map[strat_rank] if check == "C" else nocheck_color_map[strat_rank]
+
+        rect = Rectangle((0, 0), 1, 1,
+                         transform=ax.transAxes,
+                         fill=False,
+                         linewidth=border_width,
+                         edgecolor=border_color)
+        ax.add_patch(rect)
+
+    plt.tight_layout(rect=[0, 0, 1, 0.98])  # Leave room for suptitle
+    # plt.tight_layout()  # Leave room for suptitle
+    plt.savefig(outpath, dpi=300)
+    plt.show()
+    plt.close(fig)
+
+# -------------------------------------------------------------------
 # 4) Function to color-code one "level" (column) in a new figure
 # -------------------------------------------------------------------
 
@@ -173,18 +269,23 @@ def plot_level(df, stim_dir, level_col, outpath):
 # 5) Make the "all stimuli" figure
 # -------------------------------------------------------------------
 
-all_stimuli_outfile = os.path.join(OUTPUT_DIR, "all_stimuli_overview.png")
-plot_all_stimuli(df, STIM_DIR, all_stimuli_outfile)
-print("Saved overview of all stimuli to:", all_stimuli_outfile)
+# all_stimuli_outfile = os.path.join(OUTPUT_DIR, "all_stimuli_overview.png")
+# plot_all_stimuli(df, STIM_DIR, all_stimuli_outfile)
+# print("Saved overview of all stimuli to:", all_stimuli_outfile)
 
-# -------------------------------------------------------------------
-# 6) For each numeric column (except 'filename'), create a color-coded figure
-# -------------------------------------------------------------------
+# # -------------------------------------------------------------------
+# # 6) For each numeric column (except 'filename'), create a color-coded figure
+# # -------------------------------------------------------------------
 
-for col in level_columns:
-    outname = f"plot_{col}.png"
-    outpath = os.path.join(OUTPUT_DIR, outname)
-    print(f"Creating figure for level '{col}'...")
-    plot_level(df, STIM_DIR, col, outpath)
+# for col in level_columns:
+#     outname = f"plot_{col}.png"
+#     outpath = os.path.join(OUTPUT_DIR, outname)
+#     print(f"Creating figure for level '{col}'...")
+#     plot_level(df, STIM_DIR, col, outpath)
+
+
+tagged_outfile = os.path.join(OUTPUT_DIR, "stimuli_with_tags.png")
+plot_all_stimuli_with_dynamic_borders(df, STIM_DIR, tagged_outfile)
+print("Saved tagged stimuli overview to:", tagged_outfile)
 
 print("All figures have been generated in:", OUTPUT_DIR)
