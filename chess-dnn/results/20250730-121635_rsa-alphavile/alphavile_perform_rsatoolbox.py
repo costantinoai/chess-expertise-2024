@@ -32,7 +32,7 @@ import rsatoolbox
 from rsatoolbox.rdm.rdms import RDMs, concat
 from rsatoolbox.data.dataset import Dataset
 from rsatoolbox.model import ModelFixed
-from rsatoolbox.inference.evaluate import eval_bootstrap_pattern,eval_fixed
+from rsatoolbox.inference.evaluate import eval_bootstrap_pattern
 from rsatoolbox.vis.rdm_plot import show_rdm
 from rsatoolbox.vis.model_plot import plot_model_comparison
 
