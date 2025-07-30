@@ -84,7 +84,7 @@ def load_all_betas(subject_id: str, avg_runs: bool) -> Tuple[Dict[str, np.ndarra
             total_voxels = np.prod(betas[cond][0].shape)
             nans = np.isnan(betas[cond][0]).sum()
 
-        # Print th number of total voxels and the number of nans
+        # Print the number of total voxels and the number of nans
 
         logger.info(
             f"Condition '{cond}' has {total_voxels} total voxels, "
