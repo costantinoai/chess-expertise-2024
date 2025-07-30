@@ -25,7 +25,6 @@ import seaborn as sns
 
 from matplotlib.patches import Patch
 from scipy.spatial.distance import pdist, squareform
-from scipy.stats import ttest_rel
 from statsmodels.stats.multitest import fdrcorrection
 
 import rsatoolbox
