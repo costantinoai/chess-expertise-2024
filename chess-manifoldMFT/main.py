@@ -23,8 +23,8 @@ import seaborn as sns  # high-level plotting
 import matplotlib.pyplot as plt  # low-level plotting
 import nibabel as nib  # NIfTI I/O
 import scipy.io as sio  # MATLAB .mat I/O
-from scipy.stats import ttest_ind  # independent t-test
-from statsmodels.stats.multitest import multipletests  # FDR correction
+# from scipy.stats import ttest_ind  # independent t-test
+# from statsmodels.stats.multitest import multipletests  # FDR correction
 from sklearn.random_projection import (
     GaussianRandomProjection,
 )  # optional dimensionality reduction
@@ -34,65 +34,25 @@ from joblib import Parallel, delayed  # parallel processing
 from mftma.manifold_analysis_correlation import manifold_analysis_corr
 from mftma.alldata_dimension_analysis import alldata_dimension_analysis
 
+from modules import BASE_GLM_PATH, ATLAS_FILE, EXPERTS, NONEXPERTS
+
 # ---------------------- CONFIGURATION ---------------------- #
 
 # Base path to GLM outputs (SPM.mat directories)
-BASE_PATH = "D:\\Andrea\\Chess\\BIDS\\derivatives\\fmriprep-SPM\\MNI\\fmriprep-SPM-MNI-checknocheck\\GLM"
+BASE_PATH = BASE_GLM_PATH
 
 # Filename of the SPM.mat within each subject's folder
 SPM_FILENAME = "SPM.mat"
 
 # Path to ROI atlas (integer labels in NIfTI)
-ATLAS_FILE = "D:\\Andrea\\Chess\\misc\\templates\\tpl-MNI152NLin2009cAsym_res-02_atlas-Glasser2016_desc-cortices_bilateral_resampled.nii"
+ATLAS_FILE = ATLAS_FILE
 
 # Root directory for all output (CSVs, plots, provenance script)
 OUTPUT_ROOT = "results"
 
 # Subject identifiers by group
-EXPERT_SUBJECTS = [
-    "03",
-    "04",
-    "06",
-    "07",
-    "08",
-    "09",
-    "10",
-    "11",
-    "12",
-    "13",
-    "16",
-    "20",
-    "22",
-    "23",
-    "24",
-    "29",
-    "30",
-    "33",
-    "34",
-    "36",
-]
-NONEXPERT_SUBJECTS = [
-    "01",
-    "02",
-    "15",
-    "17",
-    "18",
-    "19",
-    "21",
-    "25",
-    "26",
-    "27",
-    "28",
-    "32",
-    "35",
-    "37",
-    "39",
-    "40",
-    "41",
-    "42",
-    "43",
-    "44",
-]
+EXPERT_SUBJECTS = EXPERTS
+NONEXPERT_SUBJECTS = NONEXPERTS
 ALL_SUBJECTS = EXPERT_SUBJECTS + NONEXPERT_SUBJECTS
 
 # Dimensionality reduction threshold

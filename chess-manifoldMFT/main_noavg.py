@@ -56,8 +56,12 @@ def process_subject(
         Dict[int, Dict[str, Any]]: Dictionary mapping ROI to computed metrics.
     """
     logger.info(f"Processing subject: {subject}")
-    betas_dict, labels = load_all_betas(subject, avg_runs=AVG_RUNS)
-    logger.info(f"Loaded betas for subject {subject}: conditions={labels}")
+    betas_dict, cats_raw = load_all_betas(subject, avg_runs=AVG_RUNS)
+    logger.info(f"Loaded betas for subject {subject}: conditions={cats_raw}")
+
+    labels = [int(c[0]=="C") for c in cats_raw]
+    # classes = list(range(1, 21)) * 2
+    # classes = list(range(1, 41))
 
     # Assign manifold grouping according to strategy
     manifold_assignments, manifold_names = assign_manifold_labels(labels, manifold_strategy)
