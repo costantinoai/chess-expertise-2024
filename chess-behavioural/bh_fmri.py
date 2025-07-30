@@ -3,9 +3,6 @@
 """
 Refactored Chess Expertise Analysis Script with Modular Functions (Enhanced Plot Formatting + Inline Comments)
 
-This version:
-- Ensures every line has an inline comment.
-- Adds multiprocessing support when MULTIPROCESS flag is set to True.
 """
 
 import os                                                      # Provides functions for interacting with the operating system
@@ -32,7 +29,7 @@ import multiprocessing                                         # Python's multip
 # ----------------------------------------
 
 SF = 1.0                                                      # Scaling factor for all font sizes
-FONT_FAMILY = 'Ubuntu'                                        # Global font family
+FONT_FAMILY = 'Ubuntu Condensed'                                        # Global font family
 TITLE_FS = 32 * SF                                            # Font size for plot titles
 LABEL_FS = 26 * SF                                            # Font size for axis labels
 TICK_FS = 20 * SF                                             # Font size for tick labels

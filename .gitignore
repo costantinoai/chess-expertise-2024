@@ -158,7 +158,7 @@ misc
 chess-connectivity
 # chess-manifold*
 chess-behavioural/data/sub
-chess-dnn
+# chess-dnn
 **/old
 chess-results-vis
 chess-rois
@@ -168,7 +168,7 @@ chess-rois
 /chess-mvpa/results
 /**/cifar-100-python
 *.gz
-/chess-manifoldMFT/results
-chess-manifoldMFT/modules/__init__.py
-chess-manifoldMFT/modules/__init__.py
-/chess-manifoldMFT/manifold_results
+
+chess-dnn/results/20250419-190918_extract-net-activations-alphavile_dataset-fmri/activations_model-trained_seed-0.pkl
+chess-dnn/results/20250419-190918_extract-net-activations-alphavile_dataset-fmri/activations_model-untrained_seed-0.pkl
+

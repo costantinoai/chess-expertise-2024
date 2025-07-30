@@ -17,6 +17,7 @@ from nilearn import image
 from joblib import Parallel, delayed
 from tqdm import tqdm
 import os
+from functools import reduce
 
 def get_brain_mask(ref):
     """
@@ -355,3 +356,101 @@ def save_latex_correlation_tables(df_pos, df_neg, diff_df, run_id, out_dir):
         label=f"tab:{run_id}_diff",
         fname=f"{run_id}_difference_zmap.tex"
     )
+
+def generate_latex_multicolumn_table(data_dict, output_path, table_type="diff", caption="", label=""):
+    """
+    Generate and save a LaTeX multicolumn table from multiple regressors.
+
+    Args:
+        data_dict (dict): Keys are regressor names (e.g. 'Checkmate'), values are pandas DataFrames
+                          with columns: 'term', 'r_diff' or 'r', 'CI_low', 'CI_high', 'p_fdr'
+        output_path (str): Path to save the resulting LaTeX file.
+        table_type (str): "diff", "pos", or "neg".
+        caption (str): LaTeX caption.
+        label (str): LaTeX label.
+    """
+    def format_term_name(term):
+        parts = term.split(' ', 1)
+        if len(parts) == 2:
+            return parts[1].title()
+        else:
+            return parts[0].title()
+
+    def pval_fmt(p):
+        return "<.001" if p < 0.001 else f"{p:.3f}"
+
+    value_col = "r_diff" if table_type == "diff" else "r"
+
+    # Process and rename each dataframe
+    renamed_dfs = {}
+    for key, df in data_dict.items():
+        df = df.copy()
+        df.sort_values(
+            by='term',
+            key=lambda x: x.str.extract(r'^(\d+)')[0].astype(int),
+            inplace=True
+        )
+        df['Term'] = df['term'].apply(format_term_name)
+
+        renamed = df[['Term', value_col, 'CI_low', 'CI_high', 'p_fdr']].rename(
+            columns={
+                value_col: f'{key}_r',
+                'CI_low': f'{key}_CI_low',
+                'CI_high': f'{key}_CI_high',
+                'p_fdr': f'{key}_p_fdr'
+            }
+        )
+        renamed_dfs[key] = renamed
+
+    # Merge all DataFrames on 'Term'
+    merged_df = reduce(lambda left, right: pd.merge(left, right, on='Term'), renamed_dfs.values())
+
+    # Build LaTeX table
+    lines = [
+        "\\begin{table}[p]",
+        "\\centering",
+        "\\resizebox{\\linewidth}{!}{%",
+        f"\\begin{{tabular}}{{l{''.join(['ccc' for _ in data_dict])}}}",
+        "\\toprule"
+    ]
+
+    # First header row
+    header_1 = "\\multirow{2}{*}{Term} " + " & " + " & ".join(
+        [f"\\multicolumn{{3}}{{c}}{{{key}}}" for key in data_dict]
+    ) + " \\\\"
+    lines.append(header_1)
+
+    # Second header row
+    lines.append(
+        " & " + " & ".join(["$r$ & 95\\% CI & $p_\\mathrm{FDR}$" for _ in data_dict]) + " \\\\"
+    )
+    lines.append("\\midrule")
+
+    # Data rows
+    for _, row in merged_df.iterrows():
+        line = f"{row['Term']}"
+        for key in data_dict:
+            line += (
+                f" & {row[f'{key}_r']:.3f} "
+                f"& [{row[f'{key}_CI_low']:.3f}, {row[f'{key}_CI_high']:.3f}] "
+                f"& {pval_fmt(row[f'{key}_p_fdr'])}"
+            )
+        lines.append(line + " \\\\")
+
+    lines.extend([
+        "\\bottomrule",
+        "\\end{tabular}",
+        "}",
+        f"\\caption{{{caption}}}",
+        f"\\label{{{label}}}",
+        "\\end{table}"
+    ])
+
+    latex_output = "\n".join(lines)
+
+    # Save and print LaTeX code
+    with open(output_path, 'w') as f:
+        f.write(latex_output)
+
+    print(f"\n=== LaTeX table saved to: {output_path} ===\n")
+    print(latex_output)

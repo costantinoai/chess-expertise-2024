@@ -62,8 +62,6 @@ fmriprepRoot = '/data/projects/chess/data/BIDS/derivatives/fmriprep';
 BIDSRoot = '/data/projects/chess/data/BIDS';
 outRoot = ['/data/projects/chess/data/BIDS/derivatives/fmriprep-SPM_smoothed-6_GS-FD-HMP_brainmasked/',niftiSpace,'/fmriprep-SPM-', niftiSpace];
 tempDir = '/media/costantino_ai/eik-T9/chess_temp/fmriprep-preSPM';
-atlasPath = '/data/projects/chess/data/misc/afni_glasser/MNI_Glasser_HCP_v1.0_resampled.nii';
-% outRoot = '/home/eik-tb/Desktop/New Folder';
 
 % Files to select
 % selectedSubjectsList = '*';        % Must be list of integers or '*'
@@ -109,8 +107,6 @@ thresholds = {
 parfor i = 1:length(sub_paths)
     run_subject_glm(sub_paths(i).folder, sub_paths(i).name, selectedTasks, selectedRuns, ...
          fmriprepRoot, BIDSRoot, outRoot, tempDir, pipeline, niftiSpace, thresholds);
-
-    
 end
 
 

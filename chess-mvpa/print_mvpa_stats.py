@@ -5,7 +5,8 @@ import pickle
 import pandas as pd
 
 # ==== CONFIGURATION ====
-analyses = ["rsa_corr", "svm"]
+# analyses = ["svm"]
+analyses = ["rsa_corr"]
 MVPA_RESULTS_PATHS = [
     (
         "/data/projects/chess/data/BIDS/derivatives/mvpa/20250402-191833_glasser_cortices_bilateral",
@@ -13,22 +14,22 @@ MVPA_RESULTS_PATHS = [
     ),
 ]
 regressor_mapping = {
-    "checkmate": "Checkmate vs. Non-checkmate boards",
-    "stimuli_half": "Pairwise checkmate boards",
-    "stimuli": "Pairwise all boards",
+    # "checkmate": "Checkmate vs. Non-checkmate boards",
+    # "stimuli_half": "Pairwise checkmate boards",
+    # "stimuli": "Pairwise all boards",
     "motif_half": "Motifs (Checkmate boards only)",
     "check_n_half": "Moves to Checkmate",
-    "side_half": "King Position (L-R)",
+    # "side_half": "King Position (L-R)",
     "categories_half": "Strategy (Checkmate boards)",
-    "categories": "Strategy (All boards)",
-    "visualStimuli": "Visual Similarity",
+    # "categories": "Strategy (All boards)",
+    # "visualStimuli": "Visual Similarity",
     "total_pieces_half": "Total Pieces (Checkmate)",
     "legal_moves_half": "Legal Moves (Checkmate)",
-    "total_pieces": "Total Pieces",
-    "legal_moves": "Legal Moves",
-    "difficulty_half": "Board Difficulty",
-    "first_piece_half": "First Piece to Move",
-    "checkmate_piece_half": "Checkmate Piece",
+    # "total_pieces": "Total Pieces",
+    # "legal_moves": "Legal Moves",
+    # "difficulty_half": "Board Difficulty",
+    # "first_piece_half": "First Piece to Move",
+    # "checkmate_piece_half": "Checkmate Piece",
 }
 
 # ==== FUNCTIONS ====
@@ -88,6 +89,8 @@ for analysis in analyses:
             results = load_results(pickle_path)
             regressors = sorted(set(r for c in results.values() for r in c.keys()))
             for reg in regressors:
+                if reg not in regressor_mapping.keys():
+                    continue
                 df = extract_stats(results, reg)
                 label = regressor_mapping.get(reg, reg)
                 print_latex_table(df, analysis, reg, label)

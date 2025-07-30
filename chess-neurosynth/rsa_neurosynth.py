@@ -43,7 +43,7 @@ from plotly.subplots import make_subplots  # Multi-view 3D cortical plots
 import warnings
 
 from modules.io_utils import load_term_maps
-from modules.stats_utils import save_latex_correlation_tables
+from modules.stats_utils import save_latex_correlation_tables, generate_latex_multicolumn_table
 from modules.plot_utils import plot_correlations, plot_difference
 from modules.run_utils import (
     create_run_id,
@@ -861,9 +861,8 @@ def compute_all_zmap_correlations(z_pos, z_neg, term_maps, ref_img,
     return df_pos, df_neg, df_diff
 
 
-
 # --- Configuration ---
-DATA_DIR         = '/home/eik-tb/Desktop/mvpa_searchlight'
+DATA_DIR         = '/data/projects/chess/data/BIDS/derivatives/rsa_searchlight'
 RESULTS_ROOT     = 'results'
 SMOOTHING_MM     = 6            # Group-level smoothing (FWHM)
 MIN_VOXEL_VALUE  = 1e-5         # Threshold for plotting
@@ -904,6 +903,10 @@ with OutputLogger(True, out_text_file):
     # STEP 1: Load Neurosynth term maps
     logger.info("Loading meta-analytic term maps from: %s", TERM_DIR)
     term_maps = load_term_maps(TERM_DIR)
+
+    all_pos = {}
+    all_neg = {}
+    all_diff = {}
 
     i = 0
     for term_key, term_path in term_maps.items():
@@ -988,6 +991,12 @@ with OutputLogger(True, out_text_file):
         )
 
         # STEP 2h: Save correlation data
+        key = pattern_clean[PAT].split()[0].lower()  # e.g., 'checkmate'
+
+        all_pos[key] = df_pos
+        all_neg[key] = df_neg
+        all_diff[key] = df_diff.rename(columns={'r': 'r_diff'})
+
         df_pos.to_csv(os.path.join(RESULTS_DIR, f'{pattern_name}_term_corr_positive.csv'), index=False)
         df_neg.to_csv(os.path.join(RESULTS_DIR, f'{pattern_name}_term_corr_negative.csv'), index=False)
         df_diff.to_csv(os.path.join(RESULTS_DIR, f'{pattern_name}_term_corr_difference.csv'), index=False)
@@ -1004,6 +1013,34 @@ with OutputLogger(True, out_text_file):
             run_id=pattern_name,
             out_fig=os.path.join(RESULTS_DIR, f'{pattern_name}_term_correlation_differences.png')
         )
+
+
+    # Assume all_diff, all_pos, all_neg are dicts:
+    # e.g., {'Checkmate': df1, 'Strategy': df2, 'Visual Similarity': df3}
+
+    generate_latex_multicolumn_table(
+        data_dict=all_diff,
+        output_path=os.path.join(RESULTS_DIR, 'rsa_searchlight_diff.tex'),
+        table_type='diff',
+        caption='RSA searchlight results for expert–novice difference in correlation with term maps.',
+        label='tab:rsa_searchlight_diff'
+    )
+
+    generate_latex_multicolumn_table(
+        data_dict=all_pos,
+        output_path=os.path.join(RESULTS_DIR, 'rsa_searchlight_pos.tex'),
+        table_type='pos',
+        caption='RSA searchlight results for positive z-maps (experts only).',
+        label='tab:rsa_searchlight_expert_pos'
+    )
+
+    generate_latex_multicolumn_table(
+        data_dict=all_neg,
+        output_path=os.path.join(RESULTS_DIR, 'rsa_searchlight_neg.tex'),
+        table_type='neg',
+        caption='RSA searchlight results for negative z-maps (novices > experts).',
+        label='tab:rsa_searchlight_expert_neg'
+    )
 
     # Final message
     logger.info("=== Analysis Complete. Results saved to: %s ===", RESULTS_DIR)

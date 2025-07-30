@@ -20,11 +20,12 @@ def plot_rdm(rdm, title="RDM", colormap="RdPu"):
 
     Args:
     - rdm (array-like): The dissimilarity matrix to plot.
-    - strategies (list of str): The list of strategy labels corresponding to both the rows and columns of the RDM.
     - title (str): The title of the plot.
     - colormap (str): The colormap for the heatmap.
     """
-    # Initialize the plot
+    from matplotlib import rcParams
+    rcParams['font.family'] = 'Ubuntu Condensed'
+
     fig, ax = plt.subplots(figsize=(12, 10))
     hm = sns.heatmap(
         rdm,
@@ -32,61 +33,55 @@ def plot_rdm(rdm, title="RDM", colormap="RdPu"):
         fmt="d",
         cmap=colormap,
         ax=ax,
-
     )
-    hm.collections[0].colorbar.set_label("Dissimilarity", fontsize=24)  # main label
+    hm.collections[0].colorbar.set_label("Dissimilarity", fontsize=24, family="Ubuntu Condensed")
 
+    matrix_size = rdm.shape[0]
+    strategies_used = STRATEGIES[:matrix_size]
+    is_partial = matrix_size < len(STRATEGIES)
+    patch_scale = 2.0 if is_partial else 1.0  # double thickness if partial
 
-    # Set up tick positions and labels for changes in strategy group
+    # Tick label handling
     ticks = []
     tick_labels = []
     prev_label = None
-
-    # Determine the positions where the label changes
-    for i, label in enumerate(STRATEGIES):
+    for i, label in enumerate(strategies_used):
         if label != prev_label:
             ticks.append(i)
             tick_labels.append(label)
         prev_label = label
+    ticks.append(matrix_size)
 
-    # Adding one more tick for the end of the last block
-    ticks.append(len(STRATEGIES))
+    ax.set_xticks(ticks[:-1], labels=tick_labels, rotation=45, ha='right', fontsize=8, family="Ubuntu Condensed")
+    ax.set_yticks(ticks[:-1], labels=tick_labels, fontsize=8, family="Ubuntu Condensed")
 
-    # Set ticks and labels
-    ax.set_xticks(ticks[:-1], labels=tick_labels, rotation=45, ha='right', fontsize=8)
-    ax.set_yticks(ticks[:-1], labels=tick_labels, fontsize=8)
+    strategy_colors, strategy_alpha = determine_color_and_alpha(strategies_used)
 
-    # Add rectangles for strategy group highlighting
-    strategy_colors, strategy_alpha = determine_color_and_alpha(STRATEGIES)
-
-    # Create patches for both axes
     for idx, start in enumerate(ticks[:-1]):
-        end = ticks[idx + 1]
+        end = min(ticks[idx + 1], matrix_size)
         width = end - start
-        color = strategy_colors[ticks[idx]]
-        alpha = strategy_alpha[ticks[idx]]
+        color = strategy_colors[start]
+        alpha = strategy_alpha[start]
 
-        # Create rectangle patches
-        # Adding rect_x along the bottom x-axis
-        rect_x = Rectangle((start, -0.01), width, -0.0005*len(rdm), color=color, alpha=alpha, ec=None, transform=ax.get_xaxis_transform(), clip_on=False)
-        # Adding rect_y along the left y-axis
-        rect_y = Rectangle((-0.01, start), -0.0005*len(rdm), width, color=color, alpha=alpha, ec=None, transform=ax.get_yaxis_transform(), clip_on=False)
+        thickness = -0.0005 * matrix_size * patch_scale
+
+        rect_x = Rectangle((start, -0.01), width, thickness, color=color, alpha=alpha,
+                           ec=None, transform=ax.get_xaxis_transform(), clip_on=False)
+        rect_y = Rectangle((-0.01, start), thickness, width, color=color, alpha=alpha,
+                           ec=None, transform=ax.get_yaxis_transform(), clip_on=False)
 
         ax.add_patch(rect_x)
         ax.add_patch(rect_y)
 
-    # Set ticks and labels
     ax.set_xticks([])
     ax.set_yticks([])
-
-    # Enhance plot titles and labels
-    plt.title(title, fontsize=30, pad=20)
-    hm.collections[0].colorbar.ax.tick_params(labelsize=20)  # Set colorbar label size to 20
+    plt.title(title, fontsize=30, pad=20, family="Ubuntu Condensed")
+    hm.collections[0].colorbar.ax.tick_params(labelsize=20)
 
     fname = os.path.join(OUTPUT_DIR, f"{title}.png")
     plt.savefig(fname, bbox_inches='tight', pad_inches=0.1)
-
     plt.show()
+
 
 def determine_color_and_alpha(STRATEGIES):
     # Base colors
@@ -166,18 +161,18 @@ THUMB_HEIGHT = 4 *2  # height (in inches) for the entire grid figure
 BORDER_LW = 5 * 2
 
 regressor_mapping = {
-    "check": "Checkmate vs. Non-checkmate boards",
+    "check": "Checkmate vs. Non-checkmate",
     "stim_id": "Pairwise all boards",
-    "motif": "Motifs (Checkmate boards only)",
-    "check-n": "Number of moves to checkmate (Checkmate boards only)",
-    "side": "King position (L-R, Checkmate boards only)",
-    "strategy": "Strategy (all stimuli)",
+    "motif": "Motifs",
+    "check-n": "Number of moves to checkmate",
+    "side": "King side",
+    "strategy": "Strategy",
     "visual": "Visually similar pairs",
     "total_pieces": "Total number of pieces",
     "legal_moves": "Number of available legal moves",
-    "difficulty": "Board difficulty (Checkmate boards only)",
-    "first_piece": "First piece to move (Checkmate boards only)",
-    "checkmate_piece": "Checkmate piece (Checkmate boards only)",
+    "difficulty": "Board difficulty",
+    "first_piece": "First piece to move",
+    "checkmate_piece": "Checkmate piece",
 }
 
 STRATEGIES = [
@@ -258,6 +253,11 @@ print("Columns to build RDMs for:", level_columns)
 
 for col in level_columns:
     print(f"Computing RDM for column: {col}")
-    rdm = compute_rdm(df[col], col)
+    full_rdm = compute_rdm(df[col], col)
 
-    plot_rdm(rdm, title=regressor_mapping[col])
+    # Plot full RDM
+    plot_rdm(full_rdm, title=regressor_mapping[col])
+
+    half_rdm = full_rdm[:20,:20]
+
+    plot_rdm(half_rdm, title=regressor_mapping[col] + " (Checkmate Boards Only)")

@@ -60,7 +60,7 @@ NONEXPERT_SUBJECTS = { ...
     };
 
 %% 3. Set main parameters
-rootDir    = '/data/projects/chess/data/BIDS/derivatives/fmriprep-SPM_smoothed-4_GS-FD-HMP_brainmasked/MNI/fmriprep-SPM-MNI/GLM';
+rootDir    = '/data/projects/chess/data/BIDS/derivatives/fmriprep-SPM_smoothed-6_GS-FD-HMP_brainmasked/MNI/fmriprep-SPM-MNI/GLM';
 
 % Define the contrasts you want to test across groups
 contrastFiles = { ...
@@ -70,7 +70,7 @@ contrastFiles = { ...
     };
 
 % If smoothing is applied, use this FWHM
-fwhm = [3 3 3];  % e.g., 9mm isotropic
+fwhm = [0 0 0];  % e.g., 9mm isotropic
 
 %% 4. Loop over each contrast
 for c = 1:numel(contrastFiles)
@@ -78,7 +78,7 @@ for c = 1:numel(contrastFiles)
 
     % For naming the second-level folder
     [~, contrastBase, ~] = fileparts(contrastFile); % e.g. 'con_0001'
-    secondLevelFolder = fullfile(rootDir, ['2ndLevel_SMOOTH4_ExpVsNonExp_' contrastBase]);
+    secondLevelFolder = fullfile(rootDir, ['2ndLevel_ExpVsNonExp_smooth-6-0_' contrastBase]);
 
     if ~exist(secondLevelFolder, 'dir')
         mkdir(secondLevelFolder);
