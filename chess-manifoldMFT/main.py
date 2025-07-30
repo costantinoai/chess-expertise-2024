@@ -321,7 +321,6 @@ if __name__ == "__main__":
     # 4) Parallel processing of all subjects
     logger.info("Launching parallel processing for %d subjects", len(ALL_SUBJECTS))
 
-    USE_PARALLEL = False
     # 5) Process all subjects, either in parallel or serially
     if USE_PARALLEL:
         logger.info("Processing subjects in parallel (n_jobs=%s)", N_JOBS)
