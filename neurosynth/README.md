@@ -4,7 +4,9 @@ Purpose
 - Meta-analytic lookups and term-based analyses using Neurosynth or related tools.
 
 Inputs
-- Terms/seed ROIs and any required meta-analytic resources.
+- Group maps under `data/`:
+  - RSA searchlight: `data/BIDS/derivatives/rsa_searchlight/<model>/`
+  - Univariate GLM: `data/BIDS/derivatives/fmriprep-SPM_*/GLM/2ndLevel_*`
 
 How To Run
 - Entry scripts:

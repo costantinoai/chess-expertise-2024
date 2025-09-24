@@ -1,5 +1,16 @@
 Chess ROIs — Overview
+ROIs — Overview
 
+Purpose
+- ROI definitions and helper scripts. Includes generated ROI NIfTIs and TSVs with region info.
+
+Layout
+- `rois/data/` — reference resources (e.g., HCP-MMP1 CSV/TSV, template NIfTIs)
+- `rois/results/<roi_set>/` — generated ROI NIfTIs and `region_info.tsv`
+
+Usage
+- Python scripts expect ROI annotations under `rois/results/<roi_set>/region_info.tsv` and the corresponding `.nii` in the same folder.
+- MATLAB scripts that build ROIs should use `fullfile` to read/write within this folder.
 Purpose
 - ROI definitions, lookup tables, and ROI-specific utilities for analyses.
 
@@ -12,4 +23,3 @@ How To Use
 
 Results
 - Timestamped subfolders with generated ROI artefacts.
-
