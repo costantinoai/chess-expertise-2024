@@ -47,7 +47,9 @@ level_columns = [col for col in df.columns if col not in exclude_columns]
 # The example below assumes exactly 40 rows (first 20 = "cold set", second 20 = "hot set").
 # Adapt as needed if your dataset differs.
 if df.shape[0] != 40:
-    print("WARNING: This script is configured for exactly 40 stimuli. Found:", df.shape[0])
+    import logging
+    logging.basicConfig(level=logging.INFO)
+    logging.warning("This script is configured for exactly 40 stimuli. Found: %s", df.shape[0])
 
 # -------------------------------------------------------------------
 # 3) Helper function to draw all stimuli in one figure (no color outlines)
@@ -71,7 +73,7 @@ def plot_all_stimuli(df, stim_dir, outpath):
         img_path = os.path.join(stim_dir, row['filename'])
         if not os.path.isfile(img_path):
             # If image doesn't exist, you may raise an error or skip
-            print(f"Image not found: {img_path}")
+            logging.warning("Image not found: %s", img_path)
             continue
 
         img = mpimg.imread(img_path)
@@ -140,7 +142,7 @@ def plot_all_stimuli_with_dynamic_borders(df, stim_dir, outpath):
 
         img_path = os.path.join(stim_dir, row['filename'])
         if not os.path.isfile(img_path):
-            print(f"Image not found: {img_path}")
+            logging.warning("Image not found: %s", img_path)
             continue
 
         img = mpimg.imread(img_path)
@@ -239,7 +241,9 @@ def plot_level(df, stim_dir, level_col, outpath):
         # Load the image
         img_path = os.path.join(stim_dir, row['filename'])
         if not os.path.isfile(img_path):
-            print(f"Image not found: {img_path}")
+            import logging
+            logging.basicConfig(level=logging.INFO)
+            logging.warning("Image not found: %s", img_path)
             continue
         img = mpimg.imread(img_path)
         ax.imshow(img)
@@ -271,7 +275,7 @@ def plot_level(df, stim_dir, level_col, outpath):
 
 # all_stimuli_outfile = os.path.join(OUTPUT_DIR, "all_stimuli_overview.png")
 # plot_all_stimuli(df, STIM_DIR, all_stimuli_outfile)
-# print("Saved overview of all stimuli to:", all_stimuli_outfile)
+# logging.info("Saved overview of all stimuli to: %s", all_stimuli_outfile)
 
 # # -------------------------------------------------------------------
 # # 6) For each numeric column (except 'filename'), create a color-coded figure
@@ -280,12 +284,12 @@ def plot_level(df, stim_dir, level_col, outpath):
 # for col in level_columns:
 #     outname = f"plot_{col}.png"
 #     outpath = os.path.join(OUTPUT_DIR, outname)
-#     print(f"Creating figure for level '{col}'...")
+#     logging.info("Creating figure for level '%s'...", col)
 #     plot_level(df, STIM_DIR, col, outpath)
 
 
 tagged_outfile = os.path.join(OUTPUT_DIR, "stimuli_with_tags.png")
 plot_all_stimuli_with_dynamic_borders(df, STIM_DIR, tagged_outfile)
-print("Saved tagged stimuli overview to:", tagged_outfile)
+logging.info("Saved tagged stimuli overview to: %s", tagged_outfile)
 
-print("All figures have been generated in:", OUTPUT_DIR)
+logging.info("All figures have been generated in: %s", OUTPUT_DIR)

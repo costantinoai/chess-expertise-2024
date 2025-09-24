@@ -325,8 +325,7 @@ latex_var_table[['Unique to P1', 'Unique to P2', 'Shared', 'Residual']] = latex_
     ['Unique to P1', 'Unique to P2', 'Shared', 'Residual']
 ].applymap(lambda x: f"{x:.2f}")
 
-print("=== LaTeX Table: Variance Partitioning ===\n")
-print(latex_var_table.to_latex(index=False, escape=False))
+logging.info("=== LaTeX Table: Variance Partitioning ===\n%s", latex_var_table.to_latex(index=False, escape=False))
 
 # Correlation Table
 latex_corr_table = correlation_df.copy()
@@ -343,5 +342,5 @@ latex_corr_table[['Pairwise P1', 'Partial P1 (|P2)', 'Pairwise P2', 'Partial P2 
     ['Pairwise P1', 'Partial P1 (|P2)', 'Pairwise P2', 'Partial P2 (|P1)']
 ].applymap(lambda x: f"{x:.2f}")
 
-print("\n=== LaTeX Table: RDM Correlations ===\n")
-print(latex_corr_table.to_latex(index=False, escape=False))
+logging.info("\n=== LaTeX Table: RDM Correlations ===\n%s", latex_corr_table.to_latex(index=False, escape=False))
+import logging

@@ -232,7 +232,9 @@ level_columns = [col for col in df.columns if col not in exclude_columns]
 # The example below assumes exactly 40 rows (first 20 = "cold set", second 20 = "hot set").
 # Adapt as needed if your dataset differs.
 if df.shape[0] != 40:
-    print("WARNING: This script is configured for exactly 40 stimuli. Found:", df.shape[0])
+    import logging
+    logging.basicConfig(level=logging.INFO)
+    logging.warning("This script is configured for exactly 40 stimuli. Found: %s", df.shape[0])
 
 # Identify which labels we do not want to plot:
 exclude_columns = {
@@ -246,13 +248,13 @@ level_columns = [col for col in df.columns if col not in exclude_columns]
 
 # Check the number of rows (you said you have exactly 40 stimuli)
 if df.shape[0] != 40:
-    print("WARNING: This script is configured for exactly 40 stimuli. Found:", df.shape[0])
+    logging.warning("This script is configured for exactly 40 stimuli. Found: %s", df.shape[0])
 
-print("Columns found:", df.columns)
-print("Columns to build RDMs for:", level_columns)
+logging.info("Columns found: %s", df.columns)
+logging.info("Columns to build RDMs for: %s", level_columns)
 
 for col in level_columns:
-    print(f"Computing RDM for column: {col}")
+    logging.info("Computing RDM for column: %s", col)
     full_rdm = compute_rdm(df[col], col)
 
     # Plot full RDM
