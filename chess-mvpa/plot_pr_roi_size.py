@@ -537,7 +537,7 @@ def plot_elo_roi_correlation(elo_data, expert_pr, roi_names):
     plt.title("ELO vs Dimensionality (PR) by ROI\n(* FDR-corrected p < 0.05)")
     plt.xlabel("ROI")
     plt.ylabel("Correlation (r)")
-    plt.xticks(rotation=45, ha="right")
+    plt.xticks(rotation=30, ha="right")
     plt.tight_layout()
     plt.show()
 
@@ -643,6 +643,11 @@ def plot_pr_and_pca_heatmaps(
         xticklabels=True,
         yticklabels=True,
     )
+    # Add thick black border
+    for spine in axes[1].spines.values():
+        spine.set_edgecolor("black")
+        spine.set_linewidth(2.5)  # adjust thickness
+
     # axes[1].set_xlabel("ROI")
     # axes[1].set_ylabel("Principal Component")
     axes[1].set_title("ROI Contributions to PCA Components")
@@ -650,7 +655,7 @@ def plot_pr_and_pca_heatmaps(
     # Fix x-tick alignment
     xticks = np.arange(len(roi_names)) + 0.5
     axes[1].set_xticks(xticks)
-    axes[1].set_xticklabels(roi_names, rotation=45, ha="right", color="gray")
+    axes[1].set_xticklabels(roi_names, rotation=30, ha="right", color="gray")
 
     plt.tight_layout()
     plt.show()

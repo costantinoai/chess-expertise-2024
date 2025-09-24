@@ -1,455 +1,116 @@
-import os
+"""
+Participation Ratio (PR) pipeline — refactored, typed, and documented
+=====================================================================
+
+This module:
+  1) loads SPM first-level betas,
+  2) extracts ROI-wise voxel matrices,
+  3) computes Participation Ratio (PR) per ROI per subject,
+  4) runs Welch tests (Experts vs Novices) with CIs and FDR,
+  5) consolidates results (group means + CIs + Δ + CIs + p, p_FDR),
+  6) plots figures from the consolidated results only (no recomputation),
+  7) builds a LaTeX multi-column table from the consolidated results.
+
+Design principles
+-----------------
+- Analysis functions compute things **once**.
+- Plotting/reporting functions are **read-only** (accept precomputed results).
+- Clear boundaries between IO, analysis, and presentation.
+- All configuration centralized in a dataclass (`Config`).
+- Extensive type hints and docstrings for maintainability.
+- Minimal code duplication; small utilities shared across call sites.
+- Robustness: explicit errors with helpful messages; logging around IO.
+
+Author: <you>
+"""
+from __future__ import annotations
+
+from dataclasses import dataclass, field
+from pathlib import Path
+from typing import Dict, List, Mapping, Optional, Sequence, Tuple
+
+import logging
 import re
+
 import numpy as np
 import pandas as pd
 import seaborn as sns
 import matplotlib.pyplot as plt
-from natsort import natsorted
 
 import nibabel as nib
 import scipy.io as sio
 from scipy.stats import ttest_ind, ttest_1samp
-from statsmodels.stats.multitest import fdrcorrection
 
 from sklearn.decomposition import PCA
 from statsmodels.stats.multitest import multipletests
 from pingouin import compute_effsize
 
 from joblib import Parallel, delayed
-import logging
 
+# Local helpers
 from modules.helpers import create_run_id, save_script_to_file
 
-# Plot styles
+# ------------------------------
+# Plot styles for consistent figures across the paper
+# ------------------------------
 sns.set_style("white", {"axes.grid": False})
-base_font_size = 28
-plt.rcParams.update(
-    {
-        "font.family": "Ubuntu Condensed",
-        "font.size": base_font_size,
-        "axes.titlesize": base_font_size * 1.4,  # 36.4 ~ 36
-        "axes.labelsize": base_font_size * 1.2,  # 31.2 ~ 31
-        "xtick.labelsize": base_font_size,  # 26
-        "ytick.labelsize": base_font_size,  # 26
-        "legend.fontsize": base_font_size,  # 26
-        "figure.figsize": (21, 11),  # wide figures
-    }
-)
-
-
-
-##############################################################################
-#                                 CONSTANTS
-##############################################################################
-
-# Define any constants or paths used throughout the script.
-CUSTOM_COLORS = [
-    "#a6cee3", "#a6cee3",  # Early Visual (2)
-    "#1f78b4", "#1f78b4", "#1f78b4",  # Intermediate Visual (3)
-    "#b2df8a", "#b2df8a", "#b2df8a", "#b2df8a",  # Sensorimotor (4)
-    "#33a02c", "#33a02c", "#33a02c",  # Auditory (3)
-    "#fb9a99", "#fb9a99",  # Temporal (2)
-    "#e31a1c", "#e31a1c", "#e31a1c", "#e31a1c",  # Posterior (4)
-    "#fdbf6f", "#fdbf6f", "#fdbf6f", "#fdbf6f"   # Anterior (4)
-]
-
-EXPERT_SUBJECTS = [
-    "03", "04", "06", "07", "08", "09",
-    "10", "11", "12", "13", "16", "20",
-    "22", "23", "24", "29", "30", "33",
-    "34", "36"
-]
-
-NONEXPERT_SUBJECTS = [
-    "01", "02", "15", "17", "18", "19",
-    "21", "25", "26", "27", "28", "32",
-    "35", "37", "39", "40", "41", "42",
-    "43", "44"
-]
-
-BASE_PATH = "/data/projects/chess/data/BIDS/derivatives/fmriprep-SPM_smoothed-NO_GS-FD-HMP_brainmasked/MNI/fmriprep-SPM-MNI/GLM"
-SPM_FILENAME = "SPM.mat"
-ATLAS_FILE = "/data/projects/chess/data/misc/templates/tpl-MNI152NLin2009cAsym_res-02_atlas-Glasser2016_desc-cortices_bilateral_resampled.nii"
-
-ALPHA_FDR = 0.05      # alpha level for FDR correction
-USE_PARALLEL = True   # Toggle parallelization
-use_fdr = True        # Whether to use FDR-corrected p-values for significance markers
-
-
-##############################################################################
-#                                LOGGING SETUP
-##############################################################################
-
-logger = logging.getLogger(__name__)
-logging.basicConfig(level=logging.INFO)  # You can set to logging.DEBUG for more detail
-
-
-##############################################################################
-#                            FUNCTION DEFINITIONS
-##############################################################################
-def get_spm_betas_info(subject_id):
-    """
-    Returns, for each condition label (e.g. 'C1', 'C2', …), a list of dicts:
-      - 'run'            : int, run number
-      - 'regressor_name' : str, full regressor name
-      - 'beta_path'      : str, absolute path to the .nii file
-    """
-    # 1. load SPM.mat
-    spm_mat_path = os.path.join(BASE_PATH, f"sub-{subject_id}", "exp", "SPM.mat")
-    if not os.path.isfile(spm_mat_path):
-        raise FileNotFoundError(f"SPM.mat not found at {spm_mat_path}")
-
-    SPM = sio.loadmat(spm_mat_path, struct_as_record=False, squeeze_me=True)["SPM"]
-    beta_info       = SPM.Vbeta
-    regressor_names = SPM.xX.name
-    spm_dir         = getattr(SPM, "swd", os.path.dirname(spm_mat_path))
-
-    # 2. regex to pull out run and condition
-    pattern = r"Sn\((\d+)\)\s+(.*?)\*bf\(1\)"
-
-    cond_info = {}
-    for idx, full_name in enumerate(regressor_names):
-        m = re.match(pattern, full_name)
-        if not m:
-            continue
-
-        run  = int(m.group(1))
-        cond = m.group(2)
-
-        # --- BUG FIXED HERE ---
-        entry_struct = beta_info[idx]
-        beta_fname   = getattr(entry_struct, "fname", None)
-        if beta_fname is None:
-            available = [f for f in dir(entry_struct) if not f.startswith("_")]
-            raise AttributeError(
-                f"Vbeta[{idx}] has no 'fname' field. Available fields: {available}"
-            )
-
-        beta_path = os.path.join(spm_dir, beta_fname)
-
-        cond_info.setdefault(cond, []).append({
-            "run": run,
-            "regressor_name": full_name,
-            "beta_path": beta_path
-        })
-
-    return cond_info
-
-def get_spm_info(subject_id):
-    """
-    Loads the subject's SPM.mat structure and returns averaged beta images.
-
-    The function identifies condition-specific beta images (e.g., 'C1', 'C2', etc.)
-    across multiple runs and averages them into a single image per condition.
-
-    Parameters
-    ----------
-    subject_id : str
-        Subject identifier (e.g., '001').
-
-    Returns
-    -------
-    averaged_betas : dict
-        Keys are condition names (e.g., 'C1', 'C2', ...), values are in-memory
-        Nifti1Image objects representing the average beta image for that condition.
-    """
-
-    # Construct the full path to the SPM.mat file
-    spm_mat_path = os.path.join(BASE_PATH, f"sub-{subject_id}", "exp", SPM_FILENAME)
-    if not os.path.isfile(spm_mat_path):
-        logger.error(f"SPM.mat not found for sub-{subject_id} at: {spm_mat_path}")
-        raise FileNotFoundError(f"Could not find SPM.mat at: {spm_mat_path}")
-
-    logger.debug(f"Loading SPM.mat from: {spm_mat_path}")
-    spm_dict = sio.loadmat(spm_mat_path, struct_as_record=False, squeeze_me=True)
-    SPM = spm_dict["SPM"]
-
-    beta_info = SPM.Vbeta
-    regressor_names_full = SPM.xX.name
-
-    # Regex to match condition names of the form "Sn(1) C1*bf(1)"
-    pattern = r"Sn\(\d+\)\s+(.*?)\*bf\(1\)"
-
-    # Group beta indices by condition name (C1, C2, etc.)
-    condition_dict = {}
-    for i, reg_name in enumerate(regressor_names_full):
-        match = re.match(pattern, reg_name)
-        if match:
-            cond_name = match.group(1)  # e.g., "C1"
-            if cond_name not in condition_dict:
-                condition_dict[cond_name] = []
-            condition_dict[cond_name].append(i)
-
-    # For each condition, load the corresponding beta images and average them
-    averaged_betas = {}
-    spm_dir = SPM.swd if hasattr(SPM, 'swd') else os.path.dirname(spm_mat_path)
-
-    for cond_name, indices in condition_dict.items():
-        if not indices:
-            continue
-
-        sum_data = None
-        affine, header = None, None
-
-        for idx in indices:
-            beta_fname = (
-                beta_info[idx].fname
-                if hasattr(beta_info[idx], 'fname')
-                else beta_info[idx].filename
-            )
-            beta_path = os.path.join(spm_dir, beta_fname)
-
-            img = nib.load(beta_path)
-            data = img.get_fdata(dtype=np.float32)
-
-            # Initialize the summation array on the first pass
-            if sum_data is None:
-                sum_data = np.zeros_like(data, dtype=np.float32)
-                affine = img.affine
-                header = img.header
-
-            sum_data += data
-
-        # Average the sums across runs
-        avg_data = sum_data / float(len(indices))
-        avg_img = nib.Nifti1Image(avg_data, affine=affine, header=header)
-        averaged_betas[cond_name] = avg_img
-
-    return averaged_betas
-
-
-def load_roi_voxel_data(subject_id, atlas_data, unique_rois):
-    """
-    Loads and extracts ROI-level voxel data from averaged beta images for one subject.
-
-    1. Averages the subject's beta images (via `get_spm_info`).
-    2. For each ROI, extracts a matrix of voxel intensities for every condition.
-
-    Parameters
-    ----------
-    subject_id : str
-        Subject identifier (e.g., '001').
-    atlas_data : ndarray
-        3D array containing integer ROI labels for each voxel.
-    unique_rois : list of int
-        The unique ROI labels in `atlas_data` (non-zero).
-
-    Returns
-    -------
-    roi_vox_data_lists : dict
-        Keys: ROI labels (int). Values: 2D ndarray of shape (n_conditions, n_voxels_in_ROI).
-    conditions : list of str
-        Sorted list of condition names to index the rows of each matrix in `roi_vox_data_lists`.
-    """
-    logger.info(f"[Subject {subject_id}] Loading ROI voxel data...")
-    averaged_betas = get_spm_info(subject_id)
-    conditions = sorted(averaged_betas.keys())
-    n_conditions = len(conditions)
-    logger.debug(f"[Subject {subject_id}] Found conditions: {conditions}")
-
-    # Initialize a data structure to hold voxel data per ROI
-    roi_vox_data_lists = {}
-    for roi_label in unique_rois:
-        roi_mask = (atlas_data == roi_label)
-        n_voxels = np.sum(roi_mask)
-        if n_voxels == 0:
-            raise ValueError(f"[ERROR] ROI {roi_label} has 0 voxels in the atlas!")
-        roi_vox_data_lists[roi_label] = np.zeros((n_conditions, n_voxels), dtype=np.float32)
-
-    # Fill the data structure with averaged beta values
-    for cond_idx, cond_name in enumerate(conditions):
-        beta_img = averaged_betas[cond_name]
-        beta_data = beta_img.get_fdata()
-
-        for roi_label in unique_rois:
-            roi_mask = (atlas_data == roi_label)
-            roi_vox_values = beta_data[roi_mask]
-            roi_vox_data_lists[roi_label][cond_idx, :] = roi_vox_values
-
-    logger.info(f"[Subject {subject_id}] Completed ROI voxel extraction.")
-    return roi_vox_data_lists
-
-
-def compute_entropy_pr_per_roi(roi_data):
-    """
-    Computes the participation ratio (PR) for a given ROI data matrix.
-
-    Calculation:
-    - Computes the PCA on the input data matrix (shape: n_observations x n_voxels).
-    - The PR is computed from the explained variance of each component.
-
-    PR = (Sum of variances)^2 / (Sum of variances^2)
-
-    If the ROI data is degenerate (empty or all NaN), returns np.nan.
-
-    Parameters
-    ----------
-    roi_data : ndarray
-        2D array of shape (n_conditions, n_voxels_in_ROI).
-
-    Returns
-    -------
-    pr_val : float or np.nan
-        The participation ratio for this ROI, or NaN if the data is invalid.
-    """
-    # Remove any voxels that are entirely NaN
-    valid_voxel_mask = ~np.isnan(roi_data).all(axis=0)
-    roi_data = roi_data[:, valid_voxel_mask]
-
-    if roi_data.size == 0:
-        return np.nan
-
-    pca = PCA().fit(roi_data)
-    var = pca.explained_variance_
-    if len(var) == 0:
-        return np.nan
-
-    pr_val = (var.sum() ** 2) / np.sum(var ** 2)
-    return pr_val
-
-
-def fdr_ttest(group1_vals, group2_vals, roi_labels, alpha=0.05):
-    """
-    Performs Welch's t-tests for each ROI and computes full stats:
-    - t-statistic
-    - p-value
-    - FDR-corrected p-value
-    - significance (raw and FDR)
-    - degrees of freedom
-    - Cohen's d (via pingouin)
-    - 95% CI for the mean difference
-
-    Parameters
-    ----------
-    group1_vals : ndarray
-        Shape (n_subjects_group1, n_rois)
-    group2_vals : ndarray
-        Shape (n_subjects_group2, n_rois)
-    roi_labels : list or array-like
-        ROI labels (1D, length n_rois)
-    alpha : float
-        Alpha for FDR correction
-
-    Returns
-    -------
-    df : pd.DataFrame
-        Dataframe with columns:
-        ['ROI_Label', 't_stat', 'p_val', 'p_val_fdr', 'significant_fdr',
-         'significant', 'dof', 'cohen_d', 'mean_diff', 'ci95_low', 'ci95_high']
-    """
-    results = []
-
-    for i, roi in enumerate(roi_labels):
-        g1 = group1_vals[:, i]
-        g2 = group2_vals[:, i]
-
-        # Remove NaNs
-        g1 = g1[~np.isnan(g1)]
-        g2 = g2[~np.isnan(g2)]
-
-        if len(g1) < 2 or len(g2) < 2:
-            results.append({
-                "ROI_Label": roi,
-                "t_stat": np.nan,
-                "p_val": np.nan,
-                "p_val_fdr": np.nan,
-                "significant_fdr": False,
-                "significant": False,
-                "dof": np.nan,
-                "cohen_d": np.nan,
-                "mean_diff": np.nan,
-                "ci95_low": np.nan,
-                "ci95_high": np.nan
-            })
-            continue
-
-        # Welch's t-test
-        res = ttest_ind(g1, g2, equal_var=False)
-        ci = res.confidence_interval(confidence_level=0.95)
-        mean_diff = np.mean(g1) - np.mean(g2)
-        d = compute_effsize(g1, g2, eftype="cohen", paired=False)
-
-        results.append({
-            "ROI_Label": roi,
-            "t_stat": res.statistic,
-            "p_val": res.pvalue,
-            "dof": res.df,
-            "cohen_d": d,
-            "mean_diff": mean_diff,
-            "ci95_low": ci.low,
-            "ci95_high": ci.high
-        })
-
-    df = pd.DataFrame(results)
-
-    # FDR correction on valid p-values
-    corrected_p = df["p_val"].copy()
-    corrected_p[df["p_val"].isna()] = 1.0  # avoid nan breaking FDR
-    reject, pval_fdr, _, _ = multipletests(corrected_p, alpha=alpha, method='fdr_bh')
-
-    df["p_val_fdr"] = pval_fdr
-    df["significant_fdr"] = reject
-    df["significant"] = df["p_val"] < 0.05
-
-    return df
-
-
-
-def process_subject(subject_id, atlas_data, unique_rois):
-    """
-    Pipeline for processing a single subject:
-      1) Load & extract ROI-level voxel data.
-      2) Compute the Participation Ratio (PR) for each ROI.
-
-    Parameters
-    ----------
-    subject_id : str
-        Subject identifier (e.g., '001').
-    atlas_data : ndarray
-        3D array of ROI labels (e.g., from a parcellation).
-    unique_rois : ndarray
-        Unique ROI labels in 'atlas_data'.
-
-    Returns
-    -------
-    subj_pr : ndarray of shape (n_rois,)
-        Contains the PR value for each ROI, in the same order as `unique_rois`.
-    """
-    logger.info(f"[Subject {subject_id}] Starting process_subject()")
-    roi_vox_data = load_roi_voxel_data(subject_id, atlas_data, unique_rois)
-    logger.debug(f"[Subject {subject_id}] ROI voxel data loaded.")
-
-    n_rois = len(unique_rois)
-    subj_pr = np.full(n_rois, np.nan, dtype=np.float32)
-
-    for ri, roi_label in enumerate(unique_rois):
-        data_2d = roi_vox_data[roi_label]
-        if data_2d is None or data_2d.size == 0:
-            logger.debug(f"[Subject {subject_id}, ROI {roi_label}] Empty or no valid data.")
-            subj_pr[ri] = np.nan
-        else:
-            pr_val = compute_entropy_pr_per_roi(data_2d)
-            subj_pr[ri] = pr_val
-
-    logger.info(f"[Subject {subject_id}] Done processing. Returning PR array.")
-    return subj_pr
-
-
-def plot_grouped_roi_bars_with_dots(
-    stat_df, measure_name, group_means_df,
-    expert_vals, nonexpert_vals, output_dir,
-    use_fdr=True, sort_by="roi", custom_colors=CUSTOM_COLORS
-):
-    """
-    Plots ROI-wise bar plots with 95% CI and individual data points for Experts and Non-Experts.
-    """
-
-    # === Constants ===
-    bar_width = 0.35
-    sig_offset = 0.5
-    asterisk_fontsize = plt.rcParams["font.size"] * 1.2
-
-    roi_name_map = {
+_BASE_FONT_SIZE = 28
+plt.rcParams.update({
+    "font.family": "Ubuntu Condensed",
+    "font.size": _BASE_FONT_SIZE,
+    "axes.titlesize": _BASE_FONT_SIZE * 1.4,
+    "axes.labelsize": _BASE_FONT_SIZE * 1.2,
+    "xtick.labelsize": _BASE_FONT_SIZE,
+    "ytick.labelsize": _BASE_FONT_SIZE,
+    "legend.fontsize": _BASE_FONT_SIZE,
+    "figure.figsize": (21, 11),
+})
+
+# ------------------------------
+# Configuration & constants
+# ------------------------------
+@dataclass(frozen=True)
+class Config:
+    """Central configuration for paths, subjects, atlas, and stats."""
+
+    # Data locations
+    base_path: Path = Path("/data/projects/chess/data/BIDS/derivatives/fmriprep-SPM_smoothed-NO_GS-FD-HMP_brainmasked/MNI/fmriprep-SPM-MNI/GLM")
+    spm_filename: str = "SPM.mat"
+    atlas_file: Path = Path("/data/projects/chess/data/misc/templates/tpl-MNI152NLin2009cAsym_res-02_atlas-Glasser2016_desc-cortices_bilateral_resampled.nii")
+
+    # Subject lists (string IDs used in paths)
+    expert_subjects: Tuple[str, ...] = (
+        "03", "04", "06", "07", "08", "09",
+        "10", "11", "12", "13", "16", "20",
+        "22", "23", "24", "29", "30", "33",
+        "34", "36",
+    )
+    nonexpert_subjects: Tuple[str, ...] = (
+        "01", "02", "15", "17", "18", "19",
+        "21", "25", "26", "27", "28", "32",
+        "35", "37", "39", "40", "41", "42",
+        "43", "44",
+    )
+
+    # Stats settings
+    alpha_fdr: float = 0.05
+    use_parallel: bool = True
+    n_jobs: int = -1
+
+    # Plotting
+    custom_colors: Tuple[str, ...] = (
+        # 22 entries to color ROIs by coarse families
+        "#a6cee3", "#a6cee3",                    # Early Visual (2)
+        "#1f78b4", "#1f78b4", "#1f78b4",         # Intermediate Visual (3)
+        "#b2df8a", "#b2df8a", "#b2df8a", "#b2df8a",  # Sensorimotor (4)
+        "#33a02c", "#33a02c", "#33a02c",         # Auditory (3)
+        "#fb9a99", "#fb9a99",                    # Temporal (2)
+        "#e31a1c", "#e31a1c", "#e31a1c", "#e31a1c",  # Posterior (4)
+        "#fdbf6f", "#fdbf6f", "#fdbf6f", "#fdbf6f"   # Anterior (4)
+    )
+
+    # ROI names (Glasser families merged bilaterally)
+    roi_name_map: Mapping[int, str] = field(default_factory=lambda: {
         1: "Primary Visual", 2: "Early Visual", 3: "Dorsal Stream Visual",
         4: "Ventral Stream Visual", 5: "MT+ Complex", 6: "Somatosensory and Motor",
         7: "Paracentral Lobular and Mid Cing", 8: "Premotor", 9: "Posterior Opercular",
@@ -457,348 +118,622 @@ def plot_grouped_roi_bars_with_dots(
         13: "Medial Temporal", 14: "Lateral Temporal", 15: "Temporo-Parieto Occipital Junction",
         16: "Superior Parietal", 17: "Inferior Parietal", 18: "Posterior Cing",
         19: "Anterior Cing and Medial Prefrontal", 20: "Orbital and Polar Frontal",
-        21: "Inferior Frontal", 22: "Dorsolateral Prefrontal"
-    }
+        21: "Inferior Frontal", 22: "Dorsolateral Prefrontal",
+    })
 
 
-    merged = pd.merge(stat_df, group_means_df, on="ROI_Label", how="inner")
-    merged["ROI_Name"] = merged["ROI_Label"].map(roi_name_map)
+# ------------------------------
+# Logging config
+# ------------------------------
+logger = logging.getLogger(__name__)
+logging.basicConfig(level=logging.INFO, format="[%(levelname)s] %(message)s")
 
-    if sort_by == "roi":
-        merged = merged.sort_values("ROI_Label", key=natsorted)
-    elif sort_by == "diff":
-        merged["diff"] = merged["PR_ExpertMean"] - merged["PR_NonExpertMean"]
-        merged = merged.sort_values("diff", ascending=False)
 
-    roi_names = merged["ROI_Name"].values
-    roi_labels = merged["ROI_Label"].values
-    x_coords = np.arange(len(roi_names))
+# ------------------------------
+# Utilities
+# ------------------------------
+def _assert_file_exists(path: Path, label: str) -> None:
+    if not path.is_file():
+        msg = f"{label} not found: {path}"
+        logger.error(msg)
+        raise FileNotFoundError(msg)
 
-    expert_means, expert_cis = [], []
-    nonexpert_means, nonexpert_cis = [], []
-    diff_means, diff_cis = [], []
-    pvals = []
 
-    # Collect all statistics first
+def _spm_dir_from_swd(spm_obj, fallback: Path) -> Path:
+    """Extract SPM working directory robustly across SPM versions."""
+    swd = getattr(spm_obj, "swd", None)
+    return Path(swd) if swd else fallback
+
+
+# ==============================
+# Helpers: load SPM betas & build ROI matrices
+# ==============================
+def get_spm_condition_betas(subject_id: str, cfg: Config) -> Dict[str, nib.Nifti1Image]:
+    """Load SPM.mat for one subject and return averaged beta image per condition.
+
+    Parameters
+    ----------
+    subject_id : str
+        Subject code (e.g., '03').
+    cfg : Config
+        Global configuration.
+
+    Returns
+    -------
+    dict[str, nib.Nifti1Image]
+        Mapping from condition label (e.g., 'C1') to averaged beta NIfTI.
+    """
+    spm_mat_path = cfg.base_path / f"sub-{subject_id}" / "exp" / cfg.spm_filename
+    _assert_file_exists(spm_mat_path, "SPM.mat")
+
+    spm_dict = sio.loadmat(spm_mat_path.as_posix(), struct_as_record=False, squeeze_me=True)
+    SPM = spm_dict["SPM"]
+    beta_info = SPM.Vbeta
+    regressor_names: Sequence[str] = SPM.xX.name
+
+    pattern = re.compile(r"Sn\(\d+\)\s+(.*?)\*bf\(1\)")
+
+    # Map condition -> beta indices (across runs)
+    condition_to_indices: Dict[str, List[int]] = {}
+    for i, reg_name in enumerate(regressor_names):
+        m = pattern.match(reg_name)
+        if m:
+            cond = m.group(1)
+            condition_to_indices.setdefault(cond, []).append(i)
+
+    spm_dir = _spm_dir_from_swd(SPM, spm_mat_path.parent)
+    averaged: Dict[str, nib.Nifti1Image] = {}
+
+    for cond, idxs in condition_to_indices.items():
+        if not idxs:
+            continue
+        sum_data: Optional[np.ndarray] = None
+        affine = header = None
+        for idx in idxs:
+            beta_fname = getattr(beta_info[idx], "fname", None) or getattr(beta_info[idx], "filename")
+            beta_path = spm_dir / beta_fname
+            img = nib.load(beta_path.as_posix())
+            data = img.get_fdata(dtype=np.float32)
+            if sum_data is None:
+                sum_data = np.zeros_like(data, dtype=np.float32)
+                affine, header = img.affine, img.header
+            sum_data += data
+        assert sum_data is not None
+        avg = sum_data / float(len(idxs))
+        averaged[cond] = nib.Nifti1Image(avg, affine=affine, header=header)
+
+    return averaged
+
+
+def extract_roi_voxel_matrices(
+    subject_id: str,
+    atlas_data: np.ndarray,
+    roi_labels: np.ndarray,
+    cfg: Config,
+) -> Dict[int, np.ndarray]:
+    """For one subject, build a (conditions × voxels) matrix per ROI.
+
+    Steps:
+      1) average betas per condition (get_spm_condition_betas),
+      2) for each ROI, gather beta values at ROI voxels for every condition.
+
+    Returns
+    -------
+    dict[int, np.ndarray]
+        roi_label -> array shape (n_conditions, n_voxels_in_roi)
+    """
+    logger.info(f"[Subject {subject_id}] Extracting ROI voxel matrices…")
+    averaged_betas = get_spm_condition_betas(subject_id, cfg)
+    conditions = sorted(averaged_betas.keys())
+
+    roi_data: Dict[int, np.ndarray] = {}
     for roi_label in roi_labels:
-        roi_idx = np.where(stat_df["ROI_Label"] == roi_label)[0][0]
-        expert_data = expert_vals[:, roi_idx]
-        nonexpert_data = nonexpert_vals[:, roi_idx]
+        mask = atlas_data == roi_label
+        n_vox = int(mask.sum())
+        if n_vox == 0:
+            raise ValueError(f"ROI {roi_label} has 0 voxels in atlas.")
+        mat = np.zeros((len(conditions), n_vox), dtype=np.float32)
+        for ci, cname in enumerate(conditions):
+            beta_vals = averaged_betas[cname].get_fdata()
+            mat[ci, :] = beta_vals[mask]
+        roi_data[int(roi_label)] = mat
 
-        # Drop NaNs
-        expert_data = expert_data[~np.isnan(expert_data)]
-        nonexpert_data = nonexpert_data[~np.isnan(nonexpert_data)]
-
-        # Group means
-        expert_mean = np.mean(expert_data)
-        nonexpert_mean = np.mean(nonexpert_data)
-        expert_means.append(expert_mean)
-        nonexpert_means.append(nonexpert_mean)
-
-        # Confidence intervals for individual groups (1-sample t-tests)
-        expert_ci = ttest_1samp(expert_data, popmean=0).confidence_interval(0.95)
-        nonexpert_ci = ttest_1samp(nonexpert_data, popmean=0).confidence_interval(0.95)
-        expert_cis.append(expert_ci)
-        nonexpert_cis.append(nonexpert_ci)
-
-        # Group difference (independent t-test)
-        res = ttest_ind(expert_data, nonexpert_data, equal_var=False, nan_policy="omit")
-        pvals.append(res.pvalue)
-        diff_means.append(expert_mean - nonexpert_mean)
-        diff_cis.append(res.confidence_interval(0.95))
-
-    # FDR correction
-    pvals = np.array(pvals)
-    pvals_fdr = fdrcorrection(pvals, alpha=ALPHA_FDR)[1]
-    is_sig = pvals_fdr < ALPHA_FDR if use_fdr else pvals < ALPHA_FDR
-
-    # Color palette
-    if custom_colors is not None:
-        ordered = merged[["ROI_Label", "ROI_Name"]].drop_duplicates()
-        ordered = ordered.sort_values("ROI_Label", key=natsorted)
-        palette_dict = {
-            row.ROI_Name: custom_colors[i % len(custom_colors)]
-            for i, row in enumerate(ordered.itertuples(index=False))
-        }
-    else:
-        palette_dict = {name: c for name, c in zip(roi_names, sns.color_palette("husl", len(roi_names)))}
-
-    fig, ax = plt.subplots()
-
-    for i, roi in enumerate(roi_names):
-        color = palette_dict[roi]
-
-        expert_err = [[expert_means[i] - expert_cis[i].low], [expert_cis[i].high - expert_means[i]]]
-        nonexpert_err = [[nonexpert_means[i] - nonexpert_cis[i].low], [nonexpert_cis[i].high - nonexpert_means[i]]]
-
-        ax.bar(x_coords[i] - bar_width / 2, expert_means[i], bar_width,
-               yerr=expert_err, capsize=4, color=color, edgecolor='black',
-               label="Expert" if i == 0 else "", zorder=2)
-
-        ax.bar(x_coords[i] + bar_width / 2, nonexpert_means[i], bar_width,
-               yerr=nonexpert_err, capsize=4, color=color, edgecolor='black',
-               hatch="//", label="Novice" if i == 0 else "", zorder=2)
-
-        if is_sig[i]:
-            y_top = max(expert_cis[i].high, nonexpert_cis[i].high)
-            y_line = y_top + sig_offset * 1.2
-            y_ast = y_line + sig_offset * 0.05
-            ax.plot([x_coords[i] - bar_width / 2, x_coords[i] + bar_width / 2],
-                    [y_line, y_line], color="black", linewidth=1.2)
-            ax.text(x_coords[i], y_ast, "*", ha="center", va="bottom",
-                    fontsize=asterisk_fontsize, zorder=5)
-
-    ax.set_xticks(x_coords)
-    ax.set_xticklabels(roi_names, rotation=30, ha="right")
-    ax.set_ylabel("Participation Ratio")
-    ax.set_title(f"Participation Ratio by ROI ({'FDR' if use_fdr else 'Raw'} p < {ALPHA_FDR})")
-    ax.axhline(0, color="black", linestyle="--", linewidth=1)
-
-    for tick, roi, sig in zip(ax.get_xticklabels(), roi_names, is_sig):
-        tick.set_color(palette_dict[roi] if sig else "lightgrey")
-
-    y_min = min(ci.low for ci in expert_cis + nonexpert_cis)
-    y_max = max(ci.high for ci in expert_cis + nonexpert_cis)
-    if np.any(~np.isnan(is_sig)):
-        y_min = min(y_min, y_min - sig_offset)
-    if np.any(is_sig):
-        y_max = max(y_max, y_max + sig_offset)
-    ax.set_ylim(y_min - 0.1, y_max + (y_max * 0.1))
-
-    ax.spines["top"].set_visible(False)
-    ax.spines["right"].set_visible(False)
-    ax.spines["left"].set_linewidth(0.5)
-    ax.spines["bottom"].set_linewidth(0.5)
-
-    ax.legend(loc="upper right", bbox_to_anchor=(1, 1.15), ncol=2, frameon=False)
-
-    plt.tight_layout()
-    fname = os.path.join(output_dir, f"roi_bars_{measure_name}_grouped_with_dots.png")
-    plt.savefig(fname, dpi=300, bbox_inches="tight")
-    plt.show()
-    plt.close()
-    print(f"Saved: {fname}")
+    logger.info(f"[Subject {subject_id}] ROI extraction done.")
+    return roi_data
 
 
-    # === SECOND PLOT: Difference with CI and significance ===
+# ==============================
+# PR computation + statistics (Welch + FDR)
+# ==============================
+def participation_ratio(roi_matrix: np.ndarray) -> float:
+    """Compute PR from PCA spectrum of a ROI matrix (conditions × voxels).
 
-    # Build dataframe for plotting
-    diff_data = []
-    for i, roi in enumerate(roi_names):
-        ci = diff_cis[i]
-        diff_data.append({
-            "ROI_Label": roi_labels[i],
-            "ROI_Name": roi,
-            "mean_diff": diff_means[i],
-            "ci95_low": ci.low,
-            "ci95_high": ci.high,
-            "significant_fdr": is_sig[i]
+    PR = (sum(λ))^2 / sum(λ^2)
+
+    Returns np.nan if matrix is degenerate after NaN-only column removal.
+    """
+    if roi_matrix.size == 0:
+        return float("nan")
+    valid = ~np.isnan(roi_matrix).all(axis=0)
+    X = roi_matrix[:, valid]
+    if X.size == 0:
+        return float("nan")
+    var = PCA().fit(X).explained_variance_
+    if var.size == 0:
+        return float("nan")
+    return float((var.sum() ** 2) / np.sum(var ** 2))
+
+
+def mean_and_ci(x: np.ndarray, conf: float = 0.95) -> Tuple[float, float, float]:
+    """Return (mean, ci_low, ci_high). Uses SciPy's one-sample t CI against 0."""
+    x = np.asarray(x)
+    x = x[~np.isnan(x)]
+    if x.size == 0:
+        return (np.nan, np.nan, np.nan)
+    mean_val = float(np.mean(x))
+    ci = ttest_1samp(x, popmean=0).confidence_interval(confidence_level=conf)
+    return (mean_val, float(ci.low), float(ci.high))
+
+
+def welch_diff_with_ci(
+    x: np.ndarray, y: np.ndarray, conf: float = 0.95
+) -> Tuple[float, float, float, float, float, float]:
+    """Return (mean_x, mean_y, mean_diff, ci_low, ci_high, p_val, df)."""
+    x = x[~np.isnan(x)]
+    y = y[~np.isnan(y)]
+    if x.size < 2 or y.size < 2:
+        return (np.nan, np.nan, np.nan, np.nan, np.nan, np.nan)
+    res = ttest_ind(x, y, equal_var=False, nan_policy="omit")
+    ci = res.confidence_interval(confidence_level=conf)
+    mean_diff = float(np.mean(x) - np.mean(y))
+    return (float(np.mean(x)), float(np.mean(y)), mean_diff, float(ci.low), float(ci.high), float(res.pvalue))
+
+
+def ci_to_errbar(mean_val: float, ci_low: float, ci_high: float) -> List[List[float]]:
+    """Convert mean+CI to Matplotlib's symmetric errorbar [[lower],[upper]]."""
+    if np.any(np.isnan([mean_val, ci_low, ci_high])):
+        return [[np.nan], [np.nan]]
+    return [[mean_val - ci_low], [ci_high - mean_val]]
+
+
+def per_roi_welch_and_fdr(
+    expert_vals: np.ndarray,
+    novice_vals: np.ndarray,
+    roi_labels: Sequence[int],
+    alpha: float,
+) -> pd.DataFrame:
+    """Welch tests per ROI + effect sizes + CIs + BH-FDR.
+
+    Returns a DataFrame with columns:
+      ROI_Label, t_stat, p_val, p_val_fdr, significant_fdr, significant,
+      dof, cohen_d, mean_diff, ci95_low, ci95_high
+    """
+    records: List[Dict[str, float]] = []
+    for i, roi in enumerate(roi_labels):
+        g1 = expert_vals[:, i]
+        g2 = novice_vals[:, i]
+        g1 = g1[~np.isnan(g1)]
+        g2 = g2[~np.isnan(g2)]
+
+        if g1.size < 2 or g2.size < 2:
+            records.append({
+                "ROI_Label": int(roi),
+                "t_stat": np.nan, "p_val": np.nan, "dof": np.nan,
+                "cohen_d": np.nan, "mean_diff": np.nan,
+                "ci95_low": np.nan, "ci95_high": np.nan,
+            })
+            continue
+
+        res = ttest_ind(g1, g2, equal_var=False, nan_policy="omit")
+        ci = res.confidence_interval(confidence_level=0.95)
+        d = compute_effsize(g1, g2, eftype="cohen", paired=False)
+
+        records.append({
+            "ROI_Label": int(roi),
+            "t_stat": float(res.statistic),
+            "p_val": float(res.pvalue),
+            "dof": float(res.df),
+            "cohen_d": float(d),
+            "mean_diff": float(np.mean(g1) - np.mean(g2)),
+            "ci95_low": float(ci.low),
+            "ci95_high": float(ci.high),
         })
 
-    diff_df = pd.DataFrame(diff_data)
+    df = pd.DataFrame.from_records(records)
+
+    # Benjamini–Hochberg FDR on p-values
+    pvals = df["p_val"].fillna(1.0).to_numpy()
+    reject, pval_fdr, _, _ = multipletests(pvals, alpha=alpha, method="fdr_bh")
+    df["p_val_fdr"] = pval_fdr
+    df["significant_fdr"] = reject
+    df["significant"] = df["p_val"] < 0.05
+    return df
+
+
+# ==============================
+# Subject-level pipeline
+# ==============================
+def process_subject(subject_id: str, atlas_data: np.ndarray, roi_labels: np.ndarray, cfg: Config) -> np.ndarray:
+    """Compute PR per ROI for one subject. Returns shape (n_rois,)."""
+    logger.info(f"[Subject {subject_id}] Start")
+    roi_mats = extract_roi_voxel_matrices(subject_id, atlas_data, roi_labels, cfg)
+    pr = np.full(len(roi_labels), np.nan, dtype=np.float32)
+    for idx, roi in enumerate(roi_labels):
+        mat = roi_mats[int(roi)]
+        pr[idx] = participation_ratio(mat) if mat is not None and mat.size else np.nan
+    logger.info(f"[Subject {subject_id}] Done")
+    return pr
+
+
+# ==============================
+# Consolidation (no new computations)
+# ==============================
+def consolidate_results(
+    expert_vals: np.ndarray,
+    novice_vals: np.ndarray,
+    roi_labels: np.ndarray,
+    stats_df: pd.DataFrame,
+    roi_name_map: Mapping[int, str],
+) -> pd.DataFrame:
+    """Create a single dataframe with EVERYTHING needed downstream.
+
+    Columns:
+      ROI_Label, ROI_Name,
+      expert_mean, expert_ci_low, expert_ci_high,
+      novice_mean, novice_ci_low, novice_ci_high,
+      delta_mean, delta_ci_low, delta_ci_high,
+      p_raw, p_fdr, significant, significant_fdr
+    """
+    rows: List[Dict[str, float | str]] = []
+    for i, roi in enumerate(roi_labels):
+        X = expert_vals[:, i]
+        Y = novice_vals[:, i]
+        e_mean, e_lo, e_hi = mean_and_ci(X)
+        n_mean, n_lo, n_hi = mean_and_ci(Y)
+        rows.append({
+            "ROI_Label": int(roi),
+            "ROI_Name": roi_name_map.get(int(roi), f"ROI {int(roi)}"),
+            "expert_mean": e_mean, "expert_ci_low": e_lo, "expert_ci_high": e_hi,
+            "novice_mean": n_mean, "novice_ci_low": n_lo, "novice_ci_high": n_hi,
+        })
+    desc_df = pd.DataFrame(rows)
+
+    stats = stats_df.rename(columns={
+        "mean_diff": "delta_mean",
+        "ci95_low": "delta_ci_low",
+        "ci95_high": "delta_ci_high",
+        "p_val": "p_raw",
+        "p_val_fdr": "p_fdr",
+    })[[
+        "ROI_Label", "delta_mean", "delta_ci_low", "delta_ci_high",
+        "p_raw", "p_fdr", "significant", "significant_fdr",
+    ]].copy()
+
+    out = desc_df.merge(stats, on="ROI_Label", how="left")
+    return out.sort_values("ROI_Label").reset_index(drop=True)
+
+
+# ==============================
+# Plotting (display-only; no computations)
+# ==============================
+def plot_pr_combined_panel(
+    results_df: pd.DataFrame,
+    measure_name: str,
+    output_dir: Path,
+    alpha_fdr: float,
+    use_fdr: bool = True,
+    sort_by: str = "roi",  # {"roi", "diff"}
+    custom_colors: Optional[Sequence[str]] = None,
+    fig_title: Optional[str] = None,
+) -> Path:
+    """Two-panel figure: group means (95% CI) and Δ with CIΔ.
+
+    Read-only: consumes `results_df` only.
+    Returns the path to the saved PNG.
+    """
+    from natsort import natsorted
 
     if sort_by == "roi":
-        diff_df = diff_df.sort_values("ROI_Label", key=natsorted)
+        df = results_df.sort_values("ROI_Label", key=natsorted).copy()
     elif sort_by == "diff":
-        diff_df = diff_df.sort_values("mean_diff", ascending=False)
+        df = results_df.sort_values("delta_mean", ascending=False).copy()
+    else:
+        df = results_df.copy()
 
-    x_coords = np.arange(len(diff_df))
-    roi_names = diff_df["ROI_Name"].values
+    roi_names = df["ROI_Name"].values
+    x = np.arange(len(df))
 
-    fig, ax = plt.subplots()
-    sns.barplot(
-        x="ROI_Name", y="mean_diff", data=diff_df,
-        palette=[palette_dict[name] for name in roi_names], ax=ax
-    )
+    pvals = df["p_fdr"].values if use_fdr else df["p_raw"].values
+    is_sig = np.array([False if np.isnan(p) else (p < alpha_fdr) for p in pvals])
 
-    # Error bars
-    for i, row in enumerate(diff_df.itertuples()):
-        ax.errorbar(
-            x=i, y=row.mean_diff,
-            yerr=[[row.mean_diff - row.ci95_low], [row.ci95_high - row.mean_diff]],
-            fmt='none', ecolor='black', elinewidth=1.5, capsize=4, zorder=2
-        )
+    # Palette per ROI name
+    if custom_colors is not None:
+        palette_dict = {name: custom_colors[i % len(custom_colors)] for i, name in enumerate(roi_names)}
+    else:
+        palette = sns.color_palette("husl", len(roi_names))
+        palette_dict = {name: palette[i] for i, name in enumerate(roi_names)}
 
-    # Significance stars
-    for i, row in enumerate(diff_df.itertuples()):
-        if row.significant_fdr:
-            if row.mean_diff >= 0:
-                y_pos = row.ci95_high + sig_offset
-                va = "bottom"
+    fig = plt.figure(constrained_layout=True, figsize=(18, 14))
+    gs = fig.add_gridspec(nrows=2, ncols=1, height_ratios=[2, 3])
+    ax_top = fig.add_subplot(gs[0, 0])
+    ax_bot = fig.add_subplot(gs[1, 0], sharex=ax_top)
+
+    bar_width = 0.35
+    capsize = 4
+    sig_offset = 0.5
+    asterisk_fs = plt.rcParams["font.size"] * 1.2
+
+    legend_handles: List[plt.Artist] = []
+    legend_labels: List[str] = []
+
+    # --- TOP: group means ---
+    for i, name in enumerate(roi_names):
+        row = df.iloc[i]
+        color = palette_dict[name]
+
+        e_mean, e_lo, e_hi = row["expert_mean"], row["expert_ci_low"], row["expert_ci_high"]
+        e_err = ci_to_errbar(e_mean, e_lo, e_hi)
+        h_exp = ax_top.bar(x[i] - bar_width/2, e_mean, bar_width, yerr=e_err, capsize=capsize,
+                            color=color, edgecolor="black", zorder=2)
+        if i == 0:
+            legend_handles.append(h_exp[0])
+            legend_labels.append("Experts")
+
+        n_mean, n_lo, n_hi = row["novice_mean"], row["novice_ci_low"], row["novice_ci_high"]
+        n_err = ci_to_errbar(n_mean, n_lo, n_hi)
+        h_nov = ax_top.bar(x[i] + bar_width/2, n_mean, bar_width, yerr=n_err, capsize=capsize,
+                            color=color, edgecolor="black", hatch="//", zorder=2)
+        if i == 0:
+            legend_handles.append(h_nov[0])
+            legend_labels.append("Novices")
+
+        if is_sig[i] and np.isfinite(e_hi) and np.isfinite(n_hi):
+            y_top = max(e_hi, n_hi)
+            y_line = y_top + sig_offset * 1.2
+            y_ast = y_line + sig_offset * 0.05
+            ax_top.plot([x[i] - bar_width/2, x[i] + bar_width/2], [y_line, y_line], color="black", linewidth=1.2)
+            ax_top.text(x[i], y_ast, "*", ha="center", va="bottom", fontsize=asterisk_fs, zorder=5)
+
+    ax_top.set_ylabel(f"Mean {measure_name} (±95% CI)")
+    ax_top.axhline(0, color="black", linestyle="--", linewidth=1)
+    ax_top.tick_params(axis="x", labelbottom=False)
+
+    y_min = np.nanmin(np.r_[df["expert_ci_low"].values, df["novice_ci_low"].values])
+    y_max = np.nanmax(np.r_[df["expert_ci_high"].values, df["novice_ci_high"].values])
+    if np.any(is_sig):
+        y_max += sig_offset
+    ax_top.set_ylim(y_min - 0.1, y_max + abs(y_max) * 0.1)
+
+    for spine in ["top", "right"]:
+        ax_top.spines[spine].set_visible(False)
+
+    # --- BOTTOM: deltas ---
+    for i, row in df.iterrows():
+        name = row["ROI_Name"]
+        color = palette_dict[name]
+        d_mean, d_lo, d_hi = row["delta_mean"], row["delta_ci_low"], row["delta_ci_high"]
+
+        ax_bot.bar(x[i], d_mean, width=0.6, color=color, edgecolor="black", zorder=2)
+        if np.all(np.isfinite([d_mean, d_lo, d_hi])):
+            ax_bot.errorbar(i, d_mean, yerr=[[d_mean - d_lo], [d_hi - d_mean]], fmt="none",
+                            ecolor="black", elinewidth=1.5, capsize=capsize, zorder=3)
+
+        if is_sig[i] and np.isfinite(d_lo) and np.isfinite(d_hi):
+            if d_mean >= 0:
+                y_pos, va = d_hi + sig_offset, "bottom"
             else:
-                y_pos = row.ci95_low - sig_offset
-                va = "top"
-            ax.text(x_coords[i], y_pos, "*", ha="center", va=va,
-                    fontsize=asterisk_fontsize, zorder=5)
+                y_pos, va = d_lo - sig_offset, "top"
+            ax_bot.text(i, y_pos, "*", ha="center", va=va, fontsize=asterisk_fs, zorder=5)
 
-    # Axis formatting
-    ax.set_xticks(x_coords)
-    ax.set_xticklabels(roi_names, rotation=30, ha="right")
-    ax.set_ylabel("ΔPR (Experts - Non-Experts)")
-    ax.set_title(f"Participation Ratio Differences ({'FDR' if use_fdr else 'Raw'} p < {ALPHA_FDR})", pad=20)
-    ax.axhline(0, color="black", linestyle="--", linewidth=1)
+    ax_bot.set_ylabel(f"Δ{measure_name} (±95% CI)")
+    ax_bot.axhline(0, color="black", linestyle="--", linewidth=1)
+    ax_bot.set_xticks(x)
+    ax_bot.set_xticklabels(roi_names, rotation=30, ha="right")
+    ax_bot.yaxis.set_major_locator(plt.MultipleLocator(5))
 
-    # Color non-significant ticks
-    for label in ax.get_xticklabels():
-        roi = label.get_text()
-        is_sig_roi = diff_df.loc[diff_df["ROI_Name"] == roi, "significant_fdr"].values[0]
-        label.set_color("lightgrey" if not is_sig_roi else palette_dict.get(roi, "black"))
+    for lbl in ax_bot.get_xticklabels():
+        name = lbl.get_text()
+        idx = np.where(roi_names == name)[0][0]
+        lbl.set_color(palette_dict[name] if is_sig[idx] else "lightgrey")
 
-    # Y-limits
-    # y_min = diff_df["ci95_low"].min() - sig_offset
-    # y_max = diff_df["ci95_high"].max() + sig_offset
-    ax.set_ylim(-12,12)
+    y_min = np.nanmin(df["delta_ci_low"].values)
+    y_max = np.nanmax(df["delta_ci_high"].values)
+    ax_bot.set_ylim(y_min - 1, y_max + 1)
 
-    ax.spines["top"].set_visible(False)
-    ax.spines["right"].set_visible(False)
-    ax.spines["left"].set_linewidth(0.5)
-    ax.spines["bottom"].set_linewidth(0.5)
-    ax.spines["bottom"].set_visible(False)
+    for spine in ["top", "right", "bottom"]:
+        ax_bot.spines[spine].set_visible(False)
 
-    plt.tight_layout()
-    fname2 = os.path.join(output_dir, f"roi_diff_{measure_name}_bar_ci.png")
-    plt.savefig(fname2, dpi=300, bbox_inches="tight")
+    if fig_title:
+        fig.suptitle(fig_title, fontsize=plt.rcParams["axes.titlesize"] * 1.05, y=0.99)
+
+    ax_top.legend(handles=legend_handles, labels=legend_labels, loc="upper center",
+                  bbox_to_anchor=(0.5, 1.25), frameon=False, ncol=2)
+
+    roi_family_labels = [
+        "Early Visual", "Intermediate Visual", "Sensorimotor", "Auditory",
+        "Temporal", "Posterior", "Anterior",
+    ]
+    roi_family_colors = [
+        "#a6cee3", "#1f78b4", "#b2df8a", "#33a02c",
+        "#fb9a99", "#e31a1c", "#fdbf6f",
+    ]
+    family_handles = [plt.Rectangle((0, 0), 0.5, 1, color=c, edgecolor="black") for c in roi_family_colors]
+    leg = fig.legend(handles=family_handles, labels=roi_family_labels, loc="lower center",
+               bbox_to_anchor=(0.5, -0.05), frameon=True, ncol=7, prop={"size": 20})
+    leg.get_frame().set_edgecolor("black")
+
+    plt.subplots_adjust(top=0.85, bottom=0.12, hspace=0.3)
+
+    output_dir.mkdir(parents=True, exist_ok=True)
+    fname = output_dir / f"roi_{measure_name}_combined_panel.png"
+    plt.savefig(fname.as_posix(), dpi=300, bbox_inches="tight")
     plt.show()
     plt.close()
-    print(f"Saved: {fname2}")
+    logger.info(f"Saved figure: {fname}")
+    return fname
 
 
+# ==============================
+# LaTeX table (display-only; no computations)
+# ==============================
+def build_pr_table(
+    results_df: pd.DataFrame,
+    output_dir: Path,
+    filename_tex: str = "roi_pr_table.tex",
+    filename_csv: str = "roi_pr_table.csv",
+    include_fdr: bool = True,
+    print_to_console: bool = True,
+) -> Tuple[pd.DataFrame, str, Path, Path]:
+    """Build and save a LaTeX multi-column table (and CSV) from results_df.
 
-##############################################################################
-#                                  MAIN SCRIPT
-##############################################################################
+    Columns: ROI | Experts: Mean, 95% CI | Novices: Mean, 95% CI | Δ: Mean, 95% CI | p or p_FDR
 
-"""
-Main analysis pipeline:
-  1) Load atlas and ROI labels.
-  2) Process Expert and Non-Expert subjects in parallel.
-  3) Compute group-level statistics with FDR correction.
-  4) Generate summary CSVs and significance plots.
-"""
-logger.info("Starting main pipeline...")
+    Returns the DataFrame used for CSV, the LaTeX string, and the paths written.
+    """
+    def fmt_ci(lo: float, hi: float) -> str:
+        return "[--, --]" if np.any(np.isnan([lo, hi])) else f"[{lo:.2f}, {hi:.2f}]"
 
-# Create an output directory with a unique run ID
-output_dir = f"results/{create_run_id()}_participation_ratio"
-os.makedirs(output_dir, exist_ok=True)
-save_script_to_file(output_dir)  # Save this script for reproducibility
+    def fmt_val(v: float) -> str:
+        return "--" if np.isnan(v) else f"{v:.2f}"
 
-# Load the atlas file
-logger.info("Loading atlas...")
-atlas_img = nib.load(ATLAS_FILE)
-atlas_data = atlas_img.get_fdata().astype(int)
-unique_rois = np.unique(atlas_data)
-unique_rois = unique_rois[unique_rois != 0]
-n_rois = len(unique_rois)
-logger.info(f"Found {n_rois} non-zero ROI labels in the atlas.")
+    def fmt_p(p: float) -> str:
+        if np.isnan(p):
+            return "--"
+        return "$<.001$" if p < 0.001 else f"$={p:.3f}$"
 
-# Expert subjects
-logger.info("Processing EXPERT subjects...")
-if USE_PARALLEL:
-    expert_results = Parallel(n_jobs=-1, verbose=5)(
-        delayed(process_subject)(sub_id, atlas_data, unique_rois)
-        for sub_id in EXPERT_SUBJECTS
+    rows = []
+    for _, r in results_df.iterrows():
+        rows.append({
+            "ROI": r["ROI_Name"],
+            "Expert_mean": fmt_val(r["expert_mean"]),
+            "Expert_CI": fmt_ci(r["expert_ci_low"], r["expert_ci_high"]),
+            "Novice_mean": fmt_val(r["novice_mean"]),
+            "Novice_CI": fmt_ci(r["novice_ci_low"], r["novice_ci_high"]),
+            "Delta_mean": fmt_val(r["delta_mean"]),
+            "Delta_CI": fmt_ci(r["delta_ci_low"], r["delta_ci_high"]),
+            "p": fmt_p(r["p_fdr"] if include_fdr else r["p_raw"]),
+        })
+    df_out = pd.DataFrame(rows)
+
+    p_label = "$p_{\\mathrm{FDR}}$" if include_fdr else "$p$"
+    header = (
+        "\\begin{table}[p]\n\\centering\n"
+        "\\resizebox{\\linewidth}{!}{%\n"
+        "\\begin{tabular}{lcc|cc|cc|c}\n\\toprule\n"
+        "\\multirow{2}{*}{ROI}\n"
+        "  & \\multicolumn{2}{c|}{Experts}\n"
+        "  & \\multicolumn{2}{c|}{Novices}\n"
+        "  & \\multicolumn{2}{c|}{Experts$-$Novices}\n"
+        f"  & {p_label} \\\\\
+"
+        "  & Mean & 95\\% CI"
+        "  & Mean & 95\\% CI"
+        "  & $\\Delta$ & 95\\% CI"
+        "  &  \\\\n\\midrule\n"
     )
-else:
-    expert_results = []
-    for sub_id in EXPERT_SUBJECTS:
-        expert_results.append(process_subject(sub_id, atlas_data, unique_rois))
-expert_pr_arr = np.array(expert_results)
-logger.info(f"Expert arrays shaped: PR = {expert_pr_arr.shape}")
 
-# Non-expert subjects
-logger.info("Processing NON-EXPERT subjects...")
-if USE_PARALLEL:
-    nonexpert_results = Parallel(n_jobs=-1, verbose=5)(
-        delayed(process_subject)(sub_id, atlas_data, unique_rois)
-        for sub_id in NONEXPERT_SUBJECTS
+    body = "\n".join(
+        f"{r['ROI']} & {r['Expert_mean']} & {r['Expert_CI']} "
+        f"& {r['Novice_mean']} & {r['Novice_CI']} "
+        f"& {r['Delta_mean']} & {r['Delta_CI']} "
+        f"& {r['p']} \\\\" for _, r in df_out.iterrows()
     )
-else:
-    nonexpert_results = []
-    for sub_id in NONEXPERT_SUBJECTS:
-        nonexpert_results.append(process_subject(sub_id, atlas_data, unique_rois))
-nonexpert_pr_arr = np.array(nonexpert_results)
-logger.info(f"Non-expert arrays shaped: PR = {nonexpert_pr_arr.shape}")
 
-# Group-level T-tests
-logger.info("Performing group-level comparisons for PR...")
-pr_stats_df = fdr_ttest(
-    expert_pr_arr,
-    nonexpert_pr_arr,
-    unique_rois,
-    alpha=ALPHA_FDR
-)
-
-# Save stats
-pr_stats_path = os.path.join(output_dir, "roi_pr_stats.csv")
-pr_stats_df.to_csv(pr_stats_path, index=False)
-logger.info(f"Saved PR stats to {pr_stats_path}")
-
-# Summaries
-expert_pr_mean = np.nanmean(expert_pr_arr, axis=0)
-nonexpert_pr_mean = np.nanmean(nonexpert_pr_arr, axis=0)
-summary_df = pd.DataFrame({
-    "ROI_Label": unique_rois,
-    "PR_ExpertMean": expert_pr_mean,
-    "PR_NonExpertMean": nonexpert_pr_mean
-})
-summary_csv = os.path.join(output_dir, "roi_group_means.csv")
-summary_df.to_csv(summary_csv, index=False)
-logger.info(f"Saved ROI group means to {summary_csv}")
-
-# # Plot all ROIs (PR)
-# # Plot difference scatter
-# logger.info("Plotting ROI-wise differences for PR with significance markers...")
-# plot_all_rois_with_significance(
-#     stat_df=pr_stats_df,
-#     measure_name="PR",
-#     group_means_df=summary_df,
-#     expert_vals=expert_pr_arr,
-#     nonexpert_vals=nonexpert_pr_arr,
-#     output_dir=output_dir,
-#     use_fdr=use_fdr,
-#     sort_by="roi"
-# )
-
-# Plot grouped barplots
-logger.info("Plotting grouped barplots for PR with significance markers...")
-plot_grouped_roi_bars_with_dots(
-    stat_df=pr_stats_df,
-    measure_name="PR",
-    group_means_df=summary_df,
-    expert_vals=expert_pr_arr,
-    nonexpert_vals=nonexpert_pr_arr,
-    output_dir=output_dir,
-    use_fdr=use_fdr,
-    sort_by="roi"
-)
-
-logger.info(f"All done. Results and figures saved in: {output_dir}")
-
-
-# Clean and format table for LaTeX output
-def format_latex_row(row):
-    roi = int(row["ROI_Label"])
-    t_stat = f"{row['t_stat']:.2f}"
-    dof = f"{row['dof']:.1f}"
-    p_val = row["p_val"]
-    p_fmt = (
-        "$< .001$" if p_val < 0.001 else f"$= {p_val:.3f}$"
+    p_caption = "FDR-corrected $p$" if include_fdr else "raw $p$"
+    footer = (
+        "\n\\bottomrule\n\\end{tabular}\n}\n"
+        "\\caption{Participation Ratio (PR): group means (95\\% CI), group differences (Welch; 95\\% CI), "
+        f"and {p_caption} per ROI." "}\n"
+        "\\label{tab:pr_multicolumn}\n\\end{table}\n"
     )
-    ci_low = f"{row['ci95_low']:.2f}"
-    ci_high = f"{row['ci95_high']:.2f}"
-    return f"{roi} & $t({dof}) = {t_stat}$ & $p {p_fmt}$ & $[{ci_low}, {ci_high}]$ \\\\"
 
-# Filter and format
-rows = []
-for _, row in pr_stats_df.iterrows():
-    if pd.notnull(row["t_stat"]):
-        rows.append(format_latex_row(row))
+    latex_table = header + body + footer
 
-# LaTeX table construction
-latex_table = "\\begin{tabular}{lccc}\n"
-latex_table += "\\textbf{ROI} & \\textbf{t-test (df)} & \\textbf{p-value} & \\textbf{95\\% CI} \\\\\n"
-latex_table += "\\hline\n"
-latex_table += "\n".join(rows)
-latex_table += "\n\\end{tabular}"
+    if print_to_console:
+        print(latex_table)
 
-print(latex_table)
+    output_dir.mkdir(parents=True, exist_ok=True)
+    tex_out = output_dir / filename_tex
+    csv_out = output_dir / filename_csv
+    tex_out.write_text(latex_table)
+    df_out.to_csv(csv_out, index=False)
+
+    logger.info(f"Saved LaTeX table: {tex_out}")
+    logger.info(f"Saved CSV: {csv_out}")
+    return df_out, latex_table, tex_out, csv_out
+
+
+# ==============================
+# MAIN
+# ==============================
+def main(cfg: Optional[Config] = None) -> None:
+    cfg = cfg or Config()
+    logger.info("PR pipeline started.")
+
+    # Output folder with unique ID + save a copy of this script for provenance
+    output_dir = Path("results") / f"{create_run_id()}_participation_ratio"
+    output_dir.mkdir(parents=True, exist_ok=True)
+    save_script_to_file(output_dir)
+
+    # Load atlas
+    logger.info("Loading atlas…")
+    _assert_file_exists(cfg.atlas_file, "Atlas NIfTI")
+    atlas_img = nib.load(cfg.atlas_file.as_posix())
+    atlas_data = atlas_img.get_fdata().astype(int)
+    roi_labels = np.unique(atlas_data)
+    roi_labels = roi_labels[roi_labels != 0]
+    logger.info(f"Found {len(roi_labels)} non-zero ROI labels.")
+
+    # Compute PR arrays for Experts / Novices (rows=subjects, cols=ROIs)
+    def _run_group(sub_ids: Sequence[str]) -> np.ndarray:
+        if cfg.use_parallel:
+            return np.array(Parallel(n_jobs=cfg.n_jobs, verbose=5)(
+                delayed(process_subject)(sid, atlas_data, roi_labels, cfg) for sid in sub_ids
+            ))
+        return np.array([process_subject(sid, atlas_data, roi_labels, cfg) for sid in sub_ids])
+
+    logger.info("Processing EXPERTS…")
+    expert_pr = _run_group(cfg.expert_subjects)
+
+    logger.info("Processing NOVICES…")
+    novice_pr = _run_group(cfg.nonexpert_subjects)
+
+    # Welch tests + CIs + FDR by ROI
+    logger.info("Running group comparisons (Welch + FDR)…")
+    stats_df = per_roi_welch_and_fdr(expert_pr, novice_pr, roi_labels, alpha=cfg.alpha_fdr)
+
+    # Consolidate
+    results_df = consolidate_results(expert_pr, novice_pr, roi_labels, stats_df, cfg.roi_name_map)
+
+    # Save consolidated CSV once
+    consolidated_csv = output_dir / "roi_pr_results_consolidated.csv"
+    results_df.to_csv(consolidated_csv, index=False)
+    logger.info(f"Saved consolidated PR results: {consolidated_csv}")
+
+    # Figures (read-only from consolidated df)
+    logger.info("Plotting figures…")
+    _ = plot_pr_combined_panel(
+        results_df=results_df,
+        measure_name="PR",
+        output_dir=output_dir,
+        alpha_fdr=cfg.alpha_fdr,
+        use_fdr=True,
+        sort_by="roi",
+        custom_colors=cfg.custom_colors,
+    )
+
+    # LaTeX table (read-only from consolidated df)
+    _ = build_pr_table(
+        results_df=results_df,
+        output_dir=output_dir,
+        include_fdr=True,
+        filename_tex="roi_pr_table.tex",
+        filename_csv="roi_pr_table.csv",
+        print_to_console=True,
+    )
+
+    logger.info(f"All done. Figures and tables saved in: {output_dir}")
+
+
+if __name__ == "__main__":  # pragma: no cover
+    main()
