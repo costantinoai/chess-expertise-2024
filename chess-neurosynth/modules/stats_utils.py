@@ -9,6 +9,7 @@ bootstrap resampling.
 """
 
 import numpy as np
+import logging
 from scipy.stats import t, norm
 from statsmodels.stats.multitest import fdrcorrection
 import pingouin as pg
@@ -121,19 +122,19 @@ def remove_useless_data(data: np.ndarray, brain_mask_flat: np.ndarray = None):
         raise ValueError("remove_useless_data expects a 2D array")
 
     n_voxels = data.shape[1]
-    print(f"Initial number of voxels: {n_voxels}")
+    logging.info(f"Initial number of voxels: {n_voxels}")
 
     # Mask: finite values across all maps
     finite_mask = np.all(np.isfinite(data), axis=0)
-    print(f"Voxels with all finite values: {np.sum(finite_mask)} "
-          f"({n_voxels - np.sum(finite_mask)} removed)")
+    logging.info(f"Voxels with all finite values: {np.sum(finite_mask)} "
+                 f"({n_voxels - np.sum(finite_mask)} removed)")
 
     # Mask: variance > 0 across maps (remove flat voxels)
     variance = np.var(data, axis=0)
     var_thresh = 1e-5
     low_variance_mask = variance < var_thresh
-    print(f"Voxels with variance >= {var_thresh}: {np.sum(~low_variance_mask)} "
-          f"({np.sum(low_variance_mask)} removed)")
+    logging.info(f"Voxels with variance >= {var_thresh}: {np.sum(~low_variance_mask)} "
+                 f"({np.sum(low_variance_mask)} removed)")
 
     # Combine masks
     keep_mask = finite_mask & (~low_variance_mask)
@@ -143,13 +144,13 @@ def remove_useless_data(data: np.ndarray, brain_mask_flat: np.ndarray = None):
         if brain_mask_flat.shape[0] != data.shape[1]:
             raise ValueError("brain_mask_flat must have shape (n_voxels,)")
         brain_mask_flat = brain_mask_flat.astype(bool)
-        print(f"Voxels in brain mask: {np.sum(brain_mask_flat)} "
-              f"({n_voxels - np.sum(brain_mask_flat)} excluded outside brain)")
+        logging.info(f"Voxels in brain mask: {np.sum(brain_mask_flat)} "
+                     f"({n_voxels - np.sum(brain_mask_flat)} excluded outside brain)")
         keep_mask &= brain_mask_flat
 
     # Final count
-    print(f"Final number of voxels retained: {np.sum(keep_mask)} "
-          f"({n_voxels - np.sum(keep_mask)} total removed)")
+    logging.info(f"Final number of voxels retained: {np.sum(keep_mask)} "
+                 f"({n_voxels - np.sum(keep_mask)} total removed)")
 
     return data[:, keep_mask], keep_mask
 
@@ -348,8 +349,7 @@ def save_latex_correlation_tables(df_pos, df_neg, diff_df, run_id, out_dir):
         out_path = os.path.join(out_dir, fname)
         with open(out_path, "w") as f:
             f.write(latex_str)
-        print(f"\n=== {caption} ===\n")
-        print(latex_str)
+        logging.info("\n=== %s ===\n%s", caption, latex_str)
 
     # --- Positive z-map table ---
     pos_base_cols = ['term', 'r', 'CI_low', 'CI_high', 'p_fdr']  # will auto-prune missing
@@ -524,5 +524,4 @@ def generate_latex_multicolumn_table(data_dict, output_path, table_type="diff", 
     with open(output_path, 'w') as f:
         f.write(latex_output)
 
-    print(f"\n=== LaTeX table saved to: {output_path} ===\n")
-    print(latex_output)
+    logging.info("\n=== LaTeX table saved to: %s ===\n%s", output_path, latex_output)

@@ -22,53 +22,25 @@ import logging as _logging
 import numpy as np
 
 
-class OutputLogger:
+def add_file_logger(log_file: str | os.PathLike[str], level: int = _logging.INFO) -> None:
+    """Attach a file handler to the root logger in addition to console output.
+
+    Use with an existing console logger to write logs both to the IDE console
+    and to a file. Safe to call multiple times; only one handler per path.
     """
-    Context manager to tee console output to a log file.
-
-    What: Mirrors everything printed to stdout/stderr into a file while keeping
-    it visible in the terminal.
-
-    Why: Capturing the exact console log for each run improves transparency and
-    reproducibility when sharing analysis outputs.
-    """
-
-    def __init__(self, log: bool, file_path: str | os.PathLike[str]):
-        self.log = bool(log)
-        self.file_path = str(file_path)
-        self.original_stdout = sys.stdout
-        self.original_stderr = sys.stderr
-        self.log_file: Optional[object] = None
-
-    def __enter__(self):
-        if self.log:
-            Path(self.file_path).parent.mkdir(parents=True, exist_ok=True)
-            self.log_file = open(self.file_path, "w", encoding="utf-8")
-            sys.stdout = self
-            sys.stderr = self
-            # Reconfigure stdlib logging to use (possibly) redirected stderr
-            for handler in _logging.root.handlers:
-                handler.stream = sys.stderr
-        return self
-
-    def __exit__(self, exc_type, exc_val, exc_tb):
-        if self.log:
-            for handler in _logging.root.handlers:
-                handler.stream = self.original_stderr
-            sys.stdout = self.original_stdout
-            sys.stderr = self.original_stderr
-            assert self.log_file is not None
-            self.log_file.close()
-
-    def write(self, message: str):
-        self.original_stdout.write(message)
-        if self.log and self.log_file and not self.log_file.closed:
-            self.log_file.write(message)
-
-    def flush(self):
-        self.original_stdout.flush()
-        if self.log and self.log_file and not self.log_file.closed:
-            self.log_file.flush()
+    path = str(log_file)
+    Path(path).parent.mkdir(parents=True, exist_ok=True)
+    logger = _logging.getLogger()
+    logger.setLevel(level)
+    # Avoid duplicate handlers for the same path
+    for h in logger.handlers:
+        if isinstance(h, _logging.FileHandler) and getattr(h, 'baseFilename', None) == os.path.abspath(path):
+            return
+    fh = _logging.FileHandler(path, encoding="utf-8")
+    fmt = _logging.Formatter("[%(levelname)s %(asctime)s] %(message)s")
+    fh.setFormatter(fmt)
+    fh.setLevel(level)
+    logger.addHandler(fh)
 
 
 def set_rnd_seed(seed: int = 42) -> None:
@@ -114,4 +86,3 @@ def save_script_to_file(output_directory: str | os.PathLike[str]) -> None:
         _logging.info("Saved a copy of the script to: %s", dest)
     except Exception:
         _logging.exception("Could not save calling script to output directory")
-

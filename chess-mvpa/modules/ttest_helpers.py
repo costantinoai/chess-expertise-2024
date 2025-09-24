@@ -11,7 +11,7 @@ import pandas as pd
 import numpy as np
 from scipy import stats
 from statsmodels.stats.multitest import multipletests
-from modules.helpers import OutputLogger
+from modules.logging_utils import setup_logging
 from modules import (
     logging,
     MVPA_ROOT_PATH,
@@ -162,8 +162,9 @@ def run_ttest_analysis(
 
     os.makedirs(out_root, exist_ok=True)
     out_text_file = os.path.join(out_root, 'mvpa_logs_ttest.log')
-
-    with OutputLogger(True, out_text_file):
+    # Save a copy of the calling script for provenance
+    save_script_to_file(out_root)
+    setup_logging(log_file=out_text_file)
 
         # Initialize a nested dictionary to store all results
         results_dict = {}
@@ -410,8 +411,8 @@ def generate_latex_apa_table(
     # Filter to only significant rows
     df_sig = df[df[p_col] < alpha].copy()
     if df_sig.empty:
-        print(f"No significant results found at alpha={alpha}.")
-        return
+        logging.info(f"No significant results found at alpha={alpha}.")
+        return ""
 
     # Build table header
     table_header = """
@@ -462,9 +463,9 @@ def generate_latex_apa_table(
     \\end{table}
     """
 
-    # Combine and print
+    # Combine and log
     full_table = table_header + "\n".join(table_rows) + table_footer
-    print(full_table)
+    logging.info("\n%s", full_table)
     return full_table
 
 def generate_results_paragraph(stats_results):
@@ -502,4 +503,5 @@ def generate_results_paragraph(stats_results):
             f"yielded t({len(stats_results) - 1}) = {res['t_stat']:.2f}, p = {res['p_value']:.3g}, "
             f"indicating that the result was {significance}.\n\n"
         )
-    return print(paragraph)
+    logging.info("\n%s", paragraph)
+    return paragraph

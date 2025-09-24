@@ -19,10 +19,10 @@ from modules.chess import get_all_moves_with_int_eval, check_accuracy
 from modules.helpers import (
     create_output_directory,
     save_script_to_file,
-    OutputLogger,
     create_run_id,
     calculate_mean_and_ci
     )
+from modules.logging_utils import setup_logging
 
 def plot_average_accuracy_by_stim_id(df, output_path):
     """
@@ -529,8 +529,7 @@ save_script_to_file(output_path)
 logging.info("Output folder created and script file saved")
 
 out_text_file = os.path.join(output_path, 'bh_data_exploration.log')
-
-with OutputLogger(True, out_text_file):
+setup_logging(log_file=out_text_file)
 
     # Load the datasets into pandas DataFrames and sort them by 'stim_id'
     dataset_df, net_df, humans_df = load_and_sort_data(DATASET_CSV_PATH, DNN_RESPONSES_CSV_PATH, humans_response_path)

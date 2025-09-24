@@ -17,7 +17,7 @@ from neuromaps.datasets import fetch_fsaverage
 import matplotlib.image as mpimg
 from matplotlib.colors import LinearSegmentedColormap
 import logging
-from modules.helpers import OutputLogger
+from modules.logging_utils import setup_logging
 from modules import (
     plt,
     LH_ANNOT,
@@ -83,8 +83,7 @@ def plot_significant_surface_overlays(
     # Create the output directory if needed
     os.makedirs(out_root, exist_ok=True)
     out_text_file = os.path.join(out_root, 'mvpa_logs_surfaces.log')
-
-    with OutputLogger(True, out_text_file):
+    setup_logging(log_file=out_text_file)
 
         # 1) Load results from disk
         with open(ttest_results_path, "rb") as f:

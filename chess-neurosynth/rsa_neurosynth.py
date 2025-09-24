@@ -49,7 +49,7 @@ from modules.run_utils import (
     create_run_id,
     create_output_directory,
     save_script_to_file,
-    OutputLogger,
+    add_file_logger,
 )
 
 # Suppress specific qfac warning from nibabel
@@ -138,19 +138,19 @@ def remove_useless_data(data: np.ndarray, brain_mask_flat: np.ndarray = None):
         raise ValueError("remove_useless_data expects a 2D array")
 
     n_voxels = data.shape[1]
-    print(f"Initial number of voxels: {n_voxels}")
+    logger.info(f"Initial number of voxels: {n_voxels}")
 
     # --- Step 1: Remove voxels with any non-finite value (NaN, inf, -inf) ---
     finite_mask = np.all(np.isfinite(data), axis=0)
-    print(f"Voxels with all finite values: {np.sum(finite_mask)} "
-          f"({n_voxels - np.sum(finite_mask)} removed)")
+    logger.info(f"Voxels with all finite values: {np.sum(finite_mask)} "
+                f"({n_voxels - np.sum(finite_mask)} removed)")
 
     # --- Step 2: Remove voxels with near-zero variance (uninformative) ---
     variance = np.var(data, axis=0)
     var_thresh = 1e-5
     low_variance_mask = variance < var_thresh
-    print(f"Voxels with variance >= {var_thresh}: {np.sum(~low_variance_mask)} "
-          f"({np.sum(low_variance_mask)} removed)")
+    logger.info(f"Voxels with variance >= {var_thresh}: {np.sum(~low_variance_mask)} "
+                f"({np.sum(low_variance_mask)} removed)")
 
     # Combine the two masks: finite and non-flat
     keep_mask = finite_mask & (~low_variance_mask)
@@ -161,13 +161,13 @@ def remove_useless_data(data: np.ndarray, brain_mask_flat: np.ndarray = None):
             raise ValueError("brain_mask_flat must have shape (n_voxels,)")
 
         brain_mask_flat = brain_mask_flat.astype(bool)
-        print(f"Voxels in brain mask: {np.sum(brain_mask_flat)} "
-              f"({n_voxels - np.sum(brain_mask_flat)} excluded outside brain)")
+        logger.info(f"Voxels in brain mask: {np.sum(brain_mask_flat)} "
+                    f"({n_voxels - np.sum(brain_mask_flat)} excluded outside brain)")
         keep_mask &= brain_mask_flat
 
     # Final count of retained voxels
-    print(f"Final number of voxels retained: {np.sum(keep_mask)} "
-          f"({n_voxels - np.sum(keep_mask)} total removed)")
+    logger.info(f"Final number of voxels retained: {np.sum(keep_mask)} "
+                f"({n_voxels - np.sum(keep_mask)} total removed)")
 
     # Apply the mask to all maps
     return data[:, keep_mask], keep_mask
@@ -278,7 +278,7 @@ def save_and_open_plotly_figure(fig, title='surface_plot', outdir='.', png_out=N
     # Save HTML
     fig.write_html(html_path)
     logger.info(f"Figure saved to: {html_path}")
-    print(f"Figure saved to: {html_path}")
+    logger.info(f"Figure saved to: {html_path}")
 
     # # Open HTML in browser
     # webbrowser.open_new_tab(f'file://{html_path}')
@@ -290,7 +290,7 @@ def save_and_open_plotly_figure(fig, title='surface_plot', outdir='.', png_out=N
     # Save PNG
     fig.write_image(png_out, scale=2)
     logger.info(f"PNG image saved to: {png_out}")
-    print(f"PNG image saved to: {png_out}")
+    logger.info(f"PNG image saved to: {png_out}")
 
 def plot_surface_map(img, title='Surface Map', threshold=None, output_file=None):
     """
@@ -1000,11 +1000,11 @@ os.makedirs(RESULTS_DIR, exist_ok=True)
 create_output_directory(RESULTS_DIR)
 save_script_to_file(RESULTS_DIR)
 out_text_file = os.path.join(RESULTS_DIR, 'console.log')
+add_file_logger(out_text_file, level=logging.INFO)
 
 # --- Begin Logging ---
-with OutputLogger(True, out_text_file):
-    logger.info("=== Neurosynth-RSA Analysis Started ===")
-    logger.info("Results directory: %s", RESULTS_DIR)
+logger.info("=== Neurosynth-RSA Analysis Started ===")
+logger.info("Results directory: %s", RESULTS_DIR)
 
     # STEP 1: Load Neurosynth term maps
     logger.info("Loading meta-analytic term maps from: %s", TERM_DIR)

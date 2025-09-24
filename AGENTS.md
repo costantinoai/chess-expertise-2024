@@ -34,7 +34,10 @@ Design Principles
   - Add docstrings (what and why) and inline comments for non‑obvious steps.
 - Reproducibility:
   - Centralize random seeds; expose a `--seed` or config option and set numpy/random seeds once.
-  - Save a copy of the calling script along with outputs (see existing `save_script_to_file` helpers).
+  - Every artefact‑producing script must:
+    - Create an output directory named `<YYYYMMDD-HHMMSS>_<short-analysis-name>`
+    - Configure logging to both console and file (use `logging_utils.setup_logging(log_file=...)` or add a file handler); do not use `print()`.
+    - Save a copy of the current script in the output folder (`save_script_to_file(...)`).
   - Log key parameters, versions, and run IDs; write logs to the output directory.
 - Config and paths:
   - Do not hard‑code absolute paths. Accept input/output paths via CLI flags or a small config file.

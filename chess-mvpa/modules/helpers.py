@@ -12,12 +12,7 @@ from pathlib import Path
 import pandas as pd
 
 from modules import logging, MANAGER, REGIONS_LABELS
-from common_utils import (
-    OutputLogger,
-    set_rnd_seed,
-    create_run_id,
-    save_script_to_file,
-)
+from common_utils import set_rnd_seed, create_run_id, save_script_to_file
 
 """
 Note: OutputLogger, seeding, run_id, and script-saving utilities are imported

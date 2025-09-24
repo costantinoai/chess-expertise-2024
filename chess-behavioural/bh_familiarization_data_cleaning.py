@@ -18,9 +18,9 @@ from modules.chess import (
 from modules.helpers import (
     create_output_directory,
     save_script_to_file,
-    OutputLogger,
     create_run_id,
     )
+from modules.logging_utils import setup_logging
 
 
 # Set parameters
@@ -34,7 +34,7 @@ save_script_to_file(out_dir)
 logging.info("Output folder created and script file saved")
 
 out_text_file = os.path.join(out_dir, 'bh_data_cleaning.log')
-with OutputLogger(True, out_text_file):
+setup_logging(log_file=out_text_file)
 
     # Verify the existence of paths
     if not os.path.exists(data_path):

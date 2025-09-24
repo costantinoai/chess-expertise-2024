@@ -11,9 +11,8 @@ import numpy as np
 import pickle
 import pandas as pd
 import seaborn as sns
-from modules.helpers import OutputLogger
-# from modules.roi_manager import ROIManager
 from modules import plt,logging
+from modules.logging_utils import setup_logging
 from modules import (
     ROIS_CSV,
     LEFT_LUT,
@@ -55,6 +54,9 @@ def plot_group_level_mvpa(ttest_results_path,
         else f"Uncorrected (p<{P_ALPHA})"
     )
 
+    # Keep a copy of the script alongside outputs for provenance
+    save_script_to_file(output_root)
+
     # 1) Load your dictionary of results from disk
     with open(ttest_results_path, "rb") as f:
         results_dict = pickle.load(f)
@@ -63,7 +65,8 @@ def plot_group_level_mvpa(ttest_results_path,
     os.makedirs(output_root, exist_ok=True)
     out_text_file = os.path.join(output_root, 'mvpa_logs_barplots.log')
 
-    with OutputLogger(True, out_text_file):
+    # Ensure logging goes both to console and to file for this run
+    setup_logging(log_file=out_text_file)
 
         # 2) Iterate over analyses and hierarchical levels
         for analysis in results_dict.keys():
@@ -176,7 +179,7 @@ def plot_group_level_mvpa(ttest_results_path,
                             use_corrected_p=plot_corrected,  # uses p_corrected or p_uncorrected
                         )
 
-        print("All plots generated successfully!")
+        logging.info("All plots generated successfully!")
     return output_root
 
 def plot_mvpa_barplot(
