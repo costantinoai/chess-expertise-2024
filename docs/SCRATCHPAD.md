@@ -17,12 +17,12 @@ High-level Plan
 5) Verify scripts run/entry points documented; regenerate API and READMEs
 
 Todo Checklist
-- [ ] Prune folders not in manuscript
-  - [ ] Remove: chess-connectivity/
-  - [ ] Remove: chess-representational-conn/
-  - [ ] Remove: chess-results-vis/
-  - [ ] Remove: chess-dnn/
-  - [ ] rg sanity check for any remaining references to removed folders
+- [x] Prune folders not in manuscript
+  - [x] Remove: chess-connectivity/
+  - [x] Remove: chess-representational-conn/
+  - [x] Remove: chess-results-vis/
+  - [x] Remove: chess-dnn/
+  - [x] rg sanity check for any remaining references to removed folders (only references remain in docs and archival result scripts)
 - [ ] DRY / Refactors
   - [ ] Unify OutputLogger implementations (prefer one in a shared module; e.g., reuse chess-mvpa/modules/helpers or move a generic version to root/common and import elsewhere)
   - [ ] Centralize seeding (set_rnd_seed), create_run_id, save_script_to_file in a shared utility
@@ -36,7 +36,7 @@ Todo Checklist
   - [ ] Ensure tests/ still valid (or trim if they belong to removed code)
 - [ ] Documentation
   - [ ] Update folder READMEs to reflect trimmed scope and provide run instructions
-  - [ ] Regenerate API.md via `python scripts/generate_api.py --output API.md`
+  - [x] Regenerate API.md via `python scripts/generate_api.py --output API.md`
   - [ ] Update README.md (root) “Repository Structure” to list only kept analyses
   - [ ] Update AGENTS.md if any convention adjustments emerge during DRY
 - [ ] Verification
@@ -59,4 +59,3 @@ Commands (for later execution)
 
 Decision Log
 - 2025-09-24: Agreed KEEP/DROP list per manuscript; added docs/ANALYSES.md as authoritative inventory.
-

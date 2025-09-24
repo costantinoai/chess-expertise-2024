@@ -47,12 +47,12 @@ How to use
 - Folder: estimated gaze decoding (uses BidsMReye outputs; integrated with fMRI analyses)
 - Outputs: supplementary figure/table under analysis `results/`
 
-Non‑manuscript or out‑of‑scope folders (candidates to remove after confirmation)
-- `chess-connectivity/`: connectivity analyses not referenced in the manuscript.
-- `chess-representational-conn/`: representational connectivity not referenced.
-- `chess-results-vis/`: cross‑analysis visualization utilities not used in final figures.
-- `chess-dnn/`: DNN comparisons not explicitly reported.
-  - Note: retain if any figure/table in manuscript depends on these.
+Removed in cleanup branch (non‑manuscript scope)
+- `chess-connectivity/`
+- `chess-representational-conn/`
+- `chess-results-vis/`
+- `chess-dnn/`
+  - Note: If any figure/table in future revisions depends on these, restore from the backup branch `backup-20250924-190426`.
 
 Dependencies & Shared Resources
 - ROI definitions/utilities: `chess-rois/` (keep)
@@ -66,4 +66,3 @@ Next actions (cleanup branch)
 3) After confirmation, remove DROP folders and update imports/paths accordingly.
 4) Regenerate `API.md` and update READMEs (folder and root) to reflect the trimmed set.
 5) DRY pass: consolidate duplicate helpers (e.g., OutputLogger) into shared utilities.
-
