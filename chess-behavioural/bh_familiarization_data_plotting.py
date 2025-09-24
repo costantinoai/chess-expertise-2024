@@ -22,7 +22,7 @@ from modules.helpers import (
     create_run_id,
     calculate_mean_and_ci
     )
-from modules.logging_utils import setup_logging
+from logging_utils import setup_logging
 
 def plot_average_accuracy_by_stim_id(df, output_path):
     """

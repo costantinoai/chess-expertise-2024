@@ -11,7 +11,7 @@ import pandas as pd
 import numpy as np
 from scipy import stats
 from statsmodels.stats.multitest import multipletests
-from modules.logging_utils import setup_logging
+from logging_utils import setup_logging
 from modules import (
     logging,
     MVPA_ROOT_PATH,

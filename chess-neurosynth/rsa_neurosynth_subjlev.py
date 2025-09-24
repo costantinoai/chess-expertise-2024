@@ -44,7 +44,7 @@ import warnings
 from modules.io_utils import load_term_maps
 from modules.stats_utils import save_latex_correlation_tables, generate_latex_multicolumn_table
 from modules.plot_utils import plot_correlations, plot_difference
-from modules.run_utils import (
+from common_utils import (
     create_run_id,
     create_output_directory,
     save_script_to_file,

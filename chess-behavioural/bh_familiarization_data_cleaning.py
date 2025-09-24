@@ -20,7 +20,7 @@ from modules.helpers import (
     save_script_to_file,
     create_run_id,
     )
-from modules.logging_utils import setup_logging
+from logging_utils import setup_logging
 
 
 # Set parameters

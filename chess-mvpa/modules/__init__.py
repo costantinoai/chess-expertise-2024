@@ -11,7 +11,7 @@ import matplotlib.pyplot as plt
 from pathlib import Path
 import warnings
 import nibabel as nib
-from modules.logging_utils import setup_logging
+from logging_utils import setup_logging
 
 warnings.filterwarnings("ignore", category=FutureWarning)
 warnings.filterwarnings("ignore", category=RuntimeWarning)
