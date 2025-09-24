@@ -16,7 +16,7 @@ Repository Layout
   - `modules/`: reusable functions and small utilities.
   - main scripts in the folder root: run the workflow to produce results and figures.
   - `results/` or analysis‑specific output folders contain generated artifacts.
-- Global helpers live at the repository root (e.g., `logging_utils.py`, `common_utils.py`, `viz_utils.py`).
+- Shared helpers live under `common/` (e.g., `common/logging_utils.py`, `common/common_utils.py`, `common/stats_utils.py`) and top-level (`viz_utils.py`).
 - For an overview of all analyses and reported figures, consult `manuscript/main.tex` and `manuscript/supplementary.tex`.
  - Ensure each top‑level folder has a `README.md` with: purpose, required inputs, how to run, expected outputs, and where results are saved.
 
@@ -49,7 +49,7 @@ Design Principles
 Python Conventions
 - Style: PEP 8, PEP 257 (docstrings), and type hints where practical.
 - Imports: standard library → third‑party → local modules; avoid wildcard imports.
-- Logging: use `logging` and the shared `setup_logging` helper (`logging_utils.setup_logging`).
+- Logging: use `logging` and the shared `setup_logging` helper (`common.logging_utils.setup_logging`).
 - Testing: when feasible, add small tests for new utility functions under `tests/` or an analysis‑local `tests/` dir.
 - CLI: prefer `argparse` for scripts that need parameters; document defaults and expected inputs.
 
@@ -66,11 +66,12 @@ Adding a New Analysis
 5) Reuse existing helpers (logging, seeding, plotting) rather than duplicating code.
 6) Document the workflow in the analysis README (inputs, steps, outputs) and reference `AGENTS.md`.
 
-API Generation
+Scratchpad & API
 - To generate an up‑to‑date API reference from the source tree, run:
   - `python scripts/generate_api.py --output API.md`
 - The script scans Python modules across analysis folders and extracts top‑level functions/classes and their docstrings; it also lists MATLAB files by path for orientation.
 - Keep `API.md` in sync when adding, renaming, or removing public functions.
+ - Active plan and next steps live in `docs/SCRATCHPAD.md`. Keep this scratchpad updated during cleanup/refactors.
 
 Review Checklist (Before Merging)
 - No duplicated logic across analyses; shared code extracted.
@@ -81,8 +82,9 @@ Review Checklist (Before Merging)
 
 Where to Look
 - High‑level overview: `README.md` and `manuscript/*.tex`.
-- Shared logging: `logging_utils.py` (root) and analysis‑local logging utilities.
-- Shared helpers (DRY): `common_utils.py` (OutputLogger, seeds, run IDs, script copy, output dirs).
+- Shared logging: `common/logging_utils.py` (console + file).
+- Shared helpers (DRY): `common/common_utils.py` (seeds, run IDs, script copy, output dirs).
+- Shared stats (DRY): `common/stats_utils.py` (t-tests, CI, FDR, bootstrap correlations and differences).
 - MVPA utilities: `mvpa/modules/`.
 - Behavioural utilities: `behavioural/modules/`.
 - GLM MATLAB utilities: `fmri_glm/matlab_helpers/` and related scripts.

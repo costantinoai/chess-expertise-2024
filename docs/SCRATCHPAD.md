@@ -54,3 +54,51 @@ Commands (for later execution)
 
 Decision Log
 - 2025-09-24: Agreed KEEP/DROP list per manuscript; added docs/ANALYSES.md as authoritative inventory.
+
+Next Steps — Central Stats + Script Cleanup
+
+Goal: centralize all statistical helpers under `common/stats_utils.py`, move functions out of entry scripts into analysis-level modules, and keep scripts as thin runners. Then regenerate the API and update docs.
+
+Phase 1 — Neurosynth extraction (scripts → modules)
+- [ ] Create `neurosynth/modules/univariate_main.py` implementing the current end-to-end workflow (formerly in `neurosynth/univariate_neurosynth.py`).
+- [ ] In `neurosynth/univariate_neurosynth.py`, remove function definitions and import:
+  - plotting + utilities from `neurosynth/modules/univariate_utils.py`
+  - stats from `neurosynth/modules/stats_utils.py` and `common/stats_utils.py`
+  - call `univariate_main.main()`; keep only run orchestration
+- [ ] Do the same for RSA:
+  - Add `neurosynth/modules/rsa_main.py`
+  - Trim `neurosynth/rsa_neurosynth.py` to a thin runner importing and invoking `rsa_main.main()`
+
+Phase 2 — Adopt central stats wrappers
+- [ ] Replace direct uses of `statsmodels.multipletests`/`fdrcorrection` and `pingouin.multicomp` with `common.stats_utils.fdr_correction` across analyses.
+- [ ] Replace ad-hoc one-sample/independent t-test code with `one_sample_ttest` and `independent_ttest` where possible.
+- [ ] Use `pearson_corr_bootstrap` and `corr_diff_bootstrap` wrappers where bootstrap correlations are computed.
+
+Phase 3 — MVPA scripts restructure
+- [ ] Move helper functions from `mvpa/mvpa_barplot*.py`, `mvpa/print_mvpa_stats.py`, etc., into `mvpa/modules/` (e.g., `barplot_utils.py`, `report_utils.py`).
+- [ ] Ensure entry scripts only orchestrate: setup run_id/output dir/logging, parse args, call module functions, save artefacts.
+
+Phase 4 — fMRI GLM restructure
+- [ ] Extract helpers from `fmri_glm/roi_ttests_all.py` into `fmri_glm/modules/glm_utils.py` (e.g., `export_diff_stats_to_latex`, `compute_confidence_intervals`, plotting helpers).
+- [ ] Keep a module `fmri_glm/modules/roi_stats.py` with `run_analysis()`; make any CLI script a thin wrapper calling it.
+
+Phase 5 — Behavioural cleanup
+- [ ] Move reusable functions from `behavioural/bh_fmri.py` and `behavioural/bh_fmri_intercorr.py` into `behavioural/modules/`.
+- [ ] Replace `calculate_mean_and_ci` with `common.stats_utils.mean_ci_t` where applicable; standardize correlations via common wrappers.
+
+Phase 6 — Consistency and hygiene
+- [ ] Ensure every artefact-producing script:
+  - creates `<YYYYMMDD-HHMMSS>_<shortname>` output dir under `results/`
+  - uses `common.logging_utils.setup_logging(log_file=...)` (no print)
+  - calls `common.common_utils.save_script_to_file(output_dir)`
+- [ ] Sweep for remaining absolute paths; replace with `config.py`/env or parameters.
+
+Phase 7 — API + Docs
+- [ ] Run `python scripts/generate_api.py --output API.md` after refactors.
+- [ ] Update per-analysis READMEs if entrypoint names changed.
+- [ ] Note progress here and in commit messages.
+
+Reference
+- Conventions: `AGENTS.md` (this plan is referenced there)
+- Shared utilities: `common/` (logging, stats, run utils)
+- API overview: `API.md`
