@@ -60,7 +60,8 @@ NONEXPERT_SUBJECTS = { ...
     };
 
 %% 3. Set main parameters
-rootDir    = '/data/projects/chess/data/BIDS/derivatives/rsa_searchlight/visual';
+% Root directory containing first-level RSA searchlight maps
+rootDir    = fullfile('data', 'BIDS', 'derivatives', 'rsa_searchlight', 'visual');
 
 % Define the contrasts you want to test across groups
 contrastFiles = { ...

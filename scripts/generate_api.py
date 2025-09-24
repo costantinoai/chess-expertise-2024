@@ -100,14 +100,18 @@ def parse_python_file(py_path: Path) -> List[PySymbol]:
 
 def iter_python_files(root: Path) -> Iterable[Path]:
     for p in root.rglob("*.py"):
-        if any(part in PY_IGNORE_DIRS for part in p.parts):
+        parts = set(p.parts)
+        if any(part in PY_IGNORE_DIRS for part in parts):
             continue
-        # Skip top-level setup/packaging scripts except analysis code
+        if "results" in parts:
+            continue
         yield p
 
 
 def iter_matlab_files(root: Path) -> Iterable[Path]:
     for p in root.rglob("*.m"):
+        if "results" in set(p.parts):
+            continue
         yield p
 
 

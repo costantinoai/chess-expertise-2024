@@ -33,15 +33,15 @@ clear; clc;
 % and prepare output directories. We also define ROI paths and load them.
 
 % Path to main 'derivatives' folder (contains preprocessed data, SPM outputs, etc.)
-derivativesDir = '/data/projects/chess/data/BIDS/derivatives';
+derivativesDir = fullfile('data','BIDS','derivatives');
 
 % SPM root folder within derivativesDir containing fmriprep + SPM outputs
 spmRoot = fullfile(derivativesDir, 'fmriprep-SPM_smoothed-NO_GS-FD-HMP_brainmasked');
 
 roisRoots = {
-    '/home/eik-tb/OneDrive_andreaivan.costantino@kuleuven.be/GitHub/chess-expertise-2024/chess-rois/results/bilalic_sphere_rois'
-    '/home/eik-tb/OneDrive_andreaivan.costantino@kuleuven.be/GitHub/chess-expertise-2024/chess-rois/results/glasser_cortices_bilateral'
-    '/home/eik-tb/OneDrive_andreaivan.costantino@kuleuven.be/GitHub/chess-expertise-2024/chess-rois/results/glasser_regions_bilateral'
+    fullfile('rois','results','bilalic_sphere_rois')
+    fullfile('rois','results','glasser_cortex_bilateral')
+    fullfile('rois','results','glasser_regions_bilateral')
 };
 
 % Folder containing the ROIs. Typically a folder with one or more .nii files

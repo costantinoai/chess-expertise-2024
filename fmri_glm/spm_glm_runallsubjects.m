@@ -56,12 +56,14 @@ clear
 
 %% PARAMETERS
 
-% Path of fmriprep, BIDS and output folder
-niftiSpace = 'MNI'; % T1w, MNI
-fmriprepRoot = '/data/projects/chess/data/BIDS/derivatives/fmriprep';
-BIDSRoot = '/data/projects/chess/data/BIDS';
-outRoot = ['/data/projects/chess/data/BIDS/derivatives/fmriprep-SPM_smoothed-6_GS-FD-HMP_brainmasked/',niftiSpace,'/fmriprep-SPM-', niftiSpace];
-tempDir = '/media/costantino_ai/eik-T9/chess_temp/fmriprep-preSPM';
+% Path of fmriprep, BIDS and output folder (edit these roots for your machine)
+niftiSpace = 'MNI'; % 'T1w' or 'MNI'
+dataRoot   = fullfile('data');
+BIDSRoot   = fullfile(dataRoot, 'BIDS');
+derivRoot  = fullfile(BIDSRoot, 'derivatives');
+fmriprepRoot = fullfile(derivRoot, 'fmriprep');
+outRoot    = fullfile(derivRoot, ['fmriprep-SPM_smoothed-6_GS-FD-HMP_brainmasked' filesep niftiSpace], ['fmriprep-SPM-' niftiSpace]);
+tempDir    = fullfile(dataRoot, 'temp', 'fmriprep-preSPM');
 
 % Files to select
 % selectedSubjectsList = '*';        % Must be list of integers or '*'
@@ -108,5 +110,4 @@ parfor i = 1:length(sub_paths)
     run_subject_glm(sub_paths(i).folder, sub_paths(i).name, selectedTasks, selectedRuns, ...
          fmriprepRoot, BIDSRoot, outRoot, tempDir, pipeline, niftiSpace, thresholds);
 end
-
 

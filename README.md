@@ -30,9 +30,14 @@ MATLAB Dependencies
 - GLM and MVPA MATLAB scripts require SPM12 and (for MVPA/RSA) CoSMoMVPA. Ensure toolboxes are on the MATLAB path.
 
 Dataset
-- The project expects a BIDS‑compliant dataset, typically under `/data/projects/chess/data`:
-  - `BIDS/` — raw data
-  - `derivatives/` — outputs from fMRIPrep, FastSurfer, etc.
+- Place data under a single `data/` folder at the repository root for clarity:
+  - `data/BIDS/` — raw BIDS dataset
+  - `data/BIDS/derivatives/` — outputs from fMRIPrep, FastSurfer, GLM, RSA searchlight, MVPA
+  - `data/misc/` — templates/LUTs (e.g., Glasser atlases, color tables)
+  - `data/temp/` — temporary folders used by some scripts (created if missing)
+
+Paths
+- Python scripts read paths from `config.py` (overridable via env vars). MATLAB scripts define a small set of variables at the top and use `fullfile`/`filesep` to avoid OS-specific separators.
 - Avoid hard‑coded absolute paths in code; pass paths via CLI flags or configs.
 
 Running Analyses
