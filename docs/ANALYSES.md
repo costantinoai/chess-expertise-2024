@@ -8,10 +8,10 @@ How to use
 - Use it as the source of truth when pruning folders or regenerating the API.
 
 Reported Analyses (from manuscript)
-- Stimulus Set Overview
+-- Stimulus Set Overview
   - Manuscript: Supplementary section “Stimulus Set Details”; figure `stimuli_with_tags.png` (supplementary figure) and table `stimuli`.
-  - Code: `chess-dataset-vis/visualize_dataset.py`
-  - Outputs: `chess-dataset-vis/results/<RUN>_dataset-vis_*/*.png`
+  - Code: removed from this repo; figures are produced externally and stored under `manuscript/write/figures/`.
+  - Outputs: n/a
 
 - Behavioural Similarity (Human RDMs)
   - Manuscript: Supplementary section “Split-half Reliability of Behavioral RDMs”; table `bh_rdm_splithalf`.
@@ -20,13 +20,13 @@ Reported Analyses (from manuscript)
 
 - fMRI Univariate GLM
   - Manuscript: Main and Supplementary (e.g., All>Rest; Checkmate>Non‑checkmate); ROI maps (supplementary `roi_maps_univ`).
-  - Code: `chess-glm/WithinGroup_SecondLevel_MultiContrast.m`, `chess-glm/TwoSample_SecondLevel_MultiContrast.m`, `chess-glm/contrasts_only.m`, ROI aggregation in `chess-glm/roi_ttests_all.py`.
-  - Outputs: `chess-glm/results/<RUN>_secondlevel-rois/*` (surface/glass PNGs, HTMLs, TSVs)
+  - Code: `fmri_glm/WithinGroup_SecondLevel_MultiContrast.m`, `fmri_glm/TwoSample_SecondLevel_MultiContrast.m`, `fmri_glm/contrasts_only.m`, ROI aggregation in `fmri_glm/roi_ttests_all.py`.
+  - Outputs: `fmri_glm/results/<RUN>_secondlevel-rois/*` (surface/glass PNGs, HTMLs, TSVs)
 
 - MVPA Decoding (ROI/group level)
   - Manuscript: Main text and Supplementary tables `decoding_main_dims`, `mvpa_extended_dimensions` (decoding of Checkmate, Strategy, Visual Similarity; extended dimensions on checkmate subset).
-  - Code: ROI decoding and stats in `chess-mvpa/` (e.g., `mvpa_barplot.py`, `mvpa_barplot_comparison.py`, `mvpa_ttest.py`); ROI management/plotting in `chess-mvpa/modules/*`.
-  - Outputs: `chess-mvpa/results/<RUN>_mvpa_*/*` (barplots, pickles, TSVs)
+  - Code: ROI decoding and stats in `mvpa/` (e.g., `mvpa_barplot.py`, `mvpa_barplot_comparison.py`, `mvpa_ttest.py`); ROI management/plotting in `mvpa/modules/*`.
+  - Outputs: `mvpa/results/<RUN>_mvpa_*/*` (barplots, pickles, TSVs)
 
 - Representational Similarity Analysis (RSA)
   - Manuscript: Whole‑brain searchlight + ROI summaries; main ROI figure (Fig. “rsa_rois” in text); supplementary tables `rsa_main_dims`, `roi_maps_rsa`.
@@ -35,8 +35,8 @@ Reported Analyses (from manuscript)
 
 - Manifold Dimensionality (Participation Ratio, PR)
   - Manuscript: Main PR results figure (`pr_classification.png`); supplementary PR vs ROI size figure (`pr_supp.png`) and table `pr_ttest`.
-  - Code: `chess-mvpa/participation_ratio.py`, `chess-mvpa/plot_pr_roi_size.py`; manifold capacity (MFT) workflows in `chess-manifoldMFT/main.py` and `chess-manifoldMFT/modules/*`.
-  - Outputs: PR figures/tables in `chess-mvpa/results/*`; MFT results in `chess-manifoldMFT/manifold_results/*` or `results/*`
+  - Code: `mvpa/participation_ratio.py`, `mvpa/plot_pr_roi_size.py`; manifold capacity (MFT) workflows in `manifold/main.py` and `manifold/modules/*`.
+  - Outputs: PR figures/tables in `mvpa/results/*`; MFT results in `manifold/manifold_results/*` or `results/*`
 
 - RDM Orthogonality (Correlation and Variance Partitioning)
   - Manuscript: Supplementary section “Orthogonality Across RDMs” with correlation and variance partitioning panels.
@@ -45,18 +45,18 @@ Reported Analyses (from manuscript)
 
 - Neurosynth Meta‑Analysis
   - Manuscript: Methods/results reporting term‑map associations with expert/novice maps; supplementary tables `neurosynth_rsa`, `neurosynth_univ` and figure `terms_flat.png`.
-  - Code: `chess-neurosynth/rsa_neurosynth.py`, `chess-neurosynth/univariate_neurosynth.py`.
-  - Outputs: `chess-neurosynth/results/<RUN>_neurosynth_*/*`
+  - Code: `neurosynth/rsa_neurosynth.py`, `neurosynth/univariate_neurosynth.py`.
+  - Outputs: `neurosynth/results/<RUN>_neurosynth_*/*`
 
 - Eye‑Movement Decoding (Supplementary)
   - Manuscript: Supplementary section “Groups cannot be inferred from estimated eye‑movements” (`et_decoding` figure/table).
-  - Code: `chess-mvpa/utils/svm_class_xy.py` (gaze x,y) and `chess-mvpa/utils/svm_class_displacement.py` (distance from screen center). Task-vs-rest is out of scope.
+  - Code: `mvpa/utils/svm_class_xy.py` (gaze x,y) and `mvpa/utils/svm_class_displacement.py` (distance from screen center). Task-vs-rest is out of scope.
   - Outputs: `results/<RUN>_et-mvpa/*` with plots and logs
 
 - Sample Balance: Number of fMRI Runs per Group (Supplementary)
   - Manuscript: Supplementary control analysis showing no difference in runs across groups.
-  - Code: `chess-mvpa/test_number_of_runs.py`
-  - Outputs: text and LaTeX table under `chess-mvpa/results/<RUN>_runs-per-group/*`
+  - Code: `mvpa/test_number_of_runs.py`
+  - Outputs: text and LaTeX table under `mvpa/results/<RUN>_runs-per-group/*`
 
 Dependencies & Shared Resources
 - ROI definitions/utilities: `chess-rois/*`
@@ -93,7 +93,7 @@ Notes
 - Before any deletion, create a timestamped backup branch and regenerate `API.md`.
 
 KEEP list (in scope for the paper)
-- `chess-glm`, `chess-mvpa`, `chess-behavioural`, `chess-dataset-vis`, `chess-neurosynth`, `chess-manifoldMFT`, `chess-rois`, plus root utilities (`common_utils.py`, `logging_utils.py`).
+- `fmri_glm`, `mvpa`, `behavioural`, `neurosynth`, `manifold`, `rois`, plus root utilities (`common_utils.py`, `logging_utils.py`).
 
 Next actions
 1) Validate each “Candidates For Removal” item against the manuscript figures/tables; move confirmed items to a removal list.

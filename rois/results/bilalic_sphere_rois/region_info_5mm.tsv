@@ -1,0 +1,10 @@
+region_id	region_name	Source	Information	color
+1	FFA	Schobert et al. (2018)	N = 15	
+2	LOC	Bona et al. (2014)	N = 15	
+3	PPA	Wang et al. (2019)	N = 21	
+4	TPJ	Kovács et al. (2014)	Peak activations across 26 studies	
+5	PCC	Dillen et al. (2016)	Peak coordinates Bai et al. (2009)	
+6	pMTL/OTJ	Bilalic et al. 2010	main effect expertise	
+7	pMTG	Bilalic et al. 2011	Expertise effect object recognition	
+8	SMG	Bilalic et al. 2011	Expertise effect object function	
+9	Caudatus	Wan et al 2011	decision making	

@@ -7,13 +7,12 @@ Analyses Overview
 - For a high‑level inventory of analyses and reported figures, see `manuscript/main.tex` and `manuscript/supplementary.tex`.
 
 Repository Structure
-- `chess-glm/` – MATLAB utilities and scripts for first/second level GLM.
-- `chess-mvpa/` – Python MVPA and RSA code with plotting utilities.
-- `chess-behavioural/` – Behavioural analysis scripts and helper modules.
-- `chess-dataset-vis/` – Tools for visualising the chess stimulus set.
-- `chess-neurosynth/` – Scripts for meta‑analytic lookups using Neurosynth.
-- `chess-manifoldMFT/` – Manifold/PR analysis workflows and outputs.
-- `chess-rois/` – ROI definitions and utilities.
+- `fmri_glm/` – MATLAB utilities and scripts for first/second level GLM.
+- `mvpa/` – Python MVPA and RSA code with plotting utilities.
+- `behavioural/` – Behavioural analysis scripts and helper modules.
+- `neurosynth/` – Scripts for meta‑analytic lookups using Neurosynth.
+- `manifold/` – Manifold/PR analysis workflows and outputs.
+- `rois/` – ROI definitions and utilities.
 - `common_utils.py` – Shared utilities (logging tee, seeding, run IDs, script copy).
 - `tests/` – Tests for shared utilities (if present/extended).
 
@@ -58,7 +57,7 @@ API Reference
 - A consolidated overview of reusable functions is in `API.md`.
 
 Maintenance notes
-- Legacy and machine‑specific folders (`old/`, `misc/`, `local/`) have been removed to keep the repo focused on manuscript analyses. See `docs/ANALYSES.md` for the up‑to‑date inventory.
+- Legacy and machine‑specific folders (`old/`, `misc/`, `local/`) have been removed to keep the repo focused on manuscript analyses. Dataset visualisation scripts were removed; see `manuscript/write/figures/` for figures and `docs/ANALYSES.md` for the inventory.
 
 License
 - MIT License (see `LICENSE`).

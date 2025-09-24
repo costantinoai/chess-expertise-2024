@@ -1,0 +1,42 @@
+key_Instrc.keys,key_Instrc.rt,participant,session,date,expName,psychopyVersion,OS,frameRate,key_Instrc2.keys,key_Instrc2.rt,key_resp_L.keys,key_resp_L.rt,spacebarpress.keys,spacebarpress.rt,consent_resp.keys,consent_resp.rt,key_resp_2.keys,key_resp_2.rt,checksequence.text,Mousetocontinue.x,Mousetocontinue.y,Mousetocontinue.leftButton,Mousetocontinue.midButton,Mousetocontinue.rightButton,Mousetocontinue.time,Mousetocontinue.clicked_name,key_resp_3.keys,key_resp_3.rt,trials.thisRepN,trials.thisTrialN,trials.thisN,trials.thisIndex,trials.ran,Experiment_try,Checkmate
+,,21,1,2024-01-11_10h11.43.197,FamTaskFinal,2022.2.4,MacIntel,90.90909091,,,,,,,,,,,   ,0.03,-0.415555556,1.0,0.0,0.0,49.038,endtext,space,2.422,0,0,0,32,1,NC3_Images_Replacement3(Nomate).png,no
+,,21,1,2024-01-11_10h11.43.197,FamTaskFinal,2022.2.4,MacIntel,90.90909091,,,,,,,,,,, ,,,,,,,,space,1.418,0,1,1,23,1,NC2_Images_KekhayovPetrov(Nomate)(Reversed).png,no
+,,21,1,2024-01-11_10h11.43.197,FamTaskFinal,2022.2.4,MacIntel,90.90909091,,,,,,,,,,,,0.048888889,-0.35,1.0,0.0,0.0,45.053,endtext,space,1.392,0,2,2,15,1,C4_Images_IvanchukSavchenko(Reversed).png,Yes
+,,21,1,2024-01-11_10h11.43.197,FamTaskFinal,2022.2.4,MacIntel,90.90909091,,,,,,,,,,,,,,,,,,,space,2.196,0,3,3,4,1,C2_Images_KrauseMeinhardt.png,Yes
+,,21,1,2024-01-11_10h11.43.197,FamTaskFinal,2022.2.4,MacIntel,90.90909091,,,,,,,,,,,,0.02,-0.407777778,1.0,0.0,0.0,48.072,endtext,space,1.531,0,4,4,13,1,C3_Images_Replacement5.png,Yes
+,,21,1,2024-01-11_10h11.43.197,FamTaskFinal,2022.2.4,MacIntel,90.90909091,,,,,,,,,,,Ng6,0.063333333,-0.394444444,1.0,0.0,0.0,42.02,endtext,space,23.93,0,5,5,19,1,C5_Images_EasyPosition6.png,Yes
+,,21,1,2024-01-11_10h11.43.197,FamTaskFinal,2022.2.4,MacIntel,90.90909091,,,,,,,,,,,,0.052222222,-0.397777778,1.0,0.0,0.0,19.976,endtext,space,0.627,0,6,6,21,1,NC1_Images_SteinitzNN(Nomate).png,no
+,,21,1,2024-01-11_10h11.43.197,FamTaskFinal,2022.2.4,MacIntel,90.90909091,,,,,,,,,,, ,0.018888889,-0.395555556,1.0,0.0,0.0,14.527,endtext,space,0.93,0,7,7,38,1,NC5_Images_EasyPosition5(Nomate)(Reversed).png,no
+,,21,1,2024-01-11_10h11.43.197,FamTaskFinal,2022.2.4,MacIntel,90.90909091,,,,,,,,,,,,0.003333333,-0.395555556,1.0,0.0,0.0,39.099,endtext,space,1.141,0,8,8,24,1,NC2_Images_KrauseMeinhardt(Nomate).png,no
+,,21,1,2024-01-11_10h11.43.197,FamTaskFinal,2022.2.4,MacIntel,90.90909091,,,,,,,,,,,,-0.012222222,-0.386666667,1.0,0.0,0.0,31.893,endtext,space,0.627,0,9,9,14,1,C4_Images_BrankaWittwer(Reversed).png,Yes
+,,21,1,2024-01-11_10h11.43.197,FamTaskFinal,2022.2.4,MacIntel,90.90909091,,,,,,,,,,,,0.028888889,-0.415555556,1.0,0.0,0.0,18.301,endtext,space,1.523,0,10,10,35,1,NC4_Images_IvanchukSavchenko(Nomate)(Reversed).png,no
+,,21,1,2024-01-11_10h11.43.197,FamTaskFinal,2022.2.4,MacIntel,90.90909091,,,,,,,,,,,,-0.022222222,-0.417777778,1.0,0.0,0.0,37.407,endtext,space,2.508,0,11,11,7,1,C3_Images_KazicVukovic(Reversed).png,Yes
+,,21,1,2024-01-11_10h11.43.197,FamTaskFinal,2022.2.4,MacIntel,90.90909091,,,,,,,,,,,,0.095555556,-0.391111111,1.0,0.0,0.0,30.441,endtext,space,1.679,0,12,12,6,1,C2_Images_Replacement4.png,Yes
+,,21,1,2024-01-11_10h11.43.197,FamTaskFinal,2022.2.4,MacIntel,90.90909091,,,,,,,,,,,,0.005555556,-0.396666667,1.0,0.0,0.0,23.411,endtext,space,1.989,0,13,13,39,1,NC5_Images_EasyPosition6(Nomate).png,no
+,,21,1,2024-01-11_10h11.43.197,FamTaskFinal,2022.2.4,MacIntel,90.90909091,,,,,,,,,,,,0.022222222,-0.398888889,1.0,0.0,0.0,30.41,endtext,space,1.48,0,14,14,0,1,C1_Images_Frombeautiful.png,Yes
+,,21,1,2024-01-11_10h11.43.197,FamTaskFinal,2022.2.4,MacIntel,90.90909091,,,,,,,,,,,,0.041111111,-0.408888889,1.0,0.0,0.0,30.024,endtext,space,0.936,0,15,15,30,1,NC3_Images_StudybyErcoleDelRio(Nomate)(Reversed).png,no
+,,21,1,2024-01-11_10h11.43.197,FamTaskFinal,2022.2.4,MacIntel,90.90909091,,,,,,,,,,,,0.036666667,-0.408888889,1.0,0.0,0.0,52.716,endtext,space,0.853,0,16,16,29,1,NC3_Images_PodzerovKuntzevic(Nomate)(Reversed).png,no
+,,21,1,2024-01-11_10h11.43.197,FamTaskFinal,2022.2.4,MacIntel,90.90909091,,,,,,,,,,,,0.03,-0.412222222,1.0,0.0,0.0,55.723,endtext,space,28.115,0,17,17,5,1,C2_Images_SkujaRozenbergs(Reversed).png,Yes
+,,21,1,2024-01-11_10h11.43.197,FamTaskFinal,2022.2.4,MacIntel,90.90909091,,,,,,,,,,,Qh6,-0.027777778,-0.314444444,1.0,0.0,0.0,25.512,endtext,space,1.189,0,18,18,17,1,C5_Images_EasyPosition2.png,Yes
+,,21,1,2024-01-11_10h11.43.197,FamTaskFinal,2022.2.4,MacIntel,90.90909091,,,,,,,,,,,,0.027777778,-0.401111111,1.0,0.0,0.0,56.926,endtext,space,1.229,0,19,19,11,1,C3_Images_TylorWinter.png,Yes
+,,21,1,2024-01-11_10h11.43.197,FamTaskFinal,2022.2.4,MacIntel,90.90909091,,,,,,,,,,,,,,,,,,,space,1.237,0,20,20,31,1,NC3_Images_TylorWinter(Nomate).png,no
+,,21,1,2024-01-11_10h11.43.197,FamTaskFinal,2022.2.4,MacIntel,90.90909091,,,,,,,,,,,  ,0.087777778,-0.396666667,1.0,0.0,0.0,56.326,endtext,space,1.857,0,21,21,16,1,C4_Images_StrekalovskyShaposhlikov.png,Yes
+,,21,1,2024-01-11_10h11.43.197,FamTaskFinal,2022.2.4,MacIntel,90.90909091,,,,,,,,,,,,0.031111111,-0.402222222,1.0,0.0,0.0,22.743,endtext,space,1.142,0,22,22,37,1,NC5_Images_EasyPosition2(Nomate).png,no
+,,21,1,2024-01-11_10h11.43.197,FamTaskFinal,2022.2.4,MacIntel,90.90909091,,,,,,,,,,,,0.013333333,-0.406666667,1.0,0.0,0.0,45.322,endtext,space,0.509,0,23,23,22,1,NC1_Images_WinterFriede(Nomate)(Reversed).png,no
+,,21,1,2024-01-11_10h11.43.197,FamTaskFinal,2022.2.4,MacIntel,90.90909091,,,,,,,,,,,,0.026666667,-0.377777778,1.0,0.0,0.0,26.185,endtext,space,1.262,0,24,24,20,1,NC1_Images_Frombeautiful(Nomate).png,no
+,,21,1,2024-01-11_10h11.43.197,FamTaskFinal,2022.2.4,MacIntel,90.90909091,,,,,,,,,,,,0.02,0.323333333,1.0,0.0,0.0,23.677,endtext,space,1.221,0,25,25,9,1,C3_Images_PodzerovKuntzevic(Reversed).png,Yes
+,,21,1,2024-01-11_10h11.43.197,FamTaskFinal,2022.2.4,MacIntel,90.90909091,,,,,,,,,,,,0.048888889,-0.401111111,1.0,0.0,0.0,35.521,endtext,space,1.539,0,26,26,1,1,C1_Images_SteinitzNN.png,Yes
+,,21,1,2024-01-11_10h11.43.197,FamTaskFinal,2022.2.4,MacIntel,90.90909091,,,,,,,,,,,,0.028888889,-0.405555556,1.0,0.0,0.0,53.379,endtext,space,0.75,0,27,27,28,1,NC3_Images_MalininAndreev(Nomate)(Reversed).png,no
+,,21,1,2024-01-11_10h11.43.197,FamTaskFinal,2022.2.4,MacIntel,90.90909091,,,,,,,,,,,,0.067777778,-0.401111111,1.0,0.0,0.0,52.409,endtext,space,0.776,0,28,28,33,1,NC3_Images_Replacement5(Nomate).png,no
+,,21,1,2024-01-11_10h11.43.197,FamTaskFinal,2022.2.4,MacIntel,90.90909091,,,,,,,,,,,,0.07,-0.38,1.0,0.0,0.0,26.872,endtext,space,0.947,0,29,29,27,1,NC3_Images_KazicVukovic(Nomate)(Reversed).png,no
+,,21,1,2024-01-11_10h11.43.197,FamTaskFinal,2022.2.4,MacIntel,90.90909091,,,,,,,,,,,"
+",0.062222222,-0.41,1.0,0.0,0.0,53.404,endtext,space,2.94,0,30,30,25,1,NC2_Images_SkujaRozenbergs(Nomate)(Reversed).png,no
+,,21,1,2024-01-11_10h11.43.197,FamTaskFinal,2022.2.4,MacIntel,90.90909091,,,,,,,,,,,,0.044444444,-0.401111111,1.0,0.0,0.0,49.055,endtext,space,1.001,0,31,31,8,1,C3_Images_MalininAndreev(Reversed).png,Yes
+,,21,1,2024-01-11_10h11.43.197,FamTaskFinal,2022.2.4,MacIntel,90.90909091,,,,,,,,,,,,0.067777778,-0.405555556,1.0,0.0,0.0,52.176,endtext,space,0.563,0,32,32,26,1,NC2_Images_Replacement4(Nomate).png,no
+,,21,1,2024-01-11_10h11.43.197,FamTaskFinal,2022.2.4,MacIntel,90.90909091,,,,,,,,,,,,0.032222222,-0.392222222,1.0,0.0,0.0,35.103,endtext,space,0.596,0,33,33,36,1,NC4_Images_StrekalovskyShaposhlikov(Nomate).png,no
+,,21,1,2024-01-11_10h11.43.197,FamTaskFinal,2022.2.4,MacIntel,90.90909091,,,,,,,,,,,,0.027777778,-0.302222222,1.0,0.0,0.0,58.37,,space,10.54,0,34,34,3,1,C2_Images_KekhayovPetrov(Reversed).png,Yes
+,,21,1,2024-01-11_10h11.43.197,FamTaskFinal,2022.2.4,MacIntel,90.90909091,,,,,,,,,,,,0.018888889,-0.395555556,1.0,0.0,0.0,36.173,endtext,space,0.785,0,35,35,34,1,NC4_Images_BrankaWittwer(Nomate)(Reversed).png,no
+,,21,1,2024-01-11_10h11.43.197,FamTaskFinal,2022.2.4,MacIntel,90.90909091,,,,,,,,,,,Rc7,0.018888889,-0.305555556,1.0,0.0,0.0,28.276,endtext,space,4.97,0,36,36,2,1,C1_Images_WinterFriede(Reversed).png,Yes
+,,21,1,2024-01-11_10h11.43.197,FamTaskFinal,2022.2.4,MacIntel,90.90909091,,,,,,,,,,,Ba6,0.066666667,-0.388888889,1.0,0.0,0.0,40.902,endtext,space,2.084,0,37,37,18,1,C5_Images_EasyPosition5(Reversed).png,Yes
+,,21,1,2024-01-11_10h11.43.197,FamTaskFinal,2022.2.4,MacIntel,90.90909091,,,,,,,,,,,,,,,,,,,space,0.794,0,38,38,12,1,C3_Images_Replacement3.png,Yes
+,,21,1,2024-01-11_10h11.43.197,FamTaskFinal,2022.2.4,MacIntel,90.90909091,,,,,,,,,,,Nc6,0.073333333,-0.407777778,1.0,0.0,0.0,58.35,endtext,space,1.34,0,39,39,10,1,C3_Images_StudybyErcoledelRio(Reversed).png,Yes

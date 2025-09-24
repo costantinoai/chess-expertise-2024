@@ -1,0 +1,23 @@
+\begin{table}[p]
+\centering
+\resizebox{0.9\linewidth}{!}{%
+\begin{tabular}{lcc}
+\toprule
+ & Experts & Non-Experts \\
+\midrule
+$n$ & 20 & 20 \\
+Mean (SD) & 8.40 (2.01) & 9.45 (1.36) \\
+Median & 10.00 & 10.00 \\
+Range & [6, 10] & [6, 10] \\
+\midrule
+Levene’s test (var.~equality) & \multicolumn{2}{c}{W = 17.952, $p$ = 0.0001} \\
+Welch's t-test (unequal variances) & \multicolumn{2}{c}{$t$ = -1.936, df = 33.326, $p$ = 0.0614} \\
+$95\%$ CI (ΔMean) & \multicolumn{2}{c}{[-2.15, 0.05]} \\
+Effect size & \multicolumn{2}{c}{Cohen's $d_{av}$ (avg. SD) = -0.612, Hedges’ $g$ = -0.600} \\
+Mann--Whitney $U$ & \multicolumn{2}{c}{$U$ = 146.0, $p$ = 0.0625} \\
+\bottomrule
+\end{tabular}
+}
+\caption{Comparison of number of runs per subject between Experts and Non-Experts. Descriptives are shown for each group. Levene’s test informs whether equal variances can be assumed; the analysis then uses Student’s $t$ (equal variances) or Welch’s $t$ (unequal variances) accordingly. We report the corresponding 95\% CI of the mean difference (Experts $-$ Non-Experts) and an appropriate standardized effect size.}
+\label{tab:run_count_group_test}
+\end{table}

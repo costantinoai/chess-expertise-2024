@@ -1,0 +1,14 @@
+Run count comparison (Welch's t-test (unequal variances))
+============================================================
+Experts     (n=20): mean=8.40, sd=2.01, median=10.00, range=[6, 10]
+Non-Experts (n=20): mean=9.45, sd=1.36, median=10.00, range=[6, 10]
+------------------------------------------------------------
+Levene's test for equal variances (diagnostic):
+  W = 17.952, p = 0.0001
+Welch's t-test (unequal variances):
+  t = -1.936, df = 33.326, p = 0.0614
+  95% CI of mean difference (Experts - Non-Experts): [-2.15, 0.05]
+  Cohen's $d_{av}$ (avg. SD) = -0.612  (Hedges' g = -0.600)
+------------------------------------------------------------
+Mann–Whitney U (robustness check):
+  U = 146.0, p = 0.0625

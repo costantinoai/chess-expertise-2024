@@ -1,0 +1,3379 @@
+
+type = string-attribute
+name = TYPESTRING
+count = 15
+'3DIM_HEAD_ANAT~
+
+type = string-attribute
+name = IDCODE_STRING
+count = 27
+'AFN_5DjVQxmDlcu2BxKDm9a9ug~
+
+type = string-attribute
+name = IDCODE_DATE
+count = 25
+'Tue Mar 26 16:48:47 2019~
+
+type = integer-attribute
+name = SCENE_DATA
+count = 8
+ 2 11 0 -999 -999
+ -999 -999 -999
+
+type = string-attribute
+name = LABEL_1
+count = 5
+'zyxt~
+
+type = string-attribute
+name = LABEL_2
+count = 5
+'zyxt~
+
+type = string-attribute
+name = DATASET_NAME
+count = 5
+'zyxt~
+
+type = integer-attribute
+name = ORIENT_SPECIFIC
+count = 3
+ 0 5 2
+
+type  = float-attribute
+name  = ORIGIN
+count = 3
+           -128            147            146
+
+type  = float-attribute
+name  = DELTA
+count = 3
+              1             -1             -1
+
+type  = float-attribute
+name  = IJK_TO_DICOM
+count = 12
+              1              0              0           -128              0
+              0             -1            146              0             -1
+              0            147
+
+type  = float-attribute
+name  = IJK_TO_DICOM_REAL
+count = 12
+              1              0              0           -128              0
+              0             -1            146              0             -1
+              0            147
+
+type  = float-attribute
+name  = BRICK_STATS
+count = 2
+              0            360
+
+type = integer-attribute
+name = DATASET_RANK
+count = 8
+ 3 1 0 0 0
+ 0 0 0
+
+type = integer-attribute
+name = DATASET_DIMENSIONS
+count = 5
+ 256 256 256 0 0
+
+type = integer-attribute
+name = BRICK_TYPES
+count = 1
+ 3
+
+type  = float-attribute
+name  = BRICK_FLOAT_FACS
+count = 1
+              0
+
+type = string-attribute
+name = BRICK_LABS
+count = 5
+'rank~
+
+type = string-attribute
+name = TEMPLATE_SPACE
+count = 4
+'MNI~
+
+type = integer-attribute
+name = INT_CMAP
+count = 1
+ 0
+
+type = string-attribute
+name = BYTEORDER_STRING
+count = 10
+'LSB_FIRST~
+
+type = string-attribute
+name = VALUE_LABEL_DTABLE
+count = 8713
+''<VALUE_LABEL_DTABLE
+ni_type="2*String"
+ni_dimen=“361" 
+pbar_name="ROI_i256">
+0 Unknown
+1 L_Primary_Visual_Cortex
+2 L_Medial_Superior_Temporal_Area
+3 L_Sixth_Visual_Area
+4 L_Second_Visual_Area
+5 L_Third_Visual_Area
+6 L_Fourth_Visual_Area
+7 L_Eighth_Visual_Area
+8 L_Primary_Motor_Cortex
+9 L_Primary_Sensory_Cortex
+10 L_Frontal_Eye_Fields
+11 L_Premotor_Eye_Fields
+12 L_Area_55b
+13 L_Area_V3A
+14 L_RetroSplenial_Complex
+15 L_Parieto-Occipital_Sulcus_Area_2
+16 L_Seventh_Visual_Area
+17 L_IntraParietal_Sulcus_Area_1
+18 L_Fusiform_Face_Complex
+19 L_Area_V3B
+20 L_Area_Lateral_Occipital_1
+21 L_Area_Lateral_Occipital_2
+22 L_Posterior_InferoTemporal
+23 L_Middle_Temporal_Area
+24 L_Primary_Auditory_Cortex
+25 L_PeriSylvian_Language_Area
+26 L_Superior_Frontal_Language_Area
+27 L_PreCuneus_Visual_Area
+28 L_Superior_Temporal_Visual_Area
+29 L_Medial_Area_7P
+30 L_Area_7m
+31 L_Parieto-Occipital_Sulcus_Area_1
+32 L_Area_23d
+33 L_Area_ventral_23_a+b
+34 L_Area_dorsal_23_a+b
+35 L_Area_31p_ventral
+36 L_Area_5m
+37 L_Area_5m_ventral
+38 L_Area_23c
+39 L_Area_5L
+40 L_Dorsal_Area_24d
+41 L_Ventral_Area_24d
+42 L_Lateral_Area_7A
+43 L_Supplementary_And_Cingulate_Eye
+44 L_Area_6m_anterior
+45 L_Medial_Area_7A
+46 L_Lateral_Area_7P
+47 L_Area_7PC
+48 L_Area_Lateral_IntraParietal_ventral
+49 L_Ventral_IntraParietal_Complex
+50 L_Medial_IntraParietal_Area
+51 L_Area_1
+52 L_Area_2
+53 L_Area_3a
+54 L_Dorsal_area_6
+55 L_Area_6mp
+56 L_Ventral_Area_6
+57 L_Area_Posterior_24_prime
+58 L_Area_33_prime
+59 L_Anterior_24_prime
+60 L_Area_p32_prime
+61 L_Area_a24
+62 L_Area_dorsal_32
+63 L_Area_8BM
+64 L_Area_p32
+65 L_Area_10r
+66 L_Area_47m
+67 L_Area_8Av
+68 L_Area_8Ad
+69 L_Area_9_Middle
+70 L_Area_8B_Lateral
+71 L_Area_9_Posterior
+72 L_Area_10d
+73 L_Area_8C
+74 L_Area_44
+75 L_Area_45
+76 L_Area_47l_(47_lateral)
+77 L_Area_anterior_47r
+78 L_Rostral_Area_6
+79 L_Area_IFJa
+80 L_Area_IFJp
+81 L_Area_IFSp
+82 L_Area__IFSa
+83 L_Area_posterior_9-46v
+84 L_Area_46
+85 L_Area_anterior_9-46v
+86 L_Area_9-46d
+87 L_Area_9_anterior
+88 L_Area_10v
+89 L_Area_anterior_10p
+90 L_Polar_10p
+91 L_Area_11l
+92 L_Area_13l
+93 L_Orbital_Frontal_Complex
+94 L_Area_47s
+95 L_Area_Lateral_IntraParietal_dorsal
+96 L_Area_6_anterior
+97 L_Inferior_6-8_Transitional_Area
+98 L_Superior_6-8_Transitional_Area
+99 L_Area_43
+100 "L_Area_OP4/PV"
+101 "L_Area_OP1/SII"
+102 "L_Area_OP2-3/VS"
+103 L_Area_52
+104 L_RetroInsular_Cortex
+105 L_Area_PFcm
+106 L_Posterior_Insular_Area_2
+107 L_Area_TA2
+108 L_Frontal_Opercular_Area_4
+109 L_Middle_Insular_Area
+110 L_Piriform_Cortex
+111 L_Anterior_Ventral_Insular_Area
+112 L_Anterior_Agranular_Insula_Complex
+113 L_Frontal_Opercular_Area_1
+114 L_Frontal_Opercular_Area_3
+115 L_Frontal_Opercular_Area_2
+116 L_Area_PFt
+117 L_Anterior_IntraParietal_Area
+118 L_Entorhinal_Cortex
+119 L_PreSubiculum
+120 L_Hippocampus
+121 L_ProStriate_Area
+122 L_Perirhinal_Ectorhinal_Cortex
+123 L_Area_STGa
+124 L_ParaBelt_Complex
+125 L_Auditory_5_Complex
+126 L_ParaHippocampal_Area_1
+127 L_ParaHippocampal_Area_3
+128 L_Area_STSd_anterior
+129 L_Area_STSd_posterior
+130 L_Area_STSv_posterior
+131 L_Area_TG_dorsal
+132 L_Area_TE1_anterior
+133 L_Area_TE1_posterior
+134 L_Area_TE2_anterior
+135 L_Area_TF
+136 L_Area_TE2_posterior
+137 L_Area_PHT
+138 L_Area_PH
+139 L_Area_TemporoParietoOccipital_Junction_1
+140 L_Area_TemporoParietoOccipital_Junction_2
+141 L_Area_TemporoParietoOccipital_Junction_3
+142 L_Dorsal_Transitional_Visual_Area
+143 L_Area_PGp
+144 L_Area_IntraParietal_2
+145 L_Area_IntraParietal_1
+146 L_Area_IntraParietal_0
+147 L_Area_PF_opercular
+148 L_Area_PF_Complex
+149 L_Area_PFm_Complex
+150 L_Area_PGi
+151 L_Area_PGs
+152 L_Area_V6A
+153 L_VentroMedial_Visual_Area_1
+154 L_VentroMedial_Visual_Area_3
+155 L_ParaHippocampal_Area_2
+156 L_Area_V4t
+157 L_Area_FST
+158 L_Area_V3CD
+159 L_Area_Lateral_Occipital_3
+160 L_VentroMedial_Visual_Area_2
+161 L_Area_31pd
+162 L_Area_31a
+163 L_Ventral_Visual_Complex
+164 L_Area_25
+165 L_Area_s32
+166 L_posterior_OFC_Complex
+167 L_Area_Posterior_Insular_1
+168 L_Insular_Granular_Complex
+169 L_Area_Frontal_Opercular
+170 L_Area_posterior_10p
+171 L_Area_posterior_47r
+172 L_Area_TG_Ventral
+173 L_Medial_Belt_Complex
+174 L_Lateral_Belt_Complex
+175 L_Auditory_4_Complex
+176 L_Area_STSv_anterior
+177 L_Area_TE1_Middle
+178 L_Para-Insular_Area
+179 L_Area_anterior_32_prime
+180 L_Area_posterior_24
+1001 R_Primary_Visual_Cortex
+1002 R_Medial_Superior_Temporal_Area
+1003 R_Sixth_Visual_Area
+1004 R_Second_Visual_Area
+1005 R_Third_Visual_Area
+1006 R_Fourth_Visual_Area
+1007 R_Eighth_Visual_Area
+1008 R_Primary_Motor_Cortex
+1009 R_Primary_Sensory_Cortex
+1010 R_Frontal_Eye_Fields
+1011 R_Premotor_Eye_Fields
+1012 R_Area_55b
+1013 R_Area_V3A
+1014 R_RetroSplenial_Complex
+1015 R_Parieto-Occipital_Sulcus_Area_2
+1016 R_Seventh_Visual_Area
+1017 R_IntraParietal_Sulcus_Area_1
+1018 R_Fusiform_Face_Complex
+1019 R_Area_V3B
+1020 R_Area_Lateral_Occipital_1
+1021 R_Area_Lateral_Occipital_2
+1022 R_Posterior_InferoTemporal
+1023 R_Middle_Temporal_Area
+1024 R_Primary_Auditory_Cortex
+1025 R_PeriSylvian_Language_Area
+1026 R_Superior_Frontal_Language_Area
+1027 R_PreCuneus_Visual_Area
+1028 R_Superior_Temporal_Visual_Area
+1029 R_Medial_Area_7P
+1030 R_Area_7m
+1031 R_Parieto-Occipital_Sulcus_Area_1
+1032 R_Area_23d
+1033 R_Area_ventral_23_a+b
+1034 R_Area_dorsal_23_a+b
+1035 R_Area_31p_ventral
+1036 R_Area_5m
+1037 R_Area_5m_ventral
+1038 R_Area_23c
+1039 R_Area_5L
+1040 R_Dorsal_Area_24d
+1041 R_Ventral_Area_24d
+1042 R_Lateral_Area_7A
+1043 R_Supplementary_And_Cingulate_Eye
+1044 R_Area_6m_anterior
+1045 R_Medial_Area_7A
+1046 R_Lateral_Area_7P
+1047 R_Area_7PC
+1048 R_Area_Lateral_IntraParietal_ventral
+1049 R_Ventral_IntraParietal_Complex
+1050 R_Medial_IntraParietal_Area
+1051 R_Area_1
+1052 R_Area_2
+1053 R_Area_3a
+1054 R_Dorsal_area_6
+1055 R_Area_6mp
+1056 R_Ventral_Area_6
+1057 R_Area_Posterior_24_prime
+1058 R_Area_33_prime
+1059 R_Anterior_24_prime
+1060 R_Area_p32_prime
+1061 R_Area_a24
+1062 R_Area_dorsal_32
+1063 R_Area_8BM
+1064 R_Area_p32
+1065 R_Area_10r
+1066 R_Area_47m
+1067 R_Area_8Av
+1068 R_Area_8Ad
+1069 R_Area_9_Middle
+1070 R_Area_8B_Lateral
+1071 R_Area_9_Posterior
+1072 R_Area_10d
+1073 R_Area_8C
+1074 R_Area_44
+1075 R_Area_45
+1076 R_Area_47l_(47_lateral)
+1077 R_Area_anterior_47r
+1078 R_Rostral_Area_6
+1079 R_Area_IFJa
+1080 R_Area_IFJp
+1081 R_Area_IFSp
+1082 R_Area__IFSa
+1083 R_Area_posterior_9-46v
+1084 R_Area_46
+1085 R_Area_anterior_9-46v
+1086 R_Area_9-46d
+1087 R_Area_9_anterior
+1088 R_Area_10v
+1089 R_Area_anterior_10p
+1090 R_Polar_10p
+1091 R_Area_11l
+1092 R_Area_13l
+1093 R_Orbital_Frontal_Complex
+1094 R_Area_47s
+1095 R_Area_Lateral_IntraParietal_dorsal
+1096 R_Area_6_anterior
+1097 R_Inferior_6-8_Transitional_Area
+1098 R_Superior_6-8_Transitional_Area
+1099 R_Area_43
+1100 "R_Area_OP4/PV"
+1101 "R_Area_OP1/SII"
+1102 "R_Area_OP2-3/VS"
+1103 R_Area_52
+1104 R_RetroInsular_Cortex
+1105 R_Area_PFcm
+1106 R_Posterior_Insular_Area_2
+1107 R_Area_TA2
+1108 R_Frontal_Opercular_Area_4
+1109 R_Middle_Insular_Area
+1110 R_Piriform_Cortex
+1111 R_Anterior_Ventral_Insular_Area
+1112 R_Anterior_Agranular_Insula_Complex
+1113 R_Frontal_Opercular_Area_1
+1114 R_Frontal_Opercular_Area_3
+1115 R_Frontal_Opercular_Area_2
+1116 R_Area_PFt
+1117 R_Anterior_IntraParietal_Area
+1118 R_Entorhinal_Cortex
+1119 R_PreSubiculum
+1120 R_Hippocampus
+1121 R_ProStriate_Area
+1122 R_Perirhinal_Ectorhinal_Cortex
+1123 R_Area_STGa
+1124 R_ParaBelt_Complex
+1125 R_Auditory_5_Complex
+1126 R_ParaHippocampal_Area_1
+1127 R_ParaHippocampal_Area_3
+1128 R_Area_STSd_anterior
+1129 R_Area_STSd_posterior
+1130 R_Area_STSv_posterior
+1131 R_Area_TG_dorsal
+1132 R_Area_TE1_anterior
+1133 R_Area_TE1_posterior
+1134 R_Area_TE2_anterior
+1135 R_Area_TF
+1136 R_Area_TE2_posterior
+1137 R_Area_PHT
+1138 R_Area_PH
+1139 R_Area_TemporoParietoOccipital_Junction_1
+1140 R_Area_TemporoParietoOccipital_Junction_2
+1141 R_Area_TemporoParietoOccipital_Junction_3
+1142 R_Dorsal_Transitional_Visual_Area
+1143 R_Area_PGp
+1144 R_Area_IntraParietal_2
+1145 R_Area_IntraParietal_1
+1146 R_Area_IntraParietal_0
+1147 R_Area_PF_opercular
+1148 R_Area_PF_Complex
+1149 R_Area_PFm_Complex
+1150 R_Area_PGi
+1151 R_Area_PGs
+1152 R_Area_V6A
+1153 R_VentroMedial_Visual_Area_1
+1154 R_VentroMedial_Visual_Area_3
+1155 R_ParaHippocampal_Area_2
+1156 R_Area_V4t
+1157 R_Area_FST
+1158 R_Area_V3CD
+1159 R_Area_Lateral_Occipital_3
+1160 R_VentroMedial_Visual_Area_2
+1161 R_Area_31pd
+1162 R_Area_31a
+1163 R_Ventral_Visual_Complex
+1164 R_Area_25
+1165 R_Area_s32
+1166 R_posterior_OFC_Complex
+1167 R_Area_Posterior_Insular_1
+1168 R_Insular_Granular_Complex
+1169 R_Area_Frontal_Opercular
+1170 R_Area_posterior_10p
+1171 R_Area_posterior_47r
+1172 R_Area_TG_Ventral
+1173 R_Medial_Belt_Complex
+1174 R_Lateral_Belt_Complex
+1175 R_Auditory_4_Complex
+1176 R_Area_STSv_anterior
+1177 R_Area_TE1_Middle
+1178 R_Para-Insular_Area
+1179 R_Area_anterior_32_prime
+1180 R_Area_posterior_24
+~
+
+type = string-attribute
+name = BRICK_KEYWORDS
+count = 1
+'~
+
+type = string-attribute
+name = ATLAS_LABEL_TABLE
+count = 66698
+'<atlas_point_list
+ ni_form="ni_group">
+<ATLAS_POINT
+  data_type="atlas_point" 
+  STRUCT="L_Primary_Visual_Cortex"
+  VAL="001"
+  OKEY="001"
+  GYoAR="0"
+  COG = "3.888890 87.055600 0.722229"
+  SB_LABEL="L_Primary_Visual_Cortex" />
+<ATLAS_POINT
+  data_type="atlas_point" 
+  STRUCT="R_Primary_Visual_Cortex"
+  VAL="1001"
+  OKEY="1001"
+  GYoAR="0"
+  COG = "-7.133330 80.800000 6.333330"
+  SB_LABEL="R_Primary_Visual_Cortex" />
+<ATLAS_POINT
+  data_type="atlas_point" 
+  STRUCT="L_Medial_Superior_Temporal_Area"
+  VAL="002"
+  OKEY="002"
+  GYoAR="0"
+  COG = "41.281200 64.250000 10.375000"
+  SB_LABEL="L_Medial_Superior_Temporal_Area" />
+<ATLAS_POINT
+  data_type="atlas_point" 
+  STRUCT="R_Medial_Superior_Temporal_Area"
+  VAL="1002"
+  OKEY="1002"
+  GYoAR="0"
+  COG = "-49.242400 66.333300 6.666670"
+  SB_LABEL="R_Medial_Superior_Temporal_Area" />
+<ATLAS_POINT
+  data_type="atlas_point" 
+  STRUCT="L_Sixth_Visual_Area"
+  VAL="003"
+  OKEY="003"
+  GYoAR="0"
+  COG = "14.958300 79.916700 28.833300"
+  SB_LABEL="L_Sixth_Visual_Area" />
+<ATLAS_POINT
+  data_type="atlas_point" 
+  STRUCT="R_Sixth_Visual_Area"
+  VAL="1003"
+  OKEY="1003"
+  GYoAR="0"
+  COG = "-17.214300 76.428600 27.785700"
+  SB_LABEL="R_Sixth_Visual_Area" />
+<ATLAS_POINT
+  data_type="atlas_point" 
+  STRUCT="L_Second_Visual_Area"
+  VAL="004"
+  OKEY="004"
+  GYoAR="0"
+  COG = "9.759990 84.960000 -14.200000"
+  SB_LABEL="L_Second_Visual_Area" />
+<ATLAS_POINT
+  data_type="atlas_point" 
+  STRUCT="R_Second_Visual_Area"
+  VAL="1004"
+  OKEY="1004"
+  GYoAR="0"
+  COG = "-7.000000 84.833300 -13.133300"
+  SB_LABEL="R_Second_Visual_Area" />
+<ATLAS_POINT
+  data_type="atlas_point" 
+  STRUCT="L_Third_Visual_Area"
+  VAL="005"
+  OKEY="005"
+  GYoAR="0"
+  COG = "33.000000 91.407400 -12.703700"
+  SB_LABEL="L_Third_Visual_Area" />
+<ATLAS_POINT
+  data_type="atlas_point" 
+  STRUCT="R_Third_Visual_Area"
+  VAL="1005"
+  OKEY="1005"
+  GYoAR="0"
+  COG = "-33.454500 90.863600 -5.636370"
+  SB_LABEL="R_Third_Visual_Area" />
+<ATLAS_POINT
+  data_type="atlas_point" 
+  STRUCT="L_Fourth_Visual_Area"
+  VAL="006"
+  OKEY="006"
+  GYoAR="0"
+  COG = "36.166700 90.875000 -12.125000"
+  SB_LABEL="L_Fourth_Visual_Area" />
+<ATLAS_POINT
+  data_type="atlas_point" 
+  STRUCT="R_Fourth_Visual_Area"
+  VAL="1006"
+  OKEY="1006"
+  GYoAR="0"
+  COG = "-34.206900 89.793100 -10.000000"
+  SB_LABEL="R_Fourth_Visual_Area" />
+<ATLAS_POINT
+  data_type="atlas_point" 
+  STRUCT="L_Eighth_Visual_Area"
+  VAL="007"
+  OKEY="007"
+  GYoAR="0"
+  COG = "31.406200 77.843800 -12.656200"
+  SB_LABEL="L_Eighth_Visual_Area" />
+<ATLAS_POINT
+  data_type="atlas_point" 
+  STRUCT="R_Eighth_Visual_Area"
+  VAL="1007"
+  OKEY="1007"
+  GYoAR="0"
+  COG = "-32.212100 75.545500 -9.818180"
+  SB_LABEL="R_Eighth_Visual_Area" />
+<ATLAS_POINT
+  data_type="atlas_point" 
+  STRUCT="L_Primary_Motor_Cortex"
+  VAL="008"
+  OKEY="008"
+  GYoAR="0"
+  COG = "35.500000 24.800000 60.000000"
+  SB_LABEL="L_Primary_Motor_Cortex" />
+<ATLAS_POINT
+  data_type="atlas_point" 
+  STRUCT="R_Primary_Motor_Cortex"
+  VAL="1008"
+  OKEY="1008"
+  GYoAR="0"
+  COG = "-35.387100 22.258100 60.064500"
+  SB_LABEL="R_Primary_Motor_Cortex" />
+<ATLAS_POINT
+  data_type="atlas_point" 
+  STRUCT="L_Primary_Sensory_Cortex"
+  VAL="009"
+  OKEY="009"
+  GYoAR="0"
+  COG = "45.187500 22.812500 57.187500"
+  SB_LABEL="L_Primary_Sensory_Cortex" />
+<ATLAS_POINT
+  data_type="atlas_point" 
+  STRUCT="R_Primary_Sensory_Cortex"
+  VAL="1009"
+  OKEY="1009"
+  GYoAR="0"
+  COG = "-43.500000 22.500000 57.000000"
+  SB_LABEL="R_Primary_Sensory_Cortex" />
+<ATLAS_POINT
+  data_type="atlas_point" 
+  STRUCT="L_Frontal_Eye_Fields"
+  VAL="010"
+  OKEY="010"
+  GYoAR="0"
+  COG = "42.225800 5.645160 50.000000"
+  SB_LABEL="L_Frontal_Eye_Fields" />
+<ATLAS_POINT
+  data_type="atlas_point" 
+  STRUCT="R_Frontal_Eye_Fields"
+  VAL="1010"
+  OKEY="1010"
+  GYoAR="0"
+  COG = "-43.843800 0.781250 51.812500"
+  SB_LABEL="R_Frontal_Eye_Fields" />
+<ATLAS_POINT
+  data_type="atlas_point" 
+  STRUCT="L_Premotor_Eye_Fields"
+  VAL="011"
+  OKEY="011"
+  GYoAR="0"
+  COG = "47.107100 1.964280 39.892900"
+  SB_LABEL="L_Premotor_Eye_Fields" />
+<ATLAS_POINT
+  data_type="atlas_point" 
+  STRUCT="R_Premotor_Eye_Fields"
+  VAL="1011"
+  OKEY="1011"
+  GYoAR="0"
+  COG = "-45.906200 -1.250000 35.656200"
+  SB_LABEL="R_Premotor_Eye_Fields" />
+<ATLAS_POINT
+  data_type="atlas_point" 
+  STRUCT="L_Area_55b"
+  VAL="012"
+  OKEY="012"
+  GYoAR="0"
+  COG = "49.535700 -2.142850 49.607100"
+  SB_LABEL="L_Area_55b" />
+<ATLAS_POINT
+  data_type="atlas_point" 
+  STRUCT="R_Area_55b"
+  VAL="1012"
+  OKEY="1012"
+  GYoAR="0"
+  COG = "-49.689700 -5.103450 47.827600"
+  SB_LABEL="R_Area_55b" />
+<ATLAS_POINT
+  data_type="atlas_point" 
+  STRUCT="L_Area_V3A"
+  VAL="013"
+  OKEY="013"
+  GYoAR="0"
+  COG = "14.000000 91.217400 25.739100"
+  SB_LABEL="L_Area_V3A" />
+<ATLAS_POINT
+  data_type="atlas_point" 
+  STRUCT="R_Area_V3A"
+  VAL="1013"
+  OKEY="1013"
+  GYoAR="0"
+  COG = "-14.714300 88.714300 27.357100"
+  SB_LABEL="R_Area_V3A" />
+<ATLAS_POINT
+  data_type="atlas_point" 
+  STRUCT="L_RetroSplenial_Complex"
+  VAL="014"
+  OKEY="014"
+  GYoAR="0"
+  COG = "5.366670 43.733300 23.133300"
+  SB_LABEL="L_RetroSplenial_Complex" />
+<ATLAS_POINT
+  data_type="atlas_point" 
+  STRUCT="R_RetroSplenial_Complex"
+  VAL="1014"
+  OKEY="1014"
+  GYoAR="0"
+  COG = "-5.171420 42.600000 24.714300"
+  SB_LABEL="R_RetroSplenial_Complex" />
+<ATLAS_POINT
+  data_type="atlas_point" 
+  STRUCT="L_Parieto-Occipital_Sulcus_Area_2"
+  VAL="015"
+  OKEY="015"
+  GYoAR="0"
+  COG = "8.333330 69.925900 36.370400"
+  SB_LABEL="L_Parieto-Occipital_Sulcus_Area_2" />
+<ATLAS_POINT
+  data_type="atlas_point" 
+  STRUCT="R_Parieto-Occipital_Sulcus_Area_2"
+  VAL="1015"
+  OKEY="1015"
+  GYoAR="0"
+  COG = "-12.269200 68.115400 37.423100"
+  SB_LABEL="R_Parieto-Occipital_Sulcus_Area_2" />
+<ATLAS_POINT
+  data_type="atlas_point" 
+  STRUCT="L_Seventh_Visual_Area"
+  VAL="016"
+  OKEY="016"
+  GYoAR="0"
+  COG = "25.263200 85.947400 28.578900"
+  SB_LABEL="L_Seventh_Visual_Area" />
+<ATLAS_POINT
+  data_type="atlas_point" 
+  STRUCT="R_Seventh_Visual_Area"
+  VAL="1016"
+  OKEY="1016"
+  GYoAR="0"
+  COG = "-28.800000 84.280000 31.520000"
+  SB_LABEL="R_Seventh_Visual_Area" />
+<ATLAS_POINT
+  data_type="atlas_point" 
+  STRUCT="L_IntraParietal_Sulcus_Area_1"
+  VAL="017"
+  OKEY="017"
+  GYoAR="0"
+  COG = "25.173900 74.043500 34.695700"
+  SB_LABEL="L_IntraParietal_Sulcus_Area_1" />
+<ATLAS_POINT
+  data_type="atlas_point" 
+  STRUCT="R_IntraParietal_Sulcus_Area_1"
+  VAL="1017"
+  OKEY="1017"
+  GYoAR="0"
+  COG = "-26.933300 72.533300 38.466700"
+  SB_LABEL="R_IntraParietal_Sulcus_Area_1" />
+<ATLAS_POINT
+  data_type="atlas_point" 
+  STRUCT="L_Fusiform_Face_Complex"
+  VAL="018"
+  OKEY="018"
+  GYoAR="0"
+  COG = "42.105300 61.000000 -18.368400"
+  SB_LABEL="L_Fusiform_Face_Complex" />
+<ATLAS_POINT
+  data_type="atlas_point" 
+  STRUCT="R_Fusiform_Face_Complex"
+  VAL="1018"
+  OKEY="1018"
+  GYoAR="0"
+  COG = "-40.875000 59.708300 -17.583300"
+  SB_LABEL="R_Fusiform_Face_Complex" />
+<ATLAS_POINT
+  data_type="atlas_point" 
+  STRUCT="L_Area_V3B"
+  VAL="019"
+  OKEY="019"
+  GYoAR="0"
+  COG = "26.200000 81.440000 16.840000"
+  SB_LABEL="L_Area_V3B" />
+<ATLAS_POINT
+  data_type="atlas_point" 
+  STRUCT="R_Area_V3B"
+  VAL="1019"
+  OKEY="1019"
+  GYoAR="0"
+  COG = "-29.843800 76.312500 20.156200"
+  SB_LABEL="R_Area_V3B" />
+<ATLAS_POINT
+  data_type="atlas_point" 
+  STRUCT="L_Area_Lateral_Occipital_1"
+  VAL="020"
+  OKEY="020"
+  GYoAR="0"
+  COG = "38.451600 82.193600 6.516130"
+  SB_LABEL="L_Area_Lateral_Occipital_1" />
+<ATLAS_POINT
+  data_type="atlas_point" 
+  STRUCT="R_Area_Lateral_Occipital_1"
+  VAL="1020"
+  OKEY="1020"
+  GYoAR="0"
+  COG = "-36.192300 79.153800 2.576920"
+  SB_LABEL="R_Area_Lateral_Occipital_1" />
+<ATLAS_POINT
+  data_type="atlas_point" 
+  STRUCT="L_Area_Lateral_Occipital_2"
+  VAL="021"
+  OKEY="021"
+  GYoAR="0"
+  COG = "45.230800 86.423100 -1.500000"
+  SB_LABEL="L_Area_Lateral_Occipital_2" />
+<ATLAS_POINT
+  data_type="atlas_point" 
+  STRUCT="R_Area_Lateral_Occipital_2"
+  VAL="1021"
+  OKEY="1021"
+  GYoAR="0"
+  COG = "-44.441200 80.558800 -4.411760"
+  SB_LABEL="R_Area_Lateral_Occipital_2" />
+<ATLAS_POINT
+  data_type="atlas_point" 
+  STRUCT="L_Posterior_InferoTemporal"
+  VAL="022"
+  OKEY="022"
+  GYoAR="0"
+  COG = "43.689700 83.310300 -13.103500"
+  SB_LABEL="L_Posterior_InferoTemporal" />
+<ATLAS_POINT
+  data_type="atlas_point" 
+  STRUCT="R_Posterior_InferoTemporal"
+  VAL="1022"
+  OKEY="1022"
+  GYoAR="0"
+  COG = "-44.222200 81.222200 -12.666700"
+  SB_LABEL="R_Posterior_InferoTemporal" />
+<ATLAS_POINT
+  data_type="atlas_point" 
+  STRUCT="L_Middle_Temporal_Area"
+  VAL="023"
+  OKEY="023"
+  GYoAR="0"
+  COG = "42.517200 69.206900 14.034500"
+  SB_LABEL="L_Middle_Temporal_Area" />
+<ATLAS_POINT
+  data_type="atlas_point" 
+  STRUCT="R_Middle_Temporal_Area"
+  VAL="1023"
+  OKEY="1023"
+  GYoAR="0"
+  COG = "-53.800000 71.640000 10.520000"
+  SB_LABEL="R_Middle_Temporal_Area" />
+<ATLAS_POINT
+  data_type="atlas_point" 
+  STRUCT="L_Primary_Auditory_Cortex"
+  VAL="024"
+  OKEY="024"
+  GYoAR="0"
+  COG = "43.923100 26.884600 11.846200"
+  SB_LABEL="L_Primary_Auditory_Cortex" />
+<ATLAS_POINT
+  data_type="atlas_point" 
+  STRUCT="R_Primary_Auditory_Cortex"
+  VAL="1024"
+  OKEY="1024"
+  GYoAR="0"
+  COG = "-41.160000 21.840000 11.600000"
+  SB_LABEL="R_Primary_Auditory_Cortex" />
+<ATLAS_POINT
+  data_type="atlas_point" 
+  STRUCT="L_PeriSylvian_Language_Area"
+  VAL="025"
+  OKEY="025"
+  GYoAR="0"
+  COG = "58.057100 48.371400 24.542900"
+  SB_LABEL="L_PeriSylvian_Language_Area" />
+<ATLAS_POINT
+  data_type="atlas_point" 
+  STRUCT="R_PeriSylvian_Language_Area"
+  VAL="1025"
+  OKEY="1025"
+  GYoAR="0"
+  COG = "-65.857100 33.142900 26.642900"
+  SB_LABEL="R_PeriSylvian_Language_Area" />
+<ATLAS_POINT
+  data_type="atlas_point" 
+  STRUCT="L_Superior_Frontal_Language_Area"
+  VAL="026"
+  OKEY="026"
+  GYoAR="0"
+  COG = "11.700000 -17.500000 64.400000"
+  SB_LABEL="L_Superior_Frontal_Language_Area" />
+<ATLAS_POINT
+  data_type="atlas_point" 
+  STRUCT="R_Superior_Frontal_Language_Area"
+  VAL="1026"
+  OKEY="1026"
+  GYoAR="0"
+  COG = "-9.888890 -14.703700 63.296300"
+  SB_LABEL="R_Superior_Frontal_Language_Area" />
+<ATLAS_POINT
+  data_type="atlas_point" 
+  STRUCT="L_PreCuneus_Visual_Area"
+  VAL="027"
+  OKEY="027"
+  GYoAR="0"
+  COG = "7.000000 52.000000 49.900000"
+  SB_LABEL="L_PreCuneus_Visual_Area" />
+<ATLAS_POINT
+  data_type="atlas_point" 
+  STRUCT="R_PreCuneus_Visual_Area"
+  VAL="1027"
+  OKEY="1027"
+  GYoAR="0"
+  COG = "-10.111100 53.111100 50.500000"
+  SB_LABEL="R_PreCuneus_Visual_Area" />
+<ATLAS_POINT
+  data_type="atlas_point" 
+  STRUCT="L_Superior_Temporal_Visual_Area"
+  VAL="028"
+  OKEY="028"
+  GYoAR="0"
+  COG = "62.440000 51.200000 15.760000"
+  SB_LABEL="L_Superior_Temporal_Visual_Area" />
+<ATLAS_POINT
+  data_type="atlas_point" 
+  STRUCT="R_Superior_Temporal_Visual_Area"
+  VAL="1028"
+  OKEY="1028"
+  GYoAR="0"
+  COG = "-58.333300 45.000000 20.000000"
+  SB_LABEL="R_Superior_Temporal_Visual_Area" />
+<ATLAS_POINT
+  data_type="atlas_point" 
+  STRUCT="L_Medial_Area_7P"
+  VAL="029"
+  OKEY="029"
+  GYoAR="0"
+  COG = "2.933330 70.600000 48.700000"
+  SB_LABEL="L_Medial_Area_7P" />
+<ATLAS_POINT
+  data_type="atlas_point" 
+  STRUCT="R_Medial_Area_7P"
+  VAL="1029"
+  OKEY="1029"
+  GYoAR="0"
+  COG = "-6.125000 65.041700 50.666700"
+  SB_LABEL="R_Medial_Area_7P" />
+<ATLAS_POINT
+  data_type="atlas_point" 
+  STRUCT="L_Area_7m"
+  VAL="030"
+  OKEY="030"
+  GYoAR="0"
+  COG = "4.218750 62.375000 35.437500"
+  SB_LABEL="L_Area_7m" />
+<ATLAS_POINT
+  data_type="atlas_point" 
+  STRUCT="R_Area_7m"
+  VAL="1030"
+  OKEY="1030"
+  GYoAR="0"
+  COG = "-3.550000 62.100000 35.100000"
+  SB_LABEL="R_Area_7m" />
+<ATLAS_POINT
+  data_type="atlas_point" 
+  STRUCT="L_Parieto-Occipital_Sulcus_Area_1"
+  VAL="031"
+  OKEY="031"
+  GYoAR="0"
+  COG = "11.928600 58.214300 12.750000"
+  SB_LABEL="L_Parieto-Occipital_Sulcus_Area_1" />
+<ATLAS_POINT
+  data_type="atlas_point" 
+  STRUCT="R_Parieto-Occipital_Sulcus_Area_1"
+  VAL="1031"
+  OKEY="1031"
+  GYoAR="0"
+  COG = "-14.500000 54.176500 15.176500"
+  SB_LABEL="R_Parieto-Occipital_Sulcus_Area_1" />
+<ATLAS_POINT
+  data_type="atlas_point" 
+  STRUCT="L_Area_23d"
+  VAL="032"
+  OKEY="032"
+  GYoAR="0"
+  COG = "3.133330 17.500000 39.000000"
+  SB_LABEL="L_Area_23d" />
+<ATLAS_POINT
+  data_type="atlas_point" 
+  STRUCT="R_Area_23d"
+  VAL="1032"
+  OKEY="1032"
+  GYoAR="0"
+  COG = "-2.884610 21.769200 37.230800"
+  SB_LABEL="R_Area_23d" />
+<ATLAS_POINT
+  data_type="atlas_point" 
+  STRUCT="L_Area_ventral_23_a+b"
+  VAL="033"
+  OKEY="033"
+  GYoAR="0"
+  COG = "4.636370 56.318200 17.863600"
+  SB_LABEL="L_Area_ventral_23_a+b" />
+<ATLAS_POINT
+  data_type="atlas_point" 
+  STRUCT="R_Area_ventral_23_a+b"
+  VAL="1033"
+  OKEY="1033"
+  GYoAR="0"
+  COG = "-4.400000 53.600000 18.400000"
+  SB_LABEL="R_Area_ventral_23_a+b" />
+<ATLAS_POINT
+  data_type="atlas_point" 
+  STRUCT="L_Area_dorsal_23_a+b"
+  VAL="034"
+  OKEY="034"
+  GYoAR="0"
+  COG = "2.823530 40.500000 32.823500"
+  SB_LABEL="L_Area_dorsal_23_a+b" />
+<ATLAS_POINT
+  data_type="atlas_point" 
+  STRUCT="R_Area_dorsal_23_a+b"
+  VAL="1034"
+  OKEY="1034"
+  GYoAR="0"
+  COG = "-3.903230 36.871000 33.935500"
+  SB_LABEL="R_Area_dorsal_23_a+b" />
+<ATLAS_POINT
+  data_type="atlas_point" 
+  STRUCT="L_Area_31p_ventral"
+  VAL="035"
+  OKEY="035"
+  GYoAR="0"
+  COG = "11.888900 47.666700 32.666700"
+  SB_LABEL="L_Area_31p_ventral" />
+<ATLAS_POINT
+  data_type="atlas_point" 
+  STRUCT="R_Area_31p_ventral"
+  VAL="1035"
+  OKEY="1035"
+  GYoAR="0"
+  COG = "-11.708300 41.166700 33.708300"
+  SB_LABEL="R_Area_31p_ventral" />
+<ATLAS_POINT
+  data_type="atlas_point" 
+  STRUCT="L_Area_5m"
+  VAL="036"
+  OKEY="036"
+  GYoAR="0"
+  COG = "7.350010 41.300000 59.050000"
+  SB_LABEL="L_Area_5m" />
+<ATLAS_POINT
+  data_type="atlas_point" 
+  STRUCT="R_Area_5m"
+  VAL="1036"
+  OKEY="1036"
+  GYoAR="0"
+  COG = "-4.666660 40.000000 64.000000"
+  SB_LABEL="R_Area_5m" />
+<ATLAS_POINT
+  data_type="atlas_point" 
+  STRUCT="L_Area_5m_ventral"
+  VAL="037"
+  OKEY="037"
+  GYoAR="0"
+  COG = "15.913000 35.956500 48.956500"
+  SB_LABEL="L_Area_5m_ventral" />
+<ATLAS_POINT
+  data_type="atlas_point" 
+  STRUCT="R_Area_5m_ventral"
+  VAL="1037"
+  OKEY="1037"
+  GYoAR="0"
+  COG = "-15.454500 38.636400 51.909100"
+  SB_LABEL="R_Area_5m_ventral" />
+<ATLAS_POINT
+  data_type="atlas_point" 
+  STRUCT="L_Area_23c"
+  VAL="038"
+  OKEY="038"
+  GYoAR="0"
+  COG = "12.807700 30.076900 38.884600"
+  SB_LABEL="L_Area_23c" />
+<ATLAS_POINT
+  data_type="atlas_point" 
+  STRUCT="R_Area_23c"
+  VAL="1038"
+  OKEY="1038"
+  GYoAR="0"
+  COG = "-13.482800 30.379300 40.206900"
+  SB_LABEL="R_Area_23c" />
+<ATLAS_POINT
+  data_type="atlas_point" 
+  STRUCT="L_Area_5L"
+  VAL="039"
+  OKEY="039"
+  GYoAR="0"
+  COG = "11.933300 49.366700 70.733300"
+  SB_LABEL="L_Area_5L" />
+<ATLAS_POINT
+  data_type="atlas_point" 
+  STRUCT="R_Area_5L"
+  VAL="1039"
+  OKEY="1039"
+  GYoAR="0"
+  COG = "-12.722200 49.000000 75.444400"
+  SB_LABEL="R_Area_5L" />
+<ATLAS_POINT
+  data_type="atlas_point" 
+  STRUCT="L_Dorsal_Area_24d"
+  VAL="040"
+  OKEY="040"
+  GYoAR="0"
+  COG = "8.551730 17.655200 50.413800"
+  SB_LABEL="L_Dorsal_Area_24d" />
+<ATLAS_POINT
+  data_type="atlas_point" 
+  STRUCT="R_Dorsal_Area_24d"
+  VAL="1040"
+  OKEY="1040"
+  GYoAR="0"
+  COG = "-8.333340 16.222200 51.777800"
+  SB_LABEL="R_Dorsal_Area_24d" />
+<ATLAS_POINT
+  data_type="atlas_point" 
+  STRUCT="L_Ventral_Area_24d"
+  VAL="041"
+  OKEY="041"
+  GYoAR="0"
+  COG = "10.038500 -0.692307 43.038500"
+  SB_LABEL="L_Ventral_Area_24d" />
+<ATLAS_POINT
+  data_type="atlas_point" 
+  STRUCT="R_Ventral_Area_24d"
+  VAL="1041"
+  OKEY="1041"
+  GYoAR="0"
+  COG = "-9.281250 0.781250 45.500000"
+  SB_LABEL="R_Ventral_Area_24d" />
+<ATLAS_POINT
+  data_type="atlas_point" 
+  STRUCT="L_Lateral_Area_7A"
+  VAL="042"
+  OKEY="042"
+  GYoAR="0"
+  COG = "21.000000 50.857100 63.428600"
+  SB_LABEL="L_Lateral_Area_7A" />
+<ATLAS_POINT
+  data_type="atlas_point" 
+  STRUCT="R_Lateral_Area_7A"
+  VAL="1042"
+  OKEY="1042"
+  GYoAR="0"
+  COG = "-24.206900 52.000000 70.689700"
+  SB_LABEL="R_Lateral_Area_7A" />
+<ATLAS_POINT
+  data_type="atlas_point" 
+  STRUCT="L_Supplementary_And_Cingulate_Eye"
+  VAL="043"
+  OKEY="043"
+  GYoAR="0"
+  COG = "6.903230 -4.806460 57.806400"
+  SB_LABEL="L_Supplementary_And_Cingulate_Eye" />
+<ATLAS_POINT
+  data_type="atlas_point" 
+  STRUCT="R_Supplementary_And_Cingulate_Eye"
+  VAL="1043"
+  OKEY="1043"
+  GYoAR="0"
+  COG = "-6.277780 -4.361110 62.638900"
+  SB_LABEL="R_Supplementary_And_Cingulate_Eye" />
+<ATLAS_POINT
+  data_type="atlas_point" 
+  STRUCT="L_Area_6m_anterior"
+  VAL="044"
+  OKEY="044"
+  GYoAR="0"
+  COG = "19.750000 -2.687500 67.375000"
+  SB_LABEL="L_Area_6m_anterior" />
+<ATLAS_POINT
+  data_type="atlas_point" 
+  STRUCT="R_Area_6m_anterior"
+  VAL="1044"
+  OKEY="1044"
+  GYoAR="0"
+  COG = "-21.642900 -5.714280 66.000000"
+  SB_LABEL="R_Area_6m_anterior" />
+<ATLAS_POINT
+  data_type="atlas_point" 
+  STRUCT="L_Medial_Area_7A"
+  VAL="045"
+  OKEY="045"
+  GYoAR="0"
+  COG = "10.428600 58.857100 56.761900"
+  SB_LABEL="L_Medial_Area_7A" />
+<ATLAS_POINT
+  data_type="atlas_point" 
+  STRUCT="R_Medial_Area_7A"
+  VAL="1045"
+  OKEY="1045"
+  GYoAR="0"
+  COG = "-13.500000 56.500000 57.600000"
+  SB_LABEL="R_Medial_Area_7A" />
+<ATLAS_POINT
+  data_type="atlas_point" 
+  STRUCT="L_Lateral_Area_7P"
+  VAL="046"
+  OKEY="046"
+  GYoAR="0"
+  COG = "-0.500000 18.500000 19.500000"
+  SB_LABEL="L_Lateral_Area_7P" />
+<ATLAS_POINT
+  data_type="atlas_point" 
+  STRUCT="R_Lateral_Area_7P"
+  VAL="1046"
+  OKEY="1046"
+  GYoAR="0"
+  COG = "-11.545500 73.545500 55.727300"
+  SB_LABEL="R_Lateral_Area_7P" />
+<ATLAS_POINT
+  data_type="atlas_point" 
+  STRUCT="L_Area_7PC"
+  VAL="047"
+  OKEY="047"
+  GYoAR="0"
+  COG = "40.000000 47.000000 62.000000"
+  SB_LABEL="L_Area_7PC" />
+<ATLAS_POINT
+  data_type="atlas_point" 
+  STRUCT="R_Area_7PC"
+  VAL="1047"
+  OKEY="1047"
+  GYoAR="0"
+  COG = "-0.500000 18.500000 19.500000"
+  SB_LABEL="R_Area_7PC" />
+<ATLAS_POINT
+  data_type="atlas_point" 
+  STRUCT="L_Area_Lateral_IntraParietal_ventral"
+  VAL="048"
+  OKEY="048"
+  GYoAR="0"
+  COG = "30.565200 55.869600 54.434800"
+  SB_LABEL="L_Area_Lateral_IntraParietal_ventral" />
+<ATLAS_POINT
+  data_type="atlas_point" 
+  STRUCT="R_Area_Lateral_IntraParietal_ventral"
+  VAL="1048"
+  OKEY="1048"
+  GYoAR="0"
+  COG = "-24.769200 56.307700 53.230800"
+  SB_LABEL="R_Area_Lateral_IntraParietal_ventral" />
+<ATLAS_POINT
+  data_type="atlas_point" 
+  STRUCT="L_Ventral_IntraParietal_Complex"
+  VAL="049"
+  OKEY="049"
+  GYoAR="0"
+  COG = "22.607100 63.607100 61.428600"
+  SB_LABEL="L_Ventral_IntraParietal_Complex" />
+<ATLAS_POINT
+  data_type="atlas_point" 
+  STRUCT="R_Ventral_IntraParietal_Complex"
+  VAL="1049"
+  OKEY="1049"
+  GYoAR="0"
+  COG = "-20.964300 64.035700 63.892900"
+  SB_LABEL="R_Ventral_IntraParietal_Complex" />
+<ATLAS_POINT
+  data_type="atlas_point" 
+  STRUCT="L_Medial_IntraParietal_Area"
+  VAL="050"
+  OKEY="050"
+  GYoAR="0"
+  COG = "24.310300 67.137900 47.827600"
+  SB_LABEL="L_Medial_IntraParietal_Area" />
+<ATLAS_POINT
+  data_type="atlas_point" 
+  STRUCT="R_Medial_IntraParietal_Area"
+  VAL="1050"
+  OKEY="1050"
+  GYoAR="0"
+  COG = "-25.370400 68.888900 48.518500"
+  SB_LABEL="R_Medial_IntraParietal_Area" />
+<ATLAS_POINT
+  data_type="atlas_point" 
+  STRUCT="L_Area_1"
+  VAL="051"
+  OKEY="051"
+  GYoAR="0"
+  COG = "51.476200 23.952400 59.142900"
+  SB_LABEL="L_Area_1" />
+<ATLAS_POINT
+  data_type="atlas_point" 
+  STRUCT="R_Area_1"
+  VAL="1051"
+  OKEY="1051"
+  GYoAR="0"
+  COG = "-49.875000 21.937500 60.750000"
+  SB_LABEL="R_Area_1" />
+<ATLAS_POINT
+  data_type="atlas_point" 
+  STRUCT="L_Area_2"
+  VAL="052"
+  OKEY="052"
+  GYoAR="0"
+  COG = "42.931000 33.689700 48.965500"
+  SB_LABEL="L_Area_2" />
+<ATLAS_POINT
+  data_type="atlas_point" 
+  STRUCT="R_Area_2"
+  VAL="1052"
+  OKEY="1052"
+  GYoAR="0"
+  COG = "-39.625000 29.875000 49.291700"
+  SB_LABEL="R_Area_2" />
+<ATLAS_POINT
+  data_type="atlas_point" 
+  STRUCT="L_Area_3a"
+  VAL="053"
+  OKEY="053"
+  GYoAR="0"
+  COG = "36.343800 22.125000 45.687500"
+  SB_LABEL="L_Area_3a" />
+<ATLAS_POINT
+  data_type="atlas_point" 
+  STRUCT="R_Area_3a"
+  VAL="1053"
+  OKEY="1053"
+  GYoAR="0"
+  COG = "-37.470600 21.705900 46.823500"
+  SB_LABEL="R_Area_3a" />
+<ATLAS_POINT
+  data_type="atlas_point" 
+  STRUCT="L_Dorsal_area_6"
+  VAL="054"
+  OKEY="054"
+  GYoAR="0"
+  COG = "36.074100 15.666700 67.518500"
+  SB_LABEL="L_Dorsal_area_6" />
+<ATLAS_POINT
+  data_type="atlas_point" 
+  STRUCT="R_Dorsal_area_6"
+  VAL="1054"
+  OKEY="1054"
+  GYoAR="0"
+  COG = "-37.529400 10.882400 65.470600"
+  SB_LABEL="R_Dorsal_area_6" />
+<ATLAS_POINT
+  data_type="atlas_point" 
+  STRUCT="L_Area_6mp"
+  VAL="055"
+  OKEY="055"
+  GYoAR="0"
+  COG = "8.035720 13.321400 74.928600"
+  SB_LABEL="L_Area_6mp" />
+<ATLAS_POINT
+  data_type="atlas_point" 
+  STRUCT="R_Area_6mp"
+  VAL="1055"
+  OKEY="1055"
+  GYoAR="0"
+  COG = "-13.148100 12.814800 72.111100"
+  SB_LABEL="R_Area_6mp" />
+<ATLAS_POINT
+  data_type="atlas_point" 
+  STRUCT="L_Ventral_Area_6"
+  VAL="056"
+  OKEY="056"
+  GYoAR="0"
+  COG = "58.172400 -6.103450 35.448300"
+  SB_LABEL="L_Ventral_Area_6" />
+<ATLAS_POINT
+  data_type="atlas_point" 
+  STRUCT="R_Ventral_Area_6"
+  VAL="1056"
+  OKEY="1056"
+  GYoAR="0"
+  COG = "-57.566700 -7.399990 33.766700"
+  SB_LABEL="R_Ventral_Area_6" />
+<ATLAS_POINT
+  data_type="atlas_point" 
+  STRUCT="L_Area_Posterior_24_prime"
+  VAL="057"
+  OKEY="057"
+  GYoAR="0"
+  COG = "4.433330 0.199997 38.966700"
+  SB_LABEL="L_Area_Posterior_24_prime" />
+<ATLAS_POINT
+  data_type="atlas_point" 
+  STRUCT="R_Area_Posterior_24_prime"
+  VAL="1057"
+  OKEY="1057"
+  GYoAR="0"
+  COG = "-4.379310 3.448270 40.551700"
+  SB_LABEL="R_Area_Posterior_24_prime" />
+<ATLAS_POINT
+  data_type="atlas_point" 
+  STRUCT="L_Area_33_prime"
+  VAL="058"
+  OKEY="058"
+  GYoAR="0"
+  COG = "3.125000 -11.250000 28.812500"
+  SB_LABEL="L_Area_33_prime" />
+<ATLAS_POINT
+  data_type="atlas_point" 
+  STRUCT="R_Area_33_prime"
+  VAL="1058"
+  OKEY="1058"
+  GYoAR="0"
+  COG = "-5.137930 -11.310300 28.172400"
+  SB_LABEL="R_Area_33_prime" />
+<ATLAS_POINT
+  data_type="atlas_point" 
+  STRUCT="L_Anterior_24_prime"
+  VAL="059"
+  OKEY="059"
+  GYoAR="0"
+  COG = "6.500000 -18.000000 31.000000"
+  SB_LABEL="L_Anterior_24_prime" />
+<ATLAS_POINT
+  data_type="atlas_point" 
+  STRUCT="R_Anterior_24_prime"
+  VAL="1059"
+  OKEY="1059"
+  GYoAR="0"
+  COG = "-4.709680 -18.225800 32.903200"
+  SB_LABEL="R_Anterior_24_prime" />
+<ATLAS_POINT
+  data_type="atlas_point" 
+  STRUCT="L_Area_p32_prime"
+  VAL="060"
+  OKEY="060"
+  GYoAR="0"
+  COG = "9.500000 -17.500000 36.500000"
+  SB_LABEL="L_Area_p32_prime" />
+<ATLAS_POINT
+  data_type="atlas_point" 
+  STRUCT="R_Area_p32_prime"
+  VAL="1060"
+  OKEY="1060"
+  GYoAR="0"
+  COG = "-10.750000 -14.500000 38.750000"
+  SB_LABEL="R_Area_p32_prime" />
+<ATLAS_POINT
+  data_type="atlas_point" 
+  STRUCT="L_Area_a24"
+  VAL="061"
+  OKEY="061"
+  GYoAR="0"
+  COG = "5.772720 -44.136400 -3.500000"
+  SB_LABEL="L_Area_a24" />
+<ATLAS_POINT
+  data_type="atlas_point" 
+  STRUCT="R_Area_a24"
+  VAL="1061"
+  OKEY="1061"
+  GYoAR="0"
+  COG = "-6.000000 -40.166700 -3.333330"
+  SB_LABEL="R_Area_a24" />
+<ATLAS_POINT
+  data_type="atlas_point" 
+  STRUCT="L_Area_dorsal_32"
+  VAL="062"
+  OKEY="062"
+  GYoAR="0"
+  COG = "10.454500 -44.212100 21.969700"
+  SB_LABEL="L_Area_dorsal_32" />
+<ATLAS_POINT
+  data_type="atlas_point" 
+  STRUCT="R_Area_dorsal_32"
+  VAL="1062"
+  OKEY="1062"
+  GYoAR="0"
+  COG = "-9.294120 -42.617600 22.647100"
+  SB_LABEL="R_Area_dorsal_32" />
+<ATLAS_POINT
+  data_type="atlas_point" 
+  STRUCT="L_Area_8BM"
+  VAL="063"
+  OKEY="063"
+  GYoAR="0"
+  COG = "4.722230 -31.638900 44.361100"
+  SB_LABEL="L_Area_8BM" />
+<ATLAS_POINT
+  data_type="atlas_point" 
+  STRUCT="R_Area_8BM"
+  VAL="1063"
+  OKEY="1063"
+  GYoAR="0"
+  COG = "-4.225810 -29.354800 47.000000"
+  SB_LABEL="R_Area_8BM" />
+<ATLAS_POINT
+  data_type="atlas_point" 
+  STRUCT="L_Area_p32"
+  VAL="064"
+  OKEY="064"
+  GYoAR="0"
+  COG = "12.875000 -50.093800 -3.500000"
+  SB_LABEL="L_Area_p32" />
+<ATLAS_POINT
+  data_type="atlas_point" 
+  STRUCT="R_Area_p32"
+  VAL="1064"
+  OKEY="1064"
+  GYoAR="0"
+  COG = "-10.045500 -47.954500 -3.954540"
+  SB_LABEL="R_Area_p32" />
+<ATLAS_POINT
+  data_type="atlas_point" 
+  STRUCT="L_Area_10r"
+  VAL="065"
+  OKEY="065"
+  GYoAR="0"
+  COG = "6.318180 -51.318200 -11.318200"
+  SB_LABEL="L_Area_10r" />
+<ATLAS_POINT
+  data_type="atlas_point" 
+  STRUCT="R_Area_10r"
+  VAL="1065"
+  OKEY="1065"
+  GYoAR="0"
+  COG = "-8.038460 -52.076900 -10.884600"
+  SB_LABEL="R_Area_10r" />
+<ATLAS_POINT
+  data_type="atlas_point" 
+  STRUCT="L_Area_47m"
+  VAL="066"
+  OKEY="066"
+  GYoAR="0"
+  COG = "38.343800 -31.906200 -13.812500"
+  SB_LABEL="L_Area_47m" />
+<ATLAS_POINT
+  data_type="atlas_point" 
+  STRUCT="R_Area_47m"
+  VAL="1066"
+  OKEY="1066"
+  GYoAR="0"
+  COG = "-32.562500 -34.406200 -14.531200"
+  SB_LABEL="R_Area_47m" />
+<ATLAS_POINT
+  data_type="atlas_point" 
+  STRUCT="L_Area_8Av"
+  VAL="067"
+  OKEY="067"
+  GYoAR="0"
+  COG = "40.652200 -15.869600 51.652200"
+  SB_LABEL="L_Area_8Av" />
+<ATLAS_POINT
+  data_type="atlas_point" 
+  STRUCT="R_Area_8Av"
+  VAL="1067"
+  OKEY="1067"
+  GYoAR="0"
+  COG = "-39.548400 -19.032300 51.161300"
+  SB_LABEL="R_Area_8Av" />
+<ATLAS_POINT
+  data_type="atlas_point" 
+  STRUCT="L_Area_8Ad"
+  VAL="068"
+  OKEY="068"
+  GYoAR="0"
+  COG = "22.230800 -30.307700 38.769200"
+  SB_LABEL="L_Area_8Ad" />
+<ATLAS_POINT
+  data_type="atlas_point" 
+  STRUCT="R_Area_8Ad"
+  VAL="1068"
+  OKEY="1068"
+  GYoAR="0"
+  COG = "-22.851900 -30.037000 38.963000"
+  SB_LABEL="R_Area_8Ad" />
+<ATLAS_POINT
+  data_type="atlas_point" 
+  STRUCT="L_Area_9_Middle"
+  VAL="069"
+  OKEY="069"
+  GYoAR="0"
+  COG = "6.500000 -56.500000 20.500000"
+  SB_LABEL="L_Area_9_Middle" />
+<ATLAS_POINT
+  data_type="atlas_point" 
+  STRUCT="R_Area_9_Middle"
+  VAL="1069"
+  OKEY="1069"
+  GYoAR="0"
+  COG = "-5.035710 -57.321400 19.178600"
+  SB_LABEL="R_Area_9_Middle" />
+<ATLAS_POINT
+  data_type="atlas_point" 
+  STRUCT="L_Area_8B_Lateral"
+  VAL="070"
+  OKEY="070"
+  GYoAR="0"
+  COG = "12.615400 -35.769200 53.500000"
+  SB_LABEL="L_Area_8B_Lateral" />
+<ATLAS_POINT
+  data_type="atlas_point" 
+  STRUCT="R_Area_8B_Lateral"
+  VAL="1070"
+  OKEY="1070"
+  GYoAR="0"
+  COG = "-13.600000 -40.742900 49.314300"
+  SB_LABEL="R_Area_8B_Lateral" />
+<ATLAS_POINT
+  data_type="atlas_point" 
+  STRUCT="L_Area_9_Posterior"
+  VAL="071"
+  OKEY="071"
+  GYoAR="0"
+  COG = "18.633300 -45.466700 36.366700"
+  SB_LABEL="L_Area_9_Posterior" />
+<ATLAS_POINT
+  data_type="atlas_point" 
+  STRUCT="R_Area_9_Posterior"
+  VAL="1071"
+  OKEY="1071"
+  GYoAR="0"
+  COG = "-18.500000 -50.233300 32.966700"
+  SB_LABEL="R_Area_9_Posterior" />
+<ATLAS_POINT
+  data_type="atlas_point" 
+  STRUCT="L_Area_10d"
+  VAL="072"
+  OKEY="072"
+  GYoAR="0"
+  COG = "12.611100 -68.111100 7.833330"
+  SB_LABEL="L_Area_10d" />
+<ATLAS_POINT
+  data_type="atlas_point" 
+  STRUCT="R_Area_10d"
+  VAL="1072"
+  OKEY="1072"
+  GYoAR="0"
+  COG = "-9.000000 -69.000000 4.583330"
+  SB_LABEL="R_Area_10d" />
+<ATLAS_POINT
+  data_type="atlas_point" 
+  STRUCT="L_Area_8C"
+  VAL="073"
+  OKEY="073"
+  GYoAR="0"
+  COG = "46.100000 -12.450000 35.100000"
+  SB_LABEL="L_Area_8C" />
+<ATLAS_POINT
+  data_type="atlas_point" 
+  STRUCT="R_Area_8C"
+  VAL="1073"
+  OKEY="1073"
+  GYoAR="0"
+  COG = "-37.678600 -18.000000 35.500000"
+  SB_LABEL="R_Area_8C" />
+<ATLAS_POINT
+  data_type="atlas_point" 
+  STRUCT="L_Area_44"
+  VAL="074"
+  OKEY="074"
+  GYoAR="0"
+  COG = "56.533300 -16.600000 12.500000"
+  SB_LABEL="L_Area_44" />
+<ATLAS_POINT
+  data_type="atlas_point" 
+  STRUCT="R_Area_44"
+  VAL="1074"
+  OKEY="1074"
+  GYoAR="0"
+  COG = "-54.638900 -20.583300 13.361100"
+  SB_LABEL="R_Area_44" />
+<ATLAS_POINT
+  data_type="atlas_point" 
+  STRUCT="L_Area_45"
+  VAL="075"
+  OKEY="075"
+  GYoAR="0"
+  COG = "49.281200 -22.468800 3.250000"
+  SB_LABEL="L_Area_45" />
+<ATLAS_POINT
+  data_type="atlas_point" 
+  STRUCT="R_Area_45"
+  VAL="1075"
+  OKEY="1075"
+  GYoAR="0"
+  COG = "-50.620700 -26.965500 4.137920"
+  SB_LABEL="R_Area_45" />
+<ATLAS_POINT
+  data_type="atlas_point" 
+  STRUCT="L_Area_47l_(47_lateral)"
+  VAL="076"
+  OKEY="076"
+  GYoAR="0"
+  COG = "46.115400 -31.192300 -9.384610"
+  SB_LABEL="L_Area_47l_(47_lateral)" />
+<ATLAS_POINT
+  data_type="atlas_point" 
+  STRUCT="R_Area_47l_(47_lateral)"
+  VAL="1076"
+  OKEY="1076"
+  GYoAR="0"
+  COG = "-46.315800 -34.947400 -14.578900"
+  SB_LABEL="R_Area_47l_(47_lateral)" />
+<ATLAS_POINT
+  data_type="atlas_point" 
+  STRUCT="L_Area_anterior_47r"
+  VAL="077"
+  OKEY="077"
+  GYoAR="0"
+  COG = "41.269200 -49.038500 -11.961500"
+  SB_LABEL="L_Area_anterior_47r" />
+<ATLAS_POINT
+  data_type="atlas_point" 
+  STRUCT="R_Area_anterior_47r"
+  VAL="1077"
+  OKEY="1077"
+  GYoAR="0"
+  COG = "-41.757600 -52.909100 -10.606100"
+  SB_LABEL="R_Area_anterior_47r" />
+<ATLAS_POINT
+  data_type="atlas_point" 
+  STRUCT="L_Rostral_Area_6"
+  VAL="078"
+  OKEY="078"
+  GYoAR="0"
+  COG = "51.740700 -4.888890 17.370400"
+  SB_LABEL="L_Rostral_Area_6" />
+<ATLAS_POINT
+  data_type="atlas_point" 
+  STRUCT="R_Rostral_Area_6"
+  VAL="1078"
+  OKEY="1078"
+  GYoAR="0"
+  COG = "-50.166700 -8.722230 15.388900"
+  SB_LABEL="R_Rostral_Area_6" />
+<ATLAS_POINT
+  data_type="atlas_point" 
+  STRUCT="L_Area_IFJa"
+  VAL="079"
+  OKEY="079"
+  GYoAR="0"
+  COG = "39.000000 -9.727280 26.090900"
+  SB_LABEL="L_Area_IFJa" />
+<ATLAS_POINT
+  data_type="atlas_point" 
+  STRUCT="R_Area_IFJa"
+  VAL="1079"
+  OKEY="1079"
+  GYoAR="0"
+  COG = "-41.178600 -17.178600 24.892900"
+  SB_LABEL="R_Area_IFJa" />
+<ATLAS_POINT
+  data_type="atlas_point" 
+  STRUCT="L_Area_IFJp"
+  VAL="080"
+  OKEY="080"
+  GYoAR="0"
+  COG = "39.076900 -4.038470 29.346200"
+  SB_LABEL="L_Area_IFJp" />
+<ATLAS_POINT
+  data_type="atlas_point" 
+  STRUCT="R_Area_IFJp"
+  VAL="1080"
+  OKEY="1080"
+  GYoAR="0"
+  COG = "-37.451600 -7.709670 26.129000"
+  SB_LABEL="R_Area_IFJp" />
+<ATLAS_POINT
+  data_type="atlas_point" 
+  STRUCT="L_Area_IFSp"
+  VAL="081"
+  OKEY="081"
+  GYoAR="0"
+  COG = "45.782600 -18.913000 22.260900"
+  SB_LABEL="L_Area_IFSp" />
+<ATLAS_POINT
+  data_type="atlas_point" 
+  STRUCT="R_Area_IFSp"
+  VAL="1081"
+  OKEY="1081"
+  GYoAR="0"
+  COG = "-41.800000 -27.560000 18.960000"
+  SB_LABEL="R_Area_IFSp" />
+<ATLAS_POINT
+  data_type="atlas_point" 
+  STRUCT="L_Area__IFSa"
+  VAL="082"
+  OKEY="082"
+  GYoAR="0"
+  COG = "50.709700 -34.354800 11.903200"
+  SB_LABEL="L_Area__IFSa" />
+<ATLAS_POINT
+  data_type="atlas_point" 
+  STRUCT="R_Area__IFSa"
+  VAL="1082"
+  OKEY="1082"
+  GYoAR="0"
+  COG = "-50.000000 -40.272700 3.909090"
+  SB_LABEL="R_Area__IFSa" />
+<ATLAS_POINT
+  data_type="atlas_point" 
+  STRUCT="L_Area_posterior_9-46v"
+  VAL="083"
+  OKEY="083"
+  GYoAR="0"
+  COG = "49.931000 -29.069000 25.000000"
+  SB_LABEL="L_Area_posterior_9-46v" />
+<ATLAS_POINT
+  data_type="atlas_point" 
+  STRUCT="R_Area_posterior_9-46v"
+  VAL="1083"
+  OKEY="1083"
+  GYoAR="0"
+  COG = "-47.750000 -33.964300 22.928600"
+  SB_LABEL="R_Area_posterior_9-46v" />
+<ATLAS_POINT
+  data_type="atlas_point" 
+  STRUCT="L_Area_46"
+  VAL="084"
+  OKEY="084"
+  GYoAR="0"
+  COG = "39.666700 -36.090900 28.909100"
+  SB_LABEL="L_Area_46" />
+<ATLAS_POINT
+  data_type="atlas_point" 
+  STRUCT="R_Area_46"
+  VAL="1084"
+  OKEY="1084"
+  GYoAR="0"
+  COG = "-35.800000 -38.700000 25.966700"
+  SB_LABEL="R_Area_46" />
+<ATLAS_POINT
+  data_type="atlas_point" 
+  STRUCT="L_Area_anterior_9-46v"
+  VAL="085"
+  OKEY="085"
+  GYoAR="0"
+  COG = "41.437500 -52.250000 7.375000"
+  SB_LABEL="L_Area_anterior_9-46v" />
+<ATLAS_POINT
+  data_type="atlas_point" 
+  STRUCT="R_Area_anterior_9-46v"
+  VAL="1085"
+  OKEY="1085"
+  GYoAR="0"
+  COG = "-40.285700 -53.142900 8.428570"
+  SB_LABEL="R_Area_anterior_9-46v" />
+<ATLAS_POINT
+  data_type="atlas_point" 
+  STRUCT="L_Area_9-46d"
+  VAL="086"
+  OKEY="086"
+  GYoAR="0"
+  COG = "27.125000 -40.718800 22.718800"
+  SB_LABEL="L_Area_9-46d" />
+<ATLAS_POINT
+  data_type="atlas_point" 
+  STRUCT="R_Area_9-46d"
+  VAL="1086"
+  OKEY="1086"
+  GYoAR="0"
+  COG = "-24.954500 -46.863600 19.636400"
+  SB_LABEL="R_Area_9-46d" />
+<ATLAS_POINT
+  data_type="atlas_point" 
+  STRUCT="L_Area_9_anterior"
+  VAL="087"
+  OKEY="087"
+  GYoAR="0"
+  COG = "22.937500 -59.125000 24.625000"
+  SB_LABEL="L_Area_9_anterior" />
+<ATLAS_POINT
+  data_type="atlas_point" 
+  STRUCT="R_Area_9_anterior"
+  VAL="1087"
+  OKEY="1087"
+  GYoAR="0"
+  COG = "-18.166700 -62.266700 16.566700"
+  SB_LABEL="R_Area_9_anterior" />
+<ATLAS_POINT
+  data_type="atlas_point" 
+  STRUCT="L_Area_10v"
+  VAL="088"
+  OKEY="088"
+  GYoAR="0"
+  COG = "3.869570 -51.173900 -21.304400"
+  SB_LABEL="L_Area_10v" />
+<ATLAS_POINT
+  data_type="atlas_point" 
+  STRUCT="R_Area_10v"
+  VAL="1088"
+  OKEY="1088"
+  GYoAR="0"
+  COG = "-2.769230 -50.000000 -20.000000"
+  SB_LABEL="R_Area_10v" />
+<ATLAS_POINT
+  data_type="atlas_point" 
+  STRUCT="L_Area_anterior_10p"
+  VAL="089"
+  OKEY="089"
+  GYoAR="0"
+  COG = "28.217400 -57.304400 -6.434780"
+  SB_LABEL="L_Area_anterior_10p" />
+<ATLAS_POINT
+  data_type="atlas_point" 
+  STRUCT="R_Area_anterior_10p"
+  VAL="1089"
+  OKEY="1089"
+  GYoAR="0"
+  COG = "-21.342900 -59.314300 -9.600010"
+  SB_LABEL="R_Area_anterior_10p" />
+<ATLAS_POINT
+  data_type="atlas_point" 
+  STRUCT="L_Polar_10p"
+  VAL="090"
+  OKEY="090"
+  GYoAR="0"
+  COG = "12.555600 -62.666700 -15.277800"
+  SB_LABEL="L_Polar_10p" />
+<ATLAS_POINT
+  data_type="atlas_point" 
+  STRUCT="R_Polar_10p"
+  VAL="1090"
+  OKEY="1090"
+  GYoAR="0"
+  COG = "-12.312500 -63.750000 -16.062500"
+  SB_LABEL="R_Polar_10p" />
+<ATLAS_POINT
+  data_type="atlas_point" 
+  STRUCT="L_Area_11l"
+  VAL="091"
+  OKEY="091"
+  GYoAR="0"
+  COG = "28.000000 -47.083300 -13.000000"
+  SB_LABEL="L_Area_11l" />
+<ATLAS_POINT
+  data_type="atlas_point" 
+  STRUCT="R_Area_11l"
+  VAL="1091"
+  OKEY="1091"
+  GYoAR="0"
+  COG = "-24.307700 -48.000000 -14.846200"
+  SB_LABEL="R_Area_11l" />
+<ATLAS_POINT
+  data_type="atlas_point" 
+  STRUCT="L_Area_13l"
+  VAL="092"
+  OKEY="092"
+  GYoAR="0"
+  COG = "22.925900 -30.222200 -17.740700"
+  SB_LABEL="L_Area_13l" />
+<ATLAS_POINT
+  data_type="atlas_point" 
+  STRUCT="R_Area_13l"
+  VAL="1092"
+  OKEY="1092"
+  GYoAR="0"
+  COG = "-20.240000 -28.640000 -18.320000"
+  SB_LABEL="R_Area_13l" />
+<ATLAS_POINT
+  data_type="atlas_point" 
+  STRUCT="L_Orbital_Frontal_Complex"
+  VAL="093"
+  OKEY="093"
+  GYoAR="0"
+  COG = "9.937500 -35.812500 -25.375000"
+  SB_LABEL="L_Orbital_Frontal_Complex" />
+<ATLAS_POINT
+  data_type="atlas_point" 
+  STRUCT="R_Orbital_Frontal_Complex"
+  VAL="1093"
+  OKEY="1093"
+  GYoAR="0"
+  COG = "-9.500000 -43.777800 -21.111100"
+  SB_LABEL="R_Orbital_Frontal_Complex" />
+<ATLAS_POINT
+  data_type="atlas_point" 
+  STRUCT="L_Area_47s"
+  VAL="094"
+  OKEY="094"
+  GYoAR="0"
+  COG = "31.916700 -20.583300 -19.000000"
+  SB_LABEL="L_Area_47s" />
+<ATLAS_POINT
+  data_type="atlas_point" 
+  STRUCT="R_Area_47s"
+  VAL="1094"
+  OKEY="1094"
+  GYoAR="0"
+  COG = "-30.500000 -23.250000 -19.000000"
+  SB_LABEL="R_Area_47s" />
+<ATLAS_POINT
+  data_type="atlas_point" 
+  STRUCT="L_Area_Lateral_IntraParietal_dorsal"
+  VAL="095"
+  OKEY="095"
+  GYoAR="0"
+  COG = "29.281200 55.437500 41.750000"
+  SB_LABEL="L_Area_Lateral_IntraParietal_dorsal" />
+<ATLAS_POINT
+  data_type="atlas_point" 
+  STRUCT="R_Area_Lateral_IntraParietal_dorsal"
+  VAL="1095"
+  OKEY="1095"
+  GYoAR="0"
+  COG = "-27.862100 53.586200 43.172400"
+  SB_LABEL="R_Area_Lateral_IntraParietal_dorsal" />
+<ATLAS_POINT
+  data_type="atlas_point" 
+  STRUCT="L_Area_6_anterior"
+  VAL="096"
+  OKEY="096"
+  GYoAR="0"
+  COG = "24.733300 6.600010 52.000000"
+  SB_LABEL="L_Area_6_anterior" />
+<ATLAS_POINT
+  data_type="atlas_point" 
+  STRUCT="R_Area_6_anterior"
+  VAL="1096"
+  OKEY="1096"
+  GYoAR="0"
+  COG = "-25.774200 4.870970 52.129000"
+  SB_LABEL="R_Area_6_anterior" />
+<ATLAS_POINT
+  data_type="atlas_point" 
+  STRUCT="L_Inferior_6-8_Transitional_Area"
+  VAL="097"
+  OKEY="097"
+  GYoAR="0"
+  COG = "29.714300 -8.857150 53.857100"
+  SB_LABEL="L_Inferior_6-8_Transitional_Area" />
+<ATLAS_POINT
+  data_type="atlas_point" 
+  STRUCT="R_Inferior_6-8_Transitional_Area"
+  VAL="1097"
+  OKEY="1097"
+  GYoAR="0"
+  COG = "-31.300000 -12.133300 54.233300"
+  SB_LABEL="R_Inferior_6-8_Transitional_Area" />
+<ATLAS_POINT
+  data_type="atlas_point" 
+  STRUCT="L_Superior_6-8_Transitional_Area"
+  VAL="098"
+  OKEY="098"
+  GYoAR="0"
+  COG = "23.576900 -23.884600 55.846200"
+  SB_LABEL="L_Superior_6-8_Transitional_Area" />
+<ATLAS_POINT
+  data_type="atlas_point" 
+  STRUCT="R_Superior_6-8_Transitional_Area"
+  VAL="1098"
+  OKEY="1098"
+  GYoAR="0"
+  COG = "-23.785700 -23.928600 58.071400"
+  SB_LABEL="R_Superior_6-8_Transitional_Area" />
+<ATLAS_POINT
+  data_type="atlas_point" 
+  STRUCT="L_Area_43"
+  VAL="099"
+  OKEY="099"
+  GYoAR="0"
+  COG = "57.000000 0.187500 9.593750"
+  SB_LABEL="L_Area_43" />
+<ATLAS_POINT
+  data_type="atlas_point" 
+  STRUCT="R_Area_43"
+  VAL="1099"
+  OKEY="1099"
+  GYoAR="0"
+  COG = "-55.758600 -0.965515 10.482800"
+  SB_LABEL="R_Area_43" />
+<ATLAS_POINT
+  data_type="atlas_point" 
+  STRUCT="L_Area_OP4/PV"
+  VAL="100"
+  OKEY="100"
+  GYoAR="0"
+  COG = "60.812500 12.062500 12.187500"
+  SB_LABEL="L_Area_OP4/PV" />
+<ATLAS_POINT
+  data_type="atlas_point" 
+  STRUCT="R_Area_OP4/PV"
+  VAL="1100"
+  OKEY="1100"
+  GYoAR="0"
+  COG = "-53.307700 12.000000 14.346200"
+  SB_LABEL="R_Area_OP4/PV" />
+<ATLAS_POINT
+  data_type="atlas_point" 
+  STRUCT="L_Area_OP1/SII"
+  VAL="101"
+  OKEY="101"
+  GYoAR="0"
+  COG = "46.700000 22.966700 19.566700"
+  SB_LABEL="L_Area_OP1/SII" />
+<ATLAS_POINT
+  data_type="atlas_point" 
+  STRUCT="R_Area_OP1/SII"
+  VAL="1101"
+  OKEY="1101"
+  GYoAR="0"
+  COG = "-42.571400 19.250000 17.928600"
+  SB_LABEL="R_Area_OP1/SII" />
+<ATLAS_POINT
+  data_type="atlas_point" 
+  STRUCT="L_Area_OP2-3/VS"
+  VAL="102"
+  OKEY="102"
+  GYoAR="0"
+  COG = "41.166700 15.400000 21.033300"
+  SB_LABEL="L_Area_OP2-3/VS" />
+<ATLAS_POINT
+  data_type="atlas_point" 
+  STRUCT="R_Area_OP2-3/VS"
+  VAL="1102"
+  OKEY="1102"
+  GYoAR="0"
+  COG = "-38.233300 12.166700 20.966700"
+  SB_LABEL="R_Area_OP2-3/VS" />
+<ATLAS_POINT
+  data_type="atlas_point" 
+  STRUCT="L_Area_52"
+  VAL="103"
+  OKEY="103"
+  GYoAR="0"
+  COG = "37.468800 24.375000 2.718750"
+  SB_LABEL="L_Area_52" />
+<ATLAS_POINT
+  data_type="atlas_point" 
+  STRUCT="R_Area_52"
+  VAL="1103"
+  OKEY="1103"
+  GYoAR="0"
+  COG = "-37.333300 22.000000 3.000000"
+  SB_LABEL="R_Area_52" />
+<ATLAS_POINT
+  data_type="atlas_point" 
+  STRUCT="L_RetroInsular_Cortex"
+  VAL="104"
+  OKEY="104"
+  GYoAR="0"
+  COG = "38.636400 34.697000 18.606100"
+  SB_LABEL="L_RetroInsular_Cortex" />
+<ATLAS_POINT
+  data_type="atlas_point" 
+  STRUCT="R_RetroInsular_Cortex"
+  VAL="1104"
+  OKEY="1104"
+  GYoAR="0"
+  COG = "-38.235300 31.323500 19.705900"
+  SB_LABEL="R_RetroInsular_Cortex" />
+<ATLAS_POINT
+  data_type="atlas_point" 
+  STRUCT="L_Area_PFcm"
+  VAL="105"
+  OKEY="105"
+  GYoAR="0"
+  COG = "49.777800 33.703700 21.481500"
+  SB_LABEL="L_Area_PFcm" />
+<ATLAS_POINT
+  data_type="atlas_point" 
+  STRUCT="R_Area_PFcm"
+  VAL="1105"
+  OKEY="1105"
+  GYoAR="0"
+  COG = "-44.538500 29.576900 23.538500"
+  SB_LABEL="R_Area_PFcm" />
+<ATLAS_POINT
+  data_type="atlas_point" 
+  STRUCT="L_Posterior_Insular_Area_2"
+  VAL="106"
+  OKEY="106"
+  GYoAR="0"
+  COG = "40.818200 3.727280 0.181824"
+  SB_LABEL="L_Posterior_Insular_Area_2" />
+<ATLAS_POINT
+  data_type="atlas_point" 
+  STRUCT="R_Posterior_Insular_Area_2"
+  VAL="1106"
+  OKEY="1106"
+  GYoAR="0"
+  COG = "-40.766700 2.933330 -2.233340"
+  SB_LABEL="R_Posterior_Insular_Area_2" />
+<ATLAS_POINT
+  data_type="atlas_point" 
+  STRUCT="L_Area_TA2"
+  VAL="107"
+  OKEY="107"
+  GYoAR="0"
+  COG = "49.968800 0.500000 -6.250000"
+  SB_LABEL="L_Area_TA2" />
+<ATLAS_POINT
+  data_type="atlas_point" 
+  STRUCT="R_Area_TA2"
+  VAL="1107"
+  OKEY="1107"
+  GYoAR="0"
+  COG = "-50.812500 -0.656250 -5.781250"
+  SB_LABEL="R_Area_TA2" />
+<ATLAS_POINT
+  data_type="atlas_point" 
+  STRUCT="L_Frontal_Opercular_Area_4"
+  VAL="108"
+  OKEY="108"
+  GYoAR="0"
+  COG = "36.300000 -13.300000 10.000000"
+  SB_LABEL="L_Frontal_Opercular_Area_4" />
+<ATLAS_POINT
+  data_type="atlas_point" 
+  STRUCT="R_Frontal_Opercular_Area_4"
+  VAL="1108"
+  OKEY="1108"
+  GYoAR="0"
+  COG = "-35.750000 -16.531200 10.000000"
+  SB_LABEL="R_Frontal_Opercular_Area_4" />
+<ATLAS_POINT
+  data_type="atlas_point" 
+  STRUCT="L_Middle_Insular_Area"
+  VAL="109"
+  OKEY="109"
+  GYoAR="0"
+  COG = "33.880000 -11.800000 4.960010"
+  SB_LABEL="L_Middle_Insular_Area" />
+<ATLAS_POINT
+  data_type="atlas_point" 
+  STRUCT="R_Middle_Insular_Area"
+  VAL="1109"
+  OKEY="1109"
+  GYoAR="0"
+  COG = "-36.033300 -10.133300 3.733340"
+  SB_LABEL="R_Middle_Insular_Area" />
+<ATLAS_POINT
+  data_type="atlas_point" 
+  STRUCT="L_Piriform_Cortex"
+  VAL="110"
+  OKEY="110"
+  GYoAR="0"
+  COG = "32.000000 -7.250000 -16.500000"
+  SB_LABEL="L_Piriform_Cortex" />
+<ATLAS_POINT
+  data_type="atlas_point" 
+  STRUCT="R_Piriform_Cortex"
+  VAL="1110"
+  OKEY="1110"
+  GYoAR="0"
+  COG = "-29.578900 -9.052630 -17.263200"
+  SB_LABEL="R_Piriform_Cortex" />
+<ATLAS_POINT
+  data_type="atlas_point" 
+  STRUCT="L_Anterior_Ventral_Insular_Area"
+  VAL="111"
+  OKEY="111"
+  GYoAR="0"
+  COG = "30.208300 -27.500000 -2.666670"
+  SB_LABEL="L_Anterior_Ventral_Insular_Area" />
+<ATLAS_POINT
+  data_type="atlas_point" 
+  STRUCT="R_Anterior_Ventral_Insular_Area"
+  VAL="1111"
+  OKEY="1111"
+  GYoAR="0"
+  COG = "-33.333300 -28.000000 -5.055560"
+  SB_LABEL="R_Anterior_Ventral_Insular_Area" />
+<ATLAS_POINT
+  data_type="atlas_point" 
+  STRUCT="L_Anterior_Agranular_Insula_Complex"
+  VAL="112"
+  OKEY="112"
+  GYoAR="0"
+  COG = "33.133300 -15.000000 -10.500000"
+  SB_LABEL="L_Anterior_Agranular_Insula_Complex" />
+<ATLAS_POINT
+  data_type="atlas_point" 
+  STRUCT="R_Anterior_Agranular_Insula_Complex"
+  VAL="1112"
+  OKEY="1112"
+  GYoAR="0"
+  COG = "-30.871000 -17.774200 -13.129000"
+  SB_LABEL="R_Anterior_Agranular_Insula_Complex" />
+<ATLAS_POINT
+  data_type="atlas_point" 
+  STRUCT="L_Frontal_Opercular_Area_1"
+  VAL="113"
+  OKEY="113"
+  GYoAR="0"
+  COG = "48.611100 -1.166670 4.500000"
+  SB_LABEL="L_Frontal_Opercular_Area_1" />
+<ATLAS_POINT
+  data_type="atlas_point" 
+  STRUCT="R_Frontal_Opercular_Area_1"
+  VAL="1113"
+  OKEY="1113"
+  GYoAR="0"
+  COG = "-45.727300 -4.757570 6.757570"
+  SB_LABEL="R_Frontal_Opercular_Area_1" />
+<ATLAS_POINT
+  data_type="atlas_point" 
+  STRUCT="L_Frontal_Opercular_Area_3"
+  VAL="114"
+  OKEY="114"
+  GYoAR="0"
+  COG = "35.675700 -1.675670 14.297300"
+  SB_LABEL="L_Frontal_Opercular_Area_3" />
+<ATLAS_POINT
+  data_type="atlas_point" 
+  STRUCT="R_Frontal_Opercular_Area_3"
+  VAL="1114"
+  OKEY="1114"
+  GYoAR="0"
+  COG = "-34.125000 -8.281250 11.718800"
+  SB_LABEL="R_Frontal_Opercular_Area_3" />
+<ATLAS_POINT
+  data_type="atlas_point" 
+  STRUCT="L_Frontal_Opercular_Area_2"
+  VAL="115"
+  OKEY="115"
+  GYoAR="0"
+  COG = "42.875000 3.625000 15.468800"
+  SB_LABEL="L_Frontal_Opercular_Area_2" />
+<ATLAS_POINT
+  data_type="atlas_point" 
+  STRUCT="R_Frontal_Opercular_Area_2"
+  VAL="1115"
+  OKEY="1115"
+  GYoAR="0"
+  COG = "-39.772700 0.727280 16.681800"
+  SB_LABEL="R_Frontal_Opercular_Area_2" />
+<ATLAS_POINT
+  data_type="atlas_point" 
+  STRUCT="L_Area_PFt"
+  VAL="116"
+  OKEY="116"
+  GYoAR="0"
+  COG = "57.241400 23.344800 37.551700"
+  SB_LABEL="L_Area_PFt" />
+<ATLAS_POINT
+  data_type="atlas_point" 
+  STRUCT="R_Area_PFt"
+  VAL="1116"
+  OKEY="1116"
+  GYoAR="0"
+  COG = "-56.500000 20.818200 36.727300"
+  SB_LABEL="R_Area_PFt" />
+<ATLAS_POINT
+  data_type="atlas_point" 
+  STRUCT="L_Anterior_IntraParietal_Area"
+  VAL="117"
+  OKEY="117"
+  GYoAR="0"
+  COG = "36.666700 38.777800 41.166700"
+  SB_LABEL="L_Anterior_IntraParietal_Area" />
+<ATLAS_POINT
+  data_type="atlas_point" 
+  STRUCT="R_Anterior_IntraParietal_Area"
+  VAL="1117"
+  OKEY="1117"
+  GYoAR="0"
+  COG = "-34.785700 36.071400 42.642900"
+  SB_LABEL="R_Anterior_IntraParietal_Area" />
+<ATLAS_POINT
+  data_type="atlas_point" 
+  STRUCT="L_Entorhinal_Cortex"
+  VAL="118"
+  OKEY="118"
+  GYoAR="0"
+  COG = "21.222200 11.444400 -31.111100"
+  SB_LABEL="L_Entorhinal_Cortex" />
+<ATLAS_POINT
+  data_type="atlas_point" 
+  STRUCT="R_Entorhinal_Cortex"
+  VAL="1118"
+  OKEY="1118"
+  GYoAR="0"
+  COG = "-20.692300 13.884600 -30.346200"
+  SB_LABEL="R_Entorhinal_Cortex" />
+<ATLAS_POINT
+  data_type="atlas_point" 
+  STRUCT="L_PreSubiculum"
+  VAL="119"
+  OKEY="119"
+  GYoAR="0"
+  COG = "16.562500 33.187500 -11.125000"
+  SB_LABEL="L_PreSubiculum" />
+<ATLAS_POINT
+  data_type="atlas_point" 
+  STRUCT="R_PreSubiculum"
+  VAL="1119"
+  OKEY="1119"
+  GYoAR="0"
+  COG = "-16.080000 33.040000 -9.840000"
+  SB_LABEL="R_PreSubiculum" />
+<ATLAS_POINT
+  data_type="atlas_point" 
+  STRUCT="L_Hippocampus"
+  VAL="120"
+  OKEY="120"
+  GYoAR="0"
+  COG = "28.764700 28.352900 -13.676500"
+  SB_LABEL="L_Hippocampus" />
+<ATLAS_POINT
+  data_type="atlas_point" 
+  STRUCT="R_Hippocampus"
+  VAL="1120"
+  OKEY="1120"
+  GYoAR="0"
+  COG = "-26.769200 27.038500 -12.923100"
+  SB_LABEL="R_Hippocampus" />
+<ATLAS_POINT
+  data_type="atlas_point" 
+  STRUCT="L_ProStriate_Area"
+  VAL="121"
+  OKEY="121"
+  GYoAR="0"
+  COG = "23.800000 56.166700 4.833330"
+  SB_LABEL="L_ProStriate_Area" />
+<ATLAS_POINT
+  data_type="atlas_point" 
+  STRUCT="R_ProStriate_Area"
+  VAL="1121"
+  OKEY="1121"
+  GYoAR="0"
+  COG = "-22.695700 48.826100 2.043470"
+  SB_LABEL="R_ProStriate_Area" />
+<ATLAS_POINT
+  data_type="atlas_point" 
+  STRUCT="L_Perirhinal_Ectorhinal_Cortex"
+  VAL="122"
+  OKEY="122"
+  GYoAR="0"
+  COG = "31.963000 4.555560 -37.000000"
+  SB_LABEL="L_Perirhinal_Ectorhinal_Cortex" />
+<ATLAS_POINT
+  data_type="atlas_point" 
+  STRUCT="R_Perirhinal_Ectorhinal_Cortex"
+  VAL="1122"
+  OKEY="1122"
+  GYoAR="0"
+  COG = "-29.950000 5.399990 -34.250000"
+  SB_LABEL="R_Perirhinal_Ectorhinal_Cortex" />
+<ATLAS_POINT
+  data_type="atlas_point" 
+  STRUCT="L_Area_STGa"
+  VAL="123"
+  OKEY="123"
+  GYoAR="0"
+  COG = "51.000000 -14.222200 -18.444400"
+  SB_LABEL="L_Area_STGa" />
+<ATLAS_POINT
+  data_type="atlas_point" 
+  STRUCT="R_Area_STGa"
+  VAL="1123"
+  OKEY="1123"
+  GYoAR="0"
+  COG = "-49.100000 -15.000000 -17.800000"
+  SB_LABEL="R_Area_STGa" />
+<ATLAS_POINT
+  data_type="atlas_point" 
+  STRUCT="L_ParaBelt_Complex"
+  VAL="124"
+  OKEY="124"
+  GYoAR="0"
+  COG = "56.437500 21.531200 5.562500"
+  SB_LABEL="L_ParaBelt_Complex" />
+<ATLAS_POINT
+  data_type="atlas_point" 
+  STRUCT="R_ParaBelt_Complex"
+  VAL="1124"
+  OKEY="1124"
+  GYoAR="0"
+  COG = "-57.838700 16.225800 7.451610"
+  SB_LABEL="R_ParaBelt_Complex" />
+<ATLAS_POINT
+  data_type="atlas_point" 
+  STRUCT="L_Auditory_5_Complex"
+  VAL="125"
+  OKEY="125"
+  GYoAR="0"
+  COG = "63.352900 13.647100 -4.470580"
+  SB_LABEL="L_Auditory_5_Complex" />
+<ATLAS_POINT
+  data_type="atlas_point" 
+  STRUCT="R_Auditory_5_Complex"
+  VAL="1125"
+  OKEY="1125"
+  GYoAR="0"
+  COG = "-62.000000 12.033300 -5.433330"
+  SB_LABEL="R_Auditory_5_Complex" />
+<ATLAS_POINT
+  data_type="atlas_point" 
+  STRUCT="L_ParaHippocampal_Area_1"
+  VAL="126"
+  OKEY="126"
+  GYoAR="0"
+  COG = "24.250000 37.678600 -14.035700"
+  SB_LABEL="L_ParaHippocampal_Area_1" />
+<ATLAS_POINT
+  data_type="atlas_point" 
+  STRUCT="R_ParaHippocampal_Area_1"
+  VAL="1126"
+  OKEY="1126"
+  GYoAR="0"
+  COG = "-23.303000 34.666700 -15.151500"
+  SB_LABEL="R_ParaHippocampal_Area_1" />
+<ATLAS_POINT
+  data_type="atlas_point" 
+  STRUCT="L_ParaHippocampal_Area_3"
+  VAL="127"
+  OKEY="127"
+  GYoAR="0"
+  COG = "31.590900 38.772700 -17.000000"
+  SB_LABEL="L_ParaHippocampal_Area_3" />
+<ATLAS_POINT
+  data_type="atlas_point" 
+  STRUCT="R_ParaHippocampal_Area_3"
+  VAL="1127"
+  OKEY="1127"
+  GYoAR="0"
+  COG = "-34.769200 35.615400 -16.153800"
+  SB_LABEL="R_ParaHippocampal_Area_3" />
+<ATLAS_POINT
+  data_type="atlas_point" 
+  STRUCT="L_Area_STSd_anterior"
+  VAL="128"
+  OKEY="128"
+  GYoAR="0"
+  COG = "54.942900 4.600010 -10.400000"
+  SB_LABEL="L_Area_STSd_anterior" />
+<ATLAS_POINT
+  data_type="atlas_point" 
+  STRUCT="R_Area_STSd_anterior"
+  VAL="1128"
+  OKEY="1128"
+  GYoAR="0"
+  COG = "-53.871000 1.096770 -16.064500"
+  SB_LABEL="R_Area_STSd_anterior" />
+<ATLAS_POINT
+  data_type="atlas_point" 
+  STRUCT="L_Area_STSd_posterior"
+  VAL="129"
+  OKEY="129"
+  GYoAR="0"
+  COG = "51.909100 33.000000 3.000000"
+  SB_LABEL="L_Area_STSd_posterior" />
+<ATLAS_POINT
+  data_type="atlas_point" 
+  STRUCT="R_Area_STSd_posterior"
+  VAL="1129"
+  OKEY="1129"
+  GYoAR="0"
+  COG = "-47.866700 25.666700 -2.000000"
+  SB_LABEL="R_Area_STSd_posterior" />
+<ATLAS_POINT
+  data_type="atlas_point" 
+  STRUCT="L_Area_STSv_posterior"
+  VAL="130"
+  OKEY="130"
+  GYoAR="0"
+  COG = "52.925900 34.963000 -1.962970"
+  SB_LABEL="L_Area_STSv_posterior" />
+<ATLAS_POINT
+  data_type="atlas_point" 
+  STRUCT="R_Area_STSv_posterior"
+  VAL="1130"
+  OKEY="1130"
+  GYoAR="0"
+  COG = "-57.000000 27.444400 -3.962970"
+  SB_LABEL="R_Area_STSv_posterior" />
+<ATLAS_POINT
+  data_type="atlas_point" 
+  STRUCT="L_Area_TG_dorsal"
+  VAL="131"
+  OKEY="131"
+  GYoAR="0"
+  COG = "38.800000 -15.300000 -34.700000"
+  SB_LABEL="L_Area_TG_dorsal" />
+<ATLAS_POINT
+  data_type="atlas_point" 
+  STRUCT="R_Area_TG_dorsal"
+  VAL="1131"
+  OKEY="1131"
+  GYoAR="0"
+  COG = "-38.200000 -15.100000 -36.000000"
+  SB_LABEL="R_Area_TG_dorsal" />
+<ATLAS_POINT
+  data_type="atlas_point" 
+  STRUCT="L_Area_TE1_anterior"
+  VAL="132"
+  OKEY="132"
+  GYoAR="0"
+  COG = "62.238100 6.571430 -22.476200"
+  SB_LABEL="L_Area_TE1_anterior" />
+<ATLAS_POINT
+  data_type="atlas_point" 
+  STRUCT="R_Area_TE1_anterior"
+  VAL="1132"
+  OKEY="1132"
+  GYoAR="0"
+  COG = "-60.136400 -0.409088 -26.136400"
+  SB_LABEL="R_Area_TE1_anterior" />
+<ATLAS_POINT
+  data_type="atlas_point" 
+  STRUCT="L_Area_TE1_posterior"
+  VAL="133"
+  OKEY="133"
+  GYoAR="0"
+  COG = "59.777800 49.111100 -10.333300"
+  SB_LABEL="L_Area_TE1_posterior" />
+<ATLAS_POINT
+  data_type="atlas_point" 
+  STRUCT="R_Area_TE1_posterior"
+  VAL="1133"
+  OKEY="1133"
+  GYoAR="0"
+  COG = "-58.588200 38.588200 -11.500000"
+  SB_LABEL="R_Area_TE1_posterior" />
+<ATLAS_POINT
+  data_type="atlas_point" 
+  STRUCT="L_Area_TE2_anterior"
+  VAL="134"
+  OKEY="134"
+  GYoAR="0"
+  COG = "58.272700 21.393900 -25.393900"
+  SB_LABEL="L_Area_TE2_anterior" />
+<ATLAS_POINT
+  data_type="atlas_point" 
+  STRUCT="R_Area_TE2_anterior"
+  VAL="1134"
+  OKEY="1134"
+  GYoAR="0"
+  COG = "-55.806400 14.387100 -28.903200"
+  SB_LABEL="R_Area_TE2_anterior" />
+<ATLAS_POINT
+  data_type="atlas_point" 
+  STRUCT="L_Area_TF"
+  VAL="135"
+  OKEY="135"
+  GYoAR="0"
+  COG = "45.823500 18.000000 -26.823500"
+  SB_LABEL="L_Area_TF" />
+<ATLAS_POINT
+  data_type="atlas_point" 
+  STRUCT="R_Area_TF"
+  VAL="1135"
+  OKEY="1135"
+  GYoAR="0"
+  COG = "-42.310300 15.482800 -25.965500"
+  SB_LABEL="R_Area_TF" />
+<ATLAS_POINT
+  data_type="atlas_point" 
+  STRUCT="L_Area_TE2_posterior"
+  VAL="136"
+  OKEY="136"
+  GYoAR="0"
+  COG = "47.903200 42.225800 -17.709700"
+  SB_LABEL="L_Area_TE2_posterior" />
+<ATLAS_POINT
+  data_type="atlas_point" 
+  STRUCT="R_Area_TE2_posterior"
+  VAL="1136"
+  OKEY="1136"
+  GYoAR="0"
+  COG = "-48.720000 38.360000 -19.920000"
+  SB_LABEL="R_Area_TE2_posterior" />
+<ATLAS_POINT
+  data_type="atlas_point" 
+  STRUCT="L_Area_PHT"
+  VAL="137"
+  OKEY="137"
+  GYoAR="0"
+  COG = "56.652200 58.478300 1.260860"
+  SB_LABEL="L_Area_PHT" />
+<ATLAS_POINT
+  data_type="atlas_point" 
+  STRUCT="R_Area_PHT"
+  VAL="1137"
+  OKEY="1137"
+  GYoAR="0"
+  COG = "-61.470600 53.470600 -5.823530"
+  SB_LABEL="R_Area_PHT" />
+<ATLAS_POINT
+  data_type="atlas_point" 
+  STRUCT="L_Area_PH"
+  VAL="138"
+  OKEY="138"
+  GYoAR="0"
+  COG = "44.928600 64.678600 -4.357150"
+  SB_LABEL="L_Area_PH" />
+<ATLAS_POINT
+  data_type="atlas_point" 
+  STRUCT="R_Area_PH"
+  VAL="1138"
+  OKEY="1138"
+  GYoAR="0"
+  COG = "-44.821400 58.285700 -8.250000"
+  SB_LABEL="R_Area_PH" />
+<ATLAS_POINT
+  data_type="atlas_point" 
+  STRUCT="L_Area_TemporoParietoOccipital_Junction_1"
+  VAL="139"
+  OKEY="139"
+  GYoAR="0"
+  COG = "51.833300 44.750000 12.250000"
+  SB_LABEL="L_Area_TemporoParietoOccipital_Junction_1" />
+<ATLAS_POINT
+  data_type="atlas_point" 
+  STRUCT="R_Area_TemporoParietoOccipital_Junction_1"
+  VAL="1139"
+  OKEY="1139"
+  GYoAR="0"
+  COG = "-45.933300 41.066700 10.066700"
+  SB_LABEL="R_Area_TemporoParietoOccipital_Junction_1" />
+<ATLAS_POINT
+  data_type="atlas_point" 
+  STRUCT="L_Area_TemporoParietoOccipital_Junction_2"
+  VAL="140"
+  OKEY="140"
+  GYoAR="0"
+  COG = "51.687500 61.218800 15.687500"
+  SB_LABEL="L_Area_TemporoParietoOccipital_Junction_2" />
+<ATLAS_POINT
+  data_type="atlas_point" 
+  STRUCT="R_Area_TemporoParietoOccipital_Junction_2"
+  VAL="1140"
+  OKEY="1140"
+  GYoAR="0"
+  COG = "-52.774200 53.129000 4.870970"
+  SB_LABEL="R_Area_TemporoParietoOccipital_Junction_2" />
+<ATLAS_POINT
+  data_type="atlas_point" 
+  STRUCT="L_Area_TemporoParietoOccipital_Junction_3"
+  VAL="141"
+  OKEY="141"
+  GYoAR="0"
+  COG = "44.342800 72.314300 21.600000"
+  SB_LABEL="L_Area_TemporoParietoOccipital_Junction_3" />
+<ATLAS_POINT
+  data_type="atlas_point" 
+  STRUCT="R_Area_TemporoParietoOccipital_Junction_3"
+  VAL="1141"
+  OKEY="1141"
+  GYoAR="0"
+  COG = "-41.619000 59.381000 16.809500"
+  SB_LABEL="R_Area_TemporoParietoOccipital_Junction_3" />
+<ATLAS_POINT
+  data_type="atlas_point" 
+  STRUCT="L_Dorsal_Transitional_Visual_Area"
+  VAL="142"
+  OKEY="142"
+  GYoAR="0"
+  COG = "18.000000 71.000000 27.320000"
+  SB_LABEL="L_Dorsal_Transitional_Visual_Area" />
+<ATLAS_POINT
+  data_type="atlas_point" 
+  STRUCT="R_Dorsal_Transitional_Visual_Area"
+  VAL="1142"
+  OKEY="1142"
+  GYoAR="0"
+  COG = "-19.125000 68.750000 30.187500"
+  SB_LABEL="R_Dorsal_Transitional_Visual_Area" />
+<ATLAS_POINT
+  data_type="atlas_point" 
+  STRUCT="L_Area_PGp"
+  VAL="143"
+  OKEY="143"
+  GYoAR="0"
+  COG = "40.593800 86.375000 23.500000"
+  SB_LABEL="L_Area_PGp" />
+<ATLAS_POINT
+  data_type="atlas_point" 
+  STRUCT="R_Area_PGp"
+  VAL="1143"
+  OKEY="1143"
+  GYoAR="0"
+  COG = "-45.058800 79.411800 23.500000"
+  SB_LABEL="R_Area_PGp" />
+<ATLAS_POINT
+  data_type="atlas_point" 
+  STRUCT="L_Area_IntraParietal_2"
+  VAL="144"
+  OKEY="144"
+  GYoAR="0"
+  COG = "41.440000 48.120000 39.560000"
+  SB_LABEL="L_Area_IntraParietal_2" />
+<ATLAS_POINT
+  data_type="atlas_point" 
+  STRUCT="R_Area_IntraParietal_2"
+  VAL="1144"
+  OKEY="1144"
+  GYoAR="0"
+  COG = "-42.360000 43.160000 44.000000"
+  SB_LABEL="R_Area_IntraParietal_2" />
+<ATLAS_POINT
+  data_type="atlas_point" 
+  STRUCT="L_Area_IntraParietal_1"
+  VAL="145"
+  OKEY="145"
+  GYoAR="0"
+  COG = "29.777800 72.444400 40.000000"
+  SB_LABEL="L_Area_IntraParietal_1" />
+<ATLAS_POINT
+  data_type="atlas_point" 
+  STRUCT="R_Area_IntraParietal_1"
+  VAL="1145"
+  OKEY="1145"
+  GYoAR="0"
+  COG = "-35.840000 63.280000 41.640000"
+  SB_LABEL="R_Area_IntraParietal_1" />
+<ATLAS_POINT
+  data_type="atlas_point" 
+  STRUCT="L_Area_IntraParietal_0"
+  VAL="146"
+  OKEY="146"
+  GYoAR="0"
+  COG = "30.888900 78.370400 25.074100"
+  SB_LABEL="L_Area_IntraParietal_0" />
+<ATLAS_POINT
+  data_type="atlas_point" 
+  STRUCT="R_Area_IntraParietal_0"
+  VAL="1146"
+  OKEY="1146"
+  GYoAR="0"
+  COG = "-34.166700 75.000000 27.233300"
+  SB_LABEL="R_Area_IntraParietal_0" />
+<ATLAS_POINT
+  data_type="atlas_point" 
+  STRUCT="L_Area_PF_opercular"
+  VAL="147"
+  OKEY="147"
+  GYoAR="0"
+  COG = "63.250000 22.750000 22.500000"
+  SB_LABEL="L_Area_PF_opercular" />
+<ATLAS_POINT
+  data_type="atlas_point" 
+  STRUCT="R_Area_PF_opercular"
+  VAL="1147"
+  OKEY="1147"
+  GYoAR="0"
+  COG = "-58.666700 19.555600 21.666700"
+  SB_LABEL="R_Area_PF_opercular" />
+<ATLAS_POINT
+  data_type="atlas_point" 
+  STRUCT="L_Area_PF_Complex"
+  VAL="148"
+  OKEY="148"
+  GYoAR="0"
+  COG = "63.242400 38.363600 37.636400"
+  SB_LABEL="L_Area_PF_Complex" />
+<ATLAS_POINT
+  data_type="atlas_point" 
+  STRUCT="R_Area_PF_Complex"
+  VAL="1148"
+  OKEY="1148"
+  GYoAR="0"
+  COG = "-62.500000 27.200000 37.000000"
+  SB_LABEL="R_Area_PF_Complex" />
+<ATLAS_POINT
+  data_type="atlas_point" 
+  STRUCT="L_Area_PFm_Complex"
+  VAL="149"
+  OKEY="149"
+  GYoAR="0"
+  COG = "51.181800 56.545500 47.000000"
+  SB_LABEL="L_Area_PFm_Complex" />
+<ATLAS_POINT
+  data_type="atlas_point" 
+  STRUCT="R_Area_PFm_Complex"
+  VAL="1149"
+  OKEY="1149"
+  GYoAR="0"
+  COG = "-53.000000 49.000000 49.000000"
+  SB_LABEL="R_Area_PFm_Complex" />
+<ATLAS_POINT
+  data_type="atlas_point" 
+  STRUCT="L_Area_PGi"
+  VAL="150"
+  OKEY="150"
+  GYoAR="0"
+  COG = "42.484800 61.545500 28.454500"
+  SB_LABEL="L_Area_PGi" />
+<ATLAS_POINT
+  data_type="atlas_point" 
+  STRUCT="R_Area_PGi"
+  VAL="1150"
+  OKEY="1150"
+  GYoAR="0"
+  COG = "-52.272700 59.545500 26.818200"
+  SB_LABEL="R_Area_PGi" />
+<ATLAS_POINT
+  data_type="atlas_point" 
+  STRUCT="L_Area_PGs"
+  VAL="151"
+  OKEY="151"
+  GYoAR="0"
+  COG = "42.592600 76.111100 41.888900"
+  SB_LABEL="L_Area_PGs" />
+<ATLAS_POINT
+  data_type="atlas_point" 
+  STRUCT="R_Area_PGs"
+  VAL="1151"
+  OKEY="1151"
+  GYoAR="0"
+  COG = "-50.391300 64.695700 44.130400"
+  SB_LABEL="R_Area_PGs" />
+<ATLAS_POINT
+  data_type="atlas_point" 
+  STRUCT="L_Area_V6A"
+  VAL="152"
+  OKEY="152"
+  GYoAR="0"
+  COG = "21.565200 86.173900 41.913000"
+  SB_LABEL="L_Area_V6A" />
+<ATLAS_POINT
+  data_type="atlas_point" 
+  STRUCT="R_Area_V6A"
+  VAL="1152"
+  OKEY="1152"
+  GYoAR="0"
+  COG = "-21.800000 86.550000 43.350000"
+  SB_LABEL="R_Area_V6A" />
+<ATLAS_POINT
+  data_type="atlas_point" 
+  STRUCT="L_VentroMedial_Visual_Area_1"
+  VAL="153"
+  OKEY="153"
+  GYoAR="0"
+  COG = "20.942900 57.485700 -4.485720"
+  SB_LABEL="L_VentroMedial_Visual_Area_1" />
+<ATLAS_POINT
+  data_type="atlas_point" 
+  STRUCT="R_VentroMedial_Visual_Area_1"
+  VAL="1153"
+  OKEY="1153"
+  GYoAR="0"
+  COG = "-17.314300 54.657100 -5.742860"
+  SB_LABEL="R_VentroMedial_Visual_Area_1" />
+<ATLAS_POINT
+  data_type="atlas_point" 
+  STRUCT="L_VentroMedial_Visual_Area_3"
+  VAL="154"
+  OKEY="154"
+  GYoAR="0"
+  COG = "28.071400 62.071400 -10.500000"
+  SB_LABEL="L_VentroMedial_Visual_Area_3" />
+<ATLAS_POINT
+  data_type="atlas_point" 
+  STRUCT="R_VentroMedial_Visual_Area_3"
+  VAL="1154"
+  OKEY="1154"
+  GYoAR="0"
+  COG = "-28.423100 59.615400 -9.423080"
+  SB_LABEL="R_VentroMedial_Visual_Area_3" />
+<ATLAS_POINT
+  data_type="atlas_point" 
+  STRUCT="L_ParaHippocampal_Area_2"
+  VAL="155"
+  OKEY="155"
+  GYoAR="0"
+  COG = "33.560000 36.080000 -12.960000"
+  SB_LABEL="L_ParaHippocampal_Area_2" />
+<ATLAS_POINT
+  data_type="atlas_point" 
+  STRUCT="R_ParaHippocampal_Area_2"
+  VAL="1155"
+  OKEY="1155"
+  GYoAR="0"
+  COG = "-32.052600 35.210500 -13.210500"
+  SB_LABEL="R_ParaHippocampal_Area_2" />
+<ATLAS_POINT
+  data_type="atlas_point" 
+  STRUCT="L_Area_V4t"
+  VAL="156"
+  OKEY="156"
+  GYoAR="0"
+  COG = "50.043500 76.739100 5.086960"
+  SB_LABEL="L_Area_V4t" />
+<ATLAS_POINT
+  data_type="atlas_point" 
+  STRUCT="R_Area_V4t"
+  VAL="1156"
+  OKEY="1156"
+  GYoAR="0"
+  COG = "-52.062500 72.250000 -3.812500"
+  SB_LABEL="R_Area_V4t" />
+<ATLAS_POINT
+  data_type="atlas_point" 
+  STRUCT="L_Area_FST"
+  VAL="157"
+  OKEY="157"
+  GYoAR="0"
+  COG = "46.307700 69.230800 7.000000"
+  SB_LABEL="L_Area_FST" />
+<ATLAS_POINT
+  data_type="atlas_point" 
+  STRUCT="R_Area_FST"
+  VAL="1157"
+  OKEY="1157"
+  GYoAR="0"
+  COG = "-44.882400 60.705900 3.117650"
+  SB_LABEL="R_Area_FST" />
+<ATLAS_POINT
+  data_type="atlas_point" 
+  STRUCT="L_Area_V3CD"
+  VAL="158"
+  OKEY="158"
+  GYoAR="0"
+  COG = "37.692300 90.307700 11.153800"
+  SB_LABEL="L_Area_V3CD" />
+<ATLAS_POINT
+  data_type="atlas_point" 
+  STRUCT="R_Area_V3CD"
+  VAL="1158"
+  OKEY="1158"
+  GYoAR="0"
+  COG = "-38.363600 85.000000 13.181800"
+  SB_LABEL="R_Area_V3CD" />
+<ATLAS_POINT
+  data_type="atlas_point" 
+  STRUCT="L_Area_Lateral_Occipital_3"
+  VAL="159"
+  OKEY="159"
+  GYoAR="0"
+  COG = "39.034500 75.965500 13.965500"
+  SB_LABEL="L_Area_Lateral_Occipital_3" />
+<ATLAS_POINT
+  data_type="atlas_point" 
+  STRUCT="R_Area_Lateral_Occipital_3"
+  VAL="1159"
+  OKEY="1159"
+  GYoAR="0"
+  COG = "-40.636400 74.303000 10.424200"
+  SB_LABEL="R_Area_Lateral_Occipital_3" />
+<ATLAS_POINT
+  data_type="atlas_point" 
+  STRUCT="L_VentroMedial_Visual_Area_2"
+  VAL="160"
+  OKEY="160"
+  GYoAR="0"
+  COG = "28.321400 54.357100 -6.607150"
+  SB_LABEL="L_VentroMedial_Visual_Area_2" />
+<ATLAS_POINT
+  data_type="atlas_point" 
+  STRUCT="R_VentroMedial_Visual_Area_2"
+  VAL="1160"
+  OKEY="1160"
+  GYoAR="0"
+  COG = "-27.000000 53.241400 -6.724140"
+  SB_LABEL="R_VentroMedial_Visual_Area_2" />
+<ATLAS_POINT
+  data_type="atlas_point" 
+  STRUCT="L_Area_31pd"
+  VAL="161"
+  OKEY="161"
+  GYoAR="0"
+  COG = "8.466660 52.766700 34.133300"
+  SB_LABEL="L_Area_31pd" />
+<ATLAS_POINT
+  data_type="atlas_point" 
+  STRUCT="R_Area_31pd"
+  VAL="1161"
+  OKEY="1161"
+  GYoAR="0"
+  COG = "-11.148100 51.296300 35.111100"
+  SB_LABEL="R_Area_31pd" />
+<ATLAS_POINT
+  data_type="atlas_point" 
+  STRUCT="L_Area_31a"
+  VAL="162"
+  OKEY="162"
+  GYoAR="0"
+  COG = "5.166670 39.000000 43.277800"
+  SB_LABEL="L_Area_31a" />
+<ATLAS_POINT
+  data_type="atlas_point" 
+  STRUCT="R_Area_31a"
+  VAL="1162"
+  OKEY="1162"
+  GYoAR="0"
+  COG = "-9.240000 40.400000 39.320000"
+  SB_LABEL="R_Area_31a" />
+<ATLAS_POINT
+  data_type="atlas_point" 
+  STRUCT="L_Ventral_Visual_Complex"
+  VAL="163"
+  OKEY="163"
+  GYoAR="0"
+  COG = "31.400000 54.371400 -16.457100"
+  SB_LABEL="L_Ventral_Visual_Complex" />
+<ATLAS_POINT
+  data_type="atlas_point" 
+  STRUCT="R_Ventral_Visual_Complex"
+  VAL="1163"
+  OKEY="1163"
+  GYoAR="0"
+  COG = "-26.956500 48.000000 -16.347800"
+  SB_LABEL="R_Ventral_Visual_Complex" />
+<ATLAS_POINT
+  data_type="atlas_point" 
+  STRUCT="L_Area_25"
+  VAL="164"
+  OKEY="164"
+  GYoAR="0"
+  COG = "6.206890 -25.551700 -13.931000"
+  SB_LABEL="L_Area_25" />
+<ATLAS_POINT
+  data_type="atlas_point" 
+  STRUCT="R_Area_25"
+  VAL="1164"
+  OKEY="1164"
+  GYoAR="0"
+  COG = "-3.333340 -23.305600 -15.361100"
+  SB_LABEL="R_Area_25" />
+<ATLAS_POINT
+  data_type="atlas_point" 
+  STRUCT="L_Area_s32"
+  VAL="165"
+  OKEY="165"
+  GYoAR="0"
+  COG = "10.388900 -35.555600 -14.666700"
+  SB_LABEL="L_Area_s32" />
+<ATLAS_POINT
+  data_type="atlas_point" 
+  STRUCT="R_Area_s32"
+  VAL="1165"
+  OKEY="1165"
+  GYoAR="0"
+  COG = "-3.964290 -36.107100 -14.892900"
+  SB_LABEL="R_Area_s32" />
+<ATLAS_POINT
+  data_type="atlas_point" 
+  STRUCT="L_posterior_OFC_Complex"
+  VAL="166"
+  OKEY="166"
+  GYoAR="0"
+  COG = "15.166700 -19.333300 -16.633300"
+  SB_LABEL="L_posterior_OFC_Complex" />
+<ATLAS_POINT
+  data_type="atlas_point" 
+  STRUCT="R_posterior_OFC_Complex"
+  VAL="1166"
+  OKEY="1166"
+  GYoAR="0"
+  COG = "-14.069000 -22.310300 -16.620700"
+  SB_LABEL="R_posterior_OFC_Complex" />
+<ATLAS_POINT
+  data_type="atlas_point" 
+  STRUCT="L_Area_Posterior_Insular_1"
+  VAL="167"
+  OKEY="167"
+  GYoAR="0"
+  COG = "37.939400 12.181800 -6.393940"
+  SB_LABEL="L_Area_Posterior_Insular_1" />
+<ATLAS_POINT
+  data_type="atlas_point" 
+  STRUCT="R_Area_Posterior_Insular_1"
+  VAL="1167"
+  OKEY="1167"
+  GYoAR="0"
+  COG = "-38.733300 10.266700 -7.866670"
+  SB_LABEL="R_Area_Posterior_Insular_1" />
+<ATLAS_POINT
+  data_type="atlas_point" 
+  STRUCT="L_Insular_Granular_Complex"
+  VAL="168"
+  OKEY="168"
+  GYoAR="0"
+  COG = "36.516100 14.483900 15.612900"
+  SB_LABEL="L_Insular_Granular_Complex" />
+<ATLAS_POINT
+  data_type="atlas_point" 
+  STRUCT="R_Insular_Granular_Complex"
+  VAL="1168"
+  OKEY="1168"
+  GYoAR="0"
+  COG = "-36.074100 11.000000 14.074100"
+  SB_LABEL="R_Insular_Granular_Complex" />
+<ATLAS_POINT
+  data_type="atlas_point" 
+  STRUCT="L_Area_Frontal_Opercular"
+  VAL="169"
+  OKEY="169"
+  GYoAR="0"
+  COG = "33.827600 -28.103500 6.379300"
+  SB_LABEL="L_Area_Frontal_Opercular" />
+<ATLAS_POINT
+  data_type="atlas_point" 
+  STRUCT="R_Area_Frontal_Opercular"
+  VAL="1169"
+  OKEY="1169"
+  GYoAR="0"
+  COG = "-34.428600 -27.000000 5.892850"
+  SB_LABEL="R_Area_Frontal_Opercular" />
+<ATLAS_POINT
+  data_type="atlas_point" 
+  STRUCT="L_Area_posterior_10p"
+  VAL="170"
+  OKEY="170"
+  GYoAR="0"
+  COG = "25.666700 -60.555600 4.444440"
+  SB_LABEL="L_Area_posterior_10p" />
+<ATLAS_POINT
+  data_type="atlas_point" 
+  STRUCT="R_Area_posterior_10p"
+  VAL="1170"
+  OKEY="1170"
+  GYoAR="0"
+  COG = "-23.842100 -59.000000 2.684200"
+  SB_LABEL="R_Area_posterior_10p" />
+<ATLAS_POINT
+  data_type="atlas_point" 
+  STRUCT="L_Area_posterior_47r"
+  VAL="171"
+  OKEY="171"
+  GYoAR="0"
+  COG = "41.500000 -42.384600 -2.384610"
+  SB_LABEL="L_Area_posterior_47r" />
+<ATLAS_POINT
+  data_type="atlas_point" 
+  STRUCT="R_Area_posterior_47r"
+  VAL="1171"
+  OKEY="1171"
+  GYoAR="0"
+  COG = "-44.294100 -44.529400 -5.647060"
+  SB_LABEL="R_Area_posterior_47r" />
+<ATLAS_POINT
+  data_type="atlas_point" 
+  STRUCT="L_Area_TG_Ventral"
+  VAL="172"
+  OKEY="172"
+  GYoAR="0"
+  COG = "37.107100 1.250000 -45.250000"
+  SB_LABEL="L_Area_TG_Ventral" />
+<ATLAS_POINT
+  data_type="atlas_point" 
+  STRUCT="R_Area_TG_Ventral"
+  VAL="1172"
+  OKEY="1172"
+  GYoAR="0"
+  COG = "-34.000000 -0.699997 -46.100000"
+  SB_LABEL="R_Area_TG_Ventral" />
+<ATLAS_POINT
+  data_type="atlas_point" 
+  STRUCT="L_Medial_Belt_Complex"
+  VAL="173"
+  OKEY="173"
+  GYoAR="0"
+  COG = "42.531200 20.281200 5.343750"
+  SB_LABEL="L_Medial_Belt_Complex" />
+<ATLAS_POINT
+  data_type="atlas_point" 
+  STRUCT="R_Medial_Belt_Complex"
+  VAL="1173"
+  OKEY="1173"
+  GYoAR="0"
+  COG = "-41.545500 19.272700 5.575760"
+  SB_LABEL="R_Medial_Belt_Complex" />
+<ATLAS_POINT
+  data_type="atlas_point" 
+  STRUCT="L_Lateral_Belt_Complex"
+  VAL="174"
+  OKEY="174"
+  GYoAR="0"
+  COG = "46.482800 27.069000 6.068970"
+  SB_LABEL="L_Lateral_Belt_Complex" />
+<ATLAS_POINT
+  data_type="atlas_point" 
+  STRUCT="R_Lateral_Belt_Complex"
+  VAL="1174"
+  OKEY="1174"
+  GYoAR="0"
+  COG = "-48.038500 23.615400 10.423100"
+  SB_LABEL="R_Lateral_Belt_Complex" />
+<ATLAS_POINT
+  data_type="atlas_point" 
+  STRUCT="L_Auditory_4_Complex"
+  VAL="175"
+  OKEY="175"
+  GYoAR="0"
+  COG = "65.433300 17.233300 5.566670"
+  SB_LABEL="L_Auditory_4_Complex" />
+<ATLAS_POINT
+  data_type="atlas_point" 
+  STRUCT="R_Auditory_4_Complex"
+  VAL="1175"
+  OKEY="1175"
+  GYoAR="0"
+  COG = "-65.275900 13.275900 6.379300"
+  SB_LABEL="R_Auditory_4_Complex" />
+<ATLAS_POINT
+  data_type="atlas_point" 
+  STRUCT="L_Area_STSv_anterior"
+  VAL="176"
+  OKEY="176"
+  GYoAR="0"
+  COG = "50.708300 7.791670 -17.791700"
+  SB_LABEL="L_Area_STSv_anterior" />
+<ATLAS_POINT
+  data_type="atlas_point" 
+  STRUCT="R_Area_STSv_anterior"
+  VAL="1176"
+  OKEY="1176"
+  GYoAR="0"
+  COG = "-53.541700 6.583330 -21.125000"
+  SB_LABEL="R_Area_STSv_anterior" />
+<ATLAS_POINT
+  data_type="atlas_point" 
+  STRUCT="L_Area_TE1_Middle"
+  VAL="177"
+  OKEY="177"
+  GYoAR="0"
+  COG = "63.142900 29.785700 -13.071400"
+  SB_LABEL="L_Area_TE1_Middle" />
+<ATLAS_POINT
+  data_type="atlas_point" 
+  STRUCT="R_Area_TE1_Middle"
+  VAL="1177"
+  OKEY="1177"
+  GYoAR="0"
+  COG = "-64.361100 22.638900 -18.416700"
+  SB_LABEL="R_Area_TE1_Middle" />
+<ATLAS_POINT
+  data_type="atlas_point" 
+  STRUCT="L_Para-Insular_Area"
+  VAL="178"
+  OKEY="178"
+  GYoAR="0"
+  COG = "44.931000 3.206890 -14.206900"
+  SB_LABEL="L_Para-Insular_Area" />
+<ATLAS_POINT
+  data_type="atlas_point" 
+  STRUCT="R_Para-Insular_Area"
+  VAL="1178"
+  OKEY="1178"
+  GYoAR="0"
+  COG = "-44.100000 4.833330 -12.666700"
+  SB_LABEL="R_Para-Insular_Area" />
+<ATLAS_POINT
+  data_type="atlas_point" 
+  STRUCT="L_Area_anterior_32_prime"
+  VAL="179"
+  OKEY="179"
+  GYoAR="0"
+  COG = "11.000000 -30.562500 26.468800"
+  SB_LABEL="L_Area_anterior_32_prime" />
+<ATLAS_POINT
+  data_type="atlas_point" 
+  STRUCT="R_Area_anterior_32_prime"
+  VAL="1179"
+  OKEY="1179"
+  GYoAR="0"
+  COG = "-12.035700 -27.750000 30.321400"
+  SB_LABEL="R_Area_anterior_32_prime" />
+<ATLAS_POINT
+  data_type="atlas_point" 
+  STRUCT="L_Area_posterior_24"
+  VAL="180"
+  OKEY="180"
+  GYoAR="0"
+  COG = "6.000000 -37.333300 14.333300"
+  SB_LABEL="L_Area_posterior_24" />
+<ATLAS_POINT
+  data_type="atlas_point" 
+  STRUCT="R_Area_posterior_24"
+  VAL="1180"
+  OKEY="1180"
+  GYoAR="0"
+  COG = "-5.200000 -37.600000 16.600000"
+  SB_LABEL="R_Area_posterior_24" />
+</atlas_point_list>~
+~
+
+type = string-attribute
+name = HISTORY_NOTE
+count = 128
+'[dglen@elwing: Tue Mar 26 16:48:47 2019] {AFNI_19.0.19:linux_fedora_28_64} 3dRank -prefix hcp_rank -input MNI_Glasser_HCP+tlrc.~

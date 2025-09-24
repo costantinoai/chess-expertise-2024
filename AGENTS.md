@@ -11,12 +11,12 @@ Goals
  - Any script that produces artefacts (figures, tables, files) must create an output directory named `<YYYYMMDD-HHMMSS>_<short-analysis-name>` under the analysis’ `results/` (or equivalent) folder.
 
 Repository Layout
-- One analysis per top‑level folder (e.g., `chess-mvpa/`, `chess-glm/`, `chess-behavioural/`, `chess-dataset-vis/`, `chess-neurosynth/`, `chess-manifoldMFT/`).
+- One analysis per top‑level folder (e.g., `mvpa/`, `fmri_glm/`, `behavioural/`, `neurosynth/`, `manifold/`).
 - Inside an analysis folder:
   - `modules/`: reusable functions and small utilities.
   - main scripts in the folder root: run the workflow to produce results and figures.
   - `results/` or analysis‑specific output folders contain generated artifacts.
-- Global helpers live at the repository root (e.g., `logging_utils.py`).
+- Global helpers live at the repository root (e.g., `logging_utils.py`, `common_utils.py`, `viz_utils.py`).
 - For an overview of all analyses and reported figures, consult `manuscript/main.tex` and `manuscript/supplementary.tex`.
  - Ensure each top‑level folder has a `README.md` with: purpose, required inputs, how to run, expected outputs, and where results are saved.
 

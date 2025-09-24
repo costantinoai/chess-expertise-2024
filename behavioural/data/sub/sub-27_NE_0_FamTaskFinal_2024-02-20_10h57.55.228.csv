@@ -1,0 +1,49 @@
+key_Instrc.keys,key_Instrc.rt,participant,session,date,expName,psychopyVersion,OS,frameRate,key_Instrc2.keys,key_Instrc2.rt,key_resp_L.keys,key_resp_L.rt,spacebarpress.keys,spacebarpress.rt,consent_resp.keys,consent_resp.rt,key_resp_2.keys,key_resp_2.rt,checksequence.text,Mousetocontinue.x,Mousetocontinue.y,Mousetocontinue.leftButton,Mousetocontinue.midButton,Mousetocontinue.rightButton,Mousetocontinue.time,Mousetocontinue.clicked_name,key_resp_3.keys,key_resp_3.rt,trials.thisRepN,trials.thisTrialN,trials.thisN,trials.thisIndex,trials.ran,Experiment_try,Checkmate
+space,47.658,27,1,2024-02-20_10h57.55.228,FamTaskFinal,2022.2.4,Win32,59.88023952,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,,27,1,2024-02-20_10h57.55.228,FamTaskFinal,2022.2.4,Win32,59.88023952,space,28.7158,,,,,,,,,,,,,,,,,,,,,,,,,
+,,27,1,2024-02-20_10h57.55.228,FamTaskFinal,2022.2.4,Win32,59.88023952,,,space,2.0483,,,,,,,,,,,,,,,,,,,,,,,
+,,27,1,2024-02-20_10h57.55.228,FamTaskFinal,2022.2.4,Win32,59.88023952,,,,,space,2.7736,,,,,,,,,,,,,,,,,,,,,
+,,27,1,2024-02-20_10h57.55.228,FamTaskFinal,2022.2.4,Win32,59.88023952,,,,,,,space,37.5758,,,,,,,,,,,,,,,,,,,
+,,27,1,2024-02-20_10h57.55.228,FamTaskFinal,2022.2.4,Win32,59.88023952,,,,,,,,,space,62.0443,,,,,,,,,,,,,,,,,
+,,27,1,2024-02-20_10h57.55.228,FamTaskFinal,2022.2.4,Win32,59.88023952,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,,27,1,2024-02-20_10h57.55.228,FamTaskFinal,2022.2.4,Win32,59.88023952,,,,,,,,,,,    ,0.015740783,-0.406481496,1.0,0.0,0.0,26.9661,endtext,space,9.604,0.0,0.0,0.0,0.0,1.0,C1_Images_Frombeautiful.png,Yes
+,,27,1,2024-02-20_10h57.55.228,FamTaskFinal,2022.2.4,Win32,59.88023952,,,,,,,,,,, ,-0.024999972,-0.412037037,1.0,0.0,0.0,17.3418,endtext,space,2.4155,0.0,1.0,1.0,25.0,1.0,NC2_Images_SkujaRozenbergs(Nomate)(Reversed).png,no
+,,27,1,2024-02-20_10h57.55.228,FamTaskFinal,2022.2.4,Win32,59.88023952,,,,,,,,,,, ,0.008333347,-0.400925954,1.0,0.0,0.0,17.0459,endtext,space,3.2914,0.0,2.0,2.0,21.0,1.0,NC1_Images_SteinitzNN(Nomate).png,no
+,,27,1,2024-02-20_10h57.55.228,FamTaskFinal,2022.2.4,Win32,59.88023952,,,,,,,,,,,,0.008333347,-0.400925954,1.0,0.0,0.0,29.6406,endtext,space,1.5434,0.0,3.0,3.0,17.0,1.0,C5_Images_EasyPosition2.png,Yes
+,,27,1,2024-02-20_10h57.55.228,FamTaskFinal,2022.2.4,Win32,59.88023952,,,,,,,,,,,,0.008333347,-0.400925954,1.0,0.0,0.0,41.9741,endtext,space,2.3327,0.0,4.0,4.0,6.0,1.0,C2_Images_Replacement4.png,Yes
+,,27,1,2024-02-20_10h57.55.228,FamTaskFinal,2022.2.4,Win32,59.88023952,,,,,,,,,,, ,0.008333347,-0.400925954,1.0,0.0,0.0,35.5293,endtext,space,2.8858,0.0,5.0,5.0,2.0,1.0,C1_Images_WinterFriede(Reversed).png,Yes
+,,27,1,2024-02-20_10h57.55.228,FamTaskFinal,2022.2.4,Win32,59.88023952,,,,,,,,,,,,-0.001851824,-0.401851866,1.0,0.0,0.0,49.4391,endtext,space,1.2343,0.0,6.0,6.0,24.0,1.0,NC2_Images_KrauseMeinhardt(Nomate).png,no
+,,27,1,2024-02-20_10h57.55.228,FamTaskFinal,2022.2.4,Win32,59.88023952,,,,,,,,,,,,0.012037065,-0.39907406,1.0,0.0,0.0,47.5262,endtext,space,0.803,0.0,7.0,7.0,9.0,1.0,C3_Images_PodzerovKuntzevic(Reversed).png,Yes
+,,27,1,2024-02-20_10h57.55.228,FamTaskFinal,2022.2.4,Win32,59.88023952,,,,,,,,,,,,-0.007407365,-0.400925954,1.0,0.0,0.0,36.5724,endtext,space,0.6988,0.0,8.0,8.0,35.0,1.0,NC4_Images_IvanchukSavchenko(Nomate)(Reversed).png,no
+,,27,1,2024-02-20_10h57.55.228,FamTaskFinal,2022.2.4,Win32,59.88023952,,,,,,,,,,,,0.010185171,-0.407407407,1.0,0.0,0.0,56.3018,endtext,space,1.8526,0.0,9.0,9.0,12.0,1.0,C3_Images_Replacement3.png,Yes
+,,27,1,2024-02-20_10h57.55.228,FamTaskFinal,2022.2.4,Win32,59.88023952,,,,,,,,,,,,0.006481524,-0.402777778,1.0,0.0,0.0,40.9093,endtext,space,1.043,0.0,10.0,10.0,37.0,1.0,NC5_Images_EasyPosition2(Nomate).png,no
+,,27,1,2024-02-20_10h57.55.228,FamTaskFinal,2022.2.4,Win32,59.88023952,,,,,,,,,,,,-0.005555541,-0.414814843,1.0,0.0,0.0,57.9402,endtext,space,0.746,0.0,11.0,11.0,33.0,1.0,NC3_Images_Replacement5(Nomate).png,no
+,,27,1,2024-02-20_10h57.55.228,FamTaskFinal,2022.2.4,Win32,59.88023952,,,,,,,,,,,,-0.046296296,-0.398148148,1.0,0.0,0.0,57.1067,endtext,space,1.2199,0.0,12.0,12.0,28.0,1.0,NC3_Images_MalininAndreev(Nomate)(Reversed).png,no
+,,27,1,2024-02-20_10h57.55.228,FamTaskFinal,2022.2.4,Win32,59.88023952,,,,,,,,,,,,0.013888889,-0.409259302,1.0,0.0,0.0,46.3037,endtext,space,0.4762,0.0,13.0,13.0,4.0,1.0,C2_Images_KrauseMeinhardt.png,Yes
+,,27,1,2024-02-20_10h57.55.228,FamTaskFinal,2022.2.4,Win32,59.88023952,,,,,,,,,,,,,,,,,,,space,3.2716,0.0,14.0,14.0,23.0,1.0,NC2_Images_KekhayovPetrov(Nomate)(Reversed).png,no
+,,27,1,2024-02-20_10h57.55.228,FamTaskFinal,2022.2.4,Win32,59.88023952,,,,,,,,,,,Pe6,-0.011111083,-0.282407407,1.0,0.0,0.0,55.1017,,space,2.6057,0.0,15.0,15.0,22.0,1.0,NC1_Images_WinterFriede(Nomate)(Reversed).png,no
+,,27,1,2024-02-20_10h57.55.228,FamTaskFinal,2022.2.4,Win32,59.88023952,,,,,,,,,,,Ng6,0.067592621,-0.401851866,1.0,0.0,0.0,53.6852,endtext,space,3.0073,0.0,16.0,16.0,32.0,1.0,NC3_Images_Replacement3(Nomate).png,no
+,,27,1,2024-02-20_10h57.55.228,FamTaskFinal,2022.2.4,Win32,59.88023952,,,,,,,,,,,,,,,,,,,space,5.3524,0.0,17.0,17.0,39.0,1.0,NC5_Images_EasyPosition6(Nomate).png,no
+,,27,1,2024-02-20_10h57.55.228,FamTaskFinal,2022.2.4,Win32,59.88023952,,,,,,,,,,,,0.0,-0.39907406,1.0,0.0,0.0,59.3774,endtext,space,1.4187,0.0,18.0,18.0,13.0,1.0,C3_Images_Replacement5.png,Yes
+,,27,1,2024-02-20_10h57.55.228,FamTaskFinal,2022.2.4,Win32,59.88023952,,,,,,,,,,,,0.062962991,-0.398148148,1.0,0.0,0.0,57.0281,endtext,space,1.0666,0.0,19.0,19.0,26.0,1.0,NC2_Images_Replacement4(Nomate).png,no
+,,27,1,2024-02-20_10h57.55.228,FamTaskFinal,2022.2.4,Win32,59.88023952,,,,,,,,,,,Bg6,,,,,,,,space,2.9437,0.0,20.0,20.0,19.0,1.0,C5_Images_EasyPosition6.png,Yes
+,,27,1,2024-02-20_10h57.55.228,FamTaskFinal,2022.2.4,Win32,59.88023952,,,,,,,,,,,Rg7,,,,,,,,space,10.257,0.0,21.0,21.0,15.0,1.0,C4_Images_IvanchukSavchenko(Reversed).png,Yes
+,,27,1,2024-02-20_10h57.55.228,FamTaskFinal,2022.2.4,Win32,59.88023952,,,,,,,,,,,,,,,,,,,space,1.5171,0.0,22.0,22.0,8.0,1.0,C3_Images_MalininAndreev(Reversed).png,Yes
+,,27,1,2024-02-20_10h57.55.228,FamTaskFinal,2022.2.4,Win32,59.88023952,,,,,,,,,,,Rb2,,,,,,,,space,3.5053,0.0,23.0,23.0,3.0,1.0,C2_Images_KekhayovPetrov(Reversed).png,Yes
+,,27,1,2024-02-20_10h57.55.228,FamTaskFinal,2022.2.4,Win32,59.88023952,,,,,,,,,,,Nc6,-0.012036995,-0.304629644,1.0,0.0,0.0,28.4819,endtext,space,1.0577,0.0,24.0,24.0,7.0,1.0,C3_Images_KazicVukovic(Reversed).png,Yes
+,,27,1,2024-02-20_10h57.55.228,FamTaskFinal,2022.2.4,Win32,59.88023952,,,,,,,,,,,,,,,,,,,space,3.7306,0.0,25.0,25.0,38.0,1.0,NC5_Images_EasyPosition5(Nomate)(Reversed).png,no
+,,27,1,2024-02-20_10h57.55.228,FamTaskFinal,2022.2.4,Win32,59.88023952,,,,,,,,,,,,,,,,,,,space,1.8373,0.0,26.0,26.0,16.0,1.0,C4_Images_StrekalovskyShaposhlikov.png,Yes
+,,27,1,2024-02-20_10h57.55.228,FamTaskFinal,2022.2.4,Win32,59.88023952,,,,,,,,,,,Ba6,0.017592607,-0.402777778,1.0,0.0,0.0,50.839,endtext,space,0.9042,0.0,27.0,27.0,18.0,1.0,C5_Images_EasyPosition5(Reversed).png,Yes
+,,27,1,2024-02-20_10h57.55.228,FamTaskFinal,2022.2.4,Win32,59.88023952,,,,,,,,,,,,,,,,,,,space,2.0537,0.0,28.0,28.0,20.0,1.0,NC1_Images_Frombeautiful(Nomate).png,no
+,,27,1,2024-02-20_10h57.55.228,FamTaskFinal,2022.2.4,Win32,59.88023952,,,,,,,,,,,,,,,,,,,space,2.5725,0.0,29.0,29.0,1.0,1.0,C1_Images_SteinitzNN.png,Yes
+,,27,1,2024-02-20_10h57.55.228,FamTaskFinal,2022.2.4,Win32,59.88023952,,,,,,,,,,,,0.016666695,-0.402777778,1.0,0.0,0.0,41.4228,endtext,space,3.0526,0.0,30.0,30.0,14.0,1.0,C4_Images_BrankaWittwer(Reversed).png,Yes
+,,27,1,2024-02-20_10h57.55.228,FamTaskFinal,2022.2.4,Win32,59.88023952,,,,,,,,,,,Bc7,,,,,,,,space,2.1312,0.0,31.0,31.0,5.0,1.0,C2_Images_SkujaRozenbergs(Reversed).png,Yes
+,,27,1,2024-02-20_10h57.55.228,FamTaskFinal,2022.2.4,Win32,59.88023952,,,,,,,,,,,,0.012962977,-0.404629672,1.0,0.0,0.0,53.6165,endtext,space,0.7955,0.0,32.0,32.0,10.0,1.0,C3_Images_StudybyErcoledelRio(Reversed).png,Yes
+,,27,1,2024-02-20_10h57.55.228,FamTaskFinal,2022.2.4,Win32,59.88023952,,,,,,,,,,,  ,-0.025925884,-0.423148191,1.0,0.0,0.0,51.5286,endtext,space,1.1033,0.0,33.0,33.0,27.0,1.0,NC3_Images_KazicVukovic(Nomate)(Reversed).png,no
+,,27,1,2024-02-20_10h57.55.228,FamTaskFinal,2022.2.4,Win32,59.88023952,,,,,,,,,,,,0.037962949,-0.389814801,1.0,0.0,0.0,44.1289,endtext,space,1.0241,0.0,34.0,34.0,36.0,1.0,NC4_Images_StrekalovskyShaposhlikov(Nomate).png,no
+,,27,1,2024-02-20_10h57.55.228,FamTaskFinal,2022.2.4,Win32,59.88023952,,,,,,,,,,, ,0.025925954,-0.397222236,1.0,0.0,0.0,37.5452,endtext,space,1.8397,0.0,35.0,35.0,30.0,1.0,NC3_Images_StudybyErcoleDelRio(Nomate)(Reversed).png,no
+,,27,1,2024-02-20_10h57.55.228,FamTaskFinal,2022.2.4,Win32,59.88023952,,,,,,,,,,,,0.037037037,-0.408333319,1.0,0.0,0.0,58.4208,endtext,space,0.9529,0.0,36.0,36.0,34.0,1.0,NC4_Images_BrankaWittwer(Nomate)(Reversed).png,no
+,,27,1,2024-02-20_10h57.55.228,FamTaskFinal,2022.2.4,Win32,59.88023952,,,,,,,,,,,,0.015740783,-0.384259259,1.0,0.0,0.0,56.2689,endtext,space,0.7796,0.0,37.0,37.0,31.0,1.0,NC3_Images_TylorWinter(Nomate).png,no
+,,27,1,2024-02-20_10h57.55.228,FamTaskFinal,2022.2.4,Win32,59.88023952,,,,,,,,,,,,-0.010185171,-0.396296325,1.0,0.0,0.0,58.5255,endtext,space,1.3247,0.0,38.0,38.0,11.0,1.0,C3_Images_TylorWinter.png,Yes
+,,27,1,2024-02-20_10h57.55.228,FamTaskFinal,2022.2.4,Win32,59.88023952,,,,,,,,,,,,,,,,,,,space,2.1295,0.0,39.0,39.0,29.0,1.0,NC3_Images_PodzerovKuntzevic(Nomate)(Reversed).png,no
+,,27,1,2024-02-20_10h57.55.228,FamTaskFinal,2022.2.4,Win32,59.88023952,,,,,,,,,,,,,,,,,,,,,,,,,,,
