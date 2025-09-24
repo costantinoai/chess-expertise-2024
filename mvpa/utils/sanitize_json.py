@@ -76,12 +76,12 @@ def main(folder, dry_run):
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description="Replace NaN values in JSON files and find problematic files.")
-    parser.add_argument("folder", type=str, nargs='?', default="path_to_folder", help="The folder to scan for JSON files.")
+    parser.add_argument("folder", type=str, nargs='?', default=None, help="The folder to scan for JSON files.")
     parser.add_argument("--dry", action="store_true", help="Perform a dry run without making changes.")
     args = parser.parse_args()
 
-    # Defaults set for specific use case in IDE or command line
-    folder_path = args.folder if args.folder != "path_to_folder" else "/data/projects/chess/data/BIDS"
+    from config import BIDS_PATH
+    folder_path = args.folder or str(BIDS_PATH)
     dry_run_mode = True
 
     main(folder_path, dry_run_mode)

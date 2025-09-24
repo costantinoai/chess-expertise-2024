@@ -14,7 +14,8 @@ from multiprocessing import Pool, cpu_count
 logging.basicConfig(level=logging.INFO, format="%(asctime)s - %(levelname)s - %(message)s")
 
 # --- Configuration ---
-CSV_PATH = "/data/projects/chess/data/misc/fmri-ds_40-stims.csv"
+from config import MISC_PATH
+CSV_PATH = os.path.join(str(MISC_PATH), "fmri-ds_40-stims.csv")
 IMAGE_FOLDER = "/home/eik-tb/OneDrive_andreaivan.costantino@kuleuven.be/GitHub/chess-expertise-2024/chess-dataset-vis/data/stimuli"
 STOCKFISH_PATH = "/home/eik-tb/Documents/misctools/stockfish-ubuntu-x86-64/stockfish/stockfish-ubuntu-x86-64"
 IMAGE_SIZE = (256, 256)
