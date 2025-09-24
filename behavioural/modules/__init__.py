@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 import logging
 import seaborn as sns
-from logging_utils import setup_logging
+from common.logging_utils import setup_logging
 
 sns.set(style="darkgrid", palette="muted", font_scale=1.7)
 

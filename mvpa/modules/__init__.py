@@ -11,7 +11,7 @@ import matplotlib.pyplot as plt
 from pathlib import Path
 import warnings
 import nibabel as nib
-from logging_utils import setup_logging
+from common.logging_utils import setup_logging
 from config import (
     DATA_ROOT,
     BIDS_PATH as _BIDS_PATH,

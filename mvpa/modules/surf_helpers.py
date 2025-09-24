@@ -17,7 +17,7 @@ from neuromaps.datasets import fetch_fsaverage
 import matplotlib.image as mpimg
 from matplotlib.colors import LinearSegmentedColormap
 import logging
-from logging_utils import setup_logging
+from common.logging_utils import setup_logging
 from modules import (
     plt,
     LH_ANNOT,

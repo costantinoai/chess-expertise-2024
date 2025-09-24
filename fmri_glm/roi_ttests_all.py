@@ -25,7 +25,7 @@ from scipy.ndimage import center_of_mass
 from nilearn.image import coord_transform
 from nilearn.datasets import fetch_atlas_harvard_oxford
 from datetime import datetime
-from common_utils import create_run_id, save_script_to_file
+from common.common_utils import create_run_id, save_script_to_file
 import shutil, inspect
 from plotly.subplots import make_subplots
 

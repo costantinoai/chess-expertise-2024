@@ -11,7 +11,8 @@ import pandas as pd
 import numpy as np
 from scipy import stats
 from statsmodels.stats.multitest import multipletests
-from logging_utils import setup_logging
+from common.stats_utils import fdr_correction
+from common.logging_utils import setup_logging
 from modules import (
     logging,
     MVPA_ROOT_PATH,
@@ -314,10 +315,9 @@ def run_ttest_analysis(
 
                         # Apply FDR correction across all ROIs in this (left) hemisphere
                         uncorrected_p_values = stats_df["p_uncorrected"]
-                        reject, corrected_p_values, _, _ = multipletests(
+                        reject, corrected_p_values = fdr_correction(
                             uncorrected_p_values,
                             method=MULTI_CORRECTION,
-                            # method="bonferroni",
                         )
                         logging.info(f"Applied FDR correction for hemisphere '{hemisphere}'.")
                         stats_df["p_corrected"] = corrected_p_values

@@ -12,7 +12,7 @@ import pickle
 import pandas as pd
 import seaborn as sns
 from modules import plt,logging
-from logging_utils import setup_logging
+from common.logging_utils import setup_logging
 from modules import (
     ROIS_CSV,
     LEFT_LUT,

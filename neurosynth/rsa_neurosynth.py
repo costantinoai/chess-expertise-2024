@@ -51,7 +51,7 @@ from modules.stats_utils import (
 )
 from modules.plot_utils import plot_correlations, plot_difference, plot_map
 from modules.config import BRAIN_CMAP
-from common_utils import (
+from common.common_utils import (
     create_run_id,
     create_output_directory,
     save_script_to_file,

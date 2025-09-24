@@ -44,8 +44,8 @@ from sklearn.pipeline import make_pipeline
 
 # Logging setup
 import logging
-from logging_utils import setup_logging
-from common_utils import create_run_id, save_script_to_file, set_rnd_seed
+from common.logging_utils import setup_logging
+from common.common_utils import create_run_id, save_script_to_file, set_rnd_seed
 
 def load_eye_tracking_data(root_dir: str, participants: List[Tuple[str, bool]]) -> pd.DataFrame:
     """
