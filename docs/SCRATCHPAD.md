@@ -2,52 +2,47 @@ Chess Expertise 2024 — Cleanup Branch Scratchpad
 
 Branch
 - Name: cleanup-20250924-191124
-- Purpose: Trim repo to only manuscript-reported analyses, enforce DRY, simplify structure, and prepare for clean academic sharing.
+- Purpose: Trim repo to only manuscript-reported analyses, enforce DRY, simplify structure, centralize config/meta/logging, and prepare for clean academic sharing.
 
 Scope
-- KEEP: fmri_glm, mvpa, behavioural, neurosynth, manifold, rois
-- DROP (after double-check): chess-connectivity, chess-representational-conn, chess-results-vis, chess-dnn
+- KEEP: fmri_glm, mvpa, behavioural, neurosynth, manifold (PR), rois
+- DROP: dataset-vis, DNN manifold, machine-specific scripts, unneeded utils
 - Reference map: docs/ANALYSES.md (authoritative inventory), AGENTS.md (conventions), API.md (functions overview)
 
 High-level Plan
 1) Confirm analyses inventory (done) and KEEP/DROP list (done)
-2) Prune DROP folders (git rm -r) on cleanup branch
-3) DRY pass: consolidate shared utilities and remove duplicates
-4) Update packaging and docs to reflect pruned set
-5) Verify scripts run/entry points documented; regenerate API and READMEs
+2) Prune DROP folders (done)
+3) DRY pass: centralize run/logging/colormap/meta/config (done)
+4) Update packaging, ignores, and docs to reflect new structure (done)
+5) Document inputs/outputs per analysis; regenerate API (done)
 
 Todo Checklist
-- [x] Prune folders not in manuscript
-  - [x] Remove: chess-connectivity/
-  - [x] Remove: chess-representational-conn/
-  - [x] Remove: chess-results-vis/
-  - [x] Remove: chess-dnn/
-  - [x] rg sanity check for any remaining references to removed folders (only references remain in docs and archival result scripts)
+- [x] Prune folders not in manuscript / clean utils
+  - [x] Remove dataset-vis, local/misc, old/*, unused utils
 - [x] DRY / Refactors
-  - [x] Unify OutputLogger implementations (now in `common_utils.py`; imported in mvpa/behavioural helpers)
-  - [x] Centralize seeding (set_rnd_seed), create_run_id, save_script_to_file, create_output_directory in `common_utils.py`
-  - [ ] Standardize logging via logging_utils.setup_logging; ensure all main scripts call it
-  - [ ] Enforce timestamped output dir convention `<YYYYMMDD-HHMMSS>_<shortname>` across scripts
-  - [ ] Audit absolute/hard-coded paths; replace with CLI flags/config
-  - [ ] Ensure modules only contain functions; main scripts orchestrate workflows
-- [ ] Packaging / Config
-  - [ ] Update pyproject.toml package discovery to use new folder names (mvpa, fmri_glm, behavioural, neurosynth, manifold, rois)
-  - [ ] Review requirements.txt and remove deps only used by dropped code (keep if shared)
-  - [ ] Ensure tests/ still valid (or trim if they belong to removed code)
-- [ ] Documentation
-  - [ ] Update folder READMEs to reflect trimmed scope and provide run instructions
-  - [x] Regenerate API.md via `python scripts/generate_api.py --output API.md`
-  - [ ] Update README.md (root) “Repository Structure” to list only kept analyses
-  - [ ] Update AGENTS.md if any convention adjustments emerge during DRY
+  - [x] `common_utils.py` (run id, output dir, script copy, seeding)
+  - [x] `logging_utils.setup_logging` in all entry scripts
+  - [x] `viz_utils.make_brain_cmap` for maps
+  - [x] `meta.py` for ROI names/colors and plot styles
+  - [x] `config.py` for data roots/atlases/subjects with env overrides
+  - [x] Sweep absolute paths; enforce os.path.join/Path
+- [x] Packaging / Config
+  - [x] Update pyproject.toml packages to mvpa, fmri_glm, behavioural, neurosynth, manifold, rois
+  - [x] Update .gitignore to match new structure
+- [x] Documentation
+  - [x] Update per-analysis READMEs (fmri_glm, mvpa, neurosynth, manifold, rois)
+  - [x] Update root README (data layout and paths)
+  - [x] Update AGENTS.md and docs/ANALYSES.md
+- [x] API
+  - [x] Generator scans analysis dirs and excludes results
+  - [x] Regenerate API.md
 - [ ] Verification
-  - [ ] Run `rg` to find imports of removed modules
-  - [ ] Spot-run key entry scripts with `-h` to ensure CLI works
-  - [ ] Check figures/tables save to timestamped result folders
+  - [ ] Run representative scripts from IDE to confirm outputs and logs
+  - [ ] Validate env overrides on a second machine
 
 Risks & Notes
-- Removing folders may break imports if code references them implicitly; mitigate with rg search and targeted fixes.
-- pyproject.toml currently maps packages to hyphenated dirs (e.g., chess_mvpa = "chess-mvpa"); update includes accordingly.
-- Requirements pruning is optional; prefer conservative retention initially, then prune after confirming no usages.
+- Ensure `data/` layout is consistent on your machine; override via env as needed (see `config.py`).
+- MATLAB requires SPM/CoSMoMVPA on path; adjust scripts accordingly.
 
 Commands (for later execution)
 - Remove folders:
