@@ -539,7 +539,7 @@ def plot_expert_vs_novice(
     plt.savefig(fname, dpi=300, bbox_inches="tight")
     plt.show()
     plt.close(fig)
-    print(f"Figure saved: {fname}")
+    logging.info("Figure saved: %s", fname)
 
 # -----------------------------------------------------------------------------
 # Top-Level Script (No 'main' function)
@@ -619,7 +619,7 @@ for analysis in analyses:
                 (key in analysis_results and reg in analysis_results[key])
                 for key in required_keys
             ):
-                print(f"Skipping regressor '{reg}'—one or more contrasts missing.")
+                logging.warning("Skipping regressor '%s'—one or more contrasts missing.", reg)
                 continue
 
             # Build a DataFrame combining Novices, Experts, and difference stats
@@ -640,3 +640,4 @@ for analysis in analyses:
                 chance_value=chance_level[0],
                 plot_nonsig_labels=plot_nonsig_labels
             )
+import logging

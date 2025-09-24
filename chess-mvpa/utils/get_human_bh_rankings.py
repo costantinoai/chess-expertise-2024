@@ -402,7 +402,9 @@ participants = [
 # Sum all boolean values in the 'Expert' column
 total_experts = int(filtered_df["Expert"].sum())
 total_non_experts = len(filtered_df) - int(filtered_df["Expert"].sum())
-print(total_experts, total_non_experts)
+import logging
+logging.basicConfig(level=logging.INFO)
+logging.info("Experts: %s | Non-experts: %s", total_experts, total_non_experts)
 
 # Define the column names
 columns = [
@@ -429,7 +431,7 @@ novices_df = pd.DataFrame([], columns=columns)
 experts_df = pd.DataFrame([], columns=columns)
 
 for sub, exp in participants:
-    print(sub)
+    logging.info("%s", sub)
     sub_dir = os.path.join(participants_sourcedata_root, sub, "bh")
     mat_files = sorted(glob.glob(os.path.join(sub_dir, "*.mat")))
     # assert len(mat_files) != 0

@@ -809,7 +809,9 @@ def plot_results_taskvsrest(results: Dict, participants, OUT_DIR: str):
         bbox_inches="tight",
     )
     plt.show()
-    print(f"All plots have been saved in the directory: {OUT_DIR}")
+    import logging
+    logging.basicConfig(level=logging.INFO)
+    logging.info("All plots have been saved in the directory: %s", OUT_DIR)
 
 def save_script_to_file(output_directory: str):
     """

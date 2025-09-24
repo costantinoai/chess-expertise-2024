@@ -342,7 +342,7 @@ for mvpa_root in mvpa_roots:
 
         # Here, 'analysis_results' is your final nested dictionary for that method.
         # You can print, save, or further process these stats as needed.
-        print(f"Analysis complete for method: {mvpa_subdir}")
+        logging.info("Analysis complete for method: %s", mvpa_subdir)
 
         results_out = os.path.join(mvpa_dir, f"{create_run_id()}_group")
         os.makedirs(results_out)
@@ -352,7 +352,7 @@ for mvpa_root in mvpa_roots:
         with open(pkl_fname, "wb") as f:
             pickle.dump(analysis_results, f)
 
-        print(f"Results saved in: {results_out}")
+        logging.info("Results saved in: %s", results_out)
 
 
 # ----------------------------------------------------------------------------
@@ -373,3 +373,4 @@ for mvpa_root in mvpa_roots:
 # Where each "comparison" is one of:
 #   'experts_vs_chance', 'nonexperts_vs_chance', or 'experts_vs_nonexperts'.
 # ----------------------------------------------------------------------------
+import logging

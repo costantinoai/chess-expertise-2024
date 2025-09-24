@@ -674,7 +674,9 @@ participants_list, (num_exp, num_non) = load_participants(
     participants_xlsx_path="data/participants.xlsx",
     sourcedata_root=sourcedata_root
 )
-print(f"Number of Experts: {num_exp} | Number of Non-Experts: {num_non}")
+import logging
+logging.basicConfig(level=logging.INFO)
+logging.info("Number of Experts: %s | Number of Non-Experts: %s", num_exp, num_non)
 
 trial_columns = [
     "sub_id", "run", "run_trial_n", "stim_id",

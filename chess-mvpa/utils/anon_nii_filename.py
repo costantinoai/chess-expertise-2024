@@ -68,6 +68,7 @@ Created on Tue Jul 16 18:21:16 2024
 """
 
 import os
+import logging
 import argparse
 
 def format_sub_id(sub_id):
@@ -121,9 +122,9 @@ def rename_files_in_directory(directory, confirm=True, dry_run=False):
                 changes.append((original_path, new_path))
 
     if changes:
-        print("Planned changes:")
+        logging.info("Planned changes:")
         for old, new in changes:
-            print(f"{get_relative_path(old)} --> {get_relative_path(new)}")
+            logging.info("%s --> %s", get_relative_path(old), get_relative_path(new))
 
     if not dry_run and confirm:
         response = input("Proceed with these changes? (y/n): ")
@@ -170,4 +171,5 @@ def main():
             rename_files_in_directory(directory, confirm=args.confirm, dry_run=args.dry_run)
 
 if __name__ == "__main__":
+    logging.basicConfig(level=logging.INFO)
     main()

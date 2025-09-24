@@ -1,6 +1,7 @@
 import os
 import numpy as np
 import pandas as pd
+import logging
 import matplotlib.pyplot as plt
 from matplotlib.colors import LinearSegmentedColormap
 from nilearn import image, plotting
@@ -165,7 +166,8 @@ for x, y, z in zip(df_clust['X'], df_clust['Y'], df_clust['Z']):
 
 
 df_clust['Anat_Label'] = labels
-print(df_clust)
+logging.basicConfig(level=logging.INFO)
+logging.info("\n%s", df_clust)
 
 # # Generate tables for each map
 # for name, z_map in [('expert_vs_nonexpert', contrast),
@@ -177,4 +179,4 @@ print(df_clust)
     #     print(clusters)
         # clusters.to_csv(os.path.join(RESULTS_DIR, f'{name}_{tail}_clusters.csv'), index=False)
 
-print('Analysis complete. Results saved to', RESULTS_DIR)
+logging.info('Analysis complete. Results saved to %s', RESULTS_DIR)

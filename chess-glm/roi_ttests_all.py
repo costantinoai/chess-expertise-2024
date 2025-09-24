@@ -519,7 +519,7 @@ def save_and_open_plotly_figure(fig, title="surface_plot", outdir=".", png_out=N
 
     # Save HTML
     fig.write_html(html_path)
-    print(f"Figure saved to: {html_path}")
+    logging.info("Figure saved to: %s", html_path)
 
     # # Open HTML in browser
     # webbrowser.open_new_tab(f'file://{html_path}')
@@ -530,7 +530,7 @@ def save_and_open_plotly_figure(fig, title="surface_plot", outdir=".", png_out=N
 
     # Save PNG
     fig.write_image(png_out, scale=2)
-    print(f"PNG image saved to: {png_out}")
+    logging.info("PNG image saved to: %s", png_out)
 
 def paths_for(subject_ids, mode, data_dir, fname):
     paths = []
@@ -616,8 +616,8 @@ def export_diff_stats_to_latex(df, label, output_path):
     with open(output_path, "w") as f:
         f.write(table)
 
-    print(table)
-    print(f"LaTeX table saved to: {output_path}")
+    logging.info("\n%s", table)
+    logging.info("LaTeX table saved to: %s", output_path)
 
 
 def compute_confidence_intervals(X1, X2):
@@ -771,7 +771,7 @@ def run_analysis(DATA_DIR, CONTRASTS, atlas_path, mode):
     affine_glasser = atlas_img.affine
 
     for fname, label in CONTRASTS.items():
-        print(f"Processing: {label}")
+        logging.info("Processing: %s", label)
 
         # Load subject data for each group
         exp_paths = paths_for(EXPERTS, mode, DATA_DIR, fname)
@@ -860,3 +860,4 @@ RSA_CONTRASTS = {
     "visualSimilarity.nii.gz": "Visual Similarity",
 }
 run_analysis(RSA_DATA_DIR, RSA_CONTRASTS, ATLAS_PATH, mode="rsa")
+import logging

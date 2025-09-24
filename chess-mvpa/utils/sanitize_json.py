@@ -8,6 +8,7 @@ Created on Sun Jun  2 13:38:55 2024
 
 import os
 import json
+import logging
 import argparse
 import math
 import simplejson
@@ -27,7 +28,7 @@ def process_file(file_path, dry_run=False):
                 if math.isnan(v) or str(v).lower() == 'nan':
                     old_value = 'NaN'
                     new_value = 'null'
-                    print(f"{file_path}:{'.'.join(path + [k])}: {old_value} --> {new_value}")
+                    logging.info("%s:%s: %s --> %s", file_path, '.'.join(path + [k]), old_value, new_value)
                     data[k] = None
                 else:
                     replace_and_print(v, path + [k])
@@ -36,7 +37,7 @@ def process_file(file_path, dry_run=False):
                 if math.isnan(v) or str(v).lower() == 'nan':
                     old_value = 'NaN'
                     new_value = 'null'
-                    print(f"{file_path}:{'.'.join(path + [str(i)])}: {old_value} --> {new_value}")
+                    logging.info("%s:%s: %s --> %s", file_path, '.'.join(path + [str(i)]), old_value, new_value)
                     data[i] = None
                 else:
                     replace_and_print(v, path + [str(i)])
@@ -54,7 +55,7 @@ def find_nan_json_files(folder):
         for file in files:
             if file.endswith('.json'):
                 file_path = os.path.join(root, file)
-                # print(file_path)
+                # logging.debug(file_path)
                 try:
                     with open(file_path, 'r') as f:
                         data = json.load(f)
@@ -63,9 +64,9 @@ def find_nan_json_files(folder):
                 except ValueError as e:
                     if 'nan' in str(e):
                         problematic_files.append(file_path)
-                        print(f"Found problematic file: {file_path}")
+                        logging.info("Found problematic file: %s", file_path)
                 except Exception as e:
-                    print(f"Error processing file {file_path}: {e}")
+                    logging.error("Error processing file %s: %s", file_path, e)
     return problematic_files
 
 def main(folder, dry_run):

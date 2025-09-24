@@ -454,33 +454,35 @@ def main() -> None:
     else:
         mw_stat, mw_p = None, None  # skip entirely (not shown in outputs)
 
-    # Print a concise summary to the console for quick inspection
-    print("\n" + "=" * 72)
-    print(f"Run count comparison ({test_name})")
-    print("=" * 72)
-    print(  # Experts descriptives
+    import logging
+    logging.basicConfig(level=logging.INFO)
+    # Log a concise summary to the console for quick inspection
+    logging.info("\n" + "=" * 72)
+    logging.info("Run count comparison (%s)", test_name)
+    logging.info("=" * 72)
+    logging.info(  # Experts descriptives
         f"Experts     (n={s_exp['n']}): mean={s_exp['mean']:.2f}, sd={s_exp['sd']:.2f}, "
         f"median={s_exp['median']:.2f}, range=[{s_exp['min']:.0f}, {s_exp['max']:.0f}]"
     )
-    print(  # Non-Experts descriptives
+    logging.info(  # Non-Experts descriptives
         f"Non-Experts (n={s_nov['n']}): mean={s_nov['mean']:.2f}, sd={s_nov['sd']:.2f}, "
         f"median={s_nov['median']:.2f}, range=[{s_nov['min']:.0f}, {s_nov['max']:.0f}]"
     )
-    print("-" * 72)
-    print("Levene's test for equal variances (diagnostic):")  # heading
-    print(f"  W = {lev_stat:.3f}, p = {lev_p:.4f}")  # Levene results
-    print("-" * 72)
-    print(f"{test_name}:")  # which t-test was used
-    print(f"  t = {t_stat:.3f}, df = {df_used:.3f}, p = {p_value:.4f}")  # t, df, p
-    print(  # CI for mean difference
+    logging.info("-" * 72)
+    logging.info("Levene's test for equal variances (diagnostic):")  # heading
+    logging.info(f"  W = {lev_stat:.3f}, p = {lev_p:.4f}")  # Levene results
+    logging.info("-" * 72)
+    logging.info(f"{test_name}:")  # which t-test was used
+    logging.info(f"  t = {t_stat:.3f}, df = {df_used:.3f}, p = {p_value:.4f}")  # t, df, p
+    logging.info(  # CI for mean difference
         f"  95% CI of mean difference (Experts - Non-Experts): [{ci_low:.2f}, {ci_high:.2f}]"
     )
-    print(f"  {d_label} = {d:.3f}  (Hedges' g = {g:.3f})")  # effect sizes
+    logging.info(f"  {d_label} = {d:.3f}  (Hedges' g = {g:.3f})")  # effect sizes
     if mw_stat is not None and mw_p is not None:  # optional MWU
-        print("-" * 72)
-        print("Mann–Whitney U (robustness check):")
-        print(f"  U = {mw_stat:.1f}, p = {mw_p:.4f}")
-    print("=" * 72 + "\n")
+        logging.info("-" * 72)
+        logging.info("Mann–Whitney U (robustness check):")
+        logging.info(f"  U = {mw_stat:.1f}, p = {mw_p:.4f}")
+    logging.info("=" * 72 + "\n")
 
     # Save a plain-text report with the same information
     save_run_count_report_txt(

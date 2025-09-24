@@ -61,4 +61,6 @@ multiband_factor = 2
 #       slices, at time 0 you get slice 1 and 31, at time 1 slice 2-32, etc.  
 #       For single-band, see https://neurostars.org/t/how-dcm2niix-handles-different-imaging-types/22697/4
 slice_timings = calculate_slice_timing(tr, slices, multiband_factor)
-print(slice_timings)
+import logging
+logging.basicConfig(level=logging.INFO)
+logging.info("%s", slice_timings)

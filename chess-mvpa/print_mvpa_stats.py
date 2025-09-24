@@ -66,10 +66,10 @@ def extract_stats(result_dict, regressor):
     return pd.DataFrame(rows)
 
 def print_latex_table(df, analysis, regressor, label):
-    print(f"\n\\textbf{{{label} ({analysis.upper()})}}\\\\")
-    print("\\begin{tabular}{lrrrrr}")
-    print("ROI & $M$ & 95\\% CI & $p$ & $p_\\text{FDR}$ & Sig. \\\\")
-    print("\\hline")
+    logging.info("\n\\textbf{%s (%s)}\\\\", label, analysis.upper())
+    logging.info("\\begin{tabular}{lrrrrr}")
+    logging.info("ROI & $M$ & 95\\%% CI & $p$ & $p_\\text{FDR}$ & Sig. \\\\")
+    logging.info("\\hline")
     for _, row in df.iterrows():
         roi = row["roi"]
         m = row["mean_diff"]
@@ -77,8 +77,8 @@ def print_latex_table(df, analysis, regressor, label):
         p = f"{row['p_val']:.3g}"
         pfdr = f"{row['p_fdr']:.3g}"
         sig = "*" if row["sig_fdr"] else ""
-        print(f"{roi} & {m:.3f} & {ci} & {p} & {pfdr} & {sig} \\\\")
-    print("\\end{tabular}\n")
+        logging.info("%s & %.3f & %s & %s & %s & %s \\\\", roi, m, ci, p, pfdr, sig)
+    logging.info("\\end{tabular}\n")
 
 # ==== MAIN LOOP ====
 for analysis in analyses:
@@ -95,4 +95,5 @@ for analysis in analyses:
                 label = regressor_mapping.get(reg, reg)
                 print_latex_table(df, analysis, reg, label)
         except Exception as e:
-            print(f"Failed to process {analysis} / {reg}: {e}")
+            logging.error("Failed to process %s / %s: %s", analysis, reg, e)
+import logging

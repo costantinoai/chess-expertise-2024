@@ -270,7 +270,7 @@ def process_subject(subject_id: str, atlas_data: np.ndarray, roi_list: list) -> 
 
         # Skip if not enough manifolds
         if len(X_list) == 0:
-            print(f"Skipping ROI {roi}: no classes with >= {2} samples.")
+            logging.warning("Skipping ROI %s: no classes with >= %d samples.", roi, 2)
             continue
 
         # print size of the list and of each matrix inside the list. each matrix represents the observations for a manifold
@@ -301,7 +301,7 @@ def process_subject(subject_id: str, atlas_data: np.ndarray, roi_list: list) -> 
 
 # ---------------------- RUN PIPELINE ---------------------- #
 if __name__ == "__main__":
-    print("Running script")
+    logging.info("Running script")
     # 1) Create run-specific output directory
     run_id = f"{create_run_id()}_manifold-visual"
     out_dir = os.path.join(OUTPUT_ROOT, run_id)
@@ -431,3 +431,4 @@ if __name__ == "__main__":
     lineplots_path = os.path.join(out_dir, f"{run_id}_manifold_lineplots.png")
     fig.savefig(lineplots_path)
     logger.info("Saved line plots to '%s'", lineplots_path)
+import logging

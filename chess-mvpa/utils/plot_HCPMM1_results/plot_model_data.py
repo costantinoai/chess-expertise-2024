@@ -14,6 +14,7 @@ Created on Tue Apr 16 17:22:42 2024
 @author: costantino_ai
 """
 import os
+import logging
 import re
 import matplotlib.pyplot as plt
 import seaborn as sns
@@ -65,7 +66,7 @@ def plot_curves(df, title, labels, save_to=None, confidence_intervals=None):
         if os.path.isdir(save_to):
             save_path = os.path.join(save_to, filename.lower())
         elif os.path.isfile(save_to):
-            print("Warning: 'save_to' is a file. Using its directory and renaming the file.")
+            logging.warning("'save_to' is a file. Using its directory and renaming the file.")
             save_path = os.path.join(os.path.dirname(save_to), filename)
         else:
             # If save_to does not exist, assume it's a directory and attempt to create it
@@ -170,4 +171,3 @@ for mvpa_type in ["rsa_glm_hpc", "svm_hpc"]:
         plot_bars(df[sorted_columns_lh], 'Left Hemisphere Analysis', plot_labels, df_ci.loc[:, pd.IndexSlice[:, sorted_columns_lh]], df_p_values[sorted_columns_lh], save_to=out_dir)
         plot_bars(df[sorted_columns_rh], 'Right Hemisphere Analysis', plot_labels, df_ci.loc[:, pd.IndexSlice[:, sorted_columns_rh]], df_p_values[sorted_columns_rh], save_to=out_dir)
     
-

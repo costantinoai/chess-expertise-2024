@@ -19,6 +19,7 @@ Notes
 from __future__ import annotations
 
 import argparse
+import logging
 import ast
 from dataclasses import dataclass
 from pathlib import Path
@@ -166,9 +167,9 @@ def main() -> None:
 
     md = build_markdown(root, analyses)
     args.output.write_text(md, encoding="utf-8")
-    print(f"API written to {args.output}")
+    logging.basicConfig(level=logging.INFO)
+    logging.info("API written to %s", args.output)
 
 
 if __name__ == "__main__":
     main()
-

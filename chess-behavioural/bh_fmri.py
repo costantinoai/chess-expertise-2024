@@ -663,10 +663,12 @@ def analyze_group(df_group, expertise_label, df_cat):
 
     corr_results, col_labels = correlate_model_behavior(group_rdm, df_cat, expertise_label)  # Correlate group RDM with model RDMs
 
-    print(f"--- Correlation Results ({expertise_label}) ---")                  # Print header for correlation results
+    import logging
+    logging.basicConfig(level=logging.INFO)
+    logging.info("--- Correlation Results (%s) ---", expertise_label)                  # Header
     for col, r_val, p_val, ci_l, ci_u in corr_results:                          # Iterate through results
-        print(f"Column: {col}")                                                 # Print column name
-        print(f"  r = {r_val:.3f}, p = {p_val:.3e}, 95% CI = [{ci_l:.3f}, {ci_u:.3f}]\n")  # Print stats
+        logging.info("Column: %s", col)
+        logging.info("  r = %.3f, p = %.3e, 95% CI = [%.3f, %.3f]", r_val, p_val, ci_l, ci_u)
 
     return group_rdm, corr_results, col_labels                                    # Return group RDM and correlation info
 
@@ -679,7 +681,7 @@ participants_list, (num_exp, num_non) = load_participants(                      
     participants_xlsx_path="data/participants.xlsx",
     sourcedata_root="/media/costantino_ai/eik-T9/projects_backup/2024_chess-expertise/data/sourcedata"
 )
-print(f"Number of Experts: {num_exp} | Number of Non-Experts: {num_non}")          # Print participant counts
+logging.info("Number of Experts: %s | Number of Non-Experts: %s", num_exp, num_non)
 
 trial_columns = [                                                                 # Define column names for trial DataFrames
     "sub_id", "run", "run_trial_n", "stim_id",
@@ -715,7 +717,7 @@ if MULTIPROCESS:                                                                
 
 else:                                                                              # If multiprocessing is disabled
     for sub_id, is_expert in participants_list:                                    # Iterate through each subject
-        print(f"Processing participant: {sub_id} | Expert: {is_expert}")            # Print subject info
+        logging.info("Processing participant: %s | Expert: %s", sub_id, is_expert)
         single_df = process_single_participant(                                     # Process subject sequentially
             sub_id=sub_id,
             is_expert=is_expert,
@@ -769,7 +771,6 @@ stats_df = pd.DataFrame({                                                       
     "r_Novices": [f"{tup[1]:.3f}" for tup in novice_corrs],                          # Novice correlation r-values
     "95% CI Novices": [f"[{tup[3]:.3f}, {tup[4]:.3f}]" for tup in novice_corrs],      # Novice 95% confidence intervals
 })
-print("\n=== Behavioral RDM Correlations (Experts vs. Novices) ===\n")               # Print header for summary table
-print(stats_df.to_string(index=False))                                             # Print summary table without index
+logging.info("\n=== Behavioral RDM Correlations (Experts vs. Novices) ===\n%s", stats_df.to_string(index=False))
 
 plot_shared_colorbar(CUSTOM_CMAP, vmin=-18, vmax=18)                                # Display the standalone colorbar for DSMs

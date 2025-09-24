@@ -650,7 +650,9 @@ def build_pr_table(
     latex_table = header + body + footer
 
     if print_to_console:
-        print(latex_table)
+        import logging
+        logging.basicConfig(level=logging.INFO)
+        logging.info("\n%s", latex_table)
 
     output_dir.mkdir(parents=True, exist_ok=True)
     tex_out = output_dir / filename_tex

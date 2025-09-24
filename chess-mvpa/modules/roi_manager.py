@@ -666,8 +666,9 @@ class ROIManager:
 # Below is example usage / tests for the ROIManager.
 # ========================================================================
 if __name__ == "__main__":
-
-    print("Running some tests...")
+    import logging
+    logging.basicConfig(level=logging.INFO)
+    logging.info("Running some tests...")
 
     # Initialize the ROIManager with the paths.
     roi_manager = ROIManager(
@@ -679,14 +680,14 @@ if __name__ == "__main__":
     # Test 1: Retrieve keys we can interrogate (attribute names).
     keys = roi_manager.list_keys()
 
-    print("\n\nAvailable keys:")
+    logging.info("\n\nAvailable keys:")
     pprint(keys)
 
     # Test 2: Get all possible values for a given key.
     # Select one of the keys we just retrieved, e.g., the third key in the list.
     selected_key = keys[2]
     key_values = roi_manager.list_unique_values(selected_key)
-    print(f"\n\nUnique values for {selected_key}:")
+    logging.info("\n\nUnique values for %s:", selected_key)
     pprint(key_values)
 
     # Test 3: Filter the manager for a specific set of ROIs based on
@@ -703,25 +704,25 @@ if __name__ == "__main__":
     # If results is not empty, take the first ROI and display its details.
     if results:
         result = results[0]
-        print("\n\nROI details for the first match:")
+        logging.info("\n\nROI details for the first match:")
         pprint(result.get_details())
     else:
-        print("\n\nNo ROIs found with the specified filters.")
+        logging.info("\n\nNo ROIs found with the specified filters.")
 
     # Test 4: Retrieve ROI by cortex ID (e.g., 1).
     cortex_id_results, roi_mask = roi_manager.get_by_filter(cortex_id=3)
-    print(f"\n\nROIs with Cortex ID 1 ({len(cortex_id_results)} found):")
+    logging.info("\n\nROIs with Cortex ID 1 (%d found):", len(cortex_id_results))
     for roi in cortex_id_results[:5]:  # Print the first 5 for brevity
         pprint(roi.get_details())
 
     # Test 5: Retrieve ROI by region ID (e.g., 1).
     region_id_results, roi_mask = roi_manager.get_by_filter(region_id=1)
     if region_id_results:
-        print("\n\nDetails of ROI with Region ID 1:")
+        logging.info("\n\nDetails of ROI with Region ID 1:")
         for roi in region_id_results[:5]:  # Print the first 5 for brevity
             pprint(roi.get_details())
     else:
-        print("\n\nNo ROI found with Region ID 1.")
+        logging.info("\n\nNo ROI found with Region ID 1.")
 
     # Quick check to make sure every ROI is in the right place:
     from modules.surf_helpers import plot_roi_selection_overlay

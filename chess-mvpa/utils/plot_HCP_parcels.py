@@ -7,6 +7,7 @@ Created on Tue Apr 16 15:39:31 2024
 """
 
 import subprocess
+import logging
 import os
 
 def run_python_scripts(directory):
@@ -18,14 +19,14 @@ def run_python_scripts(directory):
     # Execute each Python file
     for script in python_files:
         script_path = os.path.join(directory, script)
-        print(f"Running {script_path}...")
+        logging.info("Running %s...", script_path)
         try:
             # Run the script
             result = subprocess.run(['python', script_path], check=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
             # Print the output and errors (if any)
-            print("Output:", result.stdout.decode())
+            logging.info("Output: %s", result.stdout.decode())
         except subprocess.CalledProcessError as e:
-            print(f"Error running {script_path}: {e}")
+            logging.error("Error running %s: %s", script_path, e)
 
 # Specify the directory containing the Python scripts
 script_directory = '/home/eik-tb/OneDrive_andreaivan.costantino@kuleuven.be/GitHub/chess-expertise-2024/fMRI/utils/plot_HCPMM1_results'

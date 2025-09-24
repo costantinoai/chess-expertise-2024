@@ -573,7 +573,7 @@ def find_nifti_files(data_dir, pattern=None):
     # Walk directory tree
     for root, _, fnames in os.walk(data_dir):
         for f in fnames:
-            print(f)
+            logging.info("%s", f)
             # check extension and optional pattern
             if '.nii' in f and (pattern is None or pattern in f):
                 full_path = os.path.join(root, f)

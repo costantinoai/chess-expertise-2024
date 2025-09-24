@@ -272,7 +272,7 @@ def plot_voxelcount_vs_pr(df, y_col, title_prefix, fname, out_dir):
     path = os.path.join(out_dir, fname)
     plt.savefig(path, dpi=300)
     plt.show()
-    print(f"Saved: {path}")
+    logging.info("Saved: %s", path)
 
 
 # -----------------------------------------------------------------------------
@@ -689,3 +689,4 @@ plot_elo_roi_correlation(elo_data=ELOS, expert_pr=expert_pr, roi_names=ordered_r
 plot_top_roi_scatter_grid(
     elo_values=ELOS, expert_pr=expert_pr, roi_names=ordered_roi_names, top_n=5
 )
+import logging
