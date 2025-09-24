@@ -12,6 +12,7 @@ import numpy as np
 import matplotlib.pyplot as plt
 import seaborn as sns
 from matplotlib.colors import LinearSegmentedColormap
+from viz_utils import make_brain_cmap
 import logging
 import logging
 from pathlib import Path
@@ -46,12 +47,6 @@ sns.set_palette(sns.color_palette(PALETTE))
 plt.rcParams['font.family'] = 'Ubuntu Condensed'
 
 # Custom brain colormap
-def make_brain_cmap():
-    center = plt.cm.RdPu(0)[:3]
-    neg = np.linspace([0.0, 0.5, 0.7], center, 256)
-    pos = plt.cm.RdPu(np.linspace(0, 1, 256))[:, :3]
-    return LinearSegmentedColormap.from_list('custom_brain', np.vstack((neg, pos)))
-
 BRAIN_CMAP = make_brain_cmap()
 
 # Title font settings

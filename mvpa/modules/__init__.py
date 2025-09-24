@@ -12,6 +12,15 @@ from pathlib import Path
 import warnings
 import nibabel as nib
 from logging_utils import setup_logging
+from config import (
+    DATA_ROOT,
+    BIDS_PATH as _BIDS_PATH,
+    DERIVATIVES_PATH as _DERIVATIVES_PATH,
+    MVPA_RESULTS_ROOT as _MVPA_RESULTS_ROOT,
+    HCP_ROI_CSV,
+    HCP_LH_LUT,
+    HCP_RH_LUT,
+)
 
 warnings.filterwarnings("ignore", category=FutureWarning)
 warnings.filterwarnings("ignore", category=RuntimeWarning)
@@ -35,18 +44,18 @@ plt.rcParams["savefig.bbox"] = "tight"  # Ensure plots save tightly cropped
 plt.rcParams["savefig.pad_inches"] = 0.1  # Add small padding around saved plots
 plt.rcParams["savefig.format"] = "png"  # Default save format
 
-BASE_DATA_PATH = Path("/data/projects/chess/data")
-BIDS_PATH = os.path.join(BASE_DATA_PATH, "BIDS")
-DERIVATIVES_PATH = os.path.join(BIDS_PATH, "derivatives")
-MVPA_ROOT_PATH = os.path.join(DERIVATIVES_PATH, "/data/projects/chess/data/BIDS/derivatives/mvpa/20250206-214037_mvpa_bilalic_categories")
+BASE_DATA_PATH = Path(DATA_ROOT)
+BIDS_PATH = str(_BIDS_PATH)
+DERIVATIVES_PATH = str(_DERIVATIVES_PATH)
+MVPA_ROOT_PATH = str(_MVPA_RESULTS_ROOT)
 
 FS_PATH = os.path.join(DERIVATIVES_PATH, "fastsurfer")
 LH_ANNOT =  os.path.join(FS_PATH, "fsaverage", "label", "lh.HCPMMP1.annot")
 RH_ANNOT =  os.path.join(FS_PATH, "fsaverage", "label", "rh.HCPMMP1.annot")
 
-ROIS_CSV = os.path.join(BASE_DATA_PATH, "misc/HCP-MMP1_UniqueRegionList.csv")
-LEFT_LUT = os.path.join(BASE_DATA_PATH, "misc/lh_HCPMMP1_color_table.txt")
-RIGHT_LUT = os.path.join(BASE_DATA_PATH, "misc/rh_HCPMMP1_color_table.txt")
+ROIS_CSV = str(HCP_ROI_CSV)
+LEFT_LUT = str(HCP_LH_LUT)
+RIGHT_LUT = str(HCP_RH_LUT)
 
 P_ALPHA = .05
 FDR_ALPHA = .05

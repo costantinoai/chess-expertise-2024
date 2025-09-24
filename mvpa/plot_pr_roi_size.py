@@ -20,14 +20,6 @@ import matplotlib as mpl
 from modules.helpers import create_run_id, save_script_to_file
 
 
-# Make custom colormap
-def make_brain_cmap():
-    center = plt.cm.RdPu(0)[:3]
-    neg = np.linspace([0.0, 0.5, 0.7], center, 256)
-    pos = plt.cm.RdPu(np.linspace(0, 1, 256))[:, :3]
-    return LinearSegmentedColormap.from_list("custom_brain", np.vstack((neg, pos)))
-
-
 BRAIN_CMAP = make_brain_cmap()
 
 # Plot styles
