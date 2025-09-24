@@ -12,6 +12,9 @@ Repository Structure
 - `chess-behavioural/` – Behavioural analysis scripts and helper modules.
 - `chess-dataset-vis/` – Tools for visualising the chess stimulus set.
 - `chess-neurosynth/` – Scripts for meta‑analytic lookups using Neurosynth.
+- `chess-manifoldMFT/` – Manifold/PR analysis workflows and outputs.
+- `chess-rois/` – ROI definitions and utilities.
+- `common_utils.py` – Shared utilities (logging tee, seeding, run IDs, script copy).
 - `misc/` – Example JSON sidecars for the BIDS dataset.
 - `local/` – Optional local configuration (not tracked by default).
 - `tests/` – Tests for shared utilities (if present/extended).

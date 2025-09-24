@@ -23,9 +23,9 @@ Todo Checklist
   - [x] Remove: chess-results-vis/
   - [x] Remove: chess-dnn/
   - [x] rg sanity check for any remaining references to removed folders (only references remain in docs and archival result scripts)
-- [ ] DRY / Refactors
-  - [ ] Unify OutputLogger implementations (prefer one in a shared module; e.g., reuse chess-mvpa/modules/helpers or move a generic version to root/common and import elsewhere)
-  - [ ] Centralize seeding (set_rnd_seed), create_run_id, save_script_to_file in a shared utility
+- [x] DRY / Refactors
+  - [x] Unify OutputLogger implementations (now in `common_utils.py`; imported in mvpa/behavioural helpers)
+  - [x] Centralize seeding (set_rnd_seed), create_run_id, save_script_to_file, create_output_directory in `common_utils.py`
   - [ ] Standardize logging via logging_utils.setup_logging; ensure all main scripts call it
   - [ ] Enforce timestamped output dir convention `<YYYYMMDD-HHMMSS>_<shortname>` across scripts
   - [ ] Audit absolute/hard-coded paths; replace with CLI flags/config
