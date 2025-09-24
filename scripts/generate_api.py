@@ -50,9 +50,19 @@ class PySymbol:
     line: int
 
 
+ANALYSIS_DIR_NAMES = {
+    "mvpa",
+    "fmri_glm",
+    "behavioural",
+    "neurosynth",
+    "manifold",
+    "rois",
+}
+
+
 def iter_analysis_dirs(root: Path) -> Iterable[Path]:
     for p in sorted(root.iterdir()):
-        if p.is_dir() and p.name.startswith("chess-") and p.name not in TOP_LEVEL_IGNORE:
+        if p.is_dir() and p.name in ANALYSIS_DIR_NAMES and p.name not in TOP_LEVEL_IGNORE:
             yield p
 
 

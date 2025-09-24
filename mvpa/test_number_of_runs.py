@@ -35,7 +35,8 @@ import scipy.io as sio  # loading SPM.mat (MATLAB format)
 from scipy.stats import ttest_ind, mannwhitneyu, levene  # stats tests
 
 # ---------- Configuration (edit to your project) ----------
-BASE_PATH = "/data/projects/chess/data/BIDS/derivatives/fmriprep-SPM_smoothed-NO_GS-FD-HMP_brainmasked/MNI/fmriprep-SPM-MNI/GLM"  # root of subject folders
+from config import GLM_BASE_PATH
+BASE_PATH = str(GLM_BASE_PATH)  # root of subject folders
 SPM_FILENAME = "SPM.mat"  # SPM file name inside each subject's folder
 
 # List of subject IDs for Experts (as strings without "sub-" prefix)

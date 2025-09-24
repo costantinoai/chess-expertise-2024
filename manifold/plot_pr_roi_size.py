@@ -19,25 +19,13 @@ import matplotlib as mpl
 
 from common_utils import create_run_id, save_script_to_file
 from config import GLM_BASE_PATH, ATLAS_CORTICES, EXPERTS, NONEXPERTS
+from meta import ROI_NAME_MAP, ROI_COLORS, apply_plot_style
 
 
 BRAIN_CMAP = make_brain_cmap()
 
 # Plot styles
-sns.set_style("white", {"axes.grid": False})
-base_font_size = 22
-plt.rcParams.update(
-    {
-        "font.family": "Ubuntu Condensed",
-        "font.size": base_font_size,
-        "axes.titlesize": base_font_size * 1.4,
-        "axes.labelsize": base_font_size * 1.2,
-        "xtick.labelsize": base_font_size,
-        "ytick.labelsize": base_font_size,
-        "legend.fontsize": base_font_size,
-        "figure.figsize": (12, 9),
-    }
-)
+apply_plot_style(22)
 
 # -----------------------------------------------------------------------------
 # Configuration
@@ -51,16 +39,6 @@ CUSTOM_COLORS = [
     "#fec44f", "#fec44f", "#fec44f", "#fec44f",
 ]
 
-ROI_NAME_MAP = {
-    1: "Primary Visual", 2: "Early Visual", 3: "Dorsal Stream Visual",
-    4: "Ventral Stream Visual", 5: "MT+ Complex", 6: "Somatosensory and Motor",
-    7: "Paracentral Lobular and Mid Cing", 8: "Premotor", 9: "Posterior Opercular",
-    10: "Early Auditory", 11: "Auditory Association", 12: "Insular and Frontal Opercular",
-    13: "Medial Temporal", 14: "Lateral Temporal", 15: "Temporo-Parieto Occipital Junction",
-    16: "Superior Parietal", 17: "Inferior Parietal", 18: "Posterior Cing",
-    19: "Anterior Cing and Medial Prefrontal", 20: "Orbital and Polar Frontal",
-    21: "Inferior Frontal", 22: "Dorsolateral Prefrontal",
-}
 
 EXPERT_SUBJECTS = list(EXPERTS)
 NONEXPERT_SUBJECTS = list(NONEXPERTS)
@@ -177,7 +155,7 @@ def main():
     df["PR_Expert"] = np.nanmean(expert_pr, axis=0)
     df["PR_NonExpert"] = np.nanmean(novice_pr, axis=0)
     df["PR_Diff"] = df["PR_Expert"] - df["PR_NonExpert"]
-    df["Color"] = [CUSTOM_COLORS[(i - 1) % len(CUSTOM_COLORS)] for i in df["ROI"]]
+    df["Color"] = [ROI_COLORS[(i - 1) % len(ROI_COLORS)] for i in df["ROI"]]
 
     plot_voxelcount_vs_pr(df, "PR_Expert", "Experts: PR vs ROI Size", "experts_voxel_vs_pr.png", out_dir)
     plot_voxelcount_vs_pr(df, "PR_NonExpert", "Non-Experts: PR vs ROI Size", "nonexperts_voxel_vs_pr.png", out_dir)
@@ -209,4 +187,3 @@ def main():
 
 if __name__ == "__main__":
     main()
-

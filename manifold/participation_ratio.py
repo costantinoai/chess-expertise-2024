@@ -19,20 +19,10 @@ from joblib import Parallel, delayed
 from logging_utils import setup_logging
 from common_utils import create_run_id, save_script_to_file
 from config import GLM_BASE_PATH, ATLAS_CORTICES, EXPERTS, NONEXPERTS
+from meta import ROI_NAME_MAP, ROI_COLORS, apply_plot_style
 
 
-sns.set_style("white", {"axes.grid": False})
-_BASE_FONT_SIZE = 28
-plt.rcParams.update({
-    "font.family": "Ubuntu Condensed",
-    "font.size": _BASE_FONT_SIZE,
-    "axes.titlesize": _BASE_FONT_SIZE * 1.4,
-    "axes.labelsize": _BASE_FONT_SIZE * 1.2,
-    "xtick.labelsize": _BASE_FONT_SIZE,
-    "ytick.labelsize": _BASE_FONT_SIZE,
-    "legend.fontsize": _BASE_FONT_SIZE,
-    "figure.figsize": (21, 11),
-})
+apply_plot_style(28)
 
 
 @dataclass(frozen=True)
@@ -54,16 +44,7 @@ class Config:
         "#e31a1c", "#e31a1c", "#e31a1c", "#e31a1c",
         "#fdbf6f", "#fdbf6f", "#fdbf6f", "#fdbf6f",
     )
-    roi_name_map: Mapping[int, str] = field(default_factory=lambda: {
-        1: "Primary Visual", 2: "Early Visual", 3: "Dorsal Stream Visual",
-        4: "Ventral Stream Visual", 5: "MT+ Complex", 6: "Somatosensory and Motor",
-        7: "Paracentral Lobular and Mid Cing", 8: "Premotor", 9: "Posterior Opercular",
-        10: "Early Auditory", 11: "Auditory Association", 12: "Insular and Frontal Opercular",
-        13: "Medial Temporal", 14: "Lateral Temporal", 15: "Temporo-Parieto Occipital Junction",
-        16: "Superior Parietal", 17: "Inferior Parietal", 18: "Posterior Cing",
-        19: "Anterior Cing and Medial Prefrontal", 20: "Orbital and Polar Frontal",
-        21: "Inferior Frontal", 22: "Dorsolateral Prefrontal",
-    })
+    roi_name_map: Mapping[int, str] = field(default_factory=lambda: dict(ROI_NAME_MAP))
 
 
 logger = logging.getLogger(__name__)
@@ -201,4 +182,3 @@ def main(cfg: Optional[Config] = None) -> None:
 
 if __name__ == "__main__":
     main()
-

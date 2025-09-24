@@ -57,6 +57,7 @@ from common_utils import (
     save_script_to_file,
     add_file_logger,
 )
+from config import DERIVATIVES_PATH
 
 # Suppress specific qfac warning from nibabel
 warnings.filterwarnings("ignore", message="pixdim\[0\] \(qfac\) should be 1 \(default\) or -1; setting qfac to 1")
@@ -810,7 +811,7 @@ def plot_term_maps(term_maps, results_dir, min_voxel_value):
             thresh=min_voxel_value
         )
 # --- Configuration ---
-DATA_DIR         = '/data/projects/chess/data/BIDS/derivatives/rsa_searchlight'
+# (overridden above) kept for compatibility
 RESULTS_ROOT     = 'results'
 SMOOTHING_MM     = None          # Group-level smoothing (FWHM)
 MIN_VOXEL_VALUE  = 1e-5          # Threshold for plotting
@@ -970,3 +971,5 @@ logger.info("Results directory: %s", RESULTS_DIR)
 
     # Final message
     logger.info("=== Analysis Complete. Results saved to: %s ===", RESULTS_DIR)
+# Base data dir for RSA searchlight derivatives (configurable)
+DATA_DIR = os.path.join(str(DERIVATIVES_PATH), "rsa_searchlight")

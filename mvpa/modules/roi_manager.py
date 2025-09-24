@@ -626,7 +626,8 @@ class ROIManager:
         import nibabel as nib
 
         if path==None:
-            path = "/data/projects/chess/data/misc/afni_glasser/MNI_Glasser_HCP_v1.0_resampled.nii"
+            from config import MISC_PATH
+            path = os.path.join(str(MISC_PATH), "afni_glasser", "MNI_Glasser_HCP_v1.0_resampled.nii")
 
         self.MNINLinAsym_AFNI_img = nib.load(path)
         logging.info(f"Atlas loaded successfully from {path}.")

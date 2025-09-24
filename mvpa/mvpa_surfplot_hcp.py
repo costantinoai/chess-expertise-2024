@@ -87,17 +87,19 @@ def load_glasser_surf():
         cmap = mcolors.ListedColormap(lut_data)
         return cmap, label_to_color
 
+    from config import DERIVATIVES_PATH
     data = {
-        "left": "/data/projects/chess/data/BIDS/derivatives/fastsurfer/fsaverage/label/lh.HCPMMP1.annot",
-        "right": "/data/projects/chess/data/BIDS/derivatives/fastsurfer/fsaverage/label/rh.HCPMMP1.annot",
+        "left": os.path.join(str(DERIVATIVES_PATH), "fastsurfer", "fsaverage", "label", "lh.HCPMMP1.annot"),
+        "right": os.path.join(str(DERIVATIVES_PATH), "fastsurfer", "fsaverage", "label", "rh.HCPMMP1.annot"),
     }
 
+    from config import MISC_PATH
     cmaps = {
         "left": load_freesurfer_lut(
-            "/data/projects/chess/data/misc/lh_HCPMMP1_color_table.txt"
+            os.path.join(str(MISC_PATH), "lh_HCPMMP1_color_table.txt")
         )[0],
         "right": load_freesurfer_lut(
-            "/data/projects/chess/data/misc/rh_HCPMMP1_color_table.txt"
+            os.path.join(str(MISC_PATH), "rh_HCPMMP1_color_table.txt")
         )[0],
     }
 

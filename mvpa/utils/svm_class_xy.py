@@ -344,8 +344,8 @@ def main(eye_tracking_data: pd.DataFrame) -> Dict:
     return results
 
 # Set up the data paths
-root_dir = '/data/projects/chess/temp_bidsmreye/bidsmreye'
-OUT_DIR = f"/data/projects/chess/temp_bidsmreye/{create_run_id()}_et-mvpa"
+root_dir = os.environ.get('CHESS_EYE_DATA', os.path.join(os.sep, 'data', 'projects', 'chess', 'temp_bidsmreye', 'bidsmreye'))
+OUT_DIR = os.environ.get('CHESS_EYE_RESULTS', os.path.join(os.sep, 'data', 'projects', 'chess', 'temp_bidsmreye', f"{create_run_id()}_et-mvpa"))
 participants_xlsx_path = "/home/eik-tb/OneDrive_andreaivan.costantino@kuleuven.be/Projects/Expertise/chess_files/chess_project_files/participants.xlsx"
 
 # Create output directory if it doesn't exist

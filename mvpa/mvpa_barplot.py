@@ -64,18 +64,19 @@ regressor_mapping = {
 #  (1) The path to the pickled group-level results,
 #  (2) The path to the corresponding ROI .tsv annotation file
 # ----------------------------------------------------------------------------
+from config import MVPA_RESULTS_ROOT
 MVPA_RESULTS_PATHS = [
     (
-        "/data/projects/chess/data/BIDS/derivatives/mvpa/20250402-191243_bilalic_sphere_rois",
-        "/home/eik-tb/OneDrive_andreaivan.costantino@kuleuven.be/GitHub/chess-expertise-2024/chess-rois/results/bilalic_sphere_rois",
+        os.environ.get("CHESS_MVPA_RESULTS_DIR1", os.path.join(str(MVPA_RESULTS_ROOT), "<RUN1>_bilalic_sphere_rois")),
+        os.environ.get("CHESS_ROIS_ANNOT_DIR1", os.path.join("rois", "results", "bilalic_sphere_rois")),
     ),
     (
-        "/data/projects/chess/data/BIDS/derivatives/mvpa/20250402-191833_glasser_cortices_bilateral",
-        "/home/eik-tb/OneDrive_andreaivan.costantino@kuleuven.be/GitHub/chess-expertise-2024/chess-rois/results/glasser_cortex_bilateral",
+        os.environ.get("CHESS_MVPA_RESULTS_DIR2", os.path.join(str(MVPA_RESULTS_ROOT), "<RUN2>_glasser_cortices_bilateral")),
+        os.environ.get("CHESS_ROIS_ANNOT_DIR2", os.path.join("rois", "results", "glasser_cortex_bilateral")),
     ),
     (
-        "/data/projects/chess/data/BIDS/derivatives/mvpa/20250402-230003_glasser_regions_bilateral",
-        "/home/eik-tb/OneDrive_andreaivan.costantino@kuleuven.be/GitHub/chess-expertise-2024/chess-rois/results/glasser_regions_bilateral",
+        os.environ.get("CHESS_MVPA_RESULTS_DIR3", os.path.join(str(MVPA_RESULTS_ROOT), "<RUN3>_glasser_regions_bilateral")),
+        os.environ.get("CHESS_ROIS_ANNOT_DIR3", os.path.join("rois", "results", "glasser_regions_bilateral")),
     ),
 ]
 

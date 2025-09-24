@@ -381,7 +381,8 @@ def plot_choice_frequency(data, subject, expertise):
 #           These plots clearly show that checkmate boards are preferred over non-check!
 
 
-bids_root = "/data/projects/chess/data/BIDS"
+from config import BIDS_PATH
+bids_root = str(BIDS_PATH)
 participants_xlsx_path = "/home/eik-tb/OneDrive_andreaivan.costantino@kuleuven.be/Projects/Expertise/chess_files/chess_project_files/participants.xlsx"
 participants_sourcedata_root = "/media/costantino_ai/eiK-backup2/chess/sourcedata"
 

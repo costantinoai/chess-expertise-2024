@@ -712,10 +712,11 @@ def run_analysis(DATA_DIR, CONTRASTS, atlas_path, mode):
 
     # Fetch fsaverage surface template (used for surface plotting)
     fsav = fetch_surf_fsaverage("fsaverage")
+    from config import DERIVATIVES_PATH
     annot_files = {
-        "left":"/data/projects/chess/data/BIDS/derivatives/fastsurfer/fsaverage/label/lh.HCPMMP1.annot",
-        "right":"/data/projects/chess/data/BIDS/derivatives/fastsurfer/fsaverage/label/rh.HCPMMP1.annot"
-        }
+        "left": os.path.join(str(DERIVATIVES_PATH), "fastsurfer", "fsaverage", "label", "lh.HCPMMP1.annot"),
+        "right": os.path.join(str(DERIVATIVES_PATH), "fastsurfer", "fsaverage", "label", "rh.HCPMMP1.annot"),
+    }
 
     # Initialize masker for extracting ROI means
     masker = NiftiLabelsMasker(
@@ -805,10 +806,12 @@ def run_analysis(DATA_DIR, CONTRASTS, atlas_path, mode):
 
 
 # Paths
-ATLAS_PATH = "/data/projects/chess/data/misc/templates/tpl-MNI152NLin2009cAsym_res-02_atlas-Glasser2016_desc-bilateral_resampled.nii"
+from config import ATLAS_BILATERAL
+ATLAS_PATH = str(ATLAS_BILATERAL)
 
 # Run univariate
-UNIV_DATA_DIR = "/data/projects/chess/data/BIDS/derivatives/fmriprep-SPM_smoothed-4_GS-FD-HMP_brainmasked/MNI/fmriprep-SPM-MNI/GLM"
+from config import GLM_BASE_PATH
+UNIV_DATA_DIR = str(GLM_BASE_PATH)
 UNIV_CONTRASTS = {
     "con_0001.nii": "Checkmate > Non-checkmate",
     "con_0002.nii": "All > Rest",
@@ -816,7 +819,8 @@ UNIV_CONTRASTS = {
 run_analysis(UNIV_DATA_DIR, UNIV_CONTRASTS, ATLAS_PATH, mode="univ")
 
 # Run RSA
-RSA_DATA_DIR = "/data/projects/chess/data/BIDS/derivatives/rsa_searchlight"
+from config import DERIVATIVES_PATH
+RSA_DATA_DIR = os.path.join(str(DERIVATIVES_PATH), "rsa_searchlight")
 RSA_CONTRASTS = {
     "checkmate.nii.gz": "Checkmate",
     "strategy.nii.gz": "Strategy",

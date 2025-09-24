@@ -44,9 +44,10 @@ fsaverage = load_fsaverage("fsaverage")
 # fsaverage_mesh = fsaverage.mesh
 # fsaverage_data = fsaverage.data.parts
 
+from config import DERIVATIVES_PATH
 data = {
-    "left": "/data/projects/chess/data/BIDS/derivatives/fastsurfer/fsaverage/label/lh.HCPMMP1.annot",
-    "right": "/data/projects/chess/data/BIDS/derivatives/fastsurfer/fsaverage/label/rh.HCPMMP1.annot",
+    "left": os.path.join(str(DERIVATIVES_PATH), "fastsurfer", "fsaverage", "label", "lh.HCPMMP1.annot"),
+    "right": os.path.join(str(DERIVATIVES_PATH), "fastsurfer", "fsaverage", "label", "rh.HCPMMP1.annot"),
 }
 
 import pandas as pd
@@ -54,7 +55,7 @@ import matplotlib.colors as mcolors
 
 # Load region info TSV
 roi_df = pd.read_csv(
-    "/home/eik-tb/OneDrive_andreaivan.costantino@kuleuven.be/GitHub/chess-expertise-2024/chess-rois/results/glasser_regions_bilateral/region_info.tsv",
+    os.path.join("rois", "results", "glasser_regions_bilateral", "region_info.tsv"),
     sep='\t'
 ).sort_values("region_id")
 
