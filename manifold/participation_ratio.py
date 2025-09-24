@@ -1,0 +1,204 @@
+from __future__ import annotations
+
+import logging
+from dataclasses import dataclass, field
+from pathlib import Path
+from typing import Dict, Mapping, Optional, Sequence, Tuple
+
+import numpy as np
+import pandas as pd
+import seaborn as sns
+import matplotlib.pyplot as plt
+import nibabel as nib
+import scipy.io as sio
+from scipy.stats import ttest_ind
+from sklearn.decomposition import PCA
+from statsmodels.stats.multitest import multipletests
+from joblib import Parallel, delayed
+
+from logging_utils import setup_logging
+from common_utils import create_run_id, save_script_to_file
+from config import GLM_BASE_PATH, ATLAS_CORTICES, EXPERTS, NONEXPERTS
+
+
+sns.set_style("white", {"axes.grid": False})
+_BASE_FONT_SIZE = 28
+plt.rcParams.update({
+    "font.family": "Ubuntu Condensed",
+    "font.size": _BASE_FONT_SIZE,
+    "axes.titlesize": _BASE_FONT_SIZE * 1.4,
+    "axes.labelsize": _BASE_FONT_SIZE * 1.2,
+    "xtick.labelsize": _BASE_FONT_SIZE,
+    "ytick.labelsize": _BASE_FONT_SIZE,
+    "legend.fontsize": _BASE_FONT_SIZE,
+    "figure.figsize": (21, 11),
+})
+
+
+@dataclass(frozen=True)
+class Config:
+    base_path: Path = Path(str(GLM_BASE_PATH))
+    spm_filename: str = "SPM.mat"
+    atlas_file: Path = Path(str(ATLAS_CORTICES))
+    expert_subjects: Tuple[str, ...] = tuple(EXPERTS)
+    nonexpert_subjects: Tuple[str, ...] = tuple(NONEXPERTS)
+    alpha_fdr: float = 0.05
+    use_parallel: bool = True
+    n_jobs: int = -1
+    custom_colors: Tuple[str, ...] = (
+        "#a6cee3", "#a6cee3",
+        "#1f78b4", "#1f78b4", "#1f78b4",
+        "#b2df8a", "#b2df8a", "#b2df8a", "#b2df8a",
+        "#33a02c", "#33a02c", "#33a02c",
+        "#fb9a99", "#fb9a99",
+        "#e31a1c", "#e31a1c", "#e31a1c", "#e31a1c",
+        "#fdbf6f", "#fdbf6f", "#fdbf6f", "#fdbf6f",
+    )
+    roi_name_map: Mapping[int, str] = field(default_factory=lambda: {
+        1: "Primary Visual", 2: "Early Visual", 3: "Dorsal Stream Visual",
+        4: "Ventral Stream Visual", 5: "MT+ Complex", 6: "Somatosensory and Motor",
+        7: "Paracentral Lobular and Mid Cing", 8: "Premotor", 9: "Posterior Opercular",
+        10: "Early Auditory", 11: "Auditory Association", 12: "Insular and Frontal Opercular",
+        13: "Medial Temporal", 14: "Lateral Temporal", 15: "Temporo-Parieto Occipital Junction",
+        16: "Superior Parietal", 17: "Inferior Parietal", 18: "Posterior Cing",
+        19: "Anterior Cing and Medial Prefrontal", 20: "Orbital and Polar Frontal",
+        21: "Inferior Frontal", 22: "Dorsolateral Prefrontal",
+    })
+
+
+logger = logging.getLogger(__name__)
+
+
+def _assert_file_exists(path: Path, label: str) -> None:
+    if not path.is_file():
+        raise FileNotFoundError(f"{label} not found: {path}")
+
+
+def _spm_dir_from_swd(spm_obj, fallback: Path) -> Path:
+    swd = getattr(spm_obj, "swd", None)
+    return Path(swd) if swd else fallback
+
+
+def get_spm_condition_betas(subject_id: str, cfg: Config) -> Dict[str, nib.Nifti1Image]:
+    spm_mat_path = cfg.base_path / f"sub-{subject_id}" / "exp" / cfg.spm_filename
+    _assert_file_exists(spm_mat_path, "SPM.mat")
+    mat = sio.loadmat(spm_mat_path.as_posix(), struct_as_record=False, squeeze_me=True)
+    SPM = mat["SPM"]
+    betas = SPM.Vbeta
+    names = SPM.xX.name
+    pattern = r"Sn\(\d+\)\s+(.*?)\*bf\(1\)"
+    cond_indices: Dict[str, list[int]] = {}
+    for idx, name in enumerate(names):
+        m = re.match(pattern, name)
+        if m:
+            cond = m.group(1)
+            cond_indices.setdefault(cond, []).append(idx)
+    swd = _spm_dir_from_swd(SPM, spm_mat_path.parent)
+    averaged: Dict[str, nib.Nifti1Image] = {}
+    for cond, indices in cond_indices.items():
+        sum_data = None
+        affine = header = None
+        for i in indices:
+            img = nib.load((swd / betas[i].fname).as_posix())
+            data = img.get_fdata()
+            if sum_data is None:
+                sum_data = np.zeros_like(data)
+                affine, header = img.affine, img.header
+            sum_data += data
+        averaged[cond] = nib.Nifti1Image(sum_data / len(indices), affine, header)
+    return averaged
+
+
+def load_roi_voxel_data(subject_id: str, atlas_data: np.ndarray, unique_rois: np.ndarray, cfg: Config) -> Dict[int, np.ndarray]:
+    betas = get_spm_condition_betas(subject_id, cfg)
+    conditions = sorted(betas.keys())
+    output = {roi: np.zeros((len(conditions), (atlas_data == roi).sum()), dtype=np.float32) for roi in unique_rois}
+    for i, cond in enumerate(conditions):
+        data = betas[cond].get_fdata()
+        for roi in unique_rois:
+            output[roi][i, :] = data[atlas_data == roi]
+    return output
+
+
+def compute_pr(roi_data: np.ndarray) -> Tuple[float, int]:
+    valid = ~np.isnan(roi_data).all(axis=0)
+    cleaned = roi_data[:, valid]
+    if cleaned.shape[1] < 2:
+        return np.nan, 0
+    var = PCA().fit(cleaned).explained_variance_
+    return (var.sum() ** 2) / np.sum(var ** 2), cleaned.shape[1]
+
+
+def process_subject(subject_id: str, atlas_data: np.ndarray, unique_rois: np.ndarray, cfg: Config) -> Tuple[np.ndarray, np.ndarray]:
+    roi_data = load_roi_voxel_data(subject_id, atlas_data, unique_rois, cfg)
+    pr, vox = [], []
+    for roi in unique_rois:
+        p, v = compute_pr(roi_data[roi])
+        pr.append(p)
+        vox.append(v)
+    return np.array(pr), np.array(vox)
+
+
+def per_roi_welch_and_fdr(expert_pr: np.ndarray, novice_pr: np.ndarray, roi_labels: np.ndarray, alpha: float) -> pd.DataFrame:
+    rows = []
+    for j, roi in enumerate(roi_labels):
+        x = expert_pr[:, j]
+        y = novice_pr[:, j]
+        mask = np.isfinite(x) & np.isfinite(y)
+        t, p = ttest_ind(x[mask], y[mask], equal_var=False)
+        rows.append({"ROI": int(roi), "t": float(t), "p": float(p), "delta_mean": np.nanmean(x - y)})
+    df = pd.DataFrame(rows)
+    df["p_fdr"] = multipletests(df["p"].values, alpha=alpha, method="fdr_bh")[1]
+    return df
+
+
+def consolidate_results(expert_pr: np.ndarray, novice_pr: np.ndarray, roi_labels: np.ndarray, stats_df: pd.DataFrame, roi_name_map: Mapping[int, str]) -> pd.DataFrame:
+    df = pd.DataFrame({
+        "ROI": roi_labels.astype(int),
+        "ROI_Label": [roi_name_map.get(int(r), str(int(r))) for r in roi_labels],
+        "PR_Expert": np.nanmean(expert_pr, axis=0),
+        "PR_NonExpert": np.nanmean(novice_pr, axis=0),
+    })
+    df["delta_mean"] = df["PR_Expert"] - df["PR_NonExpert"]
+    df = df.merge(stats_df[["ROI", "p", "p_fdr", "delta_mean"]], on="ROI", suffixes=("", "_stat"))
+    return df
+
+
+def main(cfg: Optional[Config] = None) -> None:
+    cfg = cfg or Config()
+    setup_logging()
+    logger.info("PR pipeline started")
+
+    output_dir = Path("results") / f"{create_run_id()}_participation_ratio"
+    output_dir.mkdir(parents=True, exist_ok=True)
+    setup_logging(log_file=str(output_dir / "run.log"))
+    save_script_to_file(output_dir)
+
+    _assert_file_exists(cfg.atlas_file, "Atlas NIfTI")
+    atlas_img = nib.load(cfg.atlas_file.as_posix())
+    atlas_data = atlas_img.get_fdata().astype(int)
+    roi_labels = np.unique(atlas_data)
+    roi_labels = roi_labels[roi_labels != 0]
+
+    def _run(sub_ids: Sequence[str]) -> np.ndarray:
+        if cfg.use_parallel:
+            return np.array(Parallel(n_jobs=cfg.n_jobs, verbose=5)(
+                delayed(process_subject)(sid, atlas_data, roi_labels, cfg) for sid in sub_ids
+            ))
+        return np.array([process_subject(sid, atlas_data, roi_labels, cfg) for sid in sub_ids])
+
+    expert_pr = _run(cfg.expert_subjects)
+    novice_pr = _run(cfg.nonexpert_subjects)
+    stats_df = per_roi_welch_and_fdr(expert_pr, novice_pr, roi_labels, cfg.alpha_fdr)
+    results_df = consolidate_results(expert_pr, novice_pr, roi_labels, stats_df, cfg.roi_name_map)
+
+    csv_out = output_dir / "roi_pr_results_consolidated.csv"
+    results_df.to_csv(csv_out, index=False)
+    logger.info("Saved consolidated PR results: %s", csv_out)
+
+    logger.info("Done. Output: %s", output_dir)
+
+
+if __name__ == "__main__":
+    main()
+

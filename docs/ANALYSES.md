@@ -35,8 +35,8 @@ Reported Analyses (from manuscript)
 
 - Manifold Dimensionality (Participation Ratio, PR)
   - Manuscript: Main PR results figure (`pr_classification.png`); supplementary PR vs ROI size figure (`pr_supp.png`) and table `pr_ttest`.
-  - Code: `mvpa/participation_ratio.py`, `mvpa/plot_pr_roi_size.py`; manifold capacity (MFT) workflows in `manifold/main.py` and `manifold/modules/*`.
-  - Outputs: PR figures/tables in `mvpa/results/*`; MFT results in `manifold/manifold_results/*` or `results/*`
+  - Code: `manifold/participation_ratio.py`, `manifold/plot_pr_roi_size.py`.
+  - Outputs: PR figures/tables in `manifold/results/*`
 
 - RDM Orthogonality (Correlation and Variance Partitioning)
   - Manuscript: Supplementary section “Orthogonality Across RDMs” with correlation and variance partitioning panels.
