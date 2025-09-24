@@ -57,6 +57,7 @@ ANALYSIS_DIR_NAMES = {
     "neurosynth",
     "manifold",
     "rois",
+    "common",  # include shared utilities in the API index
 }
 
 
