@@ -29,16 +29,18 @@ dependencies = [
 [tool.setuptools.packages.find]
 where = ["."]
 include = [
-    "chess_mvpa",
-    "chess_glm",
-    "chess_behavioural",
-    "chess_dataset_vis",
-    "chess_neurosynth"
+    "mvpa",
+    "fmri_glm",
+    "behavioural",
+    "neurosynth",
+    "manifold",
+    "rois",
 ]
 
 [tool.setuptools.package-dir]
-chess_mvpa = "chess-mvpa"
-chess_glm = "chess-glm"
-chess_behavioural = "chess-behavioural"
-chess_dataset_vis = "chess-dataset-vis"
-chess_neurosynth = "chess-neurosynth"
+mvpa = "mvpa"
+fmri_glm = "fmri_glm"
+behavioural = "behavioural"
+neurosynth = "neurosynth"
+manifold = "manifold"
+rois = "rois"

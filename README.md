@@ -3,7 +3,7 @@
 Analysis code for the Chess Expertise study. The repository contains multiple analysis folders (Python and MATLAB). Each folder is a main analysis; modules provide reusable functions, and main scripts orchestrate workflows to produce reported results and figures.
 
 Analyses Overview
-- One folder per analysis (e.g., `chess-mvpa/`, `chess-glm/`, `chess-behavioural/`, `chess-dataset-vis/`, `chess-neurosynth/`, `chess-manifoldMFT/`).
+- One folder per analysis (e.g., `mvpa/`, `fmri_glm/`, `behavioural/`, `neurosynth/`, `manifold/`).
 - For a high‑level inventory of analyses and reported figures, see `manuscript/main.tex` and `manuscript/supplementary.tex`.
 
 Repository Structure
@@ -37,9 +37,9 @@ Dataset
 
 Running Analyses
 - Each analysis folder has one or more entry scripts you can run independently.
-  - GLM example: `chess-glm/run_subject_glm.m`
-  - MVPA/RSA examples: Python scripts in `chess-mvpa/` (see module docstrings and `API.md`).
-  - Behavioural examples: scripts in `chess-behavioural/` using `modules/` helpers.
+- GLM example: `fmri_glm/run_subject_glm.m`
+- MVPA/RSA examples: Python scripts in `mvpa/` (see module docstrings and `API.md`).
+- Behavioural examples: scripts in `behavioural/` using `modules/` helpers.
 - Typical script pattern:
   1) Setup logging and a run ID
   2) Load inputs

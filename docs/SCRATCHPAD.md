@@ -5,7 +5,7 @@ Branch
 - Purpose: Trim repo to only manuscript-reported analyses, enforce DRY, simplify structure, and prepare for clean academic sharing.
 
 Scope
-- KEEP: chess-glm, chess-mvpa, chess-behavioural, chess-dataset-vis, chess-neurosynth, chess-manifoldMFT, chess-rois
+- KEEP: fmri_glm, mvpa, behavioural, neurosynth, manifold, rois
 - DROP (after double-check): chess-connectivity, chess-representational-conn, chess-results-vis, chess-dnn
 - Reference map: docs/ANALYSES.md (authoritative inventory), AGENTS.md (conventions), API.md (functions overview)
 
@@ -31,7 +31,7 @@ Todo Checklist
   - [ ] Audit absolute/hard-coded paths; replace with CLI flags/config
   - [ ] Ensure modules only contain functions; main scripts orchestrate workflows
 - [ ] Packaging / Config
-  - [ ] Update pyproject.toml package discovery to remove dropped packages (chess_dnn, etc.)
+  - [ ] Update pyproject.toml package discovery to use new folder names (mvpa, fmri_glm, behavioural, neurosynth, manifold, rois)
   - [ ] Review requirements.txt and remove deps only used by dropped code (keep if shared)
   - [ ] Ensure tests/ still valid (or trim if they belong to removed code)
 - [ ] Documentation

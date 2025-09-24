@@ -30,6 +30,8 @@ from pathlib import Path
 from typing import Dict, List, Mapping, Optional, Sequence, Tuple
 
 import logging
+from logging_utils import setup_logging
+from common_utils import create_run_id, save_script_to_file
 import re
 
 import numpy as np
@@ -650,8 +652,6 @@ def build_pr_table(
     latex_table = header + body + footer
 
     if print_to_console:
-        import logging
-        logging.basicConfig(level=logging.INFO)
         logging.info("\n%s", latex_table)
 
     output_dir.mkdir(parents=True, exist_ok=True)
@@ -670,11 +670,14 @@ def build_pr_table(
 # ==============================
 def main(cfg: Optional[Config] = None) -> None:
     cfg = cfg or Config()
+    # configure logging to console; file handler added after out dir creation
+    setup_logging()
     logger.info("PR pipeline started.")
 
     # Output folder with unique ID + save a copy of this script for provenance
     output_dir = Path("results") / f"{create_run_id()}_participation_ratio"
     output_dir.mkdir(parents=True, exist_ok=True)
+    setup_logging(log_file=str(output_dir / "run.log"))
     save_script_to_file(output_dir)
 
     # Load atlas

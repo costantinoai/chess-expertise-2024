@@ -83,6 +83,6 @@ Where to Look
 - High‑level overview: `README.md` and `manuscript/*.tex`.
 - Shared logging: `logging_utils.py` (root) and analysis‑local logging utilities.
 - Shared helpers (DRY): `common_utils.py` (OutputLogger, seeds, run IDs, script copy, output dirs).
-- MVPA utilities: `chess-mvpa/modules/`.
-- Behavioural utilities: `chess-behavioural/modules/`.
-- GLM MATLAB utilities: `chess-glm/matlab_helpers/` and related scripts.
+- MVPA utilities: `mvpa/modules/`.
+- Behavioural utilities: `behavioural/modules/`.
+- GLM MATLAB utilities: `fmri_glm/matlab_helpers/` and related scripts.

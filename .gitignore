@@ -157,18 +157,17 @@ test
 misc
 chess-connectivity
 # chess-manifold*
-chess-behavioural/data/sub
+behavioural/data/sub
 # chess-dnn
 **/old
 chess-results-vis
-chess-rois
+rois
 **/manim
-/chess-neurosynth/results
+/neurosynth/results
 /chess-representational-conn
-/chess-mvpa/results
+/mvpa/results
 /**/cifar-100-python
 *.gz
 
 chess-dnn/results/20250419-190918_extract-net-activations-alphavile_dataset-fmri/activations_model-trained_seed-0.pkl
 chess-dnn/results/20250419-190918_extract-net-activations-alphavile_dataset-fmri/activations_model-untrained_seed-0.pkl
-
