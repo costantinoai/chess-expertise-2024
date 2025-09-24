@@ -15,8 +15,6 @@ Repository Structure
 - `chess-manifoldMFT/` – Manifold/PR analysis workflows and outputs.
 - `chess-rois/` – ROI definitions and utilities.
 - `common_utils.py` – Shared utilities (logging tee, seeding, run IDs, script copy).
-- `misc/` – Example JSON sidecars for the BIDS dataset.
-- `local/` – Optional local configuration (not tracked by default).
 - `tests/` – Tests for shared utilities (if present/extended).
 
 Install
@@ -58,6 +56,9 @@ Conventions (Important)
 
 API Reference
 - A consolidated overview of reusable functions is in `API.md`.
+
+Maintenance notes
+- Legacy and machine‑specific folders (`old/`, `misc/`, `local/`) have been removed to keep the repo focused on manuscript analyses. See `docs/ANALYSES.md` for the up‑to‑date inventory.
 
 License
 - MIT License (see `LICENSE`).

@@ -1,68 +1,101 @@
 Chess Expertise 2024 — Analyses Inventory
 
 Purpose
-- Authoritative list of analyses reported in the manuscript, with pointers to where they live in this repository and where they appear in the paper.
+- Authoritative list of analyses reported in the manuscript, with pointers to code locations and expected outputs. Also tracks candidates for removal to keep the repo aligned with the paper.
 
 How to use
-- Keep this file updated when adding/removing analyses.
-- Use it as a reference when pruning folders or regenerating API docs.
+- Keep this file updated when adding/removing analyses or regenerating figures/tables.
+- Use it as the source of truth when pruning folders or regenerating the API.
 
-1) Stimulus Set Overview (Dataset Visualisation)
-- Manuscript: Supplementary Material (Stimulus Set Details; Supp. Fig. stimuli)
-- Folder: `chess-dataset-vis/`
-- Outputs: `results/<RUN>_dataset-vis_*/*.png`
+Reported Analyses (from manuscript)
+- Stimulus Set Overview
+  - Manuscript: Supplementary section “Stimulus Set Details”; figure `stimuli_with_tags.png` (supplementary figure) and table `stimuli`.
+  - Code: `chess-dataset-vis/visualize_dataset.py`
+  - Outputs: `chess-dataset-vis/results/<RUN>_dataset-vis_*/*.png`
 
-2) Behavioural Similarity (Human RDMs)
-- Manuscript: Supplementary tables (split‑half reliability; `bh_rdm_splithalf`)
-- Folder: `chess-behavioural/`
-- Outputs: `results/<RUN>_behavioural_*/*`
+- Behavioural Similarity (Human RDMs)
+  - Manuscript: Supplementary section “Split-half Reliability of Behavioral RDMs”; table `bh_rdm_splithalf`.
+  - Code: `chess-behavioural/bh_fmri_splithalf.py` (split-half); `chess-behavioural/bh_fmri.py` (behavioural RSA); `chess-behavioural/bh_fmri_intercorr.py` (between-group/inter-corr if used).
+  - Outputs: `chess-behavioural/results/<RUN>_behavioural_*/*`
 
-3) fMRI Univariate GLM
-- Manuscript: Main and supplement (e.g., All>Rest; Checkmate>Non‑checkmate; ROI maps)
-- Folder: `chess-glm/` (MATLAB; SPM12)
-- Selected outputs: `results/<RUN>_secondlevel-rois/*` (surface/glass PNGs, HTMLs, tables)
+- fMRI Univariate GLM
+  - Manuscript: Main and Supplementary (e.g., All>Rest; Checkmate>Non‑checkmate); ROI maps (supplementary `roi_maps_univ`).
+  - Code: `chess-glm/WithinGroup_SecondLevel_MultiContrast.m`, `chess-glm/TwoSample_SecondLevel_MultiContrast.m`, `chess-glm/contrasts_only.m`, ROI aggregation in `chess-glm/roi_ttests_all.py`.
+  - Outputs: `chess-glm/results/<RUN>_secondlevel-rois/*` (surface/glass PNGs, HTMLs, TSVs)
 
-4) MVPA Decoding (ROI/group level)
-- Manuscript: Main text and tables (decoding of Checkmate, Strategy, Visual Similarity; extended dims)
-- Folder: `chess-mvpa/` (Python)
-- Outputs: `results/<RUN>_mvpa_*/*.png`, barplots and logs
+- MVPA Decoding (ROI/group level)
+  - Manuscript: Main text and Supplementary tables `decoding_main_dims`, `mvpa_extended_dimensions` (decoding of Checkmate, Strategy, Visual Similarity; extended dimensions on checkmate subset).
+  - Code: ROI decoding and stats in `chess-mvpa/` (e.g., `mvpa_barplot.py`, `mvpa_barplot_comparison.py`, `mvpa_ttest.py`); ROI management/plotting in `chess-mvpa/modules/*`.
+  - Outputs: `chess-mvpa/results/<RUN>_mvpa_*/*` (barplots, pickles, TSVs)
 
-5) Representational Similarity Analysis (RSA)
-- Manuscript: Whole‑brain searchlight and ROI summaries; group differences; tables `rsa_main_dims`, `roi_maps_rsa`
-- Folders: `chess-mvpa/` (ROI RSA) and `chess-glm/` (searchlight RSA outputs)
-- Outputs: searchlight maps (HTML/PNG) and tables in GLM `results/`; ROI figures in MVPA `results/`
+- Representational Similarity Analysis (RSA)
+  - Manuscript: Whole‑brain searchlight + ROI summaries; main ROI figure (Fig. “rsa_rois” in text); supplementary tables `rsa_main_dims`, `roi_maps_rsa`.
+  - Code: Searchlight in `chess-mvpa/rsa_searchlight_final.m` and/or `chess-glm/RSA_TwoSample_SecondLevel_MultiContrast.m` (SPM); ROI RSA summaries via `chess-mvpa/*` and `chess-mvpa/modules/*`.
+  - Outputs: searchlight maps (HTML/PNG) and ROI summaries in `chess-glm/results/*`; ROI figures in `chess-mvpa/results/*`
 
-6) Manifold Dimensionality (Participation Ratio, PR)
-- Manuscript: PR section (main) + supplementary (PR vs ROI size; `pr_ttest`)
-- Folders: `chess-mvpa/` (PR utilities) and `chess-manifoldMFT/` (manifold workflows)
-- Outputs: PR figures/tables in respective `results/` or `manifold_results/`
+- Manifold Dimensionality (Participation Ratio, PR)
+  - Manuscript: Main PR results figure (`pr_classification.png`); supplementary PR vs ROI size figure (`pr_supp.png`) and table `pr_ttest`.
+  - Code: `chess-mvpa/participation_ratio.py`, `chess-mvpa/plot_pr_roi_size.py`; manifold capacity (MFT) workflows in `chess-manifoldMFT/main.py` and `chess-manifoldMFT/modules/*`.
+  - Outputs: PR figures/tables in `chess-mvpa/results/*`; MFT results in `chess-manifoldMFT/manifold_results/*` or `results/*`
 
-7) Neurosynth Meta‑Analysis
-- Manuscript: Methods/results describing term‑map associations with expert/novice maps; tables `neurosynth_rsa`, `neurosynth_univ`; supplementary maps
-- Folder: `chess-neurosynth/`
-- Outputs: figures/tables under `results/<RUN>_neurosynth_*`
+- RDM Orthogonality (Correlation and Variance Partitioning)
+  - Manuscript: Supplementary section “Orthogonality Across RDMs” with correlation and variance partitioning panels.
+  - Code: `chess-dataset-vis/rdms_intercorr.py` (pairwise and partial correlations; variance partitioning; LaTeX table snippets in logs) and `chess-dataset-vis/rdms_intercorr_checkmate_boards.py` (checkmate-only variant used in supplementary panels).
+  - Outputs: figures under `chess-dataset-vis/results/<RUN>_*/*.png` (or logs with LaTeX table content)
 
-8) Eye‑Movement Decoding (Supplementary)
-- Manuscript: Supplementary section “Groups cannot be inferred from estimated eye‑movements” (`et_decoding`)
-- Folder: estimated gaze decoding (uses BidsMReye outputs; integrated with fMRI analyses)
-- Outputs: supplementary figure/table under analysis `results/`
+- Neurosynth Meta‑Analysis
+  - Manuscript: Methods/results reporting term‑map associations with expert/novice maps; supplementary tables `neurosynth_rsa`, `neurosynth_univ` and figure `terms_flat.png`.
+  - Code: `chess-neurosynth/rsa_neurosynth.py`, `chess-neurosynth/univariate_neurosynth.py`.
+  - Outputs: `chess-neurosynth/results/<RUN>_neurosynth_*/*`
 
-Removed in cleanup branch (non‑manuscript scope)
-- `chess-connectivity/`
-- `chess-representational-conn/`
-- `chess-results-vis/`
-- `chess-dnn/`
-  - Note: If any figure/table in future revisions depends on these, restore from the backup branch `backup-20250924-190426`.
+- Eye‑Movement Decoding (Supplementary)
+  - Manuscript: Supplementary section “Groups cannot be inferred from estimated eye‑movements” (`et_decoding` figure/table).
+  - Code: `chess-mvpa/utils/svm_class_xy.py` (gaze x,y) and `chess-mvpa/utils/svm_class_displacement.py` (distance from screen center). Task-vs-rest is out of scope.
+  - Outputs: `results/<RUN>_et-mvpa/*` with plots and logs
+
+- Sample Balance: Number of fMRI Runs per Group (Supplementary)
+  - Manuscript: Supplementary control analysis showing no difference in runs across groups.
+  - Code: `chess-mvpa/test_number_of_runs.py`
+  - Outputs: text and LaTeX table under `chess-mvpa/results/<RUN>_runs-per-group/*`
 
 Dependencies & Shared Resources
-- ROI definitions/utilities: `chess-rois/` (keep)
-- Logging utilities: `logging_utils.py` (root) and analysis‑local variants
-- MVPA helpers: `chess-mvpa/modules/`
-- Behavioural helpers: `chess-behavioural/modules/`
+- ROI definitions/utilities: `chess-rois/*`
+- Shared helpers: `common_utils.py`, `logging_utils.py`
+- MVPA helpers: `chess-mvpa/modules/*`
+- Behavioural helpers: `chess-behavioural/modules/*`
 
-Next actions (cleanup branch)
-1) Confirm KEEP list: `chess-glm`, `chess-mvpa`, `chess-behavioural`, `chess-dataset-vis`, `chess-neurosynth`, `chess-manifoldMFT`, `chess-rois`.
-2) Confirm DROP list: `chess-connectivity`, `chess-representational-conn`, `chess-results-vis`, `chess-dnn` (unless supporting figures).
-3) After confirmation, remove DROP folders and update imports/paths accordingly.
-4) Regenerate `API.md` and update READMEs (folder and root) to reflect the trimmed set.
-5) DRY pass: consolidate duplicate helpers (e.g., OutputLogger) into shared utilities.
+ Candidates For Removal (not referenced in manuscript analyses)
+- chess-dataset-vis
+  - `chess-dataset-vis/barplot-manim.py` (demo/animation)
+  - `chess-dataset-vis/plot_rdms.py` (generic RDM plotting; not cited)
+  - `chess-dataset-vis/visualize_manifold.py` (manifold demo; not in paper)
+
+- chess-behavioural
+  - `chess-behavioural/bh_familiarization_data_cleaning.py` (familiarization, not reported)
+  - `chess-behavioural/bh_familiarization_data_plotting.py` (familiarization, not reported)
+
+- chess-mvpa (top‑level and utils)
+  - `chess-mvpa/manifold.py` (separate manifold script; paper uses `chess-manifoldMFT`)
+  - `chess-mvpa/utils/get_philips_MB_slicetiming.py` (acquisition helper; not an analysis)
+  - `chess-mvpa/utils/anon_nii_filename.py` (utility; not an analysis)
+  - `chess-mvpa/utils/svm_class_taskvsrest.py` (task vs rest; not reported)
+  - `chess-mvpa/utils/sanitize_json.py` (utility; not an analysis)
+
+- chess-manifoldMFT
+  - `chess-manifoldMFT/main_noavg.py` (alternative entrypoint; keep only if used for a reported figure)
+
+- misc and local
+  - `misc/*` (BIDS converters and templates; not part of analyses)
+  - `local/*` (machine‑specific configuration; not part of analyses)
+
+Notes
+- Items marked “keep only if used …” are uncertain; confirm linkage to specific supplementary panels before removal.
+- Before any deletion, create a timestamped backup branch and regenerate `API.md`.
+
+KEEP list (in scope for the paper)
+- `chess-glm`, `chess-mvpa`, `chess-behavioural`, `chess-dataset-vis`, `chess-neurosynth`, `chess-manifoldMFT`, `chess-rois`, plus root utilities (`common_utils.py`, `logging_utils.py`).
+
+Next actions
+1) Validate each “Candidates For Removal” item against the manuscript figures/tables; move confirmed items to a removal list.
+2) Delete confirmed extras on the cleanup branch, then regenerate `API.md` and update folder READMEs.
+3) Re‑scan for duplicates/non‑DRY code and centralize helpers where possible.
