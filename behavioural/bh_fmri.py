@@ -14,19 +14,16 @@ import pandas as pd                                            # DataFrame libra
 import matplotlib as mpl                                        # Core Matplotlib library for plotting
 import matplotlib.pyplot as plt                                # Pyplot API for Matplotlib
 import seaborn as sns                                          # Statistical plotting library built on Matplotlib
-from matplotlib.patches import Rectangle                       # For drawing rectangles on plots
+# from matplotlib.patches import Rectangle                     # Unused
 from matplotlib.colors import LinearSegmentedColormap          # To create custom colormaps
 import mat73                                                   # For loading MATLAB v7.3 .mat files
 import scipy.io                                                # For loading MATLAB < v7.3 .mat files
 from sklearn.manifold import MDS                               # Multi-dimensional scaling algorithm
-from modules.helpers import create_run_id                       # Helper function to create a unique run identifier
+# from modules.helpers import create_run_id                     # Unused here; runners orchestrate runs
 from common.behavioural_utils import compute_strategy_colors_alphas
 from common.behavioural_plotting import plot_shared_colorbar as shared_plot_colorbar, plot_rdm_heatmap as shared_plot_rdm_heatmap
 from modules.stats_helpers import pearson_corr_bootstrap        # Shared bootstrap correlation
-from common.common_utils import save_script_to_file
-from config import BIDS_PATH, SOURCEDATA_PATH, PARTICIPANTS_XLSX, CATEGORIES_XLSX
-
-import multiprocessing                                         # Python's multiprocessing module for parallel execution
+# Runners provide SOURCEDATA_PATH / PARTICIPANTS_XLSX / CATEGORIES_XLSX
 
 
 # ----------------------------------------

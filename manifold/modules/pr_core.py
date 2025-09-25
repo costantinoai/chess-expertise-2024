@@ -4,7 +4,7 @@ import logging
 import re
 from dataclasses import dataclass, field
 from pathlib import Path
-from typing import Dict, Mapping, Optional, Sequence, Tuple
+from typing import Dict, Mapping, Tuple
 
 import numpy as np
 import pandas as pd
@@ -13,10 +13,9 @@ import scipy.io as sio
 from scipy.stats import ttest_ind
 from sklearn.decomposition import PCA
 from common.stats_utils import fdr_correction
-from joblib import Parallel, delayed
+## joblib used by root runner
 
-from common.logging_utils import setup_logging
-from common.common_utils import create_run_id, save_script_to_file
+## Logging and run orchestration live in the root runner
 from config import GLM_BASE_PATH, ATLAS_CORTICES, EXPERTS, NONEXPERTS
 from meta import ROI_NAME_MAP, apply_plot_style
 
@@ -135,36 +134,4 @@ def consolidate_results(expert_pr: np.ndarray, novice_pr: np.ndarray, roi_labels
     return df
 
 
-def main(cfg: Optional[Config] = None) -> None:
-    cfg = cfg or Config()
-    setup_logging()
-    logger.info("PR pipeline started")
-
-    output_dir = Path("results") / f"{create_run_id()}_participation_ratio"
-    output_dir.mkdir(parents=True, exist_ok=True)
-    setup_logging(log_file=str(output_dir / "run.log"))
-    save_script_to_file(output_dir)
-
-    _assert_file_exists(cfg.atlas_file, "Atlas NIfTI")
-    atlas_img = nib.load(cfg.atlas_file.as_posix())
-    atlas_data = atlas_img.get_fdata().astype(int)
-    roi_labels = np.unique(atlas_data)
-    roi_labels = roi_labels[roi_labels != 0]
-
-    def _run(sub_ids: Sequence[str]) -> np.ndarray:
-        if cfg.use_parallel:
-            return np.array(Parallel(n_jobs=cfg.n_jobs, verbose=5)(
-                delayed(process_subject)(sid, atlas_data, roi_labels, cfg) for sid in sub_ids
-            ))
-        return np.array([process_subject(sid, atlas_data, roi_labels, cfg) for sid in sub_ids])
-
-    expert_pr = _run(cfg.expert_subjects)
-    novice_pr = _run(cfg.nonexpert_subjects)
-    stats_df = per_roi_welch_and_fdr(expert_pr, novice_pr, roi_labels, cfg.alpha_fdr)
-    results_df = consolidate_results(expert_pr, novice_pr, roi_labels, stats_df, cfg.roi_name_map)
-
-    csv_out = output_dir / "roi_pr_results_consolidated.csv"
-    results_df.to_csv(csv_out, index=False)
-    logger.info("Saved consolidated PR results: %s", csv_out)
-
-    logger.info("Done. Output: %s", output_dir)
+## No main() here: orchestration lives in run_pr_participation_ratio.py

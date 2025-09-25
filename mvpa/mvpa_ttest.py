@@ -1,14 +1,10 @@
 import os
-import glob
-from natsort import natsorted
 import pandas as pd
 import pingouin as pg
 import numpy as np
 import warnings
-import pickle
 from collections import defaultdict
 from modules import EXPERT_SUBJECTS
-from modules.helpers import create_run_id
 import logging
 
 # ------------------------------------------------------------------------------
@@ -296,55 +292,7 @@ logger = logging.getLogger(__name__)
 logger.setLevel(logging.INFO)
 pg.options["round.column.CI95%"] = 6
 
-# ------------------------------------------------------------------------------
-def main(mvpa_roots=None, mvpa_subdirs=("svm", "rsa_corr")):
-    from config import MVPA_RESULTS_ROOT
-    if mvpa_roots is None:
-        # Default to scanning under configured MVPA derivatives root
-        mvpa_roots = [str(MVPA_RESULTS_ROOT)]
-
-    for mvpa_root in mvpa_roots:
-        for mvpa_subdir in mvpa_subdirs:
-
-            # Accept either a concrete run folder or the root with multiple runs
-            patterns = [
-                os.path.join(mvpa_root, mvpa_subdir),
-                os.path.join(mvpa_root, "*", mvpa_subdir),
-            ]
-            candidate_dirs = []
-            for pat in patterns:
-                candidate_dirs.extend(glob.glob(pat))
-            candidate_dirs = natsorted([d for d in candidate_dirs if os.path.isdir(d)])
-            if not candidate_dirs:
-                logging.warning("No MVPA directories found under %s for subdir %s", mvpa_root, mvpa_subdir)
-                continue
-
-            for mvpa_dir in candidate_dirs:
-                subject_files = natsorted(glob.glob(os.path.join(mvpa_dir, "*/*.tsv")))
-                if not subject_files:
-                    logging.warning("No subject TSV files found under %s", mvpa_dir)
-                    continue
-
-                df = pd.concat([load_mvpa_subject(f) for f in subject_files], ignore_index=True)
-
-                if "rsa" in mvpa_subdir:
-                    if "layer" in df.columns:
-                        df = df.rename(columns={"layer": "target"})
-                    df = df[~df["target"].isin(["stimuli", "stimuli_half"])]
-
-                analysis_results = run_stats_on_df(df, method=mvpa_subdir)
-                logging.info("Analysis complete for method: %s", mvpa_subdir)
-
-                results_out = os.path.join(mvpa_dir, f"{create_run_id()}_group")
-                os.makedirs(results_out, exist_ok=True)
-                pkl_fname = os.path.join(results_out, "ttest_group_results.pkl")
-                with open(pkl_fname, "wb") as f:
-                    pickle.dump(analysis_results, f)
-                logging.info("Results saved in: %s", results_out)
-
-
-if __name__ == "__main__":
-    main()
+## No top-level execution: orchestration happens in run_mvpa_ttests.py
 
 
 # ----------------------------------------------------------------------------
