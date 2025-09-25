@@ -11,7 +11,7 @@ Goals
  - Any script that produces artefacts (figures, tables, files) must create an output directory named `<YYYYMMDD-HHMMSS>_<short-analysis-name>` under the analysis’ `results/` (or equivalent) folder.
 
 Repository Layout
-- One analysis per top‑level folder (e.g., `mvpa/`, `fmri_glm/`, `behavioural/`, `neurosynth/`, `manifold/`).
+- One analysis per top‑level folder (e.g., `mvpa/`, `glm/`, `behavioural/`, `neurosynth/`, `manifold/`).
 - Inside an analysis folder:
   - `modules/`: reusable functions and small utilities.
   - main scripts in the folder root: run the workflow to produce results and figures.
@@ -80,11 +80,10 @@ Review Checklist (Before Merging)
 - Logging and run ID set; script saved alongside outputs where applicable.
 - Figures and tables saved under the analysis results directory with informative names.
 
-Where to Look
-- High‑level overview: `README.md` and `manuscript/*.tex`.
+- High‑level overview: `README.md` and `docs/ANALYSES.md`.
 - Shared logging: `common/logging_utils.py` (console + file).
 - Shared helpers (DRY): `common/common_utils.py` (seeds, run IDs, script copy, output dirs).
 - Shared stats (DRY): `common/stats_utils.py` (t-tests, CI, FDR, bootstrap correlations and differences).
 - MVPA utilities: `mvpa/modules/`.
 - Behavioural utilities: `behavioural/modules/`.
-- GLM MATLAB utilities: `fmri_glm/matlab_helpers/` and related scripts.
+- GLM MATLAB utilities: `glm/matlab_helpers/` and related scripts.

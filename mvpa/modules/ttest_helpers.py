@@ -20,7 +20,6 @@ from modules import (
     NONEXPERT_SUBJECTS,
     CONTRAST_MAP,
     MULTI_CORRECTION,
-    MANAGER,
     REGIONS_LABELS
 )
 
@@ -151,7 +150,7 @@ def run_ttest_analysis(
         - The function create_run_id() to generate a timestamped run ID string.
         - The function load_all_data() to load and merge subject data into a DataFrame.
         - The function perform_ttest() to execute the t-tests.
-        - The function multipletests() for FDR correction.
+        - FDR correction via common.stats_utils.fdr_correction().
     - The final plot (outside this function) should group by expertise, then by regressor, and compare hemispheres.
     - The large docstrings in this code are intentionally verbose to clarify the entire workflow.
     """
@@ -441,7 +440,11 @@ def generate_latex_apa_table(
 
         ci_str = f"[{row['ci_low']:.3f}, {row['ci_high']:.3f}]"
 
-        roi_name_pretty = REGIONS_LABELS[MANAGER.get_by_filter(hemisphere='L', region=roi[2:].replace('_ROI', ''))[0][0].region_id][1] if "_ROI" in roi else roi
+        # Fallback prettifier: 'L_V1_ROI' → 'V1'; keep text otherwise
+        if "_ROI" in roi:
+            roi_name_pretty = roi[2:].replace('_ROI', '')
+        else:
+            roi_name_pretty = roi
 
         row_str = (
             f"{roi_name_pretty} & "

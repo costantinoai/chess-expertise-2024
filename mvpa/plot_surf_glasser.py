@@ -44,6 +44,7 @@ fsaverage = load_fsaverage("fsaverage")
 # fsaverage_mesh = fsaverage.mesh
 # fsaverage_data = fsaverage.data.parts
 
+import os
 from config import DERIVATIVES_PATH
 data = {
     "left": os.path.join(str(DERIVATIVES_PATH), "fastsurfer", "fsaverage", "label", "lh.HCPMMP1.annot"),
@@ -55,7 +56,7 @@ import matplotlib.colors as mcolors
 
 # Load region info TSV
 roi_df = pd.read_csv(
-    os.path.join("rois", "results", "glasser_regions_bilateral", "region_info.tsv"),
+    os.path.join("rois", "sets", "glasser_regions_bilateral", "region_info.tsv"),
     sep='\t'
 ).sort_values("region_id")
 

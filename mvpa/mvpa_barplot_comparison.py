@@ -26,20 +26,14 @@ import pandas as pd
 import matplotlib.pyplot as plt
 
 from modules.helpers import create_run_id
+from modules.text_utils import format_contrast
 
 # Define base font size and update global rcParams
 plt.rcParams.update({
     "font.family": "Ubuntu Condensed"
 })
 
-def format_contrast(s):
-    """
-    Convert underscore ("_") to space and "vs" to hyphen ("-"), then capitalize.
-    Example: "experts_vs_nonexperts" -> "Experts - Nonexperts".
-    """
-    s = s.replace("_", " ")  # Replace underscores with spaces
-    s = s.replace("vs", "-")  # Replace "vs" with "-"
-    return " ".join(word.capitalize() for word in s.split())  # Capitalize each word
+## moved to modules.text_utils.format_contrast
 
 
 regressor_mapping = {

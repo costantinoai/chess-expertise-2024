@@ -8,6 +8,7 @@ Created on Tue Jul 15 19:48:23 2025
 
 
 import os                                                      # Provides functions for interacting with the operating system
+import logging
 import glob                                                    # For file pattern matching (finding .mat files)
 import warnings                                                # To suppress or handle warnings
 import numpy as np                                             # Numerical computing library
@@ -15,11 +16,13 @@ import pandas as pd                                            # DataFrame libra
 import matplotlib as mpl                                        # Core Matplotlib library for plotting
 import matplotlib.pyplot as plt                                # Pyplot API for Matplotlib
 import seaborn as sns                                          # Statistical plotting library built on Matplotlib
-from matplotlib.patches import Rectangle                       # For drawing rectangles on plots
 from matplotlib.colors import LinearSegmentedColormap          # To create custom colormaps
 import mat73                                                   # For loading MATLAB v7.3 .mat files
 import scipy.io                                                # For loading MATLAB < v7.3 .mat files
 from modules.helpers import create_run_id                       # Helper function to create a unique run identifier
+from common.logging_utils import setup_logging
+from common.common_utils import save_script_to_file
+from config import SOURCEDATA_PATH, PARTICIPANTS_XLSX
 import scipy.stats
 import multiprocessing                                         # Python's multiprocessing module for parallel execution
 
@@ -140,6 +143,9 @@ warnings.filterwarnings("ignore", category=UserWarning)       # Suppress UserWar
 
 OUT_ROOT = f"./results/{create_run_id()}_bh_fmri"             # Directory to save all output figures
 os.makedirs(OUT_ROOT, exist_ok=True)                          # Create the directory if it doesn't already exist
+setup_logging()
+setup_logging(log_file=os.path.join(OUT_ROOT, "bh_fmri_splithalf.log"))
+save_script_to_file(OUT_ROOT)
 
 COL_GREEN = '#006400'                                         # Dark green color used for first strategy group
 COL_RED = '#8B0000'                                           # Dark red color used for second strategy group
@@ -165,33 +171,8 @@ STRATEGIES = [                                                # Sequence of stra
     1, 1, 1, 2, 2, 2, 2, 3, 3, 3, 3, 3, 3, 3,
     4, 4, 4, 5, 5, 5,
 ]
-
-def compute_strategy_colors_alphas(strategies):                # Given a list of strategies, return colors & alpha transparencies
-    """
-    Assign a consistent color (first 5 unique → green, next 5 → red) and increasing alpha transparency
-    (0.2 → 1.0) for each block of identical strategy labels in the input list.
-    Returns two lists (colors, alphas) of length = len(strategies).
-    """
-    current = None                                             # Track the current strategy label
-    colors = []                                                # List to store assigned colors
-    alphas = []                                                # List to store assigned alpha transparencies
-    color_idx = 0                                              # Index to count unique strategy blocks
-
-    for strat in strategies:                                   # Iterate through each strategy label in sequence
-        if strat != current:                                   # If this is a new strategy block
-            if color_idx < 5:                                  # If within the first 5 unique blocks
-                color = COL_GREEN                               # Assign dark green
-                alpha = (color_idx + 1) / 5.0                   # Alpha increments: 0.2, 0.4, ..., 1.0
-            else:                                               # For the next 5 unique blocks
-                color = COL_RED                                 # Assign dark red
-                alpha = (color_idx + 1 - 5) / 5.0               # Alpha increments: 0.2, 0.4, ..., 1.0
-            current = strat                                    # Update current strategy label
-            color_idx += 1                                      # Increment unique-block counter
-
-        colors.append(color)                                    # Append chosen color for this position
-        alphas.append(alpha)                                    # Append chosen alpha for this position
-
-    return colors, alphas                                       # Return lists of colors and alphas
+from common.behavioural_utils import compute_strategy_colors_alphas
+from common.behavioural_plotting import plot_rdm_heatmap as shared_plot_rdm_heatmap
 
 STRAT_COLORS, STRAT_ALPHAS = compute_strategy_colors_alphas(STRATEGIES)  # Precompute for global use
 
@@ -201,54 +182,18 @@ STRAT_COLORS, STRAT_ALPHAS = compute_strategy_colors_alphas(STRATEGIES)  # Preco
 # ----------------------------------------
 
 def plot_rdm_heatmap(rdm, bold_title, expertise_label, colormap="RdPu", vmin=0, vmax=18):
-    """
-    Plot a representational dissimilarity matrix (RDM) as a square heatmap without inline colorbar.
-    Adds colored rectangles along axes to indicate strategy grouping.
-    Title is two lines: bold_title (bold) on line 1, expertise_label on line 2 (normal).
-    """
-    fig, ax = plt.subplots(figsize=FIGSIZE, facecolor='white') # Create figure and axis with specified size
-
-    sns.heatmap(                                               # Plot heatmap of the RDM
+    """Delegate to shared heatmap plotter."""
+    shared_plot_rdm_heatmap(
         rdm,
-        annot=False,                                          # No annotations in cells
-        fmt="d",                                              # Integer format
-        cmap=colormap,                                        # Use specified colormap
-        vmin=vmin,                                            # Minimum data value for normalization
-        vmax=vmax,                                            # Maximum data value for normalization
-        cbar=False,                                           # Do not plot inline colorbar
-        ax=ax,                                                # Plot on this axis
-        square=True                                           # Force square cells
+        bold_title,
+        expertise_label,
+        strategies=STRATEGIES,
+        strat_colors=STRAT_COLORS,
+        strat_alphas=STRAT_ALPHAS,
+        colormap=colormap,
+        vmin=vmin,
+        vmax=vmax,
     )
-    ax.set_aspect('equal')                                     # Ensure equal aspect ratio (square plot)
-
-    # Identify where strategy label changes to draw colored bars
-    ticks = []                                                  # List to store indices where strategy changes
-    prev = None                                                 # Track previous strategy
-    for i, lab in enumerate(STRATEGIES):                        # Enumerate through STRATEGIES
-        if lab != prev:                                         # If this strategy differs from previous
-            ticks.append(i)                                     # Record the index
-            prev = lab                                          # Update previous strategy
-    ticks.append(len(STRATEGIES))                               # Append end index for final block
-
-    for idx, start in enumerate(ticks[:-1]):                     # Iterate through strategy blocks
-        end = ticks[idx + 1]                                    # Compute end index of this block
-        width = end - start                                     # Width of the block
-        color = STRAT_COLORS[start]                             # Color assigned to this block
-        alpha = STRAT_ALPHAS[start]                             # Alpha transparency assigned to this block
-        rect_x = Rectangle(                                     # Rectangle along x-axis (bottom)
-            (start, -0.01), width, -0.0005 * len(rdm),
-            color=color, alpha=alpha, ec=None,
-            transform=ax.get_xaxis_transform(),                 # Coordinate transform for x-axis
-            clip_on=False                                       # Draw outside plot area
-        )
-        rect_y = Rectangle(                                     # Rectangle along y-axis (left)
-            (-0.01, start), -0.0005 * len(rdm), width,
-            color=color, alpha=alpha, ec=None,
-            transform=ax.get_yaxis_transform(),                 # Coordinate transform for y-axis
-            clip_on=False                                       # Draw outside plot area
-        )
-        ax.add_patch(rect_x)                                     # Add x-axis rectangle to plot
-        ax.add_patch(rect_y)                                     # Add y-axis rectangle to plot
 
     # Build two-line title: first line bold, second line normal
     title_text = f"{bold_title}\n{expertise_label}"
@@ -666,16 +611,15 @@ def plot_reliability_bars(plot_data, out_fig=None, out_csv=None, run_id=None):
 
 
 # ----------------------------------------
-# MAIN EXECUTION FLOW
+"""
+# MAIN EXECUTION FLOW (commented out; use run_behavioural_splithalf.py)
 # ----------------------------------------
-sourcedata_root="/media/costantino_ai/eik-T9/projects_backup/2024_chess-expertise/data/sourcedata"
+sourcedata_root = str(SOURCEDATA_PATH)
 
 participants_list, (num_exp, num_non) = load_participants(
-    participants_xlsx_path="data/participants.xlsx",
+    participants_xlsx_path=str(PARTICIPANTS_XLSX),
     sourcedata_root=sourcedata_root
 )
-import logging
-logging.basicConfig(level=logging.INFO)
 logging.info("Number of Experts: %s | Number of Non-Experts: %s", num_exp, num_non)
 
 trial_columns = [
@@ -692,8 +636,6 @@ rdms_dict = {
     "Experts": {},
     "Novices": {}
 }
-
-import logging
 
 # Define CPU usage
 n_cpu = max(1, multiprocessing.cpu_count() - 1)
@@ -818,3 +760,4 @@ plot_data = {
 }
 
 plot_reliability_bars(plot_data)
+"""

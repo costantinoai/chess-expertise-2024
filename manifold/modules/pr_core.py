@@ -12,7 +12,7 @@ import nibabel as nib
 import scipy.io as sio
 from scipy.stats import ttest_ind
 from sklearn.decomposition import PCA
-from statsmodels.stats.multitest import multipletests
+from common.stats_utils import fdr_correction
 from joblib import Parallel, delayed
 
 from common.logging_utils import setup_logging
@@ -119,7 +119,7 @@ def per_roi_welch_and_fdr(expert_pr: np.ndarray, novice_pr: np.ndarray, roi_labe
         t, p = ttest_ind(x[mask], y[mask], equal_var=False)
         rows.append({"ROI": int(roi), "t": float(t), "p": float(p), "delta_mean": np.nanmean(x - y)})
     df = pd.DataFrame(rows)
-    df["p_fdr"] = multipletests(df["p"].values, alpha=alpha, method="fdr_bh")[1]
+    df["p_fdr"] = fdr_correction(df["p"].values, alpha=alpha, method="fdr_bh")[1]
     return df
 
 
@@ -168,4 +168,3 @@ def main(cfg: Optional[Config] = None) -> None:
     logger.info("Saved consolidated PR results: %s", csv_out)
 
     logger.info("Done. Output: %s", output_dir)
-

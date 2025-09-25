@@ -18,7 +18,7 @@ import scipy.io as sio
 
 from sklearn.decomposition import PCA
 from scipy.stats import ttest_ind
-from statsmodels.stats.multitest import multipletests
+from common.stats_utils import fdr_correction
 
 from joblib import Parallel, delayed
 import logging
@@ -340,7 +340,7 @@ def fdr_ttest(group1_vals, group2_vals, roi_labels, alpha=0.05):
             pvals[i] = p_val
 
     # FDR correction
-    reject, pvals_fdr, _, _ = multipletests(pvals, alpha=alpha, method='fdr_bh')
+    reject, pvals_fdr = fdr_correction(pvals, alpha=alpha, method='fdr_bh')
 
     df = pd.DataFrame({
         "ROI_Label": roi_labels,

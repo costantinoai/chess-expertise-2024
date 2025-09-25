@@ -6,6 +6,7 @@ Refactored Chess Expertise Analysis Script with Modular Functions (Enhanced Plot
 """
 
 import os                                                      # Provides functions for interacting with the operating system
+import logging
 import glob                                                    # For file pattern matching (finding .mat files)
 import warnings                                                # To suppress or handle warnings
 import numpy as np                                             # Numerical computing library
@@ -15,11 +16,15 @@ import matplotlib.pyplot as plt                                # Pyplot API for 
 import seaborn as sns                                          # Statistical plotting library built on Matplotlib
 from matplotlib.patches import Rectangle                       # For drawing rectangles on plots
 from matplotlib.colors import LinearSegmentedColormap          # To create custom colormaps
-import pingouin as pg                                          # Statistical package (used here for bootstrapped correlations)
 import mat73                                                   # For loading MATLAB v7.3 .mat files
 import scipy.io                                                # For loading MATLAB < v7.3 .mat files
 from sklearn.manifold import MDS                               # Multi-dimensional scaling algorithm
 from modules.helpers import create_run_id                       # Helper function to create a unique run identifier
+from common.behavioural_utils import compute_strategy_colors_alphas
+from common.behavioural_plotting import plot_shared_colorbar as shared_plot_colorbar, plot_rdm_heatmap as shared_plot_rdm_heatmap
+from modules.stats_helpers import pearson_corr_bootstrap        # Shared bootstrap correlation
+from common.common_utils import save_script_to_file
+from config import BIDS_PATH, SOURCEDATA_PATH, PARTICIPANTS_XLSX, CATEGORIES_XLSX
 
 import multiprocessing                                         # Python's multiprocessing module for parallel execution
 
@@ -45,8 +50,13 @@ sns.set_style("white")                                        # Use Seaborn's wh
 warnings.filterwarnings("ignore", category=FutureWarning)     # Suppress FutureWarnings
 warnings.filterwarnings("ignore", category=UserWarning)       # Suppress UserWarnings
 
-OUT_ROOT = f"./results/{create_run_id()}_bh_fmri"             # Directory to save all output figures
-os.makedirs(OUT_ROOT, exist_ok=True)                          # Create the directory if it doesn't already exist
+# OUT_ROOT is assigned by the root runner script via `set_output_dir()`.
+OUT_ROOT = None
+
+def set_output_dir(out_dir: str) -> None:
+    global OUT_ROOT
+    OUT_ROOT = out_dir
+    os.makedirs(OUT_ROOT, exist_ok=True)
 
 COL_GREEN = '#006400'                                         # Dark green color used for first strategy group
 COL_RED = '#8B0000'                                           # Dark red color used for second strategy group
@@ -73,32 +83,6 @@ STRATEGIES = [                                                # Sequence of stra
     4, 4, 4, 5, 5, 5,
 ]
 
-def compute_strategy_colors_alphas(strategies):                # Given a list of strategies, return colors & alpha transparencies
-    """
-    Assign a consistent color (first 5 unique → green, next 5 → red) and increasing alpha transparency
-    (0.2 → 1.0) for each block of identical strategy labels in the input list.
-    Returns two lists (colors, alphas) of length = len(strategies).
-    """
-    current = None                                             # Track the current strategy label
-    colors = []                                                # List to store assigned colors
-    alphas = []                                                # List to store assigned alpha transparencies
-    color_idx = 0                                              # Index to count unique strategy blocks
-
-    for strat in strategies:                                   # Iterate through each strategy label in sequence
-        if strat != current:                                   # If this is a new strategy block
-            if color_idx < 5:                                  # If within the first 5 unique blocks
-                color = COL_GREEN                               # Assign dark green
-                alpha = (color_idx + 1) / 5.0                   # Alpha increments: 0.2, 0.4, ..., 1.0
-            else:                                               # For the next 5 unique blocks
-                color = COL_RED                                 # Assign dark red
-                alpha = (color_idx + 1 - 5) / 5.0               # Alpha increments: 0.2, 0.4, ..., 1.0
-            current = strat                                    # Update current strategy label
-            color_idx += 1                                      # Increment unique-block counter
-
-        colors.append(color)                                    # Append chosen color for this position
-        alphas.append(alpha)                                    # Append chosen alpha for this position
-
-    return colors, alphas                                       # Return lists of colors and alphas
 
 STRAT_COLORS, STRAT_ALPHAS = compute_strategy_colors_alphas(STRATEGIES)  # Precompute for global use
 
@@ -107,94 +91,27 @@ STRAT_COLORS, STRAT_ALPHAS = compute_strategy_colors_alphas(STRATEGIES)  # Preco
 # PLOTTING FUNCTIONS
 # ----------------------------------------
 
-def plot_shared_colorbar(cmap, vmin=-18, vmax=18):             # Display a standalone colorbar for a diverging colormap
-    """
-    Display a standalone colorbar for a diverging colormap (range vmin→vmax),
-    with ticks and label on the left side.
-    Useful when individual heatmaps omit their own colorbars.
-    """
-    fig, ax = plt.subplots(figsize=FIGSIZE, facecolor='white')  # Create a new figure and axis
-    fig.subplots_adjust(left=0.3)                                # Leave space on the left for colorbar
-
-    norm = mpl.colors.Normalize(vmin=vmin, vmax=vmax)            # Normalize data range for color mapping
-    sm = mpl.cm.ScalarMappable(cmap=cmap, norm=norm)             # Create a ScalarMappable for the colorbar
-    sm.set_array([])                                             # Dummy array (required)
-
-    # Add colorbar to the left
-    cbar = fig.colorbar(
-        sm, ax=ax, fraction=0.05, pad=0.02,
-        location="left"
-    )
-    cbar.set_label("Dissimilarity Value", fontsize=COLORBAR_LABEL_FS)   # Set label text
-    cbar.ax.tick_params(labelsize=COLORBAR_TICK_FS)                     # Set tick label size
-
-    ax.set_axis_off()                                            # Hide dummy axis
-    save_path = os.path.join(OUT_ROOT, "symmetric_colorbar.png") # Output path
-    plt.savefig(save_path, bbox_inches='tight', pad_inches=0.1, facecolor='white')  # Save to file
-    plt.show()                                                   # Display figure
+def plot_shared_colorbar(cmap, vmin=-18, vmax=18):
+    """Delegate to shared plotting module for colorbar."""
+    return shared_plot_colorbar(cmap, vmin=vmin, vmax=vmax, out_dir=OUT_ROOT)
 
 
 def plot_rdm_heatmap(rdm, bold_title, expertise_label, colormap="RdPu", vmin=0, vmax=18):
-    """
-    Plot a representational dissimilarity matrix (RDM) as a square heatmap without inline colorbar.
-    Adds colored rectangles along axes to indicate strategy grouping.
-    Title is two lines: bold_title (bold) on line 1, expertise_label on line 2 (normal).
-    """
-    fig, ax = plt.subplots(figsize=FIGSIZE, facecolor='white') # Create figure and axis with specified size
-
-    sns.heatmap(                                               # Plot heatmap of the RDM
+    """Delegate RDM heatmap plotting to shared behavioural plotting module."""
+    shared_plot_rdm_heatmap(
         rdm,
-        annot=False,                                          # No annotations in cells
-        fmt="d",                                              # Integer format
-        cmap=colormap,                                        # Use specified colormap
-        vmin=vmin,                                            # Minimum data value for normalization
-        vmax=vmax,                                            # Maximum data value for normalization
-        cbar=False,                                           # Do not plot inline colorbar
-        ax=ax,                                                # Plot on this axis
-        square=True                                           # Force square cells
+        bold_title,
+        expertise_label,
+        strategies=STRATEGIES,
+        strat_colors=STRAT_COLORS,
+        strat_alphas=STRAT_ALPHAS,
+        colormap=colormap,
+        vmin=vmin,
+        vmax=vmax,
     )
-    ax.set_aspect('equal')                                     # Ensure equal aspect ratio (square plot)
-
-    # Identify where strategy label changes to draw colored bars
-    ticks = []                                                  # List to store indices where strategy changes
-    prev = None                                                 # Track previous strategy
-    for i, lab in enumerate(STRATEGIES):                        # Enumerate through STRATEGIES
-        if lab != prev:                                         # If this strategy differs from previous
-            ticks.append(i)                                     # Record the index
-            prev = lab                                          # Update previous strategy
-    ticks.append(len(STRATEGIES))                               # Append end index for final block
-
-    for idx, start in enumerate(ticks[:-1]):                     # Iterate through strategy blocks
-        end = ticks[idx + 1]                                    # Compute end index of this block
-        width = end - start                                     # Width of the block
-        color = STRAT_COLORS[start]                             # Color assigned to this block
-        alpha = STRAT_ALPHAS[start]                             # Alpha transparency assigned to this block
-        rect_x = Rectangle(                                     # Rectangle along x-axis (bottom)
-            (start, -0.01), width, -0.0005 * len(rdm),
-            color=color, alpha=alpha, ec=None,
-            transform=ax.get_xaxis_transform(),                 # Coordinate transform for x-axis
-            clip_on=False                                       # Draw outside plot area
-        )
-        rect_y = Rectangle(                                     # Rectangle along y-axis (left)
-            (-0.01, start), -0.0005 * len(rdm), width,
-            color=color, alpha=alpha, ec=None,
-            transform=ax.get_yaxis_transform(),                 # Coordinate transform for y-axis
-            clip_on=False                                       # Draw outside plot area
-        )
-        ax.add_patch(rect_x)                                     # Add x-axis rectangle to plot
-        ax.add_patch(rect_y)                                     # Add y-axis rectangle to plot
-
-    # Build two-line title: first line bold, second line normal
-    title_text = f"{bold_title}\n{expertise_label}"
-    #title_text = f"{bold_title}"
-    ax.set_title(title_text, fontsize=TITLE_FS, pad=25)         # Set title with padding for two lines
-
-    ax.set_xticks([])                                           # Remove x-axis ticks
-    ax.set_yticks([])                                           # Remove y-axis ticks
-
-    save_path = os.path.join(OUT_ROOT, bold_title.replace(" ", "_") + f"_{expertise_label}.png")  # Construct filename
-    plt.savefig(save_path, bbox_inches='tight', pad_inches=0.1, facecolor='white')  # Save figure to file
-    plt.show()                                                  # Display the plot
+    save_path = os.path.join(OUT_ROOT, bold_title.replace(" ", "_") + f"_{expertise_label}.png")
+    plt.savefig(save_path, bbox_inches='tight', pad_inches=0.1, facecolor='white')
+    plt.show()
 
 
 def plot_mds(dissimilarity_matrix, bold_title, expertise_label):
@@ -584,7 +501,7 @@ def correlate_model_behavior(d_group, df_cat, expertise_label):
     """
     For each categorical (and scalar) column in df_cat, compute:
       - Model RDM (0/1 for categorical, abs difference for scalar)
-      - Pearson r, p-value, and 95% CI (via Pingouin bootstrap) with d_group.
+      - Pearson r, p-value, and 95% CI (bootstrap) with d_group.
     Plots each model RDM as a square heatmap with formatted title.
     Returns:
         results_list: list of tuples (col, r, p, ci_lower, ci_upper)
@@ -622,15 +539,11 @@ def correlate_model_behavior(d_group, df_cat, expertise_label):
         x_vals = M[tri_idx]                                                  # Flatten model RDM lower triangle
         y_vals = D_trunc[tri_idx]                                            # Flatten group RDM lower triangle
 
-        corr_df = pg.corr(                                                   # Use Pingouin to compute correlation
-            x_vals, y_vals,
-            method='pearson',
-            alternative='two-sided',
-            bootstrap=10000
-        )
-        r_val = corr_df['r'].values[0]                                        # Extract Pearson r
-        p_val = corr_df['p-val'].values[0]                                    # Extract p-value
-        ci_l, ci_u = corr_df['CI95%'].values[0]                               # Extract 95% CI bounds
+        # Bootstrap Pearson correlation via shared helper
+        corr = pearson_corr_bootstrap(x_vals, y_vals, n_boot=10000, ci=0.95)
+        r_val = corr['r']
+        p_val = corr['p']
+        ci_l, ci_u = corr['ci_low'], corr['ci_high']
 
         results.append((col, r_val, p_val, ci_l, ci_u))                       # Append to results list
         labels.append(col)                                                    # Append column label
@@ -663,8 +576,6 @@ def analyze_group(df_group, expertise_label, df_cat):
 
     corr_results, col_labels = correlate_model_behavior(group_rdm, df_cat, expertise_label)  # Correlate group RDM with model RDMs
 
-    import logging
-    logging.basicConfig(level=logging.INFO)
     logging.info("--- Correlation Results (%s) ---", expertise_label)                  # Header
     for col, r_val, p_val, ci_l, ci_u in corr_results:                          # Iterate through results
         logging.info("Column: %s", col)
@@ -673,104 +584,4 @@ def analyze_group(df_group, expertise_label, df_cat):
     return group_rdm, corr_results, col_labels                                    # Return group RDM and correlation info
 
 
-# ----------------------------------------
-# MAIN EXECUTION FLOW
-# ----------------------------------------
-
-participants_list, (num_exp, num_non) = load_participants(                        # Load participants and counts
-    participants_xlsx_path="data/participants.xlsx",
-    sourcedata_root="/media/costantino_ai/eik-T9/projects_backup/2024_chess-expertise/data/sourcedata"
-)
-logging.info("Number of Experts: %s | Number of Non-Experts: %s", num_exp, num_non)
-
-trial_columns = [                                                                 # Define column names for trial DataFrames
-    "sub_id", "run", "run_trial_n", "stim_id",
-    "stim_onset_real", "response", "stim_onset_expected",
-    "button_mapping"
-]
-
-experts_df = pd.DataFrame([], columns=trial_columns)                               # Initialize empty DataFrame for Experts
-novices_df = pd.DataFrame([], columns=trial_columns)                                # Initialize empty DataFrame for Novices
-experts_rdms = []                                                                  # List to store each Expert's individual RDM
-novices_rdms = []                                                                  # List to store each Novice's individual RDM
-
-sourcedata_root = "/media/costantino_ai/eik-T9/projects_backup/2024_chess-expertise/data/sourcedata"  # Root path for source data
-
-if MULTIPROCESS:                                                                   # If multiprocessing is enabled
-    n_cpu = max(1, multiprocessing.cpu_count() - 1)                                # Use all but one CPU core
-    with multiprocessing.Pool(processes=n_cpu) as pool:                             # Create a pool of worker processes
-        args = [                                                                   # Prepare arguments for each subject
-            (sub_id, is_expert, sourcedata_root, trial_columns)
-            for sub_id, is_expert in participants_list
-        ]
-        results = pool.map(worker_process, args)                                   # Map worker_process over all subjects
-
-    for sub_id, single_df, is_expert, rdm_ind, dsm_ind in results:                 # Iterate through worker results
-        if single_df is None:                                                       # If subject had no valid data
-            continue                                                                # Skip to next
-        if is_expert:                                                               # If subject is an Expert
-            experts_rdms.append(rdm_ind)                                            # Store individual RDM
-            experts_df = pd.concat([experts_df, single_df], ignore_index=True)      # Append trials to Experts DataFrame
-        else:                                                                       # If subject is a Novice
-            novices_rdms.append(rdm_ind)                                            # Store individual RDM
-            novices_df = pd.concat([novices_df, single_df], ignore_index=True)      # Append trials to Novices DataFrame
-
-else:                                                                              # If multiprocessing is disabled
-    for sub_id, is_expert in participants_list:                                    # Iterate through each subject
-        logging.info("Processing participant: %s | Expert: %s", sub_id, is_expert)
-        single_df = process_single_participant(                                     # Process subject sequentially
-            sub_id=sub_id,
-            is_expert=is_expert,
-            sourcedata_root=sourcedata_root,
-            columns=trial_columns
-        )
-        if single_df is None:                                                       # If subject had no valid data
-            continue                                                                # Skip to next
-        pairwise_df = create_pairwise_df(single_df)                                  # Convert trials to pairwise comparisons
-        rdm_ind = compute_symmetric_rdm(pairwise_df, "Individual", do_plot=False)    # Compute individual symmetric RDM
-        dsm_ind = compute_directional_dsm(pairwise_df, "Individual", do_plot=False)  # Compute individual directional DSM
-
-        if is_expert:                                                               # If subject is an Expert
-            experts_rdms.append(rdm_ind)                                            # Store individual RDM
-            experts_df = pd.concat([experts_df, single_df], ignore_index=True)      # Append trials to Experts DataFrame
-        else:                                                                       # If subject is a Novice
-            novices_rdms.append(rdm_ind)                                            # Store individual RDM
-            novices_df = pd.concat([novices_df, single_df], ignore_index=True)      # Append trials to Novices DataFrame
-
-category_df = load_stimulus_categories(                                           # Load stimulus category data
-    cat_path="/home/eik-tb/OneDrive_andreaivan.costantino@kuleuven.be/"
-             "GitHub/chess-expertise-2024/chess-dataset-vis/data/categories.xlsx"
-)
-
-expert_rdm, expert_corrs, expert_cols = analyze_group(                             # Analyze Experts group
-    df_group=experts_df,
-    expertise_label="Experts",
-    df_cat=category_df
-)
-
-novice_rdm, novice_corrs, novice_cols = analyze_group(                             # Analyze Novices group
-    df_group=novices_df,
-    expertise_label="Novices",
-    df_cat=category_df
-)
-
-if expert_cols != novice_cols:                                                     # Ensure column labels match
-    raise ValueError("Mismatch in column labels between expert and novice results!")
-
-plot_model_behavior_correlations(                                                  # Plot final correlation comparison
-    expert_results=expert_corrs,
-    novice_results=novice_corrs,
-    column_labels=expert_cols
-)
-
-pretty_labels = ["Visual Similarity", "Strategy", "Checkmate"]                    # Pretty labels for final summary table
-stats_df = pd.DataFrame({                                                          # Build summary DataFrame
-    "Dimension": pretty_labels,                                                     # Model dimension names
-    "r_Experts": [f"{tup[1]:.3f}" for tup in expert_corrs],                         # Expert correlation r-values
-    "95% CI Experts": [f"[{tup[3]:.3f}, {tup[4]:.3f}]" for tup in expert_corrs],     # Expert 95% confidence intervals
-    "r_Novices": [f"{tup[1]:.3f}" for tup in novice_corrs],                          # Novice correlation r-values
-    "95% CI Novices": [f"[{tup[3]:.3f}, {tup[4]:.3f}]" for tup in novice_corrs],      # Novice 95% confidence intervals
-})
-logging.info("\n=== Behavioral RDM Correlations (Experts vs. Novices) ===\n%s", stats_df.to_string(index=False))
-
-plot_shared_colorbar(CUSTOM_CMAP, vmin=-18, vmax=18)                                # Display the standalone colorbar for DSMs
+# (No top-level execution; orchestrate from a root runner script.)

@@ -11,7 +11,7 @@ bootstrap resampling.
 import numpy as np
 import logging
 from scipy.stats import t, norm
-from statsmodels.stats.multitest import fdrcorrection
+from common.stats_utils import fdr_correction
 import pingouin as pg
 import pandas as pd
 from nilearn import image
@@ -78,28 +78,6 @@ def split_and_convert_t_to_z(t_map: np.ndarray, dof: int):
     return z_pos, z_neg
 
 
-# def remove_useless_data(data: np.ndarray, brain_mask_flat=None):
-#     """Remove problematic voxels from stacked maps.
-
-#     Parameters
-#     ----------
-#     data : np.ndarray, shape (n_maps, n_voxels)
-#         Array containing different maps stacked by rows.
-
-#     Returns
-#     -------
-#     data_clean : np.ndarray
-#         Data with unusable voxels removed.
-#     keep_mask : np.ndarray of bool
-#         Boolean mask indicating voxels that were kept.
-#     """
-#     if data.ndim != 2:
-#         raise ValueError("remove_useless_data expects a 2D array")
-
-#     finite_mask = np.all(np.isfinite(data), axis=0)
-#     const_mask = np.ptp(np.round(data, 2), axis=0) == 0
-#     keep_mask = finite_mask & (~const_mask) if brain_mask_flat == None else finite_mask & (~const_mask) & brain_mask_flat
-#     return data[:, keep_mask], keep_mask
 
 def remove_useless_data(data: np.ndarray, brain_mask_flat: np.ndarray = None):
     """Remove problematic voxels from stacked maps.
@@ -293,7 +271,7 @@ def compute_all_zmap_correlations(z_pos, z_neg, term_maps, ref_img,
 
     # Apply Benjamini-Hochberg FDR correction across all terms
     for df in [df_pos, df_neg, df_diff]:
-        rej, p_fdr = fdrcorrection(df['p_raw'], alpha=fdr_alpha)
+        rej, p_fdr = fdr_correction(df['p_raw'], alpha=fdr_alpha)
         df['p_fdr'] = p_fdr
         df['sig'] = rej
 

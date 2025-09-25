@@ -1,5 +1,6 @@
 import os
 import numpy as np
+import nibabel as nib
 import pandas as pd
 import matplotlib.pyplot as plt
 from viz_utils import make_brain_cmap

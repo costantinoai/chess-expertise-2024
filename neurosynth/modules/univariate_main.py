@@ -10,10 +10,8 @@ from __future__ import annotations
 import os
 import logging
 import numpy as np
-import pandas as pd
 from glob import glob
 
-from nilearn import image
 
 from modules.io_utils import load_term_maps
 from modules.stats_utils import (
@@ -30,11 +28,11 @@ from common.common_utils import (
 )
 
 from neurosynth.modules.univariate_utils import (
-    load_and_mask_imgs,
     plot_surface_map,
     plot_surface_map_flat,
     t_to_two_tailed_z,
 )
+from common.niimg_utils import load_and_mask_imgs
 
 logger = logging.getLogger(__name__)
 
@@ -124,4 +122,3 @@ def main(
 
 if __name__ == "__main__":  # pragma: no cover
     main()
-

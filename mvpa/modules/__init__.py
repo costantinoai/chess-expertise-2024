@@ -17,9 +17,6 @@ from config import (
     BIDS_PATH as _BIDS_PATH,
     DERIVATIVES_PATH as _DERIVATIVES_PATH,
     MVPA_RESULTS_ROOT as _MVPA_RESULTS_ROOT,
-    HCP_ROI_CSV,
-    HCP_LH_LUT,
-    HCP_RH_LUT,
 )
 
 warnings.filterwarnings("ignore", category=FutureWarning)
@@ -53,9 +50,7 @@ FS_PATH = os.path.join(DERIVATIVES_PATH, "fastsurfer")
 LH_ANNOT =  os.path.join(FS_PATH, "fsaverage", "label", "lh.HCPMMP1.annot")
 RH_ANNOT =  os.path.join(FS_PATH, "fsaverage", "label", "rh.HCPMMP1.annot")
 
-ROIS_CSV = str(HCP_ROI_CSV)
-LEFT_LUT = str(HCP_LH_LUT)
-RIGHT_LUT = str(HCP_RH_LUT)
+# Deprecated LUT/CSV constants removed. Use `rois/` metadata + NIfTI inputs instead.
 
 P_ALPHA = .05
 FDR_ALPHA = .05
@@ -63,9 +58,10 @@ MULTI_CORRECTION = "fdr_bh"
 
 # 3) Load the annotation files
 HCPMMP1_LH_LABELS, lh_ctab, HCPMMP1_LH_NAMES = nib.freesurfer.read_annot(str(LH_ANNOT))
-HCPMMP1_RH_LABELS, rh_ctab, rh_names = nib.freesurfer.read_annot(str(RH_ANNOT))
+HCPMMP1_RH_LABELS, rh_ctab, HCPMMP1_RH_NAMES = nib.freesurfer.read_annot(str(RH_ANNOT))
 
 HCPMMP1_LH_NAMES_STR = [x.decode().upper() for x in HCPMMP1_LH_NAMES]
+HCPMMP1_RH_NAMES_STR = [x.decode().upper() for x in HCPMMP1_RH_NAMES]
 
 # Subject Lists
 EXPERT_SUBJECTS = (
@@ -170,194 +166,13 @@ CORTICES_NAMES = {
     "L_posterior_opercular_cortex": "Posterior Opercular"
 }
 
-REGIONS_LABELS = (
-    (1, "Primary Visual Cortex"),
-    (2, "Medial Superior Temporal Area"),
-    (3, "Sixth Visual Area"),
-    (4, "Second Visual Area"),
-    (5, "Third Visual Area"),
-    (6, "Fourth Visual Area"),
-    (7, "Eighth Visual Area"),
-    (8, "Primary Motor Cortex"),
-    (9, "Primary Sensory Cortex"),
-    (10, "Frontal Eye Fields"),
-    (11, "Premotor Eye Field"),
-    (12, "Area 55b"),
-    (13, "Area V3A"),
-    (14, "RetroSplenial Complex"),
-    (15, "Parieto-Occipital Sulcus Area 2"),
-    (16, "Seventh Visual Area"),
-    (17, "IntraParietal Sulcus Area 1"),
-    (18, "Fusiform Face Complex"),
-    (19, "Area V3B"),
-    (20, "Area Lateral Occipital 1"),
-    (21, "Area Lateral Occipital 2"),
-    (22, "Posterior InferoTemporal complex"),
-    (23, "Middle Temporal Area"),
-    (24, "Primary Auditory Cortex"),
-    (25, "PeriSylvian Language Area"),
-    (26, "Superior Frontal Language Area"),
-    (27, "PreCuneus Visual Area"),
-    (28, "Superior Temporal Visual Area"),
-    (29, "Medial Area 7P"),
-    (30, "Area 7m"),
-    (31, "Parieto-Occipital Sulcus Area 1"),
-    (32, "Area 23d"),
-    (33, "Area ventral 23 a+b"),
-    (34, "Area dorsal 23 a+b"),
-    (35, "Area 31p ventral"),
-    (36, "Area 5m"),
-    (37, "Area 5m ventral"),
-    (38, "Area 23c"),
-    (39, "Area 5L"),
-    (40, "Dorsal Area 24d"),
-    (41, "Ventral Area 24d"),
-    (42, "Lateral Area 7A"),
-    (43, "Supplementary and Cingulate Eye Field"),
-    (44, "Area 6m anterior"),
-    (45, "Medial Area 7A"),
-    (46, "Lateral Area 7P"),
-    (47, "Area 7PC"),
-    (48, "Area Lateral IntraParietal ventral"),
-    (49, "Ventral IntraParietal Complex"),
-    (50, "Medial IntraParietal Area"),
-    (51, "Area 1"),
-    (52, "Area 2"),
-    (53, "Area 3a"),
-    (54, "Dorsal area 6"),
-    (55, "Area 6mp"),
-    (56, "Ventral Area 6"),
-    (57, "Area Posterior 24 prime"),
-    (58, "Area 33 prime"),
-    (59, "Anterior 24 prime"),
-    (60, "Area p32 prime"),
-    (61, "Area a24"),
-    (62, "Area dorsal 32"),
-    (63, "Area 8BM"),
-    (64, "Area p32"),
-    (65, "Area 10r"),
-    (66, "Area 47m"),
-    (67, "Area 8Av"),
-    (68, "Area 8Ad"),
-    (69, "Area 9 Middle"),
-    (70, "Area 8B Lateral"),
-    (71, "Area 9 Posterior"),
-    (72, "Area 10d"),
-    (73, "Area 8C"),
-    (74, "Area 44"),
-    (75, "Area 45"),
-    (76, "Area 47l (47 lateral)"),
-    (77, "Area anterior 47r"),
-    (78, "Rostral Area 6"),
-    (79, "Area IFJa"),
-    (80, "Area IFJp"),
-    (81, "Area IFSp"),
-    (82, "Area IFSa"),
-    (83, "Area posterior 9-46v"),
-    (84, "Area 46"),
-    (85, "Area anterior 9-46v"),
-    (86, "Area 9-46d"),
-    (87, "Area 9 anterior"),
-    (88, "Area 10v"),
-    (89, "Area anterior 10p"),
-    (90, "Polar 10p"),
-    (91, "Area 11l"),
-    (92, "Area 13l"),
-    (93, "Orbital Frontal Complex"),
-    (94, "Area 47s"),
-    (95, "Area Lateral IntraParietal dorsal"),
-    (96, "Area 6 anterior"),
-    (97, "Inferior 6-8 Transitional Area"),
-    (98, "Superior 6-8 Transitional Area"),
-    (99, "Area 43"),
-    (100, "Area OP4/PV"),
-    (101, "Area OP1/SII"),
-    (102, "Area OP2-3/VS"),
-    (103, "Area 52"),
-    (104, "RetroInsular Cortex"),
-    (105, "Area PFcm"),
-    (106, "Posterior Insular Area 2"),
-    (107, "Area TA2"),
-    (108, "Frontal OPercular Area 4"),
-    (109, "Middle Insular Area"),
-    (110, "Pirform Cortex"),
-    (111, "Anterior Ventral Insular Area"),
-    (112, "Anterior Agranular Insula Complex"),
-    (113, "Frontal OPercular Area 1"),
-    (114, "Frontal OPercular Area 3"),
-    (115, "Frontal OPercular Area 2"),
-    (116, "Area PFt"),
-    (117, "Anterior IntraParietal Area"),
-    (118, "Entorhinal Cortex"),
-    (119, "PreSubiculum"),
-    (120, "Hippocampus"),
-    (121, "ProStriate Area"),
-    (122, "Perirhinal Ectorhinal Cortex"),
-    (123, "Area STGa"),
-    (124, "ParaBelt Complex"),
-    (125, "Auditory 5 Complex"),
-    (126, "ParaHippocampal Area 1"),
-    (127, "ParaHippocampal Area 3"),
-    (128, "Area STSd anterior"),
-    (129, "Area STSd posterior"),
-    (130, "Area STSv posterior"),
-    (131, "Area TG dorsal"),
-    (132, "Area TE1 anterior"),
-    (133, "Area TE1 posterior"),
-    (134, "Area TE2 anterior"),
-    (135, "Area TF"),
-    (136, "Area TE2 posterior"),
-    (137, "Area PHT"),
-    (138, "Area PH"),
-    (139, "Area TemporoParietoOccipital Junction 1"),
-    (140, "Area TemporoParietoOccipital Junction 2"),
-    (141, "Area TemporoParietoOccipital Junction 3"),
-    (142, "Dorsal Transitional Visual Area"),
-    (143, "Area PGp"),
-    (144, "Area IntraParietal 2"),
-    (145, "Area IntraParietal 1"),
-    (146, "Area IntraParietal 0"),
-    (147, "Area PF opercular"),
-    (148, "Area PF Complex"),
-    (149, "Area PFm Complex"),
-    (150, "Area PGi"),
-    (151, "Area PGs"),
-    (152, "Area V6A"),
-    (153, "VentroMedial Visual Area 1"),
-    (154, "VentroMedial Visual Area 3"),
-    (155, "ParaHippocampal Area 2"),
-    (156, "Area V4t"),
-    (157, "Area FST"),
-    (158, "Area V3CD"),
-    (159, "Area Lateral Occipital 3"),
-    (160, "VentroMedial Visual Area 2"),
-    (161, "Area 31pd"),
-    (162, "Area 31a"),
-    (163, "Ventral Visual Complex"),
-    (164, "Area 25"),
-    (165, "Area s32"),
-    (166, "posterior OFC Complex"),
-    (167, "Area Posterior Insular 1"),
-    (168, "Insular Granular Complex"),
-    (169, "Area Frontal Opercular 5"),
-    (170, "Area posterior 10p"),
-    (171, "Area posterior 47r"),
-    (172, "Area TG Ventral"),
-    (173, "Medial Belt Complex"),
-    (174, "Lateral Belt Complex"),
-    (175, "Auditory 4 Complex"),
-    (176, "Area STSv anterior"),
-    (177, "Area TE1 Middle"),
-    (178, "Para-Insular Area"),
-    (179, "Area anterior 32 prime"),
-    (180, "Area posterior 24"),
-)
+from rois.meta import get_roi_info
+_roi_info = get_roi_info("glasser_regions_bilateral")
+# Build a 1-indexed list so that REGIONS_LABELS[region_id] -> (id, name)
+_max_id = max(_roi_info.id_to_name) if _roi_info.id_to_name else 0
+_tmp = [None] * (_max_id + 1)
+for idx, name in _roi_info.id_to_name.items():
+    _tmp[int(idx)] = (int(idx), name)
+REGIONS_LABELS = tuple(_tmp)
 
-from modules.roi_manager import ROIManager
-
-# 2) Initialize ROIManager
-MANAGER = ROIManager(
-    csv_path=ROIS_CSV,
-    left_color_table_path=LEFT_LUT,
-    right_color_table_path=RIGHT_LUT,
-)
+# ROIManager was deprecated. Use rois/meta + rois/io for ROI metadata and atlas I/O.

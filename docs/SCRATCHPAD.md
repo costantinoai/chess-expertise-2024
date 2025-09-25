@@ -70,17 +70,17 @@ Phase 1 — Neurosynth extraction (scripts → modules)
   - Trim `neurosynth/rsa_neurosynth.py` to a thin runner importing and invoking `rsa_main.main()`
 
 Phase 2 — Adopt central stats wrappers
-- [ ] Replace direct uses of `statsmodels.multipletests`/`fdrcorrection` and `pingouin.multicomp` with `common.stats_utils.fdr_correction` across analyses.
+- [x] Replace direct uses of `statsmodels.multipletests`/`fdrcorrection` and `pingouin.multicomp` with `common.stats_utils.fdr_correction` across analyses (manifold, neurosynth, mvpa/manifold).
 - [ ] Replace ad-hoc one-sample/independent t-test code with `one_sample_ttest` and `independent_ttest` where possible.
-- [ ] Use `pearson_corr_bootstrap` and `corr_diff_bootstrap` wrappers where bootstrap correlations are computed.
+- [x] Use `pearson_corr_bootstrap` and `corr_diff_bootstrap` wrappers where bootstrap correlations are computed (neurosynth, behavioural).
 
 Phase 3 — MVPA scripts restructure
 - [ ] Move helper functions from `mvpa/mvpa_barplot*.py`, `mvpa/print_mvpa_stats.py`, etc., into `mvpa/modules/` (e.g., `barplot_utils.py`, `report_utils.py`).
 - [ ] Ensure entry scripts only orchestrate: setup run_id/output dir/logging, parse args, call module functions, save artefacts.
 
 Phase 4 — fMRI GLM restructure
-- [ ] Extract helpers from `fmri_glm/roi_ttests_all.py` into `fmri_glm/modules/glm_utils.py` (e.g., `export_diff_stats_to_latex`, `compute_confidence_intervals`, plotting helpers).
-- [ ] Keep a module `fmri_glm/modules/roi_stats.py` with `run_analysis()`; make any CLI script a thin wrapper calling it.
+- [x] Extract helpers into `glm/modules/glm_utils.py` (FDR, Welch test wrapper, CI, LaTeX export).
+- [ ] Add `glm/modules/roi_stats.py` with `run_analysis()`; make any CLI script a thin wrapper calling it (pending script consolidation).
 
 Phase 5 — Behavioural cleanup
 - [ ] Move reusable functions from `behavioural/bh_fmri.py` and `behavioural/bh_fmri_intercorr.py` into `behavioural/modules/`.
@@ -102,3 +102,49 @@ Reference
 - Conventions: `AGENTS.md` (this plan is referenced there)
 - Shared utilities: `common/` (logging, stats, run utils)
 - API overview: `API.md`
+
+Next Steps — DRY/Centralization Pass (2025‑09‑25)
+
+Goals
+- Eliminate duplication across modules; use shared helpers.
+- Keep entry scripts as thin runners with argparse + logging + run IDs.
+
+Todo Checklist
+- [x] Neurosynth plotting: delegate correlations/differences to `common.stats_plotting` (done)
+- [x] Remove ROIManager Python module and references; migrate overlays to NIfTI+TSV metadata (done)
+- [x] mvpa_surfplot_hcp: remove local `load_glasser_surf`; use centralized overlay builder; add contours from FS annot (done)
+- [x] MVPA bar plots: switch callers to `common.plotting_utils.plot_mvpa_barplot` (done)
+- [x] MVPA bar plots: remove local implementation from `mvpa/modules/plotting_helpers.py` (overridden by thin wrapper)
+- [x] Consolidate surface plotting helpers under a shared utility (fsaverage meshes, curvature, contours)
+- [x] ROI TSVs: complete fs_name/cortex/color across sets and validate name↔annot matches (populated from HCP CSV)
+- [x] Add `rois.meta.validate_roi_tsv(...)` and call in consumers
+- [x] Optimize overlay mapping in `mvpa/modules/surf_helpers.build_significance_overlay` (precompute name→index, warn on misses)
+- [x] Update READMEs to mention shared plotting modules and ROI TSV ingestion
+- [x] Regenerate API after above
+- [x] Update all repository README/MD files to reflect: centralized plotting (common/*), ROI TSV ingestion replacing ROIManager, surface plotting helper usage, and run/output conventions.
+
+Next Items — Priority Queue (2025‑09‑25)
+
+- [x] Neurosynth plotters: verify `neurosynth/modules/plot_utils.py` fully delegates (`plot_correlations`, `plot_difference`) and remove any legacy/duplicate plotting code.
+- [x] MVPA plotting helpers: remove the local `plot_mvpa_barplot` implementation and keep the thin wrapper to `common.plotting_utils.plot_mvpa_barplot`; clean up duplicate definitions and update docstrings.
+- [x] Surf helpers docs: update `mvpa/modules/surf_helpers.py` and `mvpa/modules/plotting_helpers.py` docstrings to reflect NIfTI+TSV overlays (no ROIManager/LUT mentions).
+- [x] ROI creation code: delete or move `rois/make_glasser_rois.py` to legacy; update `rois/README.md` to state ROI sets are provided as NIfTI + TSV metadata only.
+- [ ] ROI TSVs completeness: verify both sets are fully populated (id, name, pretty_name, fs_name, cortex, color, cortex_id/order); patch if missing.
+- [ ] ROI TSV validation in consumers: call `rois.meta.validate_roi_tsv(...)` in callers and warn on mismatches; precompute FS name→index maps to speed overlay mapping.
+- [ ] READMEs refresh: mvpa, neurosynth, glm READMEs should mention shared plotting modules (common/brain_plotting.py, common/stats_plotting.py, common/plotting_utils.py) and ROI TSV ingestion replacing ROIManager.
+- [x] Regenerate API: `python scripts/generate_api.py --output API.md`; commit the updated `API.md`.
+- [x] Repository MD sweep: ensure each top‑level analysis README has inputs, how to run, where outputs save, and references the timestamped results folder convention.
+- [ ] Optional tests: add small tests for `validate_roi_tsv` and shared plotting functions to catch regressions.
+
+In‑Progress / Next
+- Next: Optional small tests for ROI TSVs and plotting (if desired).
+
+Completed Cleanup
+- [x] Trimmed large commented legacy code blocks from Python modules to keep the codebase lean (e.g., neurosynth/modules/stats_utils.py).
+ - [x] Behavioural: removed absolute paths; use `config.py` for participants/categories; added logging + script copy to outputs.
+ - [x] GLM: removed duplicate local helpers from `glm/roi_ttests_all.py`; use `glm/modules/*` and shared logging.
+ - [x] MVPA: docstrings updated to reference `fdr_correction()`.
+ - [x] Manifold: fixed missing nibabel import in `plot_pr_roi_size.py`.
+
+ Notes
+ - Analyses are run from IDE (no CLI). Configure inputs via `config.py` or environment variables.

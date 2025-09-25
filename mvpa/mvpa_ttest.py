@@ -297,62 +297,54 @@ logger.setLevel(logging.INFO)
 pg.options["round.column.CI95%"] = 6
 
 # ------------------------------------------------------------------------------
-# 5) MAIN SCRIPT
-# ------------------------------------------------------------------------------
-mvpa_roots = [
-    # "/data/projects/chess/data/BIDS/derivatives/mvpa/20250402-191833_glasser_cortices_bilateral",
-    # "/data/projects/chess/data/BIDS/derivatives/mvpa/20250402-230003_glasser_regions_bilateral",
-    # "/data/projects/chess/data/BIDS/derivatives/mvpa/20250402-191243_bilalic_sphere_rois",
-    "/data/projects/chess/data/BIDS/derivatives/mvpa-lda/20250425-183118_glasser_regions_bilateral",
-    "/data/projects/chess/data/BIDS/derivatives/mvpa-lda/20250425-175450_bilalic_sphere_rois"
-    ]
-mvpa_subdirs = ["svm", "rsa_corr"]
-# mvpa_subdirs = ["rsa_corr_trained", "rsa_corr_untrained"]
+def main(mvpa_roots=None, mvpa_subdirs=("svm", "rsa_corr")):
+    from config import MVPA_RESULTS_ROOT
+    if mvpa_roots is None:
+        # Default to scanning under configured MVPA derivatives root
+        mvpa_roots = [str(MVPA_RESULTS_ROOT)]
 
-for mvpa_root in mvpa_roots:
-    # Loop over each MVPA subdirectory (analysis method)
-    for mvpa_subdir in mvpa_subdirs:
+    for mvpa_root in mvpa_roots:
+        for mvpa_subdir in mvpa_subdirs:
 
-        # Build the path: e.g., /data/.../20250402-191243_bilalic_sphere_rois/svm
-        mvpa_dir = os.path.join(mvpa_root, mvpa_subdir)
+            # Accept either a concrete run folder or the root with multiple runs
+            patterns = [
+                os.path.join(mvpa_root, mvpa_subdir),
+                os.path.join(mvpa_root, "*", mvpa_subdir),
+            ]
+            candidate_dirs = []
+            for pat in patterns:
+                candidate_dirs.extend(glob.glob(pat))
+            candidate_dirs = natsorted([d for d in candidate_dirs if os.path.isdir(d)])
+            if not candidate_dirs:
+                logging.warning("No MVPA directories found under %s for subdir %s", mvpa_root, mvpa_subdir)
+                continue
 
-        # Collect all TSV files under subfolders (e.g., sub-01/mvpa_cv.tsv, sub-02/mvpa_cv.tsv, etc.)
-        subject_files = natsorted(glob.glob(os.path.join(mvpa_dir, "*/*.tsv")))
+            for mvpa_dir in candidate_dirs:
+                subject_files = natsorted(glob.glob(os.path.join(mvpa_dir, "*/*.tsv")))
+                if not subject_files:
+                    logging.warning("No subject TSV files found under %s", mvpa_dir)
+                    continue
 
-        # Read, clean, and concatenate all subject TSV files for this method
-        df = pd.concat(
-            [load_mvpa_subject(f) for f in subject_files],
-            ignore_index=True
-        )
+                df = pd.concat([load_mvpa_subject(f) for f in subject_files], ignore_index=True)
 
-        # Remove the stimuli matrices for RSA, since they would be meaningless
-        # (0 in the diagonal and 1 everywhere else). Still useful for SVM
-        if "rsa" in mvpa_subdir:
-            # If 'layer' column exists (from RSA-DNN outputs), rename it to 'target'
-            if "layer" in df.columns:
-                df = df.rename(columns={"layer": "target"})
+                if "rsa" in mvpa_subdir:
+                    if "layer" in df.columns:
+                        df = df.rename(columns={"layer": "target"})
+                    df = df[~df["target"].isin(["stimuli", "stimuli_half"])]
 
-                # Drop irrelevant regressors
-                df = df[~df["target"].isin(["stimuli", "stimuli_half"])]
+                analysis_results = run_stats_on_df(df, method=mvpa_subdir)
+                logging.info("Analysis complete for method: %s", mvpa_subdir)
+
+                results_out = os.path.join(mvpa_dir, f"{create_run_id()}_group")
+                os.makedirs(results_out, exist_ok=True)
+                pkl_fname = os.path.join(results_out, "ttest_group_results.pkl")
+                with open(pkl_fname, "wb") as f:
+                    pickle.dump(analysis_results, f)
+                logging.info("Results saved in: %s", results_out)
 
 
-        # Run the specialized analysis on this single method
-        # 'method' argument helps pick the correct chance level for SVM
-        analysis_results = run_stats_on_df(df, method=mvpa_subdir)
-
-        # Here, 'analysis_results' is your final nested dictionary for that method.
-        # You can print, save, or further process these stats as needed.
-        logging.info("Analysis complete for method: %s", mvpa_subdir)
-
-        results_out = os.path.join(mvpa_dir, f"{create_run_id()}_group")
-        os.makedirs(results_out)
-
-        pkl_fname = os.path.join(results_out, "ttest_group_results.pkl")
-
-        with open(pkl_fname, "wb") as f:
-            pickle.dump(analysis_results, f)
-
-        logging.info("Results saved in: %s", results_out)
+if __name__ == "__main__":
+    main()
 
 
 # ----------------------------------------------------------------------------

@@ -2,6 +2,7 @@
 import logging
 import seaborn as sns
 from common.logging_utils import setup_logging
+from config import DNN_RESPONSES_CSV
 
 sns.set(style="darkgrid", palette="muted", font_scale=1.7)
 
@@ -13,7 +14,7 @@ logging.getLogger('pandas').setLevel(logging.WARNING)
 
 DATASET_CSV_PATH = 'data/dataset.csv'
 PALETTE = {'Super-experts': 'darkorange', 'Experts': '#FFD580', 'Non-experts': 'steelblue'}
-DNN_RESPONSES_CSV_PATH = '/home/eik-tb/OneDrive_andreaivan.costantino@kuleuven.be/GitHub/chess_expertise/bh_results/misc/correct_responses_human_and_net.csv'
+DNN_RESPONSES_CSV_PATH = str(DNN_RESPONSES_CSV)
 
 # Subject Lists
 EXPERT_SUBJECTS = (

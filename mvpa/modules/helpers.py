@@ -11,7 +11,7 @@ from datetime import datetime
 from pathlib import Path
 import pandas as pd
 
-from modules import logging, MANAGER, REGIONS_LABELS
+from modules import logging, REGIONS_LABELS
 from common.common_utils import set_rnd_seed, create_run_id, save_script_to_file
 
 """
@@ -175,12 +175,17 @@ def filter_significant_ROIs(sliced_dict, use_corrected_p_values, P_ALPHA, FDR_AL
 
                 sig_rois = significant_df.index
 
-                if "cortex" in sig_rois[0]:
+                if len(sig_rois) > 0 and ("cortex" in sig_rois[0] or "lobe" in sig_rois[0]):
                     sig_rois_prettier = [sig_rois.values]
                 else:
-                    sig_rois_ids = [MANAGER.get_by_filter(hemisphere="l", region_name=roi)[0][0].region_id for roi in sig_rois]
-                    sig_rois_prettier = [REGIONS_LABELS[roi_id-1] for roi_id in sig_rois_ids] if sig_rois_ids != [] else None
-                    assert len(sig_rois) == len(sig_rois_ids)
+                    # Fallback: prettify ROI codes like 'L_V1_ROI' → 'V1'
+                    def _pretty(code: str) -> str:
+                        s = code
+                        if s[:2].lower() in ("l_", "r_"):
+                            s = s[2:]
+                        s = s.replace("_ROI", "").replace("_", " ")
+                        return s
+                    sig_rois_prettier = [_pretty(r) for r in sig_rois]
 
                 logging.info(
                     f"Significant ROIs detected | "

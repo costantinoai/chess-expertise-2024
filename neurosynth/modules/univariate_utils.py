@@ -9,7 +9,7 @@ import numpy as np
 import pingouin as pg
 from plotly.subplots import make_subplots
 from nilearn import plotting, surface, datasets
-from common.stats_utils import corr_diff_bootstrap
+from common.stats_utils import corr_diff_bootstrap, pearson_corr_bootstrap
 
 
 logger = logging.getLogger(__name__)
@@ -101,9 +101,20 @@ def build_design_matrix(n_exp: int, n_nov: int):
 
 
 def bootstrap_corr(x, y, n_boot):
-    """Bootstrap Pearson correlation using Pingouin."""
-    return pg.corr(x=x, y=y, method='pearson', bootstraps=n_boot,
-                   confidence=0.95, method_ci='percentile', alternative='two-sided')
+    """Bootstrap Pearson correlation (delegates to common.stats_utils)."""
+    # Return a Pingouin-like small adapter dict to keep callers working
+    res = pearson_corr_bootstrap(np.asarray(x), np.asarray(y), n_boot=n_boot, ci=0.95)
+    class _Obj:
+        def __init__(self, d):
+            import pandas as pd
+            self._df = pd.DataFrame({
+                'r': [d['r']],
+                'p-val': [d['p']],
+                'CI95%': [(d['ci_low'], d['ci_high'])],
+            })
+        def __getitem__(self, k):
+            return self._df[k]
+    return _Obj(res)
 
 
 def extract_corr_results(result):

@@ -16,6 +16,7 @@ from pathlib import Path
 DATA_ROOT = Path(os.environ.get("CHESS_DATA_ROOT", "/data/projects/chess/data")).resolve()
 BIDS_PATH = DATA_ROOT / "BIDS"
 DERIVATIVES_PATH = BIDS_PATH / "derivatives"
+SOURCEDATA_PATH = BIDS_PATH / "sourcedata"
 
 # GLM base path (can be overridden)
 GLM_BASE_PATH = Path(
@@ -64,6 +65,28 @@ HCP_RH_LUT = Path(
     )
 )
 
+# Behavioural inputs (override via env on different machines)
+PARTICIPANTS_XLSX = Path(
+    os.environ.get(
+        "CHESS_PARTICIPANTS_XLSX",
+        Path("data/participants.xlsx").as_posix(),
+    )
+).resolve()
+
+CATEGORIES_XLSX = Path(
+    os.environ.get(
+        "CHESS_CATEGORIES_XLSX",
+        Path("behavioural/data/categories.xlsx").as_posix(),
+    )
+).resolve()
+
+DNN_RESPONSES_CSV = Path(
+    os.environ.get(
+        "CHESS_DNN_RESPONSES_CSV",
+        Path("behavioural/data/correct_responses_human_and_net.csv").as_posix(),
+    )
+).resolve()
+
 # Subject lists
 EXPERTS = (
     "03",
@@ -110,4 +133,3 @@ NONEXPERTS = (
     "43",
     "44",
 )
-
