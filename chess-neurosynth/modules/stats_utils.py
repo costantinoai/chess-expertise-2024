@@ -300,142 +300,215 @@ def compute_all_zmap_correlations(z_pos, z_neg, term_maps, ref_img,
 
 def save_latex_correlation_tables(df_pos, df_neg, diff_df, run_id, out_dir):
     """
-    Save and print LaTeX tables for positive/negative/difference z-map correlations.
+    Save LaTeX tables for positive/negative/difference z-map correlations.
+    Column-aware: includes CI/p only if present in the provided DataFrames.
 
     Parameters
     ----------
-    df_pos : pd.DataFrame
-        Correlations and stats from positive z-map.
-    df_neg : pd.DataFrame
-        Correlations and stats from negative z-map.
-    diff_df : pd.DataFrame
-        Difference in correlations between positive and negative z-maps.
+    df_pos : pd.DataFrame  # at least: ['term','r'] (optionally CI_low, CI_high, p_fdr)
+    df_neg : pd.DataFrame  # at least: ['term','r'] (optionally CI_low, CI_high, p_fdr)
+    diff_df: pd.DataFrame  # at least: ['term','r_diff'] (optionally CI_low, CI_high, p_fdr)
     run_id : str
-        Identifier for the run (used in titles and filenames).
-    out_dir : str
-        Directory to save LaTeX tables.
+    out_dir: str
     """
     os.makedirs(out_dir, exist_ok=True)
 
-    def format_and_save(df, columns, caption, label, fname):
-        latex_str = (
-            df[columns]
-            .round(3)
-            .sort_values(by=columns[1], ascending=False)
-            .to_latex(index=False, escape=True, caption=caption, label=label)
-        )
+    def format_and_save(df, base_cols, value_col, caption, label, fname):
+        """
+        df         : DataFrame to print
+        base_cols  : list of required columns that exist (e.g., ['term','r'])
+        value_col  : column to sort by (e.g., 'r' or 'r_diff')
+        caption    : latex caption
+        label      : latex label
+        fname      : output filename
+        """
+        # Keep only columns that actually exist in df (in order)
+        cols = [c for c in base_cols if c in df.columns]
+
+        # Guard: need at least term + value_col to print anything meaningful
+        must_have = {'term', value_col}
+        if not must_have.issubset(set(cols)):
+            # Try to add missing ones if they exist in df but weren't in base_cols
+            for m in must_have:
+                if m in df.columns and m not in cols:
+                    cols.insert(0, m)  # ensure presence
+        if not must_have.issubset(set(cols)):
+            raise ValueError(f"'{fname}' table requires columns {must_have}, but got {df.columns.tolist()}")
+
+        # Round only numeric columns at print time via DataFrame.round
+        to_print = df[cols].copy()
+        numeric_cols = [c for c in cols if pd.api.types.is_numeric_dtype(to_print[c])]
+        if numeric_cols:
+            to_print[numeric_cols] = to_print[numeric_cols].round(3)
+
+        # Sort by the effect column (descending)
+        to_print = to_print.sort_values(by=value_col, ascending=False)
+
+        latex_str = to_print.to_latex(index=False, escape=True, caption=caption, label=label)
         out_path = os.path.join(out_dir, fname)
         with open(out_path, "w") as f:
             f.write(latex_str)
         print(f"\n=== {caption} ===\n")
         print(latex_str)
 
-    # Table 1: Positive z-map correlations
+    # --- Positive z-map table ---
+    pos_base_cols = ['term', 'r', 'CI_low', 'CI_high', 'p_fdr']  # will auto-prune missing
     format_and_save(
         df_pos,
-        columns=['term', 'r', 'CI_low', 'CI_high', 'p_fdr'],
+        base_cols=pos_base_cols,
+        value_col='r',
         caption=f"{run_id} — Positive z-map: correlations with each term map.",
         label=f"tab:{run_id}_pos",
         fname=f"{run_id}_positive_zmap.tex"
     )
 
-    # Table 2: Negative z-map correlations
+    # --- Negative z-map table ---
+    neg_base_cols = ['term', 'r', 'CI_low', 'CI_high', 'p_fdr']  # will auto-prune missing
     format_and_save(
         df_neg,
-        columns=['term', 'r', 'CI_low', 'CI_high', 'p_fdr'],
+        base_cols=neg_base_cols,
+        value_col='r',
         caption=f"{run_id} — Negative z-map: correlations with each term map.",
         label=f"tab:{run_id}_neg",
         fname=f"{run_id}_negative_zmap.tex"
     )
 
-    # Table 3: Differences
+    # --- Difference table ---
+    diff_base_cols = ['term', 'r_diff', 'CI_low', 'CI_high', 'p_fdr', 'sig']  # will auto-prune missing
     format_and_save(
         diff_df,
-        columns=['term', 'r_diff', 'CI_low', 'CI_high', 'p_fdr'],
+        base_cols=diff_base_cols,
+        value_col='r_diff',
         caption=f"{run_id} — Difference in correlations (positive - negative).",
         label=f"tab:{run_id}_diff",
         fname=f"{run_id}_difference_zmap.tex"
     )
+
 
 def generate_latex_multicolumn_table(data_dict, output_path, table_type="diff", caption="", label=""):
     """
     Generate and save a LaTeX multicolumn table from multiple regressors.
 
     Args:
-        data_dict (dict): Keys are regressor names (e.g. 'Checkmate'), values are pandas DataFrames
-                          with columns: 'term', 'r_diff' or 'r', 'CI_low', 'CI_high', 'p_fdr'
-        output_path (str): Path to save the resulting LaTeX file.
-        table_type (str): "diff", "pos", or "neg".
-        caption (str): LaTeX caption.
-        label (str): LaTeX label.
+        data_dict (dict): {regressor_name: DataFrame}
+            DataFrames must include:
+              - always: 'term' and value column ('r' for pos/neg, 'r_diff' for diff)
+              - optionally (diff only): 'CI_low','CI_high','p_fdr'
+        output_path (str): where to save the .tex
+        table_type (str): 'diff', 'pos', or 'neg'
+        caption (str), label (str)
     """
+    from functools import reduce
+
     def format_term_name(term):
         parts = term.split(' ', 1)
-        if len(parts) == 2:
-            return parts[1].title()
-        else:
-            return parts[0].title()
+        return parts[1].title() if len(parts) == 2 else parts[0].title()
 
     def pval_fmt(p):
-        return "<.001" if p < 0.001 else f"{p:.3f}"
+        try:
+            return "<.001" if p < 0.001 else f"{p:.3f}"
+        except Exception:
+            return ""
 
     value_col = "r_diff" if table_type == "diff" else "r"
 
-    # Process and rename each dataframe
-    renamed_dfs = {}
+    # Build per-key frames with flexible columns
+    # For POS/NEG: only 'r'
+    # For DIFF: 'r', plus optional 'CI' (combined), optional 'p_fdr'
+    prepared = {}
+    per_key_colnames = {}  # visible columns per key for header and rows (excluding 'Term')
+
     for key, df in data_dict.items():
         df = df.copy()
-        df.sort_values(
-            by='term',
-            key=lambda x: x.str.extract(r'^(\d+)')[0].astype(int),
-            inplace=True
-        )
-        df['Term'] = df['term'].apply(format_term_name)
 
-        renamed = df[['Term', value_col, 'CI_low', 'CI_high', 'p_fdr']].rename(
-            columns={
-                value_col: f'{key}_r',
-                'CI_low': f'{key}_CI_low',
-                'CI_high': f'{key}_CI_high',
-                'p_fdr': f'{key}_p_fdr'
-            }
-        )
-        renamed_dfs[key] = renamed
+        # sort by numeric prefix in 'term', as you had
+        if 'term' in df.columns:
+            df.sort_values(
+                by='term',
+                key=lambda x: x.str.extract(r'^(\d+)')[0].astype(int),
+                inplace=True
+            )
+            df['Term'] = df['term'].apply(format_term_name)
+        else:
+            raise ValueError("Each DataFrame must contain a 'term' column.")
 
-    # Merge all DataFrames on 'Term'
-    merged_df = reduce(lambda left, right: pd.merge(left, right, on='Term'), renamed_dfs.values())
+        # Always keep Term + value column
+        out = pd.DataFrame({'Term': df['Term'], f'{key}_r': df[value_col]})
 
-    # Build LaTeX table
+        # Decide visibility based on table_type and column availability
+        visible_cols = [f'{key}_r']
+
+        if table_type == "diff":
+            has_ci = {'CI_low', 'CI_high'}.issubset(df.columns)
+            has_p  = {'p_fdr'}.issubset(df.columns)
+
+            if has_ci:
+                # Merge CI_low/high into a single 'CI' text column
+                ci_text = df.apply(
+                    lambda row: f"[{row['CI_low']:.3f}, {row['CI_high']:.3f}]", axis=1
+                )
+                out[f'{key}_CI'] = ci_text
+                visible_cols.append(f'{key}_CI')
+
+            if has_p:
+                out[f'{key}_p'] = df['p_fdr'].apply(pval_fmt)
+                visible_cols.append(f'{key}_p')
+
+        # Save prepared and visible columns
+        prepared[key] = out
+        per_key_colnames[key] = visible_cols
+
+    # Merge all on 'Term'
+    merged = reduce(lambda L, R: pd.merge(L, R, on='Term', how='outer'), prepared.values())
+
+    # Build LaTeX
+    # Determine column counts per key for \multicolumn and col spec
+    key_col_counts = [len(per_key_colnames[k]) for k in data_dict.keys()]
+    colspec = "l" + "".join(["c" * cnt for cnt in key_col_counts])
+
     lines = [
         "\\begin{table}[p]",
         "\\centering",
         "\\resizebox{\\linewidth}{!}{%",
-        f"\\begin{{tabular}}{{l{''.join(['ccc' for _ in data_dict])}}}",
+        f"\\begin{{tabular}}{{{colspec}}}",
         "\\toprule"
     ]
 
-    # First header row
-    header_1 = "\\multirow{2}{*}{Term} " + " & " + " & ".join(
-        [f"\\multicolumn{{3}}{{c}}{{{key}}}" for key in data_dict]
-    ) + " \\\\"
-    lines.append(header_1)
+    # Header row 1: group headings
+    header_1_cells = ["\\multirow{2}{*}{Term}"]
+    for i, key in enumerate(data_dict.keys()):
+        header_1_cells.append(f"\\multicolumn{{{key_col_counts[i]}}}{{c}}{{{key}}}")
+    lines.append(" " + " & ".join(header_1_cells) + " \\\\")
 
-    # Second header row
-    lines.append(
-        " & " + " & ".join(["$r$ & 95\\% CI & $p_\\mathrm{FDR}$" for _ in data_dict]) + " \\\\"
-    )
+    # Header row 2: per-key subheaders
+    subheaders = []
+    for key in data_dict.keys():
+        cols = per_key_colnames[key]
+        for col in cols:
+            if col.endswith("_r"):
+                subheaders.append("$r$")
+            elif col.endswith("_CI"):
+                subheaders.append("95\\% CI")
+            elif col.endswith("_p"):
+                subheaders.append("$p_\\mathrm{FDR}$")
+            else:
+                subheaders.append(col)
+    lines.append(" " + " & ".join(subheaders) + " \\\\")
     lines.append("\\midrule")
 
-    # Data rows
-    for _, row in merged_df.iterrows():
-        line = f"{row['Term']}"
-        for key in data_dict:
-            line += (
-                f" & {row[f'{key}_r']:.3f} "
-                f"& [{row[f'{key}_CI_low']:.3f}, {row[f'{key}_CI_high']:.3f}] "
-                f"& {pval_fmt(row[f'{key}_p_fdr'])}"
-            )
-        lines.append(line + " \\\\")
+    # Rows
+    for _, row in merged.iterrows():
+        cells = [row['Term']]
+        for key in data_dict.keys():
+            for col in per_key_colnames[key]:
+                val = row.get(col, "")
+                if pd.isna(val):
+                    cells.append("")
+                elif isinstance(val, float):
+                    cells.append(f"{val:.3f}")
+                else:
+                    cells.append(f"{val}")
+        lines.append(" & ".join(map(str, cells)) + " \\\\")
 
     lines.extend([
         "\\bottomrule",
@@ -448,7 +521,6 @@ def generate_latex_multicolumn_table(data_dict, output_path, table_type="diff", 
 
     latex_output = "\n".join(lines)
 
-    # Save and print LaTeX code
     with open(output_path, 'w') as f:
         f.write(latex_output)
 

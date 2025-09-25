@@ -508,9 +508,16 @@ def plot_expert_vs_novice(
     ci_lows = ci_lows[~np.isnan(ci_lows)]
     ci_highs = ci_highs[~np.isnan(ci_highs)]
 
+    # === Y-LIMITS: Autoscale from bar heights, CI bounds, and asterisks ===
     y_min = -0.01
-    # y_max = .6 if "rsa" in analysis_type else .35
-    y_max = .25
+
+    if "rsa" in analysis_type and regressor_key == "side_half":
+        y_max = 0.5
+    elif "svm" in analysis_type and regressor_key == "side_half":
+        y_max = 0.4
+    else:
+        y_max = 0.25  # default
+
     margin = 0.05 * (y_max - y_min)
     ax.set_ylim(y_min - margin, y_max + margin)
 

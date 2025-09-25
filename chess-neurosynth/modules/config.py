@@ -31,7 +31,7 @@ def setup_logging(log_file: str | None = None, level: int = logging.INFO) -> log
             fh.setFormatter(logging.Formatter(fmt))
             logger.addHandler(fh)
     return logger
-    
+
 setup_logging()
 logger = logging.getLogger(__name__)
 

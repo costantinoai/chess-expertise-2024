@@ -66,7 +66,7 @@ logger = logging.getLogger(__name__)
 
 # ---------------------- GLOBAL PLOT STYLE ----------------------
 # Base font size for glass brain plots and others
-base_font_size = 22
+base_font_size = 24
 plt.rcParams.update({
     "font.family": 'Ubuntu Condensed',
     "font.size": base_font_size,
@@ -75,7 +75,7 @@ plt.rcParams.update({
     "xtick.labelsize": base_font_size,  # 26
     "ytick.labelsize": base_font_size,  # 26
     "legend.fontsize": base_font_size,  # 26
-    "figure.figsize": (12, 9),  # wide figures
+    "figure.figsize": (8, 10),  # wide figures
 })
 
 
@@ -573,8 +573,9 @@ def find_nifti_files(data_dir, pattern=None):
     # Walk directory tree
     for root, _, fnames in os.walk(data_dir):
         for f in fnames:
+            print(f)
             # check extension and optional pattern
-            if f.endswith('.nii.gz') and (pattern is None or pattern in f):
+            if '.nii' in f and (pattern is None or pattern in f):
                 full_path = os.path.join(root, f)
                 logger.debug(f"Found file: {full_path}")
                 files.append(full_path)
@@ -792,21 +793,24 @@ def bootstrap_corr_diff(term_map, x, y, n_boot, rng, ci_alpha, n_jobs):
     return mean_diff, lo, hi, p_val
 
 def compute_all_zmap_correlations(z_pos, z_neg, term_maps, ref_img,
-                                  n_boot=10000, fdr_alpha=0.05,
-                                  ci_alpha=0.05, random_state=42,
-                                  n_jobs=1):
+                                 n_boot=None, fdr_alpha=None,
+                                 ci_alpha=None, random_state=42,
+                                 n_jobs=1):
     """
-    Compute correlations between group RSA maps and Neurosynth term maps,
-    including bootstrapped CIs, differences, and FDR correction.
+    Compute ONLY point estimates:
+      r_pos = corr(term, z_pos), r_neg = corr(term, z_neg),
+      r_diff = r_pos - r_neg
+
+    Returns
+    -------
+    df_diff : pandas.DataFrame with columns:
+        ['term', 'r_pos', 'r_neg', 'r_diff']
     """
-    logger.info("Starting correlation analysis with %d terms", len(term_maps))
-    logger.info("Bootstrap iterations: %d, FDR alpha: %.3f, CI alpha: %.3f", n_boot, fdr_alpha, ci_alpha)
+    logger.info("Starting DIFF (point-estimate only) analysis with %d terms", len(term_maps))
 
-    records_pos = []
-    records_neg = []
-    records_diff = []
-    rng = np.random.default_rng(random_state)
+    records = []
 
+    # Flatten inputs
     flat_pos = z_pos.ravel()
     flat_neg = z_neg.ravel()
     logger.info("Flattened input z-maps.")
@@ -817,55 +821,157 @@ def compute_all_zmap_correlations(z_pos, z_neg, term_maps, ref_img,
 
     for i, (term, path) in enumerate(term_maps.items()):
         logger.info("Processing term %d/%d: '%s'", i + 1, len(term_maps), term)
-        # Load and resample term map
-        resampled_map = image.resample_to_img(image.load_img(path), ref_img,
-                                              force_resample=True, copy_header=True)
+
+        # Load + resample term map
+        resampled_map = image.resample_to_img(
+            image.load_img(path), ref_img, force_resample=True, copy_header=True
+        )
         flat_term = resampled_map.get_fdata().ravel()
 
-        # Stack maps
-        stacked_data = np.vstack([flat_pos, flat_neg, flat_term])
-        cleaned, kept_mask = remove_useless_data(stacked_data, flat_mask)
-        x, y, this_term_map = cleaned
+        # Clean
+        stacked = np.vstack([flat_pos, flat_neg, flat_term])
+        cleaned, kept_mask = remove_useless_data(stacked, flat_mask)
+        x, y, t = cleaned
         logger.info("Cleaned data for '%s'. Kept %d voxels.", term, kept_mask.sum())
 
-        # POSITIVE correlation
-        res_pos = bootstrap_corr(this_term_map, x, n_boot)
-        records_pos.append((term, *extract_corr_results(res_pos)))
-        logger.debug("POS correlation for '%s': r=%.4f, p=%.4g", term, res_pos['r'].iloc[0], res_pos['p-val'].iloc[0])
+        # Point estimates only
+        r_pos = float(np.corrcoef(t, x)[0, 1])
+        r_neg = float(np.corrcoef(t, y)[0, 1])
+        r_diff = r_pos - r_neg
 
-        # NEGATIVE correlation
-        res_neg = bootstrap_corr(this_term_map, y, n_boot)
-        records_neg.append((term, *extract_corr_results(res_neg)))
-        logger.debug("NEG correlation for '%s': r=%.4f, p=%.4g", term, res_neg['r'].iloc[0], res_neg['p-val'].iloc[0])
+        records.append((term, r_pos, r_neg, r_diff))
+        logger.debug("POINTS for '%s': r_pos=%.4f, r_neg=%.4f, r_diff=%.4f",
+                     term, r_pos, r_neg, r_diff)
 
-        # DIFFERENCE
-        res_diff = bootstrap_corr_diff(this_term_map, x, y, n_boot, rng, ci_alpha, n_jobs)
-        records_diff.append((term, res_pos['r'].iloc[0], res_neg['r'].iloc[0], *res_diff))
-        logger.debug("DIFF correlation for '%s': r_diff=%.4f, p=%.4g", term, res_diff[0], res_diff[2])
+    df_diff = pd.DataFrame(records, columns=['term', 'r_pos', 'r_neg', 'r_diff'])
+    logger.info("Completed DIFF (point-estimate only).")
+    return df_diff
 
-    logger.info("Finished computing all raw correlations. Constructing DataFrames...")
+# NOTE: this is commented out because it is a previous version that boostrapped also the
+# correlations, but probably in a wrong way (across voxels)
+# def compute_all_zmap_correlations(z_pos, z_neg, term_maps, ref_img,
+#                                   n_boot=10000, fdr_alpha=0.05,
+#                                   ci_alpha=0.05, random_state=42,
+#                                   n_jobs=1):
+#     """
+#     Compute correlations between group RSA maps and Neurosynth term maps,
+#     including bootstrapped CIs, differences, and FDR correction.
+#     """
+#     logger.info("Starting correlation analysis with %d terms", len(term_maps))
+#     logger.info("Bootstrap iterations: %d, FDR alpha: %.3f, CI alpha: %.3f", n_boot, fdr_alpha, ci_alpha)
 
-    df_pos = pd.DataFrame(records_pos, columns=['term', 'r', 'CI_low', 'CI_high', 'p_raw'])
-    df_neg = pd.DataFrame(records_neg, columns=['term', 'r', 'CI_low', 'CI_high', 'p_raw'])
-    df_diff = pd.DataFrame(records_diff, columns=['term', 'r_pos', 'r_neg', 'r_diff', 'CI_low', 'CI_high', 'p_raw'])
+#     records_pos = []
+#     records_neg = []
+#     records_diff = []
+#     rng = np.random.default_rng(random_state)
 
-    # FDR correction
-    logger.info("Applying FDR correction (alpha=%.3f)", fdr_alpha)
-    for name, df in zip(["POS", "NEG", "DIFF"], [df_pos, df_neg, df_diff]):
-        rej, p_fdr = fdrcorrection(df['p_raw'], alpha=fdr_alpha)
-        df['p_fdr'] = p_fdr
-        df['sig'] = rej
-        logger.info("%s correlations: %d significant terms after FDR", name, rej.sum())
+#     flat_pos = z_pos.ravel()
+#     flat_neg = z_neg.ravel()
+#     logger.info("Flattened input z-maps.")
 
-    logger.info("All computations completed.")
-    return df_pos, df_neg, df_diff
+#     # Binary brain mask
+#     logger.info("Extracting brain mask from reference image.")
+#     flat_mask = get_brain_mask(ref_img).get_fdata().ravel() > 0.25
+
+#     for i, (term, path) in enumerate(term_maps.items()):
+#         logger.info("Processing term %d/%d: '%s'", i + 1, len(term_maps), term)
+#         # Load and resample term map
+#         resampled_map = image.resample_to_img(image.load_img(path), ref_img,
+#                                               force_resample=True, copy_header=True)
+#         flat_term = resampled_map.get_fdata().ravel()
+
+#         # Stack maps
+#         stacked_data = np.vstack([flat_pos, flat_neg, flat_term])
+#         cleaned, kept_mask = remove_useless_data(stacked_data, flat_mask)
+#         x, y, this_term_map = cleaned
+#         logger.info("Cleaned data for '%s'. Kept %d voxels.", term, kept_mask.sum())
+
+#         # POSITIVE correlation
+#         res_pos = bootstrap_corr(this_term_map, x, n_boot)
+#         records_pos.append((term, *extract_corr_results(res_pos)))
+#         logger.debug("POS correlation for '%s': r=%.4f, p=%.4g", term, res_pos['r'].iloc[0], res_pos['p-val'].iloc[0])
+
+#         # NEGATIVE correlation
+#         res_neg = bootstrap_corr(this_term_map, y, n_boot)
+#         records_neg.append((term, *extract_corr_results(res_neg)))
+#         logger.debug("NEG correlation for '%s': r=%.4f, p=%.4g", term, res_neg['r'].iloc[0], res_neg['p-val'].iloc[0])
+
+#         # DIFFERENCE
+#         res_diff = bootstrap_corr_diff(this_term_map, x, y, n_boot, rng, ci_alpha, n_jobs)
+#         records_diff.append((term, res_pos['r'].iloc[0], res_neg['r'].iloc[0], *res_diff))
+#         logger.debug("DIFF correlation for '%s': r_diff=%.4f, p=%.4g", term, res_diff[0], res_diff[2])
+
+#     logger.info("Finished computing all raw correlations. Constructing DataFrames...")
+
+#     df_pos = pd.DataFrame(records_pos, columns=['term', 'r', 'CI_low', 'CI_high', 'p_raw'])
+#     df_neg = pd.DataFrame(records_neg, columns=['term', 'r', 'CI_low', 'CI_high', 'p_raw'])
+#     df_diff = pd.DataFrame(records_diff, columns=['term', 'r_pos', 'r_neg', 'r_diff', 'CI_low', 'CI_high', 'p_raw'])
+
+#     # FDR correction
+#     logger.info("Applying FDR correction (alpha=%.3f)", fdr_alpha)
+#     for name, df in zip(["POS", "NEG", "DIFF"], [df_pos, df_neg, df_diff]):
+#         rej, p_fdr = fdrcorrection(df['p_raw'], alpha=fdr_alpha)
+#         df['p_fdr'] = p_fdr
+#         df['sig'] = rej
+#         logger.info("%s correlations: %d significant terms after FDR", name, rej.sum())
+
+#     logger.info("All computations completed.")
+#     return df_pos, df_neg, df_diff
 
 
+def plot_term_maps(term_maps, results_dir, min_voxel_value):
+    """
+    Processes and plots surface and glass brain maps for a dictionary of term maps.
+
+    Parameters:
+    - term_maps (dict): Dictionary where keys are term identifiers and values are paths to NIfTI images.
+    - results_dir (str): Directory to save the output images.
+    - min_voxel_value (float): Threshold for visualization.
+
+    Returns:
+    - None
+    """
+    for i, (term_key, term_path) in enumerate(term_maps.items(), start=1):
+        # Format a clean title from the file name
+        base_name = os.path.basename(term_path).split('.')[0]
+        term_label = base_name[2:].title()  # Remove first 2 characters, capitalize
+        term_name = f"Term {i}: {term_label}"
+
+        # Load NIfTI image
+        img = nib.load(term_path)
+
+        # Define output base name (cleaned for file naming)
+        output_base = f"termmap_{term_label}"
+
+        # Plot surface map
+        plot_surface_map(
+            img,
+            threshold=min_voxel_value,
+            title=term_name,
+            output_file=os.path.join(results_dir, f"{output_base}_surface.png")
+        )
+
+        # Plot flat surface map
+        plot_surface_map_flat(
+            img,
+            threshold=min_voxel_value,
+            title=term_name,
+            output_file=os.path.join(results_dir, f"{output_base}_surface_flat.png")
+        )
+
+        # Plot glass brain map
+        plot_map(
+            img.get_fdata(),
+            ref_img=img,
+            title=term_name,
+            outpath=os.path.join(results_dir, f"{output_base}_glass.png"),
+            thresh=min_voxel_value
+        )
 # --- Configuration ---
 DATA_DIR         = '/data/projects/chess/data/BIDS/derivatives/rsa_searchlight'
 RESULTS_ROOT     = 'results'
-SMOOTHING_MM     = 6            # Group-level smoothing (FWHM)
-MIN_VOXEL_VALUE  = 1e-5         # Threshold for plotting
+SMOOTHING_MM     = None          # Group-level smoothing (FWHM)
+MIN_VOXEL_VALUE  = 1e-5          # Threshold for plotting
 TERM_DIR         = 'data/terms'  # Meta-analytic term maps directory
 BRAIN_CMAP       = make_brain_cmap()
 
@@ -877,18 +983,18 @@ NOVICE_SUBJECTS = ["01","02","15","17","18","19","21","25","26","27",
 
 # Define analysis patterns
 PATTERNS = [
-    'searchlight_check',
+    'searchlight_checkmate',
     'searchlight_strategy',
     'searchlight_visualSimilarity',
 ]
 pattern_clean = {
-    'searchlight_check': "Checkmate | RSA searchlight",
+    'searchlight_checkmate': "Checkmate | RSA searchlight",
     'searchlight_strategy': "Strategy | RSA searchlight",
     'searchlight_visualSimilarity': "Visual Similarity | RSA searchlight",
 }
 
 # --- Output Setup ---
-RESULTS_DIR = os.path.join(RESULTS_ROOT, f"{create_run_id()}_neurosynth-rsa-searchlight")
+RESULTS_DIR = os.path.join(RESULTS_ROOT, f"{create_run_id()}_neurosynth-rsa-searchlight-new")
 os.makedirs(RESULTS_DIR, exist_ok=True)
 
 create_output_directory(RESULTS_DIR)
@@ -908,33 +1014,7 @@ with OutputLogger(True, out_text_file):
     all_neg = {}
     all_diff = {}
 
-    i = 0
-    for term_key, term_path in term_maps.items():
-        i += 1
-        term_name = f"Term {i}: {os.path.basename(term_path).split('.')[0][2:].title()}"
-        img = nib.load(term_path)
-
-        # Save surface and glass brain plots
-        plot_surface_map(
-            img,
-            threshold=MIN_VOXEL_VALUE,
-            title=term_name,
-            output_file=os.path.join(RESULTS_DIR, f'termmap_{term_name.replace(".nii.gz", "")}_surface.png')
-        )
-        plot_surface_map_flat(
-            img,
-            threshold=MIN_VOXEL_VALUE,
-            title=term_name,
-            output_file=os.path.join(RESULTS_DIR, f'termmap_{term_name.replace(".nii.gz", "")}_surface_flat.png')
-        )
-
-        plot_map(
-            img.get_fdata(),
-            ref_img=img,
-            title=term_name,
-            outpath=os.path.join(RESULTS_DIR, f'termmap_{term_name.replace(".nii.gz", "")}_glass.png'),
-            thresh=MIN_VOXEL_VALUE
-        )
+    # plot_term_maps(term_maps, RESULTS_DIR, MIN_VOXEL_VALUE)
 
     # STEP 2: Loop through each RSA pattern
     for PAT in PATTERNS:
@@ -985,7 +1065,7 @@ with OutputLogger(True, out_text_file):
         z_neg = np.where(z_data < 0, -z_data, 0)
 
         # STEP 2g: Correlate z-maps with meta-analytic term maps
-        df_pos, df_neg, df_diff = compute_all_zmap_correlations(
+        df_diff = compute_all_zmap_correlations(
             z_pos, z_neg, term_maps, con_img,
             n_boot=10000, fdr_alpha=0.05, ci_alpha=0.05, n_jobs=-1
         )
@@ -993,9 +1073,14 @@ with OutputLogger(True, out_text_file):
         # STEP 2h: Save correlation data
         key = pattern_clean[PAT].split()[0].lower()  # e.g., 'checkmate'
 
+        # POS/NEG (point estimates only)
+        df_pos = df_diff[['term', 'r_pos']].rename(columns={'r_pos': 'r'})
+        df_neg = df_diff[['term', 'r_neg']].rename(columns={'r_neg': 'r'})
+
         all_pos[key] = df_pos
         all_neg[key] = df_neg
-        all_diff[key] = df_diff.rename(columns={'r': 'r_diff'})
+        all_diff[key] = df_diff  # already has 'r_diff'
+
 
         df_pos.to_csv(os.path.join(RESULTS_DIR, f'{pattern_name}_term_corr_positive.csv'), index=False)
         df_neg.to_csv(os.path.join(RESULTS_DIR, f'{pattern_name}_term_corr_negative.csv'), index=False)
@@ -1013,7 +1098,6 @@ with OutputLogger(True, out_text_file):
             run_id=pattern_name,
             out_fig=os.path.join(RESULTS_DIR, f'{pattern_name}_term_correlation_differences.png')
         )
-
 
     # Assume all_diff, all_pos, all_neg are dicts:
     # e.g., {'Checkmate': df1, 'Strategy': df2, 'Visual Similarity': df3}
